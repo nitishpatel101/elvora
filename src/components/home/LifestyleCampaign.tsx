@@ -13,8 +13,8 @@ export default function LifestyleCampaign() {
       {/* High-fashion Editorial Campaign Image / Background */}
       <div className="absolute inset-0">
         <Image
-          src="/images/hero/hero-couple-connection.png"
-          alt="ELVORA Couple Connection Campaign - Paris & India"
+          src="/images/brand/story-couple.jpg"
+          alt="ELVORA Couple Connection Campaign"
           fill
           priority
           sizes="100vw"
