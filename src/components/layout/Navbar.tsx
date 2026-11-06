@@ -1,21 +1,16 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import { useAuth } from '@/context/AuthContext';
-import CurrencySelector from './CurrencySelector';
 import {
-  ShoppingBag,
   Heart,
-  User,
   Search,
   Menu,
   X,
-  ChevronDown,
-  ArrowRight,
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -30,9 +25,6 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
 
-  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
-  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 15);
@@ -44,19 +36,7 @@ export default function Navbar() {
   useEffect(() => {
     setMobileMenuOpen(false);
     setSearchOpen(false);
-    setActiveDropdown(null);
   }, [pathname]);
-
-  const handleMouseEnter = (menu: string) => {
-    if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
-    setActiveDropdown(menu);
-  };
-
-  const handleMouseLeave = () => {
-    dropdownTimeoutRef.current = setTimeout(() => {
-      setActiveDropdown(null);
-    }, 180);
-  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -67,343 +47,181 @@ export default function Navbar() {
     }
   };
 
-  const jewelryCategories = [
-    { label: 'All Jewellery', href: '/shop', desc: 'Explore the complete everyday fine jewellery vault' },
-    { label: 'Couple Bracelets', href: '/shop/couple-bracelets', desc: 'Touch Distance and Celestial pairs' },
-    { label: 'Necklaces & Pendants', href: '/shop/necklaces', desc: 'Lab ruby gemstones & layered fine chains' },
-    { label: 'Earrings', href: '/shop/earrings', desc: 'Pagoda gold lanterns with freshwater pearls' },
-  ];
-
-  const collectionsMenu = [
-    { label: 'The Couple Series', href: '/shop/couple-bracelets', desc: 'Fine bracelets engineered for connection' },
-    { label: 'The Crimson Heart', href: '/product/heart-sword-pendant-necklace', desc: 'Dramatic heart crystal with silver sword' },
-    { label: 'Golden Lanterns', href: '/product/golden-lantern-pearl-earrings', desc: 'Architectural chandelier pearl earrings' },
-    { label: 'Gifting Curations', href: '/shop?collection=gifts', desc: 'Signature velvet cases ready for gifting' },
+  const navLinks = [
+    { label: 'SHOP', href: '/shop' },
+    { label: 'BEST SELLERS', href: '/shop?filter=bestsellers' },
+    { label: 'COUPLE BRACELETS', href: '/shop/couple-bracelets' },
+    { label: 'NECKLACES', href: '/shop/necklaces' },
+    { label: 'EARRINGS', href: '/shop/earrings' },
+    { label: 'BRACELETS', href: '/shop/couple-bracelets' },
+    { label: 'HOLIDAY RUSH', href: '/shop?collection=gifts', highlight: true },
   ];
 
   return (
     <>
       <header
-        className={`sticky top-0 z-40 transition-all duration-300 ${
+        className={`sticky top-0 z-40 transition-all duration-200 ${
           scrolled
-            ? 'bg-[#FAF8F5]/95 backdrop-blur-md shadow-xs border-b border-[#EAE5DE]'
-            : 'bg-[#FAF8F5] border-b border-[#EAE5DE]'
+            ? 'bg-white/98 backdrop-blur-md shadow-xs border-b border-[#EAE5DE]'
+            : 'bg-white border-b border-[#EAE5DE]'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
+        <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16 sm:h-20">
             {/* Left: Mobile Menu Toggle & Brand Logo */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden p-2 text-[#181818] hover:text-[#24332C] transition-colors"
+                className="xl:hidden p-1.5 text-[#181818] hover:text-[#24332C] transition-colors"
                 aria-label="Open mobile menu"
               >
-                <Menu className="w-5 h-5" />
+                <Menu className="w-6 h-6 stroke-[1.6]" />
               </button>
 
-              <Link href="/" className="group inline-flex flex-col">
-                <span className="font-serif text-2xl sm:text-3xl tracking-[0.22em] font-light text-[#181818] uppercase transition-colors group-hover:text-[#24332C]">
-                  ELVORA
-                </span>
-                <span className="text-[7.5px] tracking-[0.38em] uppercase text-[#708579] -mt-0.5 font-medium">
-                  Fine Jewellery
-                </span>
+              <Link
+                href="/"
+                className="flex items-center tracking-[0.14em] font-extrabold text-2xl sm:text-3xl text-[#181818] uppercase font-sans hover:opacity-90 transition-opacity"
+              >
+                ELVORA
               </Link>
             </div>
 
-            {/* Center: AUrate-style Navigation */}
-            <nav className="hidden lg:flex items-center space-x-9 text-[11px] tracking-[0.2em] uppercase font-light text-[#181818]">
-              {/* Shop / Jewellery Dropdown */}
-              <div
-                className="relative py-7"
-                onMouseEnter={() => handleMouseEnter('shop')}
-                onMouseLeave={handleMouseLeave}
-              >
+            {/* Center: Desktop Navigation Bar matching AUrate exact links */}
+            <nav className="hidden xl:flex items-center gap-6 2xl:gap-8">
+              {navLinks.map((link) => (
                 <Link
-                  href="/shop"
-                  className={`inline-flex items-center gap-1 hover:text-[#24332C] transition-colors ${
-                    pathname.startsWith('/shop') && pathname !== '/shop/couple-bracelets'
-                      ? 'text-[#24332C] font-medium'
-                      : ''
+                  key={link.label}
+                  href={link.href}
+                  className={`text-[11px] 2xl:text-xs font-semibold tracking-[0.16em] uppercase transition-colors py-2 relative group ${
+                    link.highlight
+                      ? 'text-[#8E2828] hover:text-[#B53232]'
+                      : 'text-[#181818] hover:text-[#24332C]'
                   }`}
                 >
-                  <span>Jewellery</span>
-                  <ChevronDown className="w-3 h-3 text-[#708579] transition-transform duration-200" />
+                  {link.label}
+                  <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-[#24332C] transition-all duration-200 group-hover:w-full" />
                 </Link>
-
-                {activeDropdown === 'shop' && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-80 bg-[#FFFFFF] border border-[#EAE5DE] shadow-xl p-5 z-50 animate-fadeIn">
-                    <div className="text-[9px] uppercase tracking-[0.25em] text-[#24332C] font-medium mb-3 pb-2 border-b border-[#EAE5DE]">
-                      Fine Jewellery Categories
-                    </div>
-                    <div className="space-y-3">
-                      {jewelryCategories.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block group/item transition-colors"
-                        >
-                          <div className="text-xs font-serif text-[#181818] group-hover/item:text-[#24332C] transition-colors">
-                            {item.label}
-                          </div>
-                          <div className="text-[10px] text-[#5C5852] tracking-normal capitalize font-light mt-0.5">
-                            {item.desc}
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                    <div className="mt-4 pt-3 border-t border-[#EAE5DE]">
-                      <Link
-                        href="/shop"
-                        className="text-[10px] tracking-[0.18em] uppercase text-[#24332C] hover:text-[#181818] inline-flex items-center gap-1 font-medium"
-                      >
-                        <span>View Entire Vault</span>
-                        <ArrowRight className="w-3 h-3" />
-                      </Link>
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Best Sellers */}
-              <Link
-                href="/shop?filter=bestsellers"
-                className="hover:text-[#24332C] transition-colors py-7"
-              >
-                Best Sellers
-              </Link>
-
-              {/* Collections Dropdown */}
-              <div
-                className="relative py-7"
-                onMouseEnter={() => handleMouseEnter('collections')}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link
-                  href="/shop/couple-bracelets"
-                  className={`inline-flex items-center gap-1 hover:text-[#24332C] transition-colors ${
-                    pathname === '/shop/couple-bracelets' ? 'text-[#24332C] font-medium' : ''
-                  }`}
-                >
-                  <span>Collections</span>
-                  <ChevronDown className="w-3 h-3 text-[#708579] transition-transform duration-200" />
-                </Link>
-
-                {activeDropdown === 'collections' && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-80 bg-[#FFFFFF] border border-[#EAE5DE] shadow-xl p-5 z-50 animate-fadeIn">
-                    <div className="text-[9px] uppercase tracking-[0.25em] text-[#24332C] font-medium mb-3 pb-2 border-b border-[#EAE5DE]">
-                      Signature Series
-                    </div>
-                    <div className="space-y-3">
-                      {collectionsMenu.map((item) => (
-                        <Link
-                          key={item.href}
-                          href={item.href}
-                          className="block group/item transition-colors"
-                        >
-                          <div className="text-xs font-serif text-[#181818] group-hover/item:text-[#24332C] transition-colors">
-                            {item.label}
-                          </div>
-                          <div className="text-[10px] text-[#5C5852] tracking-normal capitalize font-light mt-0.5">
-                            {item.desc}
-                          </div>
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* About Us */}
-              <Link
-                href="/about"
-                className={`hover:text-[#24332C] transition-colors py-7 ${
-                  pathname === '/about' ? 'text-[#24332C] font-medium' : ''
-                }`}
-              >
-                About Us
-              </Link>
+              ))}
             </nav>
 
-            {/* Right: Currency & Action Icons */}
-            <div className="flex items-center space-x-3 sm:space-x-5 text-[#181818]">
-              <div className="hidden sm:block">
-                <CurrencySelector />
-              </div>
-
-              {/* Search Toggle */}
-              <button
-                type="button"
-                onClick={() => setSearchOpen(!searchOpen)}
-                aria-label="Search catalogue"
-                className="p-2 hover:text-[#24332C] transition-colors"
-              >
-                <Search className="w-4 h-4" />
-              </button>
-
-              {/* Account Link */}
+            {/* Right: Utility Icons & Shopping Bag (Solid Dark Circle like AUrate) */}
+            <div className="flex items-center gap-4 sm:gap-6">
               <Link
-                href={isCustomerLoggedIn ? '/account' : '/auth/login'}
-                aria-label="Client account"
-                className="p-2 hover:text-[#24332C] transition-colors"
+                href="/about"
+                className="hidden lg:inline-block text-xs font-medium tracking-[0.16em] uppercase text-[#181818] hover:text-[#24332C] transition-colors"
               >
-                <User className="w-4 h-4" />
+                ABOUT
               </Link>
 
-              {/* Wishlist Link */}
+              <Link
+                href={isCustomerLoggedIn ? '/account' : '/auth/login'}
+                className="hidden lg:inline-block text-xs font-medium tracking-[0.16em] uppercase text-[#181818] hover:text-[#24332C] transition-colors"
+              >
+                ACCOUNT
+              </Link>
+
+              <button
+                onClick={() => setSearchOpen(!searchOpen)}
+                className="p-1.5 text-[#181818] hover:text-[#24332C] transition-colors"
+                aria-label="Open search"
+              >
+                <Search className="w-5 h-5 stroke-[1.5]" />
+              </button>
+
               <Link
                 href="/wishlist"
-                aria-label="Wishlist"
-                className="p-2 hover:text-[#24332C] transition-colors relative"
+                className="p-1.5 text-[#181818] hover:text-[#24332C] transition-colors relative"
+                aria-label="View saved pieces"
               >
-                <Heart className="w-4 h-4" />
+                <Heart className="w-5 h-5 stroke-[1.5]" />
                 {totalWishlist > 0 && (
-                  <span className="absolute top-1 -right-0.5 w-4 h-4 rounded-full bg-[#4A5F54] text-white text-[9px] flex items-center justify-center font-medium">
+                  <span className="absolute -top-1 -right-1 w-4 h-4 bg-[#24332C] text-white text-[9px] font-bold rounded-full flex items-center justify-center">
                     {totalWishlist}
                   </span>
                 )}
               </Link>
 
-              {/* Shopping Bag (AUrate style signature green badge) */}
+              {/* Exact AUrate Bag Button: Solid Dark Circle with Count */}
               <button
-                type="button"
                 onClick={() => setIsCartDrawerOpen(true)}
-                aria-label="Shopping bag"
-                className="p-2 hover:text-[#24332C] transition-colors relative"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#24332C] hover:bg-[#19241F] text-white flex items-center justify-center text-xs font-bold transition-transform hover:scale-105 shadow-xs"
+                aria-label={`Shopping bag containing ${totalItems} items`}
               >
-                <ShoppingBag className="w-4 h-4" />
-                {totalItems > 0 && (
-                  <span className="absolute top-1 -right-0.5 w-4 h-4 rounded-full bg-[#24332C] text-white text-[9px] flex items-center justify-center font-medium">
-                    {totalItems}
-                  </span>
-                )}
+                <span>{totalItems}</span>
               </button>
             </div>
           </div>
         </div>
 
-        {/* Search Overlay Bar */}
+        {/* Live Search Drawer */}
         {searchOpen && (
-          <div className="border-t border-[#EAE5DE] bg-[#FFFFFF] py-4 px-4 sm:px-8 shadow-sm animate-fadeIn">
-            <div className="max-w-3xl mx-auto">
-              <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-                <Search className="w-4 h-4 text-[#708579] absolute left-3" />
-                <input
-                  type="text"
-                  autoFocus
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search bracelets, necklaces, earrings or gold keepsakes..."
-                  className="w-full pl-10 pr-10 py-2.5 text-xs text-[#181818] bg-transparent border-b border-[#EAE5DE] focus:border-[#24332C] focus:outline-none placeholder-[#8A857D] tracking-wide"
-                />
-                <button
-                  type="button"
-                  onClick={() => setSearchOpen(false)}
-                  className="absolute right-2 text-[#8A857D] hover:text-[#181818]"
-                  aria-label="Close search"
-                >
-                  <X className="w-4 h-4" />
-                </button>
-              </form>
-            </div>
+          <div className="bg-[#FAF8F5] border-t border-[#EAE5DE] py-4 px-4 sm:px-8 animate-in fade-in slide-in-from-top-2 duration-200">
+            <form onSubmit={handleSearchSubmit} className="max-w-2xl mx-auto flex items-center gap-3">
+              <Search className="w-4 h-4 text-[#708579]" />
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Search jewellery, couple bracelets, necklaces, pearls..."
+                autoFocus
+                className="flex-1 bg-transparent border-b border-[#EAE5DE] py-2 text-xs sm:text-sm text-[#181818] placeholder-[#77736D] focus:outline-none focus:border-[#24332C]"
+              />
+              <button
+                type="submit"
+                className="text-xs uppercase tracking-wider font-semibold text-[#24332C] hover:underline"
+              >
+                Search
+              </button>
+              <button
+                type="button"
+                onClick={() => setSearchOpen(false)}
+                className="text-[#77736D] hover:text-[#181818]"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </form>
           </div>
         )}
       </header>
 
-      {/* Mobile Drawer Menu */}
+      {/* Mobile Navigation Drawer */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
+        <div className="fixed inset-0 z-50 flex">
           <div
-            className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 w-full max-w-xs bg-[#FAF8F5] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
-            <div>
-              <div className="flex items-center justify-between pb-6 border-b border-[#EAE5DE]">
-                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-                  <span className="font-serif text-2xl tracking-[0.22em] font-light text-[#181818] uppercase">
-                    ELVORA
-                  </span>
-                </Link>
-                <button
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-[#181818] hover:text-[#24332C]"
-                  aria-label="Close menu"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-
-              {/* Mobile Navigation Links */}
-              <nav className="py-6 space-y-4 text-xs uppercase tracking-[0.2em] font-light text-[#181818]">
-                <Link
-                  href="/shop"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
-                >
-                  Shop All Jewellery
-                </Link>
-                <Link
-                  href="/shop?filter=bestsellers"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
-                >
-                  Best Sellers
-                </Link>
-                <Link
-                  href="/shop/couple-bracelets"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
-                >
-                  Couple Bracelets
-                </Link>
-                <Link
-                  href="/shop/necklaces"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
-                >
-                  Necklaces &amp; Pendants
-                </Link>
-                <Link
-                  href="/shop/earrings"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
-                >
-                  Lantern Earrings
-                </Link>
-                <Link
-                  href="/about"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
-                >
-                  About Us &amp; Craft
-                </Link>
-              </nav>
+          <div className="relative w-full max-w-xs bg-white h-full shadow-2xl flex flex-col z-10">
+            <div className="p-5 flex items-center justify-between border-b border-[#EAE5DE]">
+              <span className="font-sans font-extrabold text-xl tracking-[0.14em] uppercase text-[#181818]">
+                ELVORA
+              </span>
+              <button
+                onClick={() => setMobileMenuOpen(false)}
+                className="p-1 text-[#77736D] hover:text-[#181818]"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
 
-            {/* Mobile Footer & Currency */}
-            <div className="pt-6 border-t border-[#EAE5DE] space-y-4">
-              <div className="flex items-center justify-between">
-                <span className="text-xs uppercase tracking-wider text-[#5C5852]">Currency</span>
-                <CurrencySelector />
-              </div>
-              <div className="grid grid-cols-2 gap-2 pt-2">
+            <div className="flex-1 overflow-y-auto p-5 space-y-4 text-xs font-semibold uppercase tracking-[0.16em]">
+              {navLinks.map((link) => (
                 <Link
-                  href={isCustomerLoggedIn ? '/account' : '/auth/login'}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="aurate-btn-outline text-center py-2 text-[10px]"
+                  key={link.label}
+                  href={link.href}
+                  className={`block py-2.5 border-b border-[#EAE5DE]/60 ${
+                    link.highlight ? 'text-[#8E2828]' : 'text-[#181818]'
+                  }`}
                 >
-                  Account
+                  {link.label}
                 </Link>
-                <Link
-                  href="/wishlist"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="aurate-btn-primary text-center py-2 text-[10px]"
-                >
-                  Wishlist ({totalWishlist})
-                </Link>
+              ))}
+
+              <div className="pt-4 space-y-3 font-normal text-xs text-[#708579]">
+                <Link href="/about" className="block py-1">About ELVORA</Link>
+                <Link href="/track-order" className="block py-1">Track Order</Link>
+                <Link href="/account" className="block py-1">Client Cabinet</Link>
               </div>
             </div>
           </div>

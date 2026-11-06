@@ -52,15 +52,50 @@ export default async function ProductDetailPage({
   const allProducts = await getAllProducts(false);
   const relatedProducts = allProducts.filter((p) => p.id !== product.id);
 
+  const productJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: product.images.map((img) =>
+      img.startsWith('http') ? img : `https://elvora.com${img}`
+    ),
+    description: product.description,
+    sku: product.id,
+    brand: {
+      '@type': 'Brand',
+      name: 'ELVORA',
+    },
+    category: product.category,
+    offers: {
+      '@type': 'Offer',
+      url: `https://elvora.com/product/${product.slug}`,
+      priceCurrency: 'INR',
+      price: product.price,
+      availability:
+        product.stock > 0
+          ? 'https://schema.org/InStock'
+          : 'https://schema.org/OutOfStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'ELVORA',
+      },
+    },
+  };
+
   return (
-    <div className="min-h-screen bg-[#F8F5F0] py-10 lg:py-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <ProductDetailClient
-          product={product}
-          relatedProducts={relatedProducts}
-        />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
+      />
+      <div className="min-h-screen bg-[#FAF8F5] py-10 lg:py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ProductDetailClient
+            product={product}
+            relatedProducts={relatedProducts}
+          />
+        </div>
       </div>
-    </div>
+    </>
   );
 }
-

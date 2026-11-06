@@ -9,6 +9,7 @@ import AnnouncementBar from '@/components/layout/AnnouncementBar';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/cart/CartDrawer';
+import FloatingChatBubble from '@/components/common/FloatingChatBubble';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -23,7 +24,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: 'ELVORA | Luxury Jewellery & Fine Accessories',
+  title: 'ELVORA | Fine Jewellery & Modern Keepsakes',
   description:
     'Discover ELVORA: timeless luxury jewellery, illuminated couple touch bracelets, celestial keepsakes, and fine silver & gold craftsmanship.',
   keywords: [
@@ -35,10 +36,10 @@ export const metadata: Metadata = {
     'pearl earrings',
     'heart sword necklace',
   ],
-  authors: [{ name: 'ELVORA Haute Joaillerie' }],
+  authors: [{ name: 'ELVORA Fine Jewellery' }],
   metadataBase: new URL('https://elvora.com'),
   openGraph: {
-    title: 'ELVORA | Luxury Jewellery & Fine Accessories',
+    title: 'ELVORA | Fine Jewellery & Modern Keepsakes',
     description: 'Timeless luxury jewellery and modern celestial couple bracelets.',
     url: 'https://elvora.com',
     siteName: 'ELVORA',
@@ -59,6 +60,34 @@ export const metadata: Metadata = {
   },
 };
 
+const orgSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      '@id': 'https://elvora.com/#organization',
+      name: 'ELVORA',
+      url: 'https://elvora.com',
+      logo: 'https://elvora.com/images/products/touch-distance-bracelet/hero.jpg',
+      description: 'Premium fine jewellery and illuminated couple touch bracelets.',
+      contactPoint: {
+        '@type': 'ContactPoint',
+        email: 'concierge@elvora.com',
+        contactType: 'customer service',
+      },
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://elvora.com/#website',
+      url: 'https://elvora.com',
+      name: 'ELVORA Fine Jewellery',
+      publisher: {
+        '@id': 'https://elvora.com/#organization',
+      },
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -66,7 +95,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${plusJakarta.variable}`}>
-      <body className="bg-[#FAF8F5] text-[#181818] font-sans antialiased min-h-screen flex flex-col selection:bg-[#24332C] selection:text-white">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(orgSchema) }}
+        />
+      </head>
+      <body className="bg-white text-[#181818] font-sans antialiased min-h-screen flex flex-col selection:bg-[#24332C] selection:text-white">
         <AuthProvider>
           <CurrencyProvider>
             <CartProvider>
@@ -76,6 +111,7 @@ export default function RootLayout({
                 <main className="flex-grow">{children}</main>
                 <Footer />
                 <CartDrawer />
+                <FloatingChatBubble />
               </WishlistProvider>
             </CartProvider>
           </CurrencyProvider>

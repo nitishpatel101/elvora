@@ -1,8 +1,9 @@
 import { getAllProducts } from '@/lib/db';
 import HeroSection from '@/components/home/HeroSection';
-import CategoryStrip from '@/components/home/CategoryStrip';
+import CategoryGrid from '@/components/home/CategoryGrid';
 import BestSellersSection from '@/components/home/BestSellersSection';
-import EditorialBanners from '@/components/home/EditorialBanners';
+import BurgundyBanner from '@/components/home/BurgundyBanner';
+import LifestyleCampaign from '@/components/home/LifestyleCampaign';
 import BrandStory from '@/components/home/BrandStory';
 import TrustSection from '@/components/home/TrustSection';
 
@@ -12,23 +13,26 @@ export default async function HomePage() {
   const products = await getAllProducts(false);
 
   return (
-    <div className="flex flex-col min-h-screen bg-[#F8F5F0]">
-      {/* 1. Large Editorial Hero Section */}
+    <div className="flex flex-col min-h-screen bg-white">
+      {/* 1. AUrate Editorial Hero Section */}
       <HeroSection />
 
-      {/* 2. Category Navigation Strip */}
-      <CategoryStrip />
+      {/* 2. AUrate 4-Image Category Showcase (from Frame 004 of recording) */}
+      <CategoryGrid />
 
-      {/* 3. Featured Products Showcase: CURATED FOR YOU */}
+      {/* 3. AUrate Bestsellers Section (from Frame 004 & 007 of recording) */}
       <BestSellersSection initialProducts={products} />
 
-      {/* 4. Side-by-Side Editorial Promotional Banners: Made for Two & The Art of Gifting */}
-      <EditorialBanners />
+      {/* 4. AUrate Deep Burgundy Editorial Banner (from Frame 008 of recording) */}
+      <BurgundyBanner />
 
-      {/* 5. Brand Story Section: More Than Jewellery. A Feeling. */}
+      {/* 5. AUrate Full-Width Lifestyle Campaign with Play/Pause (from Frame 013 & 015) */}
+      <LifestyleCampaign />
+
+      {/* 6. Brand Story Section: More Than Jewellery. A Feeling. */}
       <BrandStory />
 
-      {/* 6. Clean Trust Section: 4 Verified Store Benefits */}
+      {/* 7. Clean Trust Guarantees */}
       <TrustSection />
     </div>
   );

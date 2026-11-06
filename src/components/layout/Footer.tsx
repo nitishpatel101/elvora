@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { ArrowRight, Check } from 'lucide-react';
 
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -15,6 +14,19 @@ const InstagramIcon = ({ className }: { className?: string }) => (
 const FacebookIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
+  </svg>
+);
+
+const TwitterIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
+  </svg>
+);
+
+const PinterestIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+    <line x1="12" y1="4" x2="12" y2="20" />
+    <path d="M8 8a4 4 0 1 1 8 0c0 3-2 6-4 9" />
   </svg>
 );
 
@@ -31,185 +43,121 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#19241F] text-[#FAF8F5] pt-16 pb-12 border-t border-[#24332C]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-14 border-b border-[#2A3B33]">
-          {/* Brand Identity Column */}
-          <div className="lg:col-span-2 space-y-4">
-            <Link href="/" className="inline-block group">
-              <span className="font-serif text-3xl tracking-[0.22em] text-[#FFFFFF] uppercase font-light group-hover:text-[#D5E0D9] transition-colors">
-                ELVORA
+    <footer className="border-t border-[#24332C]">
+      {/* Split 2-Color AUrate Footer: Left Deep Forest Green, Right Sage Green */}
+      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[420px]">
+        {/* Left Side: Deep Forest Green (Col span 8) */}
+        <div className="lg:col-span-8 bg-[#24332C] text-[#FAF8F5] p-8 sm:p-12 lg:p-16 flex flex-col justify-between">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-12">
+            {/* Column 1: Fine Jewelry Born & Raised In */}
+            <div className="space-y-4 col-span-2 sm:col-span-1">
+              <span className="text-[10px] uppercase tracking-[0.24em] text-[#A3B2A9] font-medium block leading-tight">
+                FINE JEWELRY<br />BORN &amp; RAISED IN
               </span>
-              <span className="block text-[8px] tracking-[0.4em] uppercase text-[#708579] font-medium mt-0.5">
-                Fine Jewellery
-              </span>
-            </Link>
-
-            <p className="text-xs text-[#A3B2A9] leading-relaxed max-w-sm font-light pt-2">
-              ELVORA crafts modern, evocative jewellery designed to celebrate connection and everyday elegance. High-grade surgical steel, natural stones, and multi-micron 18K gold.
-            </p>
-
-            <div className="pt-2 flex items-center space-x-4 text-[#A3B2A9]">
-              <a
-                href="https://instagram.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="ELVORA Instagram"
-                className="hover:text-[#FFFFFF] transition-colors"
-              >
-                <InstagramIcon className="w-4 h-4" />
-              </a>
-              <a
-                href="https://facebook.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="ELVORA Facebook"
-                className="hover:text-[#FFFFFF] transition-colors"
-              >
-                <FacebookIcon className="w-4 h-4" />
-              </a>
-            </div>
-
-            <div className="pt-2 text-[10px] tracking-wider text-[#708579] uppercase font-light">
-              Online Payments Only &bull; Express Tracked Dispatch
-            </div>
-          </div>
-
-          {/* Shop Column */}
-          <div className="space-y-4">
-            <h5 className="text-[11px] uppercase tracking-[0.2em] text-[#FFFFFF] font-medium">
-              Shop Collections
-            </h5>
-            <ul className="space-y-2.5 text-xs text-[#A3B2A9] font-light">
-              <li>
-                <Link href="/shop" className="hover:text-[#FFFFFF] transition-colors">
-                  All Jewellery
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop/couple-bracelets" className="hover:text-[#FFFFFF] transition-colors">
-                  Couple Bracelets
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop/necklaces" className="hover:text-[#FFFFFF] transition-colors">
-                  Necklaces &amp; Pendants
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop/earrings" className="hover:text-[#FFFFFF] transition-colors">
-                  Pearl &amp; Lantern Earrings
-                </Link>
-              </li>
-              <li>
-                <Link href="/shop?filter=bestsellers" className="hover:text-[#FFFFFF] transition-colors">
-                  Best Sellers
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Customer Support Column */}
-          <div className="space-y-4">
-            <h5 className="text-[11px] uppercase tracking-[0.2em] text-[#FFFFFF] font-medium">
-              Customer Support
-            </h5>
-            <ul className="space-y-2.5 text-xs text-[#A3B2A9] font-light">
-              <li>
-                <Link href="/track-order" className="hover:text-[#FFFFFF] transition-colors">
-                  Track Your Order
-                </Link>
-              </li>
-              <li>
-                <Link href="/shipping-policy" className="hover:text-[#FFFFFF] transition-colors">
-                  Shipping Information
-                </Link>
-              </li>
-              <li>
-                <Link href="/refund-policy" className="hover:text-[#FFFFFF] transition-colors">
-                  Return &amp; Exchange Policy
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-[#FFFFFF] transition-colors">
-                  Contact Concierge
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-[#FFFFFF] transition-colors">
-                  About ELVORA
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Functional Newsletter Column */}
-          <div className="space-y-4">
-            <h5 className="text-[11px] uppercase tracking-[0.2em] text-[#FFFFFF] font-medium">
-              Join the Circle
-            </h5>
-            <p className="text-xs text-[#A3B2A9] leading-relaxed font-light">
-              Receive private invitations to preview new capsule collections and limited editions.
-            </p>
-
-            {subscribed ? (
-              <div className="flex items-center gap-2 text-xs text-[#D5E0D9] py-2">
-                <Check className="w-4 h-4 text-emerald-400" />
-                <span>Thank you for joining our private list.</span>
+              <div className="inline-block border border-white/40 px-4 py-2 text-center text-xs tracking-[0.24em] font-light text-white uppercase">
+                MUMBAI &bull; NYC
               </div>
-            ) : (
-              <form onSubmit={handleSubscribe} className="space-y-2">
-                <div className="relative">
-                  <input
-                    type="email"
-                    required
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Enter your email"
-                    className="w-full bg-[#24332C] border border-[#3A4E44] px-3.5 py-2.5 text-xs text-[#FFFFFF] placeholder-[#708579] focus:outline-none focus:border-[#D5E0D9] transition-colors pr-10"
-                  />
-                  <button
-                    type="submit"
-                    aria-label="Subscribe"
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#D5E0D9] hover:text-[#FFFFFF] transition-colors"
-                  >
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </form>
-            )}
+            </div>
 
-            <div className="pt-2">
-              <Link
-                href="/admin/login"
-                className="text-[10px] uppercase tracking-wider text-[#708579] hover:text-[#D5E0D9] transition-colors"
-              >
-                Staff Portal &rarr;
-              </Link>
+            {/* Column 2: Support */}
+            <div className="space-y-3">
+              <h5 className="text-[11px] uppercase tracking-[0.2em] text-white font-semibold">
+                Support
+              </h5>
+              <ul className="space-y-2 text-xs text-[#A3B2A9] font-light">
+                <li><Link href="/contact" className="hover:text-white transition-colors">FAQ</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-colors">CONTACT US</Link></li>
+                <li><Link href="/track-order" className="hover:text-white transition-colors">TRACK ORDER</Link></li>
+                <li><Link href="/refund-policy" className="hover:text-white transition-colors">RETURNS</Link></li>
+                <li><Link href="/shipping-policy" className="hover:text-white transition-colors">LIFETIME GUARANTEE</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">JEWELRY CARE</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 3: About Us */}
+            <div className="space-y-3">
+              <h5 className="text-[11px] uppercase tracking-[0.2em] text-white font-semibold">
+                About Us
+              </h5>
+              <ul className="space-y-2 text-xs text-[#A3B2A9] font-light">
+                <li><Link href="/about" className="hover:text-white transition-colors">OUR STORY</Link></li>
+                <li><Link href="/about" className="hover:text-white transition-colors">SUSTAINABILITY</Link></li>
+                <li><Link href="/shop" className="hover:text-white transition-colors">REVIEWS</Link></li>
+                <li><Link href="/shop" className="hover:text-white transition-colors">ETHICAL CRAFT</Link></li>
+              </ul>
+            </div>
+
+            {/* Column 4: Links */}
+            <div className="space-y-3">
+              <h5 className="text-[11px] uppercase tracking-[0.2em] text-white font-semibold">
+                Links
+              </h5>
+              <ul className="space-y-2 text-xs text-[#A3B2A9] font-light">
+                <li><Link href="/shop?collection=gifts" className="hover:text-white transition-colors">DIGITAL GIFT CARD</Link></li>
+                <li><Link href="/shop" className="hover:text-white transition-colors">REFER-A-FRIEND</Link></li>
+                <li><Link href="/shop" className="hover:text-white transition-colors">HOLIDAY OFFERS</Link></li>
+                <li><Link href="/admin/login" className="hover:text-white transition-colors">ADMIN PORTAL</Link></li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Legal Strip */}
+          <div className="pt-8 border-t border-[#34463C] flex flex-wrap items-center justify-between gap-4 text-[10px] tracking-[0.16em] uppercase text-[#A3B2A9]">
+            <div className="flex flex-wrap items-center gap-6">
+              <span>&copy;2026 ELVORA</span>
+              <Link href="/privacy-policy" className="hover:text-white transition-colors">PRIVACY POLICY</Link>
+              <Link href="/terms" className="hover:text-white transition-colors">TERMS &amp; CONDITIONS</Link>
+            </div>
+            <div className="font-mono text-[#D5E0D9]">
+              CARE@ELVORA.COM
             </div>
           </div>
         </div>
 
-        {/* Bottom Legal & Copyright Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-[#708579] gap-4">
-          <div>
-            &copy; {new Date().getFullYear()} ELVORA. All rights reserved. Strictly online payments only.
+        {/* Right Side: Sage Green Newsletter Column (Col span 4) matching AUrate frame 016 */}
+        <div className="lg:col-span-4 bg-[#B5C7B9] text-[#1E2C23] p-8 sm:p-12 lg:p-16 flex flex-col justify-between">
+          <div className="space-y-6">
+            <h4 className="font-serif text-2xl sm:text-3xl text-[#1E2C23] font-light leading-tight">
+              Keep up with our creations
+            </h4>
+            <p className="text-xs text-[#304537] leading-relaxed">
+              Sign up for private releases, festive gifting invitations, and member privileges.
+            </p>
+
+            <form onSubmit={handleSubscribe} className="space-y-3">
+              <div className="flex">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Enter your email"
+                  required
+                  className="w-full bg-white/70 border border-[#7A9881] px-3.5 py-3 text-xs text-[#1E2C23] placeholder-[#4F6855] focus:outline-none focus:bg-white focus:border-[#24332C]"
+                />
+                <button
+                  type="submit"
+                  className="bg-[#24332C] hover:bg-[#19241F] text-white px-5 py-3 text-xs uppercase tracking-wider font-semibold transition-colors shrink-0"
+                >
+                  {subscribed ? 'Subscribed' : 'Subscribe'}
+                </button>
+              </div>
+            </form>
           </div>
 
-          <div className="flex flex-wrap items-center gap-6">
-            <Link href="/shipping-policy" className="hover:text-[#A3B2A9] transition-colors">
-              Shipping Policy
-            </Link>
-            <Link href="/refund-policy" className="hover:text-[#A3B2A9] transition-colors">
-              Return Policy
-            </Link>
-            <Link href="/privacy-policy" className="hover:text-[#A3B2A9] transition-colors">
-              Privacy Policy
-            </Link>
-            <Link href="/terms" className="hover:text-[#A3B2A9] transition-colors">
-              Terms &amp; Conditions
-            </Link>
+          {/* Social Icons matching AUrate bottom right */}
+          <div className="pt-8 flex items-center space-x-6 text-[#24332C]">
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:opacity-75 transition-opacity">
+              <InstagramIcon className="w-5 h-5" />
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:opacity-75 transition-opacity">
+              <FacebookIcon className="w-5 h-5" />
+            </a>
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:opacity-75 transition-opacity">
+              <TwitterIcon className="w-5 h-5" />
+            </a>
+            <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" className="hover:opacity-75 transition-opacity">
+              <PinterestIcon className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </div>

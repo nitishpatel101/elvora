@@ -26,7 +26,8 @@ async function runTests() {
     assert.strictEqual(res.status, 200);
     const html = await res.text();
     assert(html.includes('ELVORA'), 'HTML must contain brand name ELVORA');
-    assert(html.includes('Haute Joaillerie') || html.includes('Luxury Jewellery'), 'HTML must contain luxury positioning');
+    assert(html.includes('Haute Joaillerie') || html.includes('Luxury Jewellery') || html.includes('Fine Jewellery'), 'HTML must contain luxury positioning');
+    assert(html.includes('application/ld+json'), 'Homepage must contain Schema.org JSON-LD');
   });
 
   // TEST 2: All six initial products are returned by database API
