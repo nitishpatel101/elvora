@@ -1,23 +1,22 @@
 import React from 'react';
-import { RotateCcw, ShieldCheck, AlertCircle } from 'lucide-react';
 
 export default function RefundPolicyPage() {
   return (
-    <div className="min-h-screen bg-[#F8F6F2] py-16 lg:py-24">
+    <div className="min-h-screen bg-[#FAF8F5] py-16 lg:py-24">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
-        <div className="text-center space-y-2 pb-6 border-b border-[#E7E1D8]">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#B89A69] font-medium block">
-            Quality Assurance
+        <div className="text-center space-y-2 pb-6 border-b border-[#EAE5DE]">
+          <span className="text-[10px] tracking-[0.28em] uppercase text-[#708579] font-medium block">
+            QUALITY ASSURANCE
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#171717] font-light">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light tracking-tight">
             Return &amp; Refund Policy
           </h1>
-          <p className="text-xs text-[#77736D]">Honoring Client Confidence with Integrity</p>
+          <p className="text-xs text-[#5C5852] font-light">Honoring Client Confidence with Integrity</p>
         </div>
 
-        <div className="text-xs sm:text-sm text-[#77736D] space-y-6 leading-relaxed">
+        <div className="text-xs sm:text-sm text-[#5C5852] space-y-6 leading-relaxed font-light">
           <section className="space-y-2">
-            <h2 className="font-serif text-lg text-[#171717] font-normal">
+            <h2 className="font-serif text-lg text-[#181818] font-normal">
               1. 7-Day Authenticity &amp; Defect Warranty
             </h2>
             <p>
@@ -26,7 +25,7 @@ export default function RefundPolicyPage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="font-serif text-lg text-[#171717] font-normal">
+            <h2 className="font-serif text-lg text-[#181818] font-normal">
               2. Eligibility Criteria
             </h2>
             <p>
@@ -40,7 +39,7 @@ export default function RefundPolicyPage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="font-serif text-lg text-[#171717] font-normal">
+            <h2 className="font-serif text-lg text-[#181818] font-normal">
               3. Refund Disbursement
             </h2>
             <p>
@@ -49,11 +48,11 @@ export default function RefundPolicyPage() {
           </section>
 
           <section className="space-y-2">
-            <h2 className="font-serif text-lg text-[#171717] font-normal">
+            <h2 className="font-serif text-lg text-[#181818] font-normal">
               4. Return Initiation Procedure
             </h2>
             <p>
-              To initiate a review, please transmit an electronic message to <span className="font-mono text-[#171717]">returns@elvora.com</span> with your Order Identifier and photographic documentation of the defect.
+              To initiate a review, please transmit an electronic message to <span className="font-mono text-[#181818] font-medium">returns@elvora.com</span> with your Order Identifier and photographic documentation of the defect.
             </p>
           </section>
         </div>
@@ -61,4 +60,3 @@ export default function RefundPolicyPage() {
     </div>
   );
 }
-

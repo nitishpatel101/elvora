@@ -16,10 +16,8 @@ const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined
 
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   const [currency, setCurrencyState] = useState<Currency>('INR');
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     try {
       const saved = localStorage.getItem('elvora_currency') as Currency;
       if (saved === 'INR' || saved === 'USD') {

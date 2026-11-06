@@ -37,7 +37,7 @@ export default function EditProductPage({
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F8F6F2] py-20 text-center text-xs text-[#77736D]">
+      <div className="min-h-screen bg-[#FAF8F5] py-20 text-center text-xs text-[#77736D]">
         Retrieving product dossier...
       </div>
     );
@@ -45,11 +45,11 @@ export default function EditProductPage({
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-[#F8F6F2] py-20 text-center space-y-4">
-        <h1 className="font-serif text-2xl text-[#171717]">Product not found</h1>
+      <div className="min-h-screen bg-[#FAF8F5] py-20 text-center space-y-4">
+        <h1 className="font-serif text-2xl text-[#181818]">Product not found</h1>
         <button
           onClick={() => router.push('/admin')}
-          className="text-xs uppercase tracking-wider text-[#B89A69] underline"
+          className="text-xs uppercase tracking-wider text-[#24332C] underline font-semibold"
         >
           Return to Admin Dashboard
         </button>
@@ -58,13 +58,13 @@ export default function EditProductPage({
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] py-10 lg:py-14">
+    <div className="min-h-screen bg-[#FAF8F5] py-10 lg:py-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div>
-          <span className="text-[10px] tracking-[0.25em] uppercase text-[#B89A69] font-semibold block">
+          <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
             Product Modification
           </span>
-          <h1 className="font-serif text-3xl text-[#171717] font-light mt-1">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light mt-1">
             Edit Creation: {product.name}
           </h1>
           <p className="text-xs text-[#77736D] mt-1 font-mono">
@@ -77,4 +77,3 @@ export default function EditProductPage({
     </div>
   );
 }
-

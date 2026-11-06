@@ -36,7 +36,7 @@ export async function POST(req: Request) {
       { success: false, message: 'Invalid administrative credentials' },
       { status: 401 }
     );
-  } catch (err) {
+  } catch {
     return NextResponse.json(
       { success: false, message: 'Server error during admin authentication' },
       { status: 500 }

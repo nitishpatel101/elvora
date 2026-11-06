@@ -66,7 +66,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${playfair.variable} ${plusJakarta.variable}`}>
-      <body className="bg-[#F8F5F0] text-[#111111] font-sans antialiased min-h-screen flex flex-col selection:bg-[#B69A65] selection:text-white">
+      <body className="bg-[#FAF8F5] text-[#181818] font-sans antialiased min-h-screen flex flex-col selection:bg-[#24332C] selection:text-white">
         <AuthProvider>
           <CurrencyProvider>
             <CartProvider>

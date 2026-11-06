@@ -30,19 +30,17 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
 
-  // Dropdown states for Desktop
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+      setScrolled(window.scrollY > 15);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close menus when pathname changes
   useEffect(() => {
     setMobileMenuOpen(false);
     setSearchOpen(false);
@@ -69,18 +67,18 @@ export default function Navbar() {
     }
   };
 
-  const shopSublinks = [
-    { label: 'All Jewellery', href: '/shop', desc: 'Browse the entire curated catalogue' },
-    { label: 'Couple Bracelets', href: '/shop/couple-bracelets', desc: 'Touch Distance & Celestial pairs' },
-    { label: 'Necklaces & Pendants', href: '/shop/necklaces', desc: 'Gemstones, chokers & layered silver' },
-    { label: 'Lantern Earrings', href: '/shop/earrings', desc: 'Gold chandeliers with freshwater pearls' },
+  const jewelryCategories = [
+    { label: 'All Jewellery', href: '/shop', desc: 'Explore the complete everyday fine jewellery vault' },
+    { label: 'Couple Bracelets', href: '/shop/couple-bracelets', desc: 'Touch Distance and Celestial pairs' },
+    { label: 'Necklaces & Pendants', href: '/shop/necklaces', desc: 'Lab ruby gemstones & layered fine chains' },
+    { label: 'Earrings', href: '/shop/earrings', desc: 'Pagoda gold lanterns with freshwater pearls' },
   ];
 
-  const collectionsSublinks = [
-    { label: 'The Couple Series', href: '/shop/couple-bracelets', desc: 'Matched bracelets bridging distance' },
-    { label: 'The Crimson Heart', href: '/product/heart-sword-pendant-necklace', desc: 'Dramatic ruby crystal & pierced sword' },
-    { label: 'Golden Lanterns', href: '/product/golden-lantern-pearl-earrings', desc: 'Architectural lanterns with cascading pearls' },
-    { label: 'Gift Curations', href: '/shop?collection=gifts', desc: 'Complimentary signature velvet packaging' },
+  const collectionsMenu = [
+    { label: 'The Couple Series', href: '/shop/couple-bracelets', desc: 'Fine bracelets engineered for connection' },
+    { label: 'The Crimson Heart', href: '/product/heart-sword-pendant-necklace', desc: 'Dramatic heart crystal with silver sword' },
+    { label: 'Golden Lanterns', href: '/product/golden-lantern-pearl-earrings', desc: 'Architectural chandelier pearl earrings' },
+    { label: 'Gifting Curations', href: '/shop?collection=gifts', desc: 'Signature velvet cases ready for gifting' },
   ];
 
   return (
@@ -88,8 +86,8 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'bg-[#F8F5F0]/95 backdrop-blur-md shadow-xs border-b border-[#E8DCCD]'
-            : 'bg-[#F8F5F0] border-b border-[#E8DCCD]'
+            ? 'bg-[#FAF8F5]/95 backdrop-blur-md shadow-xs border-b border-[#EAE5DE]'
+            : 'bg-[#FAF8F5] border-b border-[#EAE5DE]'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,25 +97,25 @@ export default function Navbar() {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="lg:hidden p-2 text-[#111111] hover:text-[#B69A65] transition-colors"
+                className="lg:hidden p-2 text-[#181818] hover:text-[#24332C] transition-colors"
                 aria-label="Open mobile menu"
               >
                 <Menu className="w-5 h-5" />
               </button>
 
               <Link href="/" className="group inline-flex flex-col">
-                <span className="font-serif text-2xl sm:text-3xl tracking-[0.24em] font-light text-[#111111] uppercase transition-colors group-hover:text-[#B69A65]">
+                <span className="font-serif text-2xl sm:text-3xl tracking-[0.22em] font-light text-[#181818] uppercase transition-colors group-hover:text-[#24332C]">
                   ELVORA
                 </span>
-                <span className="text-[7.5px] tracking-[0.42em] uppercase text-[#6B655D] -mt-0.5 font-light">
-                  Haute Joaillerie
+                <span className="text-[7.5px] tracking-[0.38em] uppercase text-[#708579] -mt-0.5 font-medium">
+                  Fine Jewellery
                 </span>
               </Link>
             </div>
 
-            {/* Center: Luxury Navigation */}
-            <nav className="hidden lg:flex items-center space-x-10 text-[11px] tracking-[0.22em] uppercase font-light text-[#111111]">
-              {/* Shop Link with Dropdown */}
+            {/* Center: AUrate-style Navigation */}
+            <nav className="hidden lg:flex items-center space-x-9 text-[11px] tracking-[0.2em] uppercase font-light text-[#181818]">
+              {/* Shop / Jewellery Dropdown */}
               <div
                 className="relative py-7"
                 onMouseEnter={() => handleMouseEnter('shop')}
@@ -125,41 +123,41 @@ export default function Navbar() {
               >
                 <Link
                   href="/shop"
-                  className={`inline-flex items-center gap-1 hover:text-[#B69A65] transition-colors ${
+                  className={`inline-flex items-center gap-1 hover:text-[#24332C] transition-colors ${
                     pathname.startsWith('/shop') && pathname !== '/shop/couple-bracelets'
-                      ? 'text-[#B69A65] font-medium'
+                      ? 'text-[#24332C] font-medium'
                       : ''
                   }`}
                 >
-                  <span>Shop</span>
-                  <ChevronDown className="w-3 h-3 text-[#B69A65] transition-transform duration-200" />
+                  <span>Jewellery</span>
+                  <ChevronDown className="w-3 h-3 text-[#708579] transition-transform duration-200" />
                 </Link>
 
                 {activeDropdown === 'shop' && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-80 bg-[#FFFFFF] border border-[#E8DCCD] shadow-xl p-5 z-50">
-                    <div className="text-[9px] uppercase tracking-[0.25em] text-[#B69A65] mb-3 pb-2 border-b border-[#E8DCCD]">
-                      Shop by Category
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-80 bg-[#FFFFFF] border border-[#EAE5DE] shadow-xl p-5 z-50 animate-fadeIn">
+                    <div className="text-[9px] uppercase tracking-[0.25em] text-[#24332C] font-medium mb-3 pb-2 border-b border-[#EAE5DE]">
+                      Fine Jewellery Categories
                     </div>
                     <div className="space-y-3">
-                      {shopSublinks.map((item) => (
+                      {jewelryCategories.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
                           className="block group/item transition-colors"
                         >
-                          <div className="text-xs font-serif text-[#111111] group-hover/item:text-[#B69A65] transition-colors">
+                          <div className="text-xs font-serif text-[#181818] group-hover/item:text-[#24332C] transition-colors">
                             {item.label}
                           </div>
-                          <div className="text-[10px] text-[#6B655D] tracking-normal capitalize font-light mt-0.5">
+                          <div className="text-[10px] text-[#5C5852] tracking-normal capitalize font-light mt-0.5">
                             {item.desc}
                           </div>
                         </Link>
                       ))}
                     </div>
-                    <div className="mt-4 pt-3 border-t border-[#E8DCCD]">
+                    <div className="mt-4 pt-3 border-t border-[#EAE5DE]">
                       <Link
                         href="/shop"
-                        className="text-[10px] tracking-[0.18em] uppercase text-[#111111] hover:text-[#B69A65] inline-flex items-center gap-1 font-medium"
+                        className="text-[10px] tracking-[0.18em] uppercase text-[#24332C] hover:text-[#181818] inline-flex items-center gap-1 font-medium"
                       >
                         <span>View Entire Vault</span>
                         <ArrowRight className="w-3 h-3" />
@@ -169,15 +167,15 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* Best Sellers Link */}
+              {/* Best Sellers */}
               <Link
                 href="/shop?filter=bestsellers"
-                className="hover:text-[#B69A65] transition-colors py-7"
+                className="hover:text-[#24332C] transition-colors py-7"
               >
                 Best Sellers
               </Link>
 
-              {/* Collections Link with Dropdown */}
+              {/* Collections Dropdown */}
               <div
                 className="relative py-7"
                 onMouseEnter={() => handleMouseEnter('collections')}
@@ -185,30 +183,30 @@ export default function Navbar() {
               >
                 <Link
                   href="/shop/couple-bracelets"
-                  className={`inline-flex items-center gap-1 hover:text-[#B69A65] transition-colors ${
-                    pathname === '/shop/couple-bracelets' ? 'text-[#B69A65] font-medium' : ''
+                  className={`inline-flex items-center gap-1 hover:text-[#24332C] transition-colors ${
+                    pathname === '/shop/couple-bracelets' ? 'text-[#24332C] font-medium' : ''
                   }`}
                 >
                   <span>Collections</span>
-                  <ChevronDown className="w-3 h-3 text-[#B69A65] transition-transform duration-200" />
+                  <ChevronDown className="w-3 h-3 text-[#708579] transition-transform duration-200" />
                 </Link>
 
                 {activeDropdown === 'collections' && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-80 bg-[#FFFFFF] border border-[#E8DCCD] shadow-xl p-5 z-50">
-                    <div className="text-[9px] uppercase tracking-[0.25em] text-[#B69A65] mb-3 pb-2 border-b border-[#E8DCCD]">
-                      Signature Capsule
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-80 bg-[#FFFFFF] border border-[#EAE5DE] shadow-xl p-5 z-50 animate-fadeIn">
+                    <div className="text-[9px] uppercase tracking-[0.25em] text-[#24332C] font-medium mb-3 pb-2 border-b border-[#EAE5DE]">
+                      Signature Series
                     </div>
                     <div className="space-y-3">
-                      {collectionsSublinks.map((item) => (
+                      {collectionsMenu.map((item) => (
                         <Link
                           key={item.href}
                           href={item.href}
                           className="block group/item transition-colors"
                         >
-                          <div className="text-xs font-serif text-[#111111] group-hover/item:text-[#B69A65] transition-colors">
+                          <div className="text-xs font-serif text-[#181818] group-hover/item:text-[#24332C] transition-colors">
                             {item.label}
                           </div>
-                          <div className="text-[10px] text-[#6B655D] tracking-normal capitalize font-light mt-0.5">
+                          <div className="text-[10px] text-[#5C5852] tracking-normal capitalize font-light mt-0.5">
                             {item.desc}
                           </div>
                         </Link>
@@ -218,19 +216,19 @@ export default function Navbar() {
                 )}
               </div>
 
-              {/* About Link */}
+              {/* About Us */}
               <Link
                 href="/about"
-                className={`hover:text-[#B69A65] transition-colors py-7 ${
-                  pathname === '/about' ? 'text-[#B69A65] font-medium' : ''
+                className={`hover:text-[#24332C] transition-colors py-7 ${
+                  pathname === '/about' ? 'text-[#24332C] font-medium' : ''
                 }`}
               >
-                About
+                About Us
               </Link>
             </nav>
 
             {/* Right: Currency & Action Icons */}
-            <div className="flex items-center space-x-3 sm:space-x-5 text-[#111111]">
+            <div className="flex items-center space-x-3 sm:space-x-5 text-[#181818]">
               <div className="hidden sm:block">
                 <CurrencySelector />
               </div>
@@ -240,7 +238,7 @@ export default function Navbar() {
                 type="button"
                 onClick={() => setSearchOpen(!searchOpen)}
                 aria-label="Search catalogue"
-                className="p-2 hover:text-[#B69A65] transition-colors"
+                className="p-2 hover:text-[#24332C] transition-colors"
               >
                 <Search className="w-4 h-4" />
               </button>
@@ -249,7 +247,7 @@ export default function Navbar() {
               <Link
                 href={isCustomerLoggedIn ? '/account' : '/auth/login'}
                 aria-label="Client account"
-                className="p-2 hover:text-[#B69A65] transition-colors"
+                className="p-2 hover:text-[#24332C] transition-colors"
               >
                 <User className="w-4 h-4" />
               </Link>
@@ -258,26 +256,26 @@ export default function Navbar() {
               <Link
                 href="/wishlist"
                 aria-label="Wishlist"
-                className="p-2 hover:text-[#B69A65] transition-colors relative"
+                className="p-2 hover:text-[#24332C] transition-colors relative"
               >
                 <Heart className="w-4 h-4" />
                 {totalWishlist > 0 && (
-                  <span className="absolute 1 top-1 -right-0.5 w-4 h-4 rounded-full bg-[#B69A65] text-white text-[9px] flex items-center justify-center font-medium">
+                  <span className="absolute top-1 -right-0.5 w-4 h-4 rounded-full bg-[#4A5F54] text-white text-[9px] flex items-center justify-center font-medium">
                     {totalWishlist}
                   </span>
                 )}
               </Link>
 
-              {/* Shopping Bag */}
+              {/* Shopping Bag (AUrate style signature green badge) */}
               <button
                 type="button"
                 onClick={() => setIsCartDrawerOpen(true)}
                 aria-label="Shopping bag"
-                className="p-2 hover:text-[#B69A65] transition-colors relative"
+                className="p-2 hover:text-[#24332C] transition-colors relative"
               >
                 <ShoppingBag className="w-4 h-4" />
                 {totalItems > 0 && (
-                  <span className="absolute top-1 -right-0.5 w-4 h-4 rounded-full bg-[#111111] text-[#F8F5F0] text-[9px] flex items-center justify-center font-medium">
+                  <span className="absolute top-1 -right-0.5 w-4 h-4 rounded-full bg-[#24332C] text-white text-[9px] flex items-center justify-center font-medium">
                     {totalItems}
                   </span>
                 )}
@@ -288,22 +286,22 @@ export default function Navbar() {
 
         {/* Search Overlay Bar */}
         {searchOpen && (
-          <div className="border-t border-[#E8DCCD] bg-[#FFFFFF] py-4 px-4 sm:px-8 shadow-md animate-fadeIn">
+          <div className="border-t border-[#EAE5DE] bg-[#FFFFFF] py-4 px-4 sm:px-8 shadow-sm animate-fadeIn">
             <div className="max-w-3xl mx-auto">
               <form onSubmit={handleSearchSubmit} className="relative flex items-center">
-                <Search className="w-4 h-4 text-[#6B655D] absolute left-3" />
+                <Search className="w-4 h-4 text-[#708579] absolute left-3" />
                 <input
                   type="text"
                   autoFocus
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search bracelets, necklaces, earrings or gold keepsakes..."
-                  className="w-full pl-10 pr-10 py-2.5 text-xs text-[#111111] bg-transparent border-b border-[#E8DCCD] focus:border-[#B69A65] focus:outline-none placeholder-[#6B655D] tracking-wide"
+                  className="w-full pl-10 pr-10 py-2.5 text-xs text-[#181818] bg-transparent border-b border-[#EAE5DE] focus:border-[#24332C] focus:outline-none placeholder-[#8A857D] tracking-wide"
                 />
                 <button
                   type="button"
                   onClick={() => setSearchOpen(false)}
-                  className="absolute right-2 text-[#6B655D] hover:text-[#111111]"
+                  className="absolute right-2 text-[#8A857D] hover:text-[#181818]"
                   aria-label="Close search"
                 >
                   <X className="w-4 h-4" />
@@ -321,17 +319,17 @@ export default function Navbar() {
             className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="fixed inset-y-0 left-0 w-full max-w-xs bg-[#F8F5F0] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
+          <div className="fixed inset-y-0 left-0 w-full max-w-xs bg-[#FAF8F5] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
             <div>
-              <div className="flex items-center justify-between pb-6 border-b border-[#E8DCCD]">
+              <div className="flex items-center justify-between pb-6 border-b border-[#EAE5DE]">
                 <Link href="/" onClick={() => setMobileMenuOpen(false)}>
-                  <span className="font-serif text-2xl tracking-[0.24em] font-light text-[#111111] uppercase">
+                  <span className="font-serif text-2xl tracking-[0.22em] font-light text-[#181818] uppercase">
                     ELVORA
                   </span>
                 </Link>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-[#111111] hover:text-[#B69A65]"
+                  className="p-2 text-[#181818] hover:text-[#24332C]"
                   aria-label="Close menu"
                 >
                   <X className="w-5 h-5" />
@@ -339,70 +337,70 @@ export default function Navbar() {
               </div>
 
               {/* Mobile Navigation Links */}
-              <nav className="py-6 space-y-4 text-xs uppercase tracking-[0.2em] font-light text-[#111111]">
+              <nav className="py-6 space-y-4 text-xs uppercase tracking-[0.2em] font-light text-[#181818]">
                 <Link
                   href="/shop"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
                 >
                   Shop All Jewellery
                 </Link>
                 <Link
                   href="/shop?filter=bestsellers"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
                 >
                   Best Sellers
                 </Link>
                 <Link
                   href="/shop/couple-bracelets"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
                 >
                   Couple Bracelets
                 </Link>
                 <Link
                   href="/shop/necklaces"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
                 >
-                  Necklaces & Pendants
+                  Necklaces &amp; Pendants
                 </Link>
                 <Link
                   href="/shop/earrings"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
                 >
                   Lantern Earrings
                 </Link>
                 <Link
                   href="/about"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                  className="block py-2 border-b border-[#EAE5DE]/60 hover:text-[#24332C]"
                 >
-                  About the Maison
+                  About Us &amp; Craft
                 </Link>
               </nav>
             </div>
 
             {/* Mobile Footer & Currency */}
-            <div className="pt-6 border-t border-[#E8DCCD] space-y-4">
+            <div className="pt-6 border-t border-[#EAE5DE] space-y-4">
               <div className="flex items-center justify-between">
-                <span className="text-xs uppercase tracking-wider text-[#6B655D]">Currency</span>
+                <span className="text-xs uppercase tracking-wider text-[#5C5852]">Currency</span>
                 <CurrencySelector />
               </div>
               <div className="grid grid-cols-2 gap-2 pt-2">
                 <Link
                   href={isCustomerLoggedIn ? '/account' : '/auth/login'}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="luxury-btn-outline text-center py-2 text-[10px]"
+                  className="aurate-btn-outline text-center py-2 text-[10px]"
                 >
                   Account
                 </Link>
                 <Link
                   href="/wishlist"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="luxury-btn-primary text-center py-2 text-[10px]"
+                  className="aurate-btn-primary text-center py-2 text-[10px]"
                 >
                   Wishlist ({totalWishlist})
                 </Link>

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { ArrowRight, ShieldCheck } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 export default function CustomerRegisterPage() {
   const router = useRouter();
@@ -26,13 +26,13 @@ export default function CustomerRegisterPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] py-16 lg:py-24">
+    <div className="min-h-screen bg-[#FAF8F5] py-16 lg:py-24">
       <div className="max-w-md mx-auto px-4 sm:px-6">
         <div className="text-center space-y-2 mb-8">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#B89A69] font-medium block">
+          <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
             Private Client Registry
           </span>
-          <h1 className="font-serif text-3xl text-[#171717] font-light">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light">
             Create Your Account
           </h1>
           <p className="text-xs text-[#77736D]">
@@ -40,10 +40,10 @@ export default function CustomerRegisterPage() {
           </p>
         </div>
 
-        <div className="bg-[#F8F6F2] border border-[#E7E1D8] p-8 shadow-xs space-y-6">
+        <div className="bg-white border border-[#EAE5DE] p-8 shadow-xs space-y-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#171717] font-medium mb-1.5">
+              <label className="block text-[11px] uppercase tracking-wider text-[#181818] font-medium mb-1.5">
                 Full Name
               </label>
               <input
@@ -52,12 +52,12 @@ export default function CustomerRegisterPage() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Rhea Kapoor"
-                className="w-full bg-[#EFEAE2]/60 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#171717] font-medium mb-1.5">
+              <label className="block text-[11px] uppercase tracking-wider text-[#181818] font-medium mb-1.5">
                 Email Address
               </label>
               <input
@@ -66,12 +66,12 @@ export default function CustomerRegisterPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="rhea@example.com"
-                className="w-full bg-[#EFEAE2]/60 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#171717] font-medium mb-1.5">
+              <label className="block text-[11px] uppercase tracking-wider text-[#181818] font-medium mb-1.5">
                 Contact Phone
               </label>
               <input
@@ -80,12 +80,12 @@ export default function CustomerRegisterPage() {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 placeholder="+91 98765 43210"
-                className="w-full bg-[#EFEAE2]/60 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#171717] font-medium mb-1.5">
+              <label className="block text-[11px] uppercase tracking-wider text-[#181818] font-medium mb-1.5">
                 Choose Password
               </label>
               <input
@@ -94,23 +94,23 @@ export default function CustomerRegisterPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
-                className="w-full bg-[#EFEAE2]/60 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] transition-colors"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#171717] text-white py-3.5 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#B89A69] transition-all duration-300"
+              className="w-full bg-[#24332C] text-white py-3.5 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#19241F] transition-all duration-300 shadow-xs"
             >
               <span>{loading ? 'Creating Profile...' : 'Complete Registration'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
 
-          <div className="pt-4 border-t border-[#E7E1D8] text-center text-xs text-[#77736D]">
+          <div className="pt-4 border-t border-[#EAE5DE] text-center text-xs text-[#77736D]">
             Already hold an account?{' '}
-            <Link href="/auth/login" className="text-[#B89A69] hover:underline font-medium">
+            <Link href="/auth/login" className="text-[#24332C] hover:underline font-semibold">
               Sign In
             </Link>
           </div>
@@ -119,4 +119,3 @@ export default function CustomerRegisterPage() {
     </div>
   );
 }
-

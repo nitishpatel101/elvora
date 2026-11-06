@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { Order } from '@/types';
 import { useCurrency } from '@/context/CurrencyContext';
-import { ArrowLeft, Package, ExternalLink, ShieldCheck } from 'lucide-react';
+import { ArrowLeft, Package, ExternalLink } from 'lucide-react';
 
 export default function MyOrdersPage() {
   const router = useRouter();
@@ -32,17 +32,17 @@ export default function MyOrdersPage() {
   }, [customer, isCustomerLoggedIn, router]);
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] py-12 lg:py-20">
+    <div className="min-h-screen bg-[#FAF8F5] py-12 lg:py-20">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-8">
           <Link
             href="/account"
-            className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#77736D] hover:text-[#171717] transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs uppercase tracking-wider text-[#708579] hover:text-[#24332C] transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
             <span>Back to Account</span>
           </Link>
-          <h1 className="font-serif text-3xl text-[#171717] font-light mt-3">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light mt-3">
             Your Order Archive
           </h1>
         </div>
@@ -50,15 +50,15 @@ export default function MyOrdersPage() {
         {loading ? (
           <p className="text-xs text-[#77736D] py-12 text-center">Loading orders...</p>
         ) : orders.length === 0 ? (
-          <div className="text-center py-16 bg-[#EFEAE2]/30 border border-[#E7E1D8] p-8 space-y-4">
-            <Package className="w-12 h-12 text-[#77736D] mx-auto stroke-1" />
-            <h2 className="font-serif text-xl text-[#171717]">No orders found</h2>
+          <div className="text-center py-16 bg-white border border-[#EAE5DE] p-8 space-y-4">
+            <Package className="w-12 h-12 text-[#708579] mx-auto stroke-1" />
+            <h2 className="font-serif text-xl text-[#181818]">No orders found</h2>
             <p className="text-xs text-[#77736D]">
               When you acquire pieces from ELVORA, they will appear here with full tracking history.
             </p>
             <Link
               href="/shop"
-              className="inline-block bg-[#171717] text-white text-xs uppercase tracking-wider px-6 py-2.5 hover:bg-[#B89A69] transition-colors"
+              className="inline-block bg-[#24332C] text-white text-xs uppercase tracking-wider px-6 py-2.5 hover:bg-[#19241F] transition-colors shadow-xs"
             >
               Browse Collections
             </Link>
@@ -68,11 +68,11 @@ export default function MyOrdersPage() {
             {orders.map((ord) => (
               <div
                 key={ord.id}
-                className="bg-[#F8F6F2] border border-[#E7E1D8] p-6 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
+                className="bg-white border border-[#EAE5DE] p-6 shadow-xs flex flex-col md:flex-row justify-between items-start md:items-center gap-6"
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-3">
-                    <span className="font-mono text-base font-bold text-[#171717]">
+                    <span className="font-mono text-sm font-semibold text-[#181818]">
                       {ord.id}
                     </span>
                     <span
@@ -98,7 +98,7 @@ export default function MyOrdersPage() {
                     <span className="text-[10px] uppercase tracking-wider text-[#77736D] block">
                       Amount Paid
                     </span>
-                    <span className="font-serif text-xl text-[#171717]">
+                    <span className="font-serif text-xl text-[#181818]">
                       {format(ord.totalAmount)}
                     </span>
                   </div>
@@ -106,13 +106,13 @@ export default function MyOrdersPage() {
                   <div className="flex gap-2">
                     <Link
                       href={`/account/orders/${ord.id}`}
-                      className="text-xs uppercase tracking-wider bg-[#171717] text-white px-4 py-2.5 hover:bg-[#B89A69] transition-colors"
+                      className="text-xs uppercase tracking-wider bg-[#24332C] text-white px-4 py-2.5 hover:bg-[#19241F] transition-colors"
                     >
                       View Details
                     </Link>
                     <Link
                       href={`/track-order?orderId=${ord.id}`}
-                      className="text-xs uppercase tracking-wider border border-[#E7E1D8] text-[#171717] p-2.5 hover:border-[#B89A69] hover:text-[#B89A69] transition-colors"
+                      className="text-xs uppercase tracking-wider border border-[#EAE5DE] text-[#181818] p-2.5 hover:border-[#24332C] hover:text-[#24332C] transition-colors"
                       title="Track Shipment"
                     >
                       <ExternalLink className="w-4 h-4" />
@@ -127,4 +127,3 @@ export default function MyOrdersPage() {
     </div>
   );
 }
-

@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { Order } from '@/types';
 import { useCurrency } from '@/context/CurrencyContext';
-import { User, Package, Heart, LogOut, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Package, Heart, LogOut, ArrowRight } from 'lucide-react';
 
 export default function AccountPage() {
   const router = useRouter();
@@ -34,14 +34,14 @@ export default function AccountPage() {
   if (!isCustomerLoggedIn) return null;
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] py-12 lg:py-20">
+    <div className="min-h-screen bg-[#FAF8F5] py-12 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#E7E1D8] mb-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between pb-8 border-b border-[#EAE5DE] mb-10">
           <div>
-            <span className="text-[10px] tracking-[0.3em] uppercase text-[#B89A69] font-medium block">
+            <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
               Private Client Cabinet
             </span>
-            <h1 className="font-serif text-3xl sm:text-4xl text-[#171717] font-light mt-1">
+            <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light mt-1">
               Welcome, {customer?.name || 'Valued Client'}
             </h1>
             <p className="text-xs text-[#77736D] mt-1">{customer?.email}</p>
@@ -59,37 +59,37 @@ export default function AccountPage() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Quick Navigation Cards */}
           <div className="lg:col-span-4 space-y-4">
-            <div className="bg-[#EFEAE2]/60 border border-[#E7E1D8] p-6 space-y-3">
-              <div className="w-10 h-10 rounded-full bg-[#F8F6F2] flex items-center justify-center text-[#B89A69]">
+            <div className="bg-white border border-[#EAE5DE] p-6 space-y-3">
+              <div className="w-10 h-10 rounded-full bg-[#EEF3F0] flex items-center justify-center text-[#24332C]">
                 <Package className="w-5 h-5" />
               </div>
-              <h3 className="font-serif text-lg text-[#171717]">Order History</h3>
+              <h3 className="font-serif text-lg text-[#181818]">Order History</h3>
               <p className="text-xs text-[#77736D]">
                 Track order progress, view payment receipts and shipping waybills.
               </p>
               <Link
                 href="/account/orders"
-                className="inline-flex items-center gap-1 text-xs uppercase tracking-wider text-[#B89A69] font-semibold hover:underline"
+                className="inline-flex items-center gap-1 text-xs uppercase tracking-wider text-[#24332C] font-semibold hover:underline"
               >
                 <span>View All Orders ({orders.length})</span>
                 <ArrowRight className="w-3.5 h-3.5" />
               </Link>
             </div>
 
-            <div className="bg-[#EFEAE2]/60 border border-[#E7E1D8] p-6 space-y-3">
-              <div className="w-10 h-10 rounded-full bg-[#F8F6F2] flex items-center justify-center text-[#B89A69]">
+            <div className="bg-white border border-[#EAE5DE] p-6 space-y-3">
+              <div className="w-10 h-10 rounded-full bg-[#EEF3F0] flex items-center justify-center text-[#24332C]">
                 <Heart className="w-5 h-5" />
               </div>
-              <h3 className="font-serif text-lg text-[#171717]">Saved Registry</h3>
+              <h3 className="font-serif text-lg text-[#181818]">Saved Registry</h3>
               <p className="text-xs text-[#77736D]">
                 Review saved couple pieces and bespoke jewelry for future acquisition.
               </p>
               <Link
                 href="/wishlist"
-                className="inline-flex items-center gap-1 text-xs uppercase tracking-wider text-[#B89A69] font-semibold hover:underline"
+                className="inline-flex items-center gap-1 text-xs uppercase tracking-wider text-[#24332C] font-semibold hover:underline"
               >
                 <span>Access Wishlist</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -98,14 +98,14 @@ export default function AccountPage() {
           </div>
 
           {/* Recent Orders Overview */}
-          <div className="lg:col-span-8 bg-[#F8F6F2] border border-[#E7E1D8] p-6 space-y-6">
-            <div className="flex items-center justify-between pb-4 border-b border-[#E7E1D8]">
-              <h2 className="font-serif text-xl text-[#171717] font-normal">
+          <div className="lg:col-span-8 bg-white border border-[#EAE5DE] p-6 space-y-6">
+            <div className="flex items-center justify-between pb-4 border-b border-[#EAE5DE]">
+              <h2 className="font-serif text-xl text-[#181818] font-normal">
                 Recent Acquisitions
               </h2>
               <Link
                 href="/account/orders"
-                className="text-xs uppercase tracking-wider text-[#77736D] hover:text-[#171717]"
+                className="text-xs uppercase tracking-wider text-[#708579] hover:text-[#24332C] font-medium"
               >
                 View Full Archive
               </Link>
@@ -120,7 +120,7 @@ export default function AccountPage() {
                 </p>
                 <Link
                   href="/shop"
-                  className="inline-block bg-[#171717] text-white text-xs uppercase tracking-wider px-6 py-2.5 hover:bg-[#B89A69] transition-colors"
+                  className="inline-block bg-[#24332C] text-white text-xs uppercase tracking-wider px-6 py-2.5 hover:bg-[#19241F] transition-colors"
                 >
                   Explore Collection
                 </Link>
@@ -130,11 +130,11 @@ export default function AccountPage() {
                 {orders.slice(0, 3).map((ord) => (
                   <div
                     key={ord.id}
-                    className="p-4 bg-[#EFEAE2]/40 border border-[#E7E1D8] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
+                    className="p-4 bg-[#FAF8F5] border border-[#EAE5DE] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4"
                   >
                     <div>
                       <div className="flex items-center gap-2">
-                        <span className="font-mono text-sm font-semibold text-[#171717]">
+                        <span className="font-mono text-xs font-semibold text-[#181818]">
                           {ord.id}
                         </span>
                         <span
@@ -154,12 +154,12 @@ export default function AccountPage() {
                     </div>
 
                     <div className="flex items-center gap-4 w-full sm:w-auto justify-between sm:justify-end">
-                      <span className="font-serif text-base text-[#171717] font-medium">
+                      <span className="font-serif text-base text-[#181818] font-medium">
                         {format(ord.totalAmount)}
                       </span>
                       <Link
                         href={`/account/orders/${ord.id}`}
-                        className="text-xs uppercase tracking-wider bg-[#171717] text-white px-4 py-2 hover:bg-[#B89A69] transition-colors"
+                        className="text-xs uppercase tracking-wider bg-[#24332C] text-white px-4 py-2 hover:bg-[#19241F] transition-colors"
                       >
                         Details
                       </Link>
@@ -174,4 +174,3 @@ export default function AccountPage() {
     </div>
   );
 }
-

@@ -31,32 +31,32 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#111111] text-[#F8F5F0] pt-16 pb-12 border-t border-[#242220]">
+    <footer className="bg-[#19241F] text-[#FAF8F5] pt-16 pb-12 border-t border-[#24332C]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Main 4-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-14 border-b border-[#242220]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 pb-14 border-b border-[#2A3B33]">
           {/* Brand Identity Column */}
           <div className="lg:col-span-2 space-y-4">
             <Link href="/" className="inline-block group">
-              <span className="font-serif text-3xl tracking-[0.25em] text-[#FFFFFF] uppercase font-light group-hover:text-[#B69A65] transition-colors">
+              <span className="font-serif text-3xl tracking-[0.22em] text-[#FFFFFF] uppercase font-light group-hover:text-[#D5E0D9] transition-colors">
                 ELVORA
               </span>
-              <span className="block text-[8px] tracking-[0.45em] uppercase text-[#B69A65] font-light mt-0.5">
-                Haute Joaillerie
+              <span className="block text-[8px] tracking-[0.4em] uppercase text-[#708579] font-medium mt-0.5">
+                Fine Jewellery
               </span>
             </Link>
 
-            <p className="text-xs text-[#8C867E] leading-relaxed max-w-sm font-light pt-2">
-              ELVORA crafts modern, evocative jewellery designed to celebrate connection and everyday elegance. Each piece brings hearts closer through thoughtful design and meaningful details.
+            <p className="text-xs text-[#A3B2A9] leading-relaxed max-w-sm font-light pt-2">
+              ELVORA crafts modern, evocative jewellery designed to celebrate connection and everyday elegance. High-grade surgical steel, natural stones, and multi-micron 18K gold.
             </p>
 
-            <div className="pt-2 flex items-center space-x-4 text-[#8C867E]">
+            <div className="pt-2 flex items-center space-x-4 text-[#A3B2A9]">
               <a
                 href="https://instagram.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="ELVORA Instagram"
-                className="hover:text-[#B69A65] transition-colors"
+                className="hover:text-[#FFFFFF] transition-colors"
               >
                 <InstagramIcon className="w-4 h-4" />
               </a>
@@ -65,45 +65,45 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="ELVORA Facebook"
-                className="hover:text-[#B69A65] transition-colors"
+                className="hover:text-[#FFFFFF] transition-colors"
               >
                 <FacebookIcon className="w-4 h-4" />
               </a>
             </div>
 
-            <div className="pt-2 text-[10px] tracking-wider text-[#B69A65] uppercase font-light">
+            <div className="pt-2 text-[10px] tracking-wider text-[#708579] uppercase font-light">
               Online Payments Only &bull; Express Tracked Dispatch
             </div>
           </div>
 
           {/* Shop Column */}
           <div className="space-y-4">
-            <h5 className="text-[11px] uppercase tracking-[0.22em] text-[#FFFFFF] font-medium">
+            <h5 className="text-[11px] uppercase tracking-[0.2em] text-[#FFFFFF] font-medium">
               Shop Collections
             </h5>
-            <ul className="space-y-2.5 text-xs text-[#8C867E] font-light">
+            <ul className="space-y-2.5 text-xs text-[#A3B2A9] font-light">
               <li>
-                <Link href="/shop" className="hover:text-[#B69A65] transition-colors">
+                <Link href="/shop" className="hover:text-[#FFFFFF] transition-colors">
                   All Jewellery
                 </Link>
               </li>
               <li>
-                <Link href="/shop/couple-bracelets" className="hover:text-[#B69A65] transition-colors">
+                <Link href="/shop/couple-bracelets" className="hover:text-[#FFFFFF] transition-colors">
                   Couple Bracelets
                 </Link>
               </li>
               <li>
-                <Link href="/shop/necklaces" className="hover:text-[#B69A65] transition-colors">
-                  Necklaces & Pendants
+                <Link href="/shop/necklaces" className="hover:text-[#FFFFFF] transition-colors">
+                  Necklaces &amp; Pendants
                 </Link>
               </li>
               <li>
-                <Link href="/shop/earrings" className="hover:text-[#B69A65] transition-colors">
-                  Pearl & Lantern Earrings
+                <Link href="/shop/earrings" className="hover:text-[#FFFFFF] transition-colors">
+                  Pearl &amp; Lantern Earrings
                 </Link>
               </li>
               <li>
-                <Link href="/shop?filter=bestsellers" className="hover:text-[#B69A65] transition-colors">
+                <Link href="/shop?filter=bestsellers" className="hover:text-[#FFFFFF] transition-colors">
                   Best Sellers
                 </Link>
               </li>
@@ -112,32 +112,32 @@ export default function Footer() {
 
           {/* Customer Support Column */}
           <div className="space-y-4">
-            <h5 className="text-[11px] uppercase tracking-[0.22em] text-[#FFFFFF] font-medium">
+            <h5 className="text-[11px] uppercase tracking-[0.2em] text-[#FFFFFF] font-medium">
               Customer Support
             </h5>
-            <ul className="space-y-2.5 text-xs text-[#8C867E] font-light">
+            <ul className="space-y-2.5 text-xs text-[#A3B2A9] font-light">
               <li>
-                <Link href="/track-order" className="hover:text-[#B69A65] transition-colors">
+                <Link href="/track-order" className="hover:text-[#FFFFFF] transition-colors">
                   Track Your Order
                 </Link>
               </li>
               <li>
-                <Link href="/shipping-policy" className="hover:text-[#B69A65] transition-colors">
+                <Link href="/shipping-policy" className="hover:text-[#FFFFFF] transition-colors">
                   Shipping Information
                 </Link>
               </li>
               <li>
-                <Link href="/refund-policy" className="hover:text-[#B69A65] transition-colors">
-                  Return & Exchange Policy
+                <Link href="/refund-policy" className="hover:text-[#FFFFFF] transition-colors">
+                  Return &amp; Exchange Policy
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-[#B69A65] transition-colors">
+                <Link href="/contact" className="hover:text-[#FFFFFF] transition-colors">
                   Contact Concierge
                 </Link>
               </li>
               <li>
-                <Link href="/about" className="hover:text-[#B69A65] transition-colors">
+                <Link href="/about" className="hover:text-[#FFFFFF] transition-colors">
                   About ELVORA
                 </Link>
               </li>
@@ -146,16 +146,16 @@ export default function Footer() {
 
           {/* Functional Newsletter Column */}
           <div className="space-y-4">
-            <h5 className="text-[11px] uppercase tracking-[0.22em] text-[#FFFFFF] font-medium">
-              The Gazette
+            <h5 className="text-[11px] uppercase tracking-[0.2em] text-[#FFFFFF] font-medium">
+              Join the Circle
             </h5>
-            <p className="text-xs text-[#8C867E] leading-relaxed font-light">
-              Receive private invitations to preview new capsule collections and special editions.
+            <p className="text-xs text-[#A3B2A9] leading-relaxed font-light">
+              Receive private invitations to preview new capsule collections and limited editions.
             </p>
 
             {subscribed ? (
-              <div className="flex items-center gap-2 text-xs text-[#B69A65] py-2">
-                <Check className="w-4 h-4" />
+              <div className="flex items-center gap-2 text-xs text-[#D5E0D9] py-2">
+                <Check className="w-4 h-4 text-emerald-400" />
                 <span>Thank you for joining our private list.</span>
               </div>
             ) : (
@@ -167,12 +167,12 @@ export default function Footer() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email"
-                    className="w-full bg-[#1A1918] border border-[#2E2B27] px-3.5 py-2.5 text-xs text-[#FFFFFF] placeholder-[#6B655D] focus:outline-none focus:border-[#B69A65] transition-colors pr-10"
+                    className="w-full bg-[#24332C] border border-[#3A4E44] px-3.5 py-2.5 text-xs text-[#FFFFFF] placeholder-[#708579] focus:outline-none focus:border-[#D5E0D9] transition-colors pr-10"
                   />
                   <button
                     type="submit"
                     aria-label="Subscribe"
-                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#B69A65] hover:text-[#FFFFFF] transition-colors"
+                    className="absolute right-2.5 top-1/2 -translate-y-1/2 text-[#D5E0D9] hover:text-[#FFFFFF] transition-colors"
                   >
                     <ArrowRight className="w-3.5 h-3.5" />
                   </button>
@@ -183,7 +183,7 @@ export default function Footer() {
             <div className="pt-2">
               <Link
                 href="/admin/login"
-                className="text-[10px] uppercase tracking-wider text-[#6B655D] hover:text-[#B69A65] transition-colors"
+                className="text-[10px] uppercase tracking-wider text-[#708579] hover:text-[#D5E0D9] transition-colors"
               >
                 Staff Portal &rarr;
               </Link>
@@ -192,22 +192,22 @@ export default function Footer() {
         </div>
 
         {/* Bottom Legal & Copyright Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-[#6B655D] gap-4">
+        <div className="pt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-[#708579] gap-4">
           <div>
             &copy; {new Date().getFullYear()} ELVORA. All rights reserved. Strictly online payments only.
           </div>
 
           <div className="flex flex-wrap items-center gap-6">
-            <Link href="/shipping-policy" className="hover:text-[#8C867E] transition-colors">
+            <Link href="/shipping-policy" className="hover:text-[#A3B2A9] transition-colors">
               Shipping Policy
             </Link>
-            <Link href="/refund-policy" className="hover:text-[#8C867E] transition-colors">
+            <Link href="/refund-policy" className="hover:text-[#A3B2A9] transition-colors">
               Return Policy
             </Link>
-            <Link href="/privacy-policy" className="hover:text-[#8C867E] transition-colors">
+            <Link href="/privacy-policy" className="hover:text-[#A3B2A9] transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/terms" className="hover:text-[#8C867E] transition-colors">
+            <Link href="/terms" className="hover:text-[#A3B2A9] transition-colors">
               Terms &amp; Conditions
             </Link>
           </div>

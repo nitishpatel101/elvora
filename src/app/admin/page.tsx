@@ -90,10 +90,10 @@ export default function AdminDashboardPage() {
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
-              <span className="text-[10px] tracking-[0.25em] uppercase text-[#B89A69] font-semibold block">
-                Administrative Portal
+              <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
+                Administrative Portal &bull; {admin?.email || 'Authenticated'}
               </span>
-              <h1 className="font-serif text-2xl sm:text-3xl text-[#171717] font-light">
+              <h1 className="font-serif text-2xl sm:text-3xl text-[#181818] font-light">
                 Product Catalogue Management
               </h1>
             </div>
@@ -194,12 +194,12 @@ export default function AdminDashboardPage() {
                       </td>
 
                       <td className="py-3 px-4">
-                        <div className="font-semibold text-[#171717]">
-                          ₹{prod.price.toLocaleString('en-IN')}
+                        <div className="font-semibold text-[#181818]">
+                          {format(prod.price)}
                         </div>
                         {prod.originalPrice && (
-                          <div className="text-[10px] text-[#A39E96] line-through">
-                            ₹{prod.originalPrice.toLocaleString('en-IN')}
+                          <div className="text-[10px] text-[#8A857D] line-through">
+                            {format(prod.originalPrice)}
                           </div>
                         )}
                       </td>

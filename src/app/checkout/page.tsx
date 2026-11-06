@@ -245,16 +245,16 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-[#F8F5F0] py-20">
-        <div className="max-w-md mx-auto text-center p-8 bg-[#FFFFFF] border border-[#E8DCCD] shadow-sm">
-          <h1 className="font-serif text-2xl text-[#111111] font-light">Your bag is empty</h1>
-          <p className="text-xs text-[#6B655D] mt-2 font-light">
+      <div className="min-h-screen bg-[#FAF8F5] py-20">
+        <div className="max-w-md mx-auto text-center p-8 bg-[#FFFFFF] border border-[#EAE5DE] shadow-sm">
+          <h1 className="font-serif text-2xl text-[#181818] font-light">Your bag is empty</h1>
+          <p className="text-xs text-[#5C5852] mt-2 font-light">
             Please select jewellery creations before proceeding to checkout.
           </p>
           <div className="pt-4">
             <Link
               href="/shop"
-              className="inline-block bg-[#111111] text-white text-xs uppercase tracking-wider px-6 py-3 hover:bg-[#B69A65] transition-colors"
+              className="inline-block bg-[#24332C] text-white text-xs uppercase tracking-wider px-6 py-3 hover:bg-[#19241F] transition-colors"
             >
               Browse Catalogue
             </Link>
@@ -265,13 +265,13 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F5F0] py-12 lg:py-20">
+    <div className="min-h-screen bg-[#FAF8F5] py-12 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-12">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#B69A65] font-medium block">
+          <span className="text-[10px] tracking-[0.28em] uppercase text-[#708579] font-medium block">
             End-to-End Encrypted
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#111111] font-light mt-1 tracking-tight">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light mt-1 tracking-tight">
             Secure Online Checkout
           </h1>
         </div>
@@ -295,7 +295,7 @@ export default function CheckoutPage() {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="sm:col-span-2">
-                    <label className="block text-xs uppercase tracking-wider text-[#171717] mb-1 font-medium">
+                    <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
                       Full Name *
                     </label>
                     <input
@@ -305,12 +305,12 @@ export default function CheckoutPage() {
                       value={formData.fullName}
                       onChange={handleChange}
                       placeholder="e.g. Ananya Sharma"
-                      className="w-full bg-[#EFEAE2]/50 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#171717] mb-1 font-medium">
+                    <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
                       Email Address *
                     </label>
                     <input
@@ -320,12 +320,12 @@ export default function CheckoutPage() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="ananya@example.com"
-                      className="w-full bg-[#EFEAE2]/50 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#171717] mb-1 font-medium">
+                    <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
                       Phone Number *
                     </label>
                     <input
@@ -335,12 +335,12 @@ export default function CheckoutPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+91 98765 43210"
-                      className="w-full bg-[#EFEAE2]/50 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     />
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs uppercase tracking-wider text-[#171717] mb-1 font-medium">
+                    <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
                       Street Address Line 1 *
                     </label>
                     <input
@@ -350,12 +350,12 @@ export default function CheckoutPage() {
                       value={formData.addressLine1}
                       onChange={handleChange}
                       placeholder="House / Apartment / Suite, Road"
-                      className="w-full bg-[#EFEAE2]/50 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     />
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs uppercase tracking-wider text-[#171717] mb-1 font-medium">
+                    <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
                       Apartment / Landmark (Optional)
                     </label>
                     <input
@@ -364,12 +364,12 @@ export default function CheckoutPage() {
                       value={formData.addressLine2}
                       onChange={handleChange}
                       placeholder="Near Oberoi Tower, 4th Floor"
-                      className="w-full bg-[#EFEAE2]/50 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#171717] mb-1 font-medium">
+                    <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
                       City *
                     </label>
                     <input
@@ -379,12 +379,12 @@ export default function CheckoutPage() {
                       value={formData.city}
                       onChange={handleChange}
                       placeholder="Mumbai / New Delhi"
-                      className="w-full bg-[#EFEAE2]/50 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#171717] mb-1 font-medium">
+                    <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
                       State / Province *
                     </label>
                     <input
@@ -394,12 +394,12 @@ export default function CheckoutPage() {
                       value={formData.state}
                       onChange={handleChange}
                       placeholder="Maharashtra"
-                      className="w-full bg-[#EFEAE2]/50 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#171717] mb-1 font-medium">
+                    <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
                       Postal Code / PIN *
                     </label>
                     <input
@@ -409,19 +409,19 @@ export default function CheckoutPage() {
                       value={formData.pincode}
                       onChange={handleChange}
                       placeholder="400001"
-                      className="w-full bg-[#EFEAE2]/50 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#171717] mb-1 font-medium">
+                    <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
                       Country *
                     </label>
                     <select
                       name="country"
                       value={formData.country}
                       onChange={handleChange}
-                      className="w-full bg-[#EFEAE2]/50 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     >
                       <option value="India">India (₹99 Express Courier)</option>
                       <option value="United States">United States ($15 DHL Express)</option>
@@ -448,12 +448,12 @@ export default function CheckoutPage() {
                 </div>
 
                 {/* COD Strictly Prohibited Notice Banner */}
-                <div className="bg-[#111111] text-[#F8F5F0] p-4 text-xs space-y-1">
-                  <div className="flex items-center gap-2 font-medium text-[#B69A65]">
-                    <Lock className="w-4 h-4" />
+                <div className="bg-[#19241F] text-[#FAF8F5] p-4 text-xs space-y-1">
+                  <div className="flex items-center gap-2 font-medium text-[#D5E0D9]">
+                    <Lock className="w-4 h-4 text-[#A3B2A9]" />
                     <span>STRICT POLICY: ONLINE PAYMENTS ONLY</span>
                   </div>
-                  <p className="text-[#8C867E] text-[11px] leading-relaxed font-light">
+                  <p className="text-[#A3B2A9] text-[11px] leading-relaxed font-light">
                     To maintain strict chain-of-custody for fine jewellery and guarantee tamper-evident delivery, Cash on Delivery (COD) is strictly prohibited. Orders are dispatched upon electronic confirmation.
                   </p>
                 </div>
@@ -463,18 +463,18 @@ export default function CheckoutPage() {
                     onClick={() => setSelectedMethod('UPI')}
                     className={`block p-4 border cursor-pointer transition-all ${
                       selectedMethod === 'UPI'
-                        ? 'border-[#B69A65] bg-[#E8DCCD]/30'
-                        : 'border-[#E8DCCD] hover:border-[#111111]'
+                        ? 'border-[#24332C] bg-[#EEF3F0]'
+                        : 'border-[#EAE5DE] hover:border-[#24332C]'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <Smartphone className="w-5 h-5 text-[#B69A65]" />
+                        <Smartphone className="w-5 h-5 text-[#24332C]" />
                         <div>
-                          <span className="text-xs uppercase tracking-wider font-medium text-[#111111] block">
+                          <span className="text-xs uppercase tracking-wider font-medium text-[#181818] block">
                             Instant UPI
                           </span>
-                          <span className="text-[11px] text-[#6B655D] font-light">
+                          <span className="text-[11px] text-[#5C5852] font-light">
                             Google Pay, PhonePe, Paytm, BHIM & QR
                           </span>
                         </div>
@@ -483,7 +483,7 @@ export default function CheckoutPage() {
                         type="radio"
                         checked={selectedMethod === 'UPI'}
                         onChange={() => setSelectedMethod('UPI')}
-                        className="accent-[#B69A65]"
+                        className="accent-[#24332C]"
                       />
                     </div>
                   </label>
@@ -492,18 +492,18 @@ export default function CheckoutPage() {
                     onClick={() => setSelectedMethod('CARD')}
                     className={`block p-4 border cursor-pointer transition-all ${
                       selectedMethod === 'CARD'
-                        ? 'border-[#B69A65] bg-[#E8DCCD]/30'
-                        : 'border-[#E8DCCD] hover:border-[#111111]'
+                        ? 'border-[#24332C] bg-[#EEF3F0]'
+                        : 'border-[#EAE5DE] hover:border-[#24332C]'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <CreditCard className="w-5 h-5 text-[#B69A65]" />
+                        <CreditCard className="w-5 h-5 text-[#24332C]" />
                         <div>
-                          <span className="text-xs uppercase tracking-wider font-medium text-[#111111] block">
+                          <span className="text-xs uppercase tracking-wider font-medium text-[#181818] block">
                             Credit & Debit Cards
                           </span>
-                          <span className="text-[11px] text-[#6B655D] font-light">
+                          <span className="text-[11px] text-[#5C5852] font-light">
                             Visa, MasterCard, American Express, RuPay
                           </span>
                         </div>
@@ -512,7 +512,7 @@ export default function CheckoutPage() {
                         type="radio"
                         checked={selectedMethod === 'CARD'}
                         onChange={() => setSelectedMethod('CARD')}
-                        className="accent-[#B69A65]"
+                        className="accent-[#24332C]"
                       />
                     </div>
                   </label>
@@ -521,13 +521,13 @@ export default function CheckoutPage() {
                     onClick={() => setSelectedMethod('NETBANKING')}
                     className={`block p-4 border cursor-pointer transition-all ${
                       selectedMethod === 'NETBANKING'
-                        ? 'border-[#B69A65] bg-[#E8DCCD]/30'
-                        : 'border-[#E8DCCD] hover:border-[#111111]'
+                        ? 'border-[#24332C] bg-[#EEF3F0]'
+                        : 'border-[#EAE5DE] hover:border-[#24332C]'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <Building className="w-5 h-5 text-[#B69A65]" />
+                        <Building className="w-5 h-5 text-[#24332C]" />
                         <div>
                           <span className="text-xs uppercase tracking-wider font-medium text-[#111111] block">
                             Net Banking & Verified Wallets
@@ -607,9 +607,9 @@ export default function CheckoutPage() {
                   </div>
                 )}
 
-                <div className="pt-3 border-t border-[#E8DCCD] flex justify-between items-baseline text-base font-light text-[#111111]">
+                <div className="pt-3 border-t border-[#EAE5DE] flex justify-between items-baseline text-base font-light text-[#181818]">
                   <span>Total Payable</span>
-                  <span className="font-serif text-2xl font-medium text-[#111111]">{format(grandTotalInr)}</span>
+                  <span className="font-serif text-2xl font-medium text-[#181818]">{format(grandTotalInr)}</span>
                 </div>
               </div>
 
@@ -617,22 +617,22 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#111111] text-white py-4 px-6 text-xs uppercase tracking-[0.22em] font-medium flex items-center justify-center gap-2 hover:bg-[#B69A65] transition-all duration-300 disabled:opacity-60"
+                className="w-full bg-[#24332C] text-white py-4 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#19241F] transition-all duration-300 disabled:opacity-60"
               >
                 {loading ? (
                   <>
-                    <Loader2 className="w-4 h-4 animate-spin text-[#B89A69]" />
+                    <Loader2 className="w-4 h-4 animate-spin text-[#A3B2A9]" />
                     <span>Processing Secure Gateway...</span>
                   </>
                 ) : (
                   <>
                     <Lock className="w-4 h-4" />
-                    <span>Authorize & Pay {format(grandTotalInr)}</span>
+                    <span>Authorize &amp; Pay {format(grandTotalInr)}</span>
                   </>
                 )}
               </button>
 
-              <div className="text-[10px] text-center text-[#77736D] tracking-wider uppercase">
+              <div className="text-[10px] text-center text-[#5C5852] tracking-wider uppercase font-light">
                 By clicking Authorize, you agree to ELVORA&rsquo;s Terms &amp; Paid Shipping Policy.
               </div>
             </div>
@@ -643,34 +643,34 @@ export default function CheckoutPage() {
       {/* Interactive Sandboxed Payment Simulation Modal (For local testing before production keys) */}
       {sandboxOrderData && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-[#FFFFFF] border border-[#E8DCCD] max-w-md w-full p-6 shadow-2xl space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E8DCCD]">
+          <div className="bg-[#FFFFFF] border border-[#EAE5DE] max-w-md w-full p-6 shadow-2xl space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-[#EAE5DE]">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#B69A65]" />
-                <h3 className="font-serif text-lg text-[#111111] font-light">
+                <ShieldCheck className="w-5 h-5 text-[#24332C]" />
+                <h3 className="font-serif text-lg text-[#181818] font-light">
                   Razorpay Secure Gateway
                 </h3>
               </div>
-              <span className="text-[10px] uppercase tracking-wider bg-[#B69A65] text-white px-2 py-0.5">
+              <span className="text-[10px] uppercase tracking-wider bg-[#24332C] text-white px-2 py-0.5">
                 Online Verification
               </span>
             </div>
 
-            <div className="space-y-3 text-xs text-[#6B655D]">
-              <div className="p-3 bg-[#F8F5F0] border border-[#E8DCCD] space-y-1 font-light">
+            <div className="space-y-3 text-xs text-[#5C5852]">
+              <div className="p-3 bg-[#FAF8F5] border border-[#EAE5DE] space-y-1 font-light">
                 <div className="flex justify-between">
                   <span>Order Identifier:</span>
-                  <span className="font-mono text-[#111111] font-bold">{sandboxOrderData.orderId}</span>
+                  <span className="font-mono text-[#181818] font-bold">{sandboxOrderData.orderId}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Merchant:</span>
-                  <span className="text-[#111111]">ELVORA Haute Joaillerie</span>
+                  <span className="text-[#181818]">ELVORA Fine Jewellery</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Customer:</span>
-                  <span className="text-[#111111]">{sandboxOrderData.customer.name}</span>
+                  <span className="text-[#181818]">{sandboxOrderData.customer.name}</span>
                 </div>
-                <div className="flex justify-between font-semibold text-sm text-[#111111] pt-1 border-t border-[#E8DCCD]">
+                <div className="flex justify-between font-semibold text-sm text-[#181818] pt-1 border-t border-[#EAE5DE]">
                   <span>Amount to Settle:</span>
                   <span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(sandboxOrderData.amountInr)}</span>
                 </div>
@@ -685,7 +685,7 @@ export default function CheckoutPage() {
               <button
                 type="button"
                 onClick={handleSimulatedPaymentSuccess}
-                className="w-full bg-[#111111] text-white py-3 text-xs uppercase tracking-wider font-medium hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-[#24332C] text-white py-3 text-xs uppercase tracking-wider font-medium hover:bg-[#19241F] transition-colors flex items-center justify-center gap-2"
               >
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 <span>Simulate Successful Bank Authorization</span>

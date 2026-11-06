@@ -18,13 +18,13 @@ export default function NewProductPage() {
   if (!isAdminLoggedIn) return null;
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] py-10 lg:py-14">
+    <div className="min-h-screen bg-[#FAF8F5] py-10 lg:py-14">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
         <div>
-          <span className="text-[10px] tracking-[0.25em] uppercase text-[#B89A69] font-semibold block">
+          <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
             Catalogue Expansion
           </span>
-          <h1 className="font-serif text-3xl text-[#171717] font-light mt-1">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light mt-1">
             Create &amp; Publish New Creation
           </h1>
           <p className="text-xs text-[#77736D] mt-1">
@@ -37,4 +37,3 @@ export default function NewProductPage() {
     </div>
   );
 }
-

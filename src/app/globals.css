@@ -4,53 +4,71 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
-  /* Editorial Luxury Palette */
-  --color-warm-ivory: #F8F5F0;
-  --color-champagne-beige: #E8DCCD;
-  --color-soft-gold: #B69A65;
-  --color-gold-hover: #9F8354;
-  --color-deep-black: #111111;
-  --color-dark-brown: #342A23;
+  /* AUrate-inspired Modern Fine Jewelry Palette */
+  --color-canvas: #FAF8F5;
+  --color-surface: #F3EFEA;
+  --color-surface-card: #FFFFFF;
+  --color-border: #EAE5DE;
+  --color-border-subtle: #F0ECE6;
+
+  /* Signature Forest & Sage Greens */
+  --color-forest: #24332C;
+  --color-forest-dark: #19241F;
+  --color-forest-hover: #1E2B25;
+  --color-sage: #4A5F54;
+  --color-sage-light: #708579;
+  --color-sage-tint: #EEF3F0;
+  --color-sage-border: #D5E0D9;
+
+  /* Warm Gold Accent */
+  --color-gold: #C5A876;
+  --color-gold-hover: #AF9261;
+  --color-gold-tint: #FAF6EF;
+
+  /* Editorial Neutrals */
+  --color-ink: #181818;
+  --color-stone: #5C5852;
+  --color-muted: #8A857D;
   --color-white: #FFFFFF;
 
-  /* Aliases for semantic mapping */
-  --color-ivory: #F8F5F0;
-  --color-ivory-sand: #E8DCCD;
-  --color-ivory-dark: #DED3C3;
-  --color-charcoal: #111111;
-  --color-stone: #6B655D;
-  --color-gold: #B69A65;
-  --color-gold-light: #DFCDB4;
-  --color-gold-tint: #F3ECE1;
-  --color-border: #E8DCCD;
+  /* Legacy semantic mappings for seamless backwards compatibility */
+  --color-ivory: #FAF8F5;
+  --color-ivory-sand: #F3EFEA;
+  --color-charcoal: #181818;
+  --color-gold-accent: #C5A876;
 }
 
 @theme {
-  --color-warm-ivory: #F8F5F0;
-  --color-champagne-beige: #E8DCCD;
-  --color-soft-gold: #B69A65;
-  --color-deep-black: #111111;
-  --color-dark-brown: #342A23;
-  --color-white: #FFFFFF;
+  --color-canvas: #FAF8F5;
+  --color-surface: #F3EFEA;
+  --color-surface-card: #FFFFFF;
+  --color-border: #EAE5DE;
+  --color-border-subtle: #F0ECE6;
 
-  --color-ivory: #F8F5F0;
-  --color-ivory-sand: #E8DCCD;
-  --color-ivory-dark: #DED3C3;
-  --color-charcoal: #111111;
-  --color-stone: #6B655D;
-  --color-gold: #B69A65;
-  --color-gold-hover: #9F8354;
-  --color-gold-light: #DFCDB4;
-  --color-gold-tint: #F3ECE1;
-  --color-border: #E8DCCD;
+  --color-forest: #24332C;
+  --color-forest-dark: #19241F;
+  --color-forest-hover: #1E2B25;
+  --color-sage: #4A5F54;
+  --color-sage-light: #708579;
+  --color-sage-tint: #EEF3F0;
+  --color-sage-border: #D5E0D9;
+
+  --color-gold: #C5A876;
+  --color-gold-hover: #AF9261;
+  --color-gold-tint: #FAF6EF;
+
+  --color-ink: #181818;
+  --color-stone: #5C5852;
+  --color-muted: #8A857D;
+  --color-white: #FFFFFF;
 
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
 }
 
 body {
-  background-color: #F8F5F0;
-  color: #111111;
+  background-color: #FAF8F5;
+  color: #181818;
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -59,76 +77,80 @@ body {
 
 h1, h2, h3, h4, .font-serif {
   font-family: var(--font-serif);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
-/* Custom Editorial Luxury Scrollbar */
+/* Custom AUrate-style Minimal Scrollbar */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8F5F0;
+  background: #FAF8F5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #DFCDB4;
+  background: #D8D2C8;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B69A65;
+  background: #24332C;
 }
 
-/* Editorial luxury buttons */
-.luxury-btn-primary {
-  background-color: #111111;
+/* AUrate-inspired clean button classes */
+.aurate-btn-primary {
+  background-color: #24332C;
   color: #FFFFFF;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   font-size: 0.6875rem; /* 11px */
   font-weight: 500;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  border: 1px solid #111111;
+  padding: 0.875rem 1.75rem;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid #24332C;
 }
 
-.luxury-btn-primary:hover {
-  background-color: #B69A65;
-  border-color: #B69A65;
-  color: #FFFFFF;
+.aurate-btn-primary:hover {
+  background-color: #19241F;
+  border-color: #19241F;
 }
 
-.luxury-btn-outline {
+.aurate-btn-outline {
   background-color: transparent;
-  color: #111111;
-  letter-spacing: 0.2em;
+  color: #181818;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: 0.6875rem; /* 11px */
+  font-size: 0.6875rem;
   font-weight: 500;
-  border: 1px solid #111111;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.875rem 1.75rem;
+  border: 1px solid #181818;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.luxury-btn-outline:hover {
-  background-color: #111111;
+.aurate-btn-outline:hover {
+  background-color: #24332C;
   color: #FFFFFF;
+  border-color: #24332C;
 }
 
-.luxury-btn-gold {
-  background-color: #B69A65;
-  color: #FFFFFF;
-  letter-spacing: 0.2em;
+.aurate-btn-sage {
+  background-color: #EEF3F0;
+  color: #24332C;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
-  font-size: 0.6875rem; /* 11px */
+  font-size: 0.6875rem;
   font-weight: 500;
-  border: 1px solid #B69A65;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.875rem 1.75rem;
+  border: 1px solid #D5E0D9;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.luxury-btn-gold:hover {
-  background-color: #9F8354;
-  border-color: #9F8354;
+.aurate-btn-sage:hover {
+  background-color: #24332C;
+  color: #FFFFFF;
+  border-color: #24332C;
 }
 
 /* Subtle Shimmer for luxury accents */
@@ -144,9 +166,9 @@ h1, h2, h3, h4, .font-serif {
 .shimmer-gold {
   background: linear-gradient(
     90deg,
-    rgba(182, 154, 101, 0.08) 0%,
-    rgba(182, 154, 101, 0.28) 50%,
-    rgba(182, 154, 101, 0.08) 100%
+    rgba(197, 168, 118, 0.08) 0%,
+    rgba(197, 168, 118, 0.28) 50%,
+    rgba(197, 168, 118, 0.08) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 4s infinite linear;

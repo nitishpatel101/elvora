@@ -20,10 +20,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [customer, setCustomer] = useState<CustomerUser | null>(null);
   const [admin, setAdmin] = useState<AdminUser | null>(null);
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
     try {
       const savedCustomer = localStorage.getItem('elvora_customer');
       if (savedCustomer) setCustomer(JSON.parse(savedCustomer));

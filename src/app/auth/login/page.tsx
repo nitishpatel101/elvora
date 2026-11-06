@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { useAuth } from '@/context/AuthContext';
-import { Lock, ArrowRight, ShieldCheck } from 'lucide-react';
+import { Lock, ArrowRight } from 'lucide-react';
 
 export default function CustomerLoginPage() {
   const router = useRouter();
@@ -24,13 +24,13 @@ export default function CustomerLoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] py-16 lg:py-24">
+    <div className="min-h-screen bg-[#FAF8F5] py-16 lg:py-24">
       <div className="max-w-md mx-auto px-4 sm:px-6">
         <div className="text-center space-y-2 mb-8">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#B89A69] font-medium block">
+          <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
             Private Client Access
           </span>
-          <h1 className="font-serif text-3xl text-[#171717] font-light">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light">
             Welcome to ELVORA
           </h1>
           <p className="text-xs text-[#77736D]">
@@ -38,10 +38,10 @@ export default function CustomerLoginPage() {
           </p>
         </div>
 
-        <div className="bg-[#F8F6F2] border border-[#E7E1D8] p-8 shadow-xs space-y-6">
+        <div className="bg-white border border-[#EAE5DE] p-8 shadow-xs space-y-6">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#171717] font-medium mb-1.5">
+              <label className="block text-[11px] uppercase tracking-wider text-[#181818] font-medium mb-1.5">
                 Email Address
               </label>
               <input
@@ -50,12 +50,12 @@ export default function CustomerLoginPage() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="client@domain.com"
-                className="w-full bg-[#EFEAE2]/60 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-xs uppercase tracking-wider text-[#171717] font-medium mb-1.5">
+              <label className="block text-[11px] uppercase tracking-wider text-[#181818] font-medium mb-1.5">
                 Password
               </label>
               <input
@@ -64,35 +64,35 @@ export default function CustomerLoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••••••"
-                className="w-full bg-[#EFEAE2]/60 border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#B89A69]"
+                className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] transition-colors"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-[#171717] text-white py-3.5 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#B89A69] transition-all duration-300"
+              className="w-full bg-[#24332C] text-white py-3.5 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#19241F] transition-all duration-300 shadow-xs"
             >
-              <span>{loading ? 'Authenticating...' : 'Enter Maison'}</span>
+              <span>{loading ? 'Authenticating...' : 'Sign In'}</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </form>
 
-          <div className="pt-4 border-t border-[#E7E1D8] text-center space-y-3">
+          <div className="pt-4 border-t border-[#EAE5DE] text-center space-y-3">
             <p className="text-xs text-[#77736D]">
               New to ELVORA?{' '}
-              <Link href="/auth/register" className="text-[#B89A69] hover:underline font-medium">
+              <Link href="/auth/register" className="text-[#24332C] hover:underline font-semibold">
                 Register an Account
               </Link>
             </p>
 
-            <div>
+            <div className="pt-2">
               <Link
                 href="/admin/login"
-                className="text-[11px] text-[#A39E96] hover:text-[#B89A69] transition-colors inline-flex items-center gap-1"
+                className="text-[11px] text-[#708579] hover:text-[#24332C] transition-colors inline-flex items-center gap-1"
               >
                 <Lock className="w-3 h-3" />
-                <span>Admin & Staff Portal</span>
+                <span>Executive & Staff Portal</span>
               </Link>
             </div>
           </div>
@@ -101,4 +101,3 @@ export default function CustomerLoginPage() {
     </div>
   );
 }
-

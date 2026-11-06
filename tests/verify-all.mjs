@@ -351,6 +351,19 @@ async function runTests() {
     const publicProducts = await publicRes.json();
     const found = publicProducts.find((p) => p.id === createdProductId);
     assert(!found, 'Unpublished product must not appear to public buyers');
+
+    // Clean up temporary test product from file storage
+    try {
+      const fs = await import('fs/promises');
+      const path = await import('path');
+      const productsPath = path.resolve('data/products.json');
+      const raw = await fs.readFile(productsPath, 'utf-8');
+      const all = JSON.parse(raw);
+      const cleaned = all.filter((p) => p.id !== createdProductId);
+      await fs.writeFile(productsPath, JSON.stringify(cleaned, null, 2), 'utf-8');
+    } catch (e) {
+      // Ignored if file cleanup not supported in environment
+    }
   });
 
   // TEST 19: All 23 Pages return HTTP 200
