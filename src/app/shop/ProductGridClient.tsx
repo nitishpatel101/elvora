@@ -1,9 +1,13 @@
 'use client';
 
 import React, { useState, useMemo } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
 import { Product, Category } from '@/types';
 import ProductCard from '@/components/product/ProductCard';
-import { Search, SlidersHorizontal, ArrowUpDown } from 'lucide-react';
+import { useCurrency } from '@/context/CurrencyContext';
+import { useCart } from '@/context/CartContext';
+import { Search, SlidersHorizontal, ArrowUpDown, X, ShoppingBag } from 'lucide-react';
 
 interface ProductGridClientProps {
   initialProducts: Product[];
@@ -18,10 +22,13 @@ export default function ProductGridClient({
   initialSearch = '',
   initialCategory = 'all',
 }: ProductGridClientProps) {
+  const { format } = useCurrency();
+  const { addToCart } = useCart();
   const [search, setSearch] = useState(initialSearch);
   const [selectedCategory, setSelectedCategory] = useState(initialCategory);
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'newest'>('featured');
   const [inStockOnly, setInStockOnly] = useState(false);
+  const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
   const filteredAndSortedProducts = useMemo(() => {
     return initialProducts
@@ -175,8 +182,83 @@ export default function ProductGridClient({
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredAndSortedProducts.map((product) => (
-            <ProductCard key={product.id} product={product} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onQuickView={setQuickViewProduct}
+            />
           ))}
+        </div>
+      )}
+
+      {/* Luxury Quick View Modal */}
+      {quickViewProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
+            onClick={() => setQuickViewProduct(null)}
+          />
+
+          <div className="relative bg-[#F8F6F2] border border-[#E7E1D8] max-w-2xl w-full p-6 sm:p-8 shadow-2xl z-10 grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+            <button
+              onClick={() => setQuickViewProduct(null)}
+              aria-label="Close preview"
+              className="absolute top-4 right-4 p-1.5 text-[#77736D] hover:text-[#171717] transition-colors"
+            >
+              <X className="w-5 h-5" />
+            </button>
+
+            {/* Modal Image */}
+            <div className="relative aspect-square bg-[#EFEAE2] border border-[#E7E1D8] overflow-hidden">
+              <Image
+                src={quickViewProduct.images[0] || '/images/products/touch-distance-bracelet/hero.jpg'}
+                alt={quickViewProduct.name}
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Modal Info & CTA */}
+            <div className="space-y-4">
+              <div>
+                <span className="text-[10px] tracking-[0.2em] uppercase text-[#B89A69] font-medium block">
+                  {quickViewProduct.category}
+                </span>
+                <h3 className="font-serif text-2xl text-[#171717] font-normal mt-1">
+                  {quickViewProduct.name}
+                </h3>
+                <div className="mt-2 text-base font-semibold text-[#171717]">
+                  {format(quickViewProduct.price)}
+                </div>
+              </div>
+
+              <p className="text-xs text-[#77736D] line-clamp-3 leading-relaxed">
+                {quickViewProduct.description}
+              </p>
+
+              <div className="pt-2 space-y-2">
+                <button
+                  onClick={() => {
+                    addToCart(quickViewProduct, 1);
+                    setQuickViewProduct(null);
+                  }}
+                  disabled={!quickViewProduct.inStock}
+                  className="w-full bg-[#171717] text-white py-3 px-4 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#B89A69] transition-colors disabled:opacity-50"
+                >
+                  <ShoppingBag className="w-4 h-4" />
+                  <span>{quickViewProduct.inStock ? 'Add to Bag' : 'Sold Out'}</span>
+                </button>
+
+                <Link
+                  href={`/product/${quickViewProduct.slug}`}
+                  onClick={() => setQuickViewProduct(null)}
+                  className="w-full border border-[#E7E1D8] text-[#171717] py-2.5 px-4 text-xs uppercase tracking-wider text-center block hover:border-[#171717] transition-colors"
+                >
+                  View Full Product Details &rarr;
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       )}
     </div>

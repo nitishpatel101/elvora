@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { Product } from '@/types';
 import { useCurrency } from '@/context/CurrencyContext';
@@ -385,6 +386,40 @@ export default function ProductDetailClient({
           </div>
         </div>
       )}
+
+      {/* Sticky Mobile Add to Cart Bar */}
+      <div className="fixed bottom-0 inset-x-0 z-30 lg:hidden bg-[#F8F6F2]/95 backdrop-blur-md border-t border-[#E7E1D8] p-3 shadow-lg flex items-center justify-between gap-3">
+        <div className="flex items-center gap-2.5 min-w-0">
+          <div className="relative w-11 h-11 bg-[#EFEAE2] border border-[#E7E1D8] overflow-hidden shrink-0">
+            <Image
+              src={product.images[0] || '/images/products/touch-distance-bracelet/hero.jpg'}
+              alt={product.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div className="min-w-0">
+            <h4 className="text-xs font-serif text-[#171717] truncate font-medium">
+              {product.name}
+            </h4>
+            <span className="text-xs font-semibold text-[#171717]">
+              {format(product.price)}
+            </span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={handleAddToCart}
+            disabled={!product.inStock}
+            className="bg-[#171717] text-white py-2.5 px-4 text-[11px] uppercase tracking-wider font-medium flex items-center gap-1.5 active:bg-[#B89A69] transition-colors disabled:opacity-50"
+          >
+            <ShoppingBag className="w-3.5 h-3.5" />
+            <span>{product.inStock ? 'Add to Bag' : 'Sold Out'}</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
+

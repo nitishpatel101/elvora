@@ -33,3 +33,4 @@ export function formatPrice(amountInInr: number, currency: Currency): string {
 export function getCurrencySymbol(currency: Currency): string {
   return currency === 'INR' ? '₹' : '$';
 }
+

@@ -148,3 +148,4 @@ export default function ProductCard({ product, onQuickView }: ProductCardProps) 
     </div>
   );
 }
+

@@ -160,3 +160,4 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
     </div>
   );
 }
+

@@ -1,5 +1,33 @@
 [
   {
+    "id": "elv-7vbp4o0",
+    "slug": "aurora-borealis-opal-choker",
+    "name": "Aurora Borealis Opal Choker",
+    "tagline": "Iridescent Australian opal encased in 18K champagne gold",
+    "price": 2299,
+    "originalPrice": 3199,
+    "description": "An ethereal choker necklace featuring genuine fire opal with celestial iridescence.",
+    "category": "Necklaces",
+    "categorySlug": "necklaces",
+    "colours": [
+      "Gold",
+      "Opal"
+    ],
+    "inStock": true,
+    "stock": 18,
+    "isFeatured": true,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": false,
+    "images": [
+      "/images/products/heart-sword-pendant-necklace/hero.jpg"
+    ],
+    "variants": [],
+    "details": {},
+    "createdAt": "2026-11-06T17:19:06.799Z",
+    "updatedAt": "2026-11-06T17:19:06.814Z"
+  },
+  {
     "id": "elv-w3d64el",
     "slug": "aurora-borealis-opal-choker",
     "name": "Aurora Borealis Opal Choker",
@@ -218,7 +246,7 @@
       "Silver"
     ],
     "inStock": true,
-    "stock": 64,
+    "stock": 63,
     "isFeatured": true,
     "isBestSeller": true,
     "isNewArrival": false,
@@ -246,7 +274,7 @@
       "care": "Store in dry compartment; avoid direct spray of perfumes"
     },
     "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-06T17:02:56.253Z"
+    "updatedAt": "2026-11-06T17:19:06.734Z"
   },
   {
     "id": "elv-prod-06",
@@ -263,7 +291,7 @@
       "White"
     ],
     "inStock": true,
-    "stock": 79,
+    "stock": 78,
     "isFeatured": true,
     "isBestSeller": true,
     "isNewArrival": false,
@@ -291,6 +319,6 @@
       "care": "Keep pearls away from citrus and ultrasonic cleaners"
     },
     "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-06T17:02:56.290Z"
+    "updatedAt": "2026-11-06T17:19:06.771Z"
   }
 ]

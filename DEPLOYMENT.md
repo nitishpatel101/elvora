@@ -117,3 +117,4 @@ npm start
 ```
 
 Access the boutique at `http://localhost:3000`.
+
