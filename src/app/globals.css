@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  --font-serif: 'Playfair Display', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+
+  --color-ivory: #F8F6F2;
+  --color-ivory-sand: #EFEAE2;
+  --color-ivory-dark: #E6DFD5;
+  --color-charcoal: #171717;
+  --color-stone: #77736D;
+  --color-gold: #B89A69;
+  --color-gold-hover: #9F8354;
+  --color-gold-light: #D7C4A5;
+  --color-gold-tint: #F5EFE6;
+  --color-border: #E7E1D8;
+}
+
+@theme {
+  --color-ivory: #F8F6F2;
+  --color-ivory-sand: #EFEAE2;
+  --color-ivory-dark: #E6DFD5;
+  --color-charcoal: #171717;
+  --color-stone: #77736D;
+  --color-gold: #B89A69;
+  --color-gold-hover: #9F8354;
+  --color-gold-light: #D7C4A5;
+  --color-gold-tint: #F5EFE6;
+  --color-border: #E7E1D8;
+
+  --font-serif: var(--font-serif);
+  --font-sans: var(--font-sans);
+}
+
+body {
+  background-color: #F8F6F2;
+  color: #171717;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
+  letter-spacing: -0.01em;
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F8F6F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D7C4A5;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B89A69;
+}
+
+/* Luxury button and subtle hover effects */
+.luxury-gold-button {
+  background: #171717;
+  color: #F8F6F2;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-gold-button:hover {
+  background: #B89A69;
+  color: #FFFFFF;
+}
+
+/* Subtle Shimmer for luxury accents */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-gold {
+  background: linear-gradient(
+    90deg,
+    rgba(184, 154, 105, 0.1) 0%,
+    rgba(184, 154, 105, 0.35) 50%,
+    rgba(184, 154, 105, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s infinite linear;
+}

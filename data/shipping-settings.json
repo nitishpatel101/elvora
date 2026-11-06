@@ -1,0 +1,12 @@
+{
+  "domesticShippingInr": 99,
+  "internationalShippingInr": 1299,
+  "internationalShippingUsd": 15,
+  "domesticCourier": "Blue Dart Express & Delhivery Luxury Courier",
+  "internationalCourier": "DHL Express International",
+  "domesticEstimatedDays": "3 - 5 Business Days",
+  "internationalEstimatedDays": "7 - 10 Business Days",
+  "packagingFeeInr": 0,
+  "insuranceIncluded": true
+}
+

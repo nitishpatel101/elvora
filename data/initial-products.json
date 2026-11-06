@@ -1,0 +1,252 @@
+[
+  {
+    "id": "elv-prod-01",
+    "slug": "touch-distance-couple-bracelet",
+    "name": "Touch Distance Couple Bracelet",
+    "tagline": "Stay connected across distance with illuminated tactile touch",
+    "price": 1399,
+    "originalPrice": 1999,
+    "description": "Matching gold and black couple bracelets featuring moon and sun symbols. Engineered with advanced responsive connection indicators that illuminate in celestial synchrony when touched, bridging hearts across any distance.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": ["Gold", "Black"],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "/images/products/touch-distance-bracelet/hero.jpg",
+      "/images/products/touch-distance-bracelet/ivory.jpg",
+      "/images/products/touch-distance-bracelet/macro.jpg",
+      "/images/products/touch-distance-bracelet/lifestyle.jpg"
+    ],
+    "variants": [
+      {
+        "id": "v-pair-standard",
+        "name": "Complete Matching Pair (Gold & Black)",
+        "inStock": true,
+        "stock": 45
+      }
+    ],
+    "details": {
+      "material": "Surgical 316L Stainless Steel with Optical Translucent Bezel",
+      "finish": "18K PVD Champagne Gold & Obsidian Matte Ion Plating",
+      "clasp": "Reinforced lobster clasp with 5cm adjustable extension links",
+      "waterResistance": "IP67 Water & Dust Resistant",
+      "packaging": "Signature ELVORA velvet presentation box, authenticity guarantee card & twin USB magnetic chargers",
+      "care": "Wipe with provided microfiber cloth; avoid submerging in chlorinated or saltwater"
+    },
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "updatedAt": "2026-11-06T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-02",
+    "slug": "beaded-couple-bracelet",
+    "name": "Beaded Couple Bracelet",
+    "tagline": "Hand-selected natural stones paired with ocean and mountain medallions",
+    "price": 1699,
+    "originalPrice": 2299,
+    "description": "Matching pink and black beaded couple bracelets with decorative central charms. Crafted with genuine strawberry rose quartz and volcanic matte onyx, featuring intricately engraved mountain and wave medallions symbolizing eternal devotion through earth and sea.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": ["Pink", "Black"],
+    "inStock": true,
+    "stock": 32,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "/images/products/beaded-couple-bracelet/hero.jpg",
+      "/images/products/beaded-couple-bracelet/detail.jpg",
+      "/images/products/beaded-couple-bracelet/lifestyle.jpg"
+    ],
+    "variants": [
+      {
+        "id": "v-bead-set",
+        "name": "Dual Set (Pink Quartz + Matte Onyx)",
+        "inStock": true,
+        "stock": 32
+      }
+    ],
+    "details": {
+      "material": "Natural Strawberry Rose Quartz, Matte Black Onyx & Rose Gold Plated Accents",
+      "finish": "Artisanal hand-strung braided cord with adjustable macramé tension lock",
+      "dimensions": "Adjustable fit for 15cm - 23cm wrist circumferences",
+      "charms": "Micro-etched Mountain & Wave medallion charms",
+      "packaging": "Signature ELVORA velvet presentation box & gemological authenticity certificate",
+      "care": "Clean gently with damp cloth; keep away from harsh perfumes and chemicals"
+    },
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "updatedAt": "2026-11-06T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-03",
+    "slug": "sun-moon-chain-bracelet",
+    "name": "Sun & Moon Chain Bracelet",
+    "tagline": "Precision-machined dual bezels with celestial engravings & snake-curb chain",
+    "price": 1199,
+    "originalPrice": 1599,
+    "description": "Matching black and rose-gold chain bracelets featuring sun and moon designs. Features engraved ELVORA luxury bezels enclosing deep luminous celestial motifs, finished with high-polish interlinked curb chain links and double fluid cords.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": ["Black", "Rose Gold"],
+    "inStock": true,
+    "stock": 50,
+    "isFeatured": true,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "/images/products/sun-moon-chain-bracelet/hero.jpg",
+      "/images/products/sun-moon-chain-bracelet/editorial.jpg",
+      "/images/products/sun-moon-chain-bracelet/showcase.jpg"
+    ],
+    "variants": [
+      {
+        "id": "v-chain-pair",
+        "name": "Sun (Gunmetal) & Moon (Rose Gold) Pair",
+        "inStock": true,
+        "stock": 50
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Sapphire Glass Inserts",
+      "finish": "Champagne Rose Gold PVD & Deep Gunmetal Black Titanium Ion Plating",
+      "chainType": "Hybrid snake cord & curb link extension",
+      "clasp": "Custom jewelry clasp with micro-adjustment holes",
+      "packaging": "Signature ELVORA velvet presentation box & warranty card",
+      "care": "Tarnish-free and sweat-resistant for daily luxury wear"
+    },
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "updatedAt": "2026-11-06T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-04",
+    "slug": "sun-moon-rope-bracelet",
+    "name": "Sun & Moon Rope Bracelet",
+    "tagline": "Double-rope architectural weave with celestial disc emblems",
+    "price": 1299,
+    "originalPrice": 1799,
+    "description": "Matching black and rose-gold double-rope style bracelets. Engineered with sleek double milanaise cord structure framing high-contrast sun and moon medallions, celebrating harmonious unity.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": ["Black", "Rose Gold"],
+    "inStock": true,
+    "stock": 38,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "/images/products/sun-moon-rope-bracelet/hero.jpg",
+      "/images/products/sun-moon-rope-bracelet/editorial.jpg",
+      "/images/products/sun-moon-rope-bracelet/detail.jpg"
+    ],
+    "variants": [
+      {
+        "id": "v-rope-pair",
+        "name": "Double-Rope Matching Pair",
+        "inStock": true,
+        "stock": 38
+      }
+    ],
+    "details": {
+      "material": "Double-strand Steel Mesh Cord & Solid Stainless Steel Core",
+      "finish": "High-luster Rose Gold and Satin Matte Gunmetal",
+      "clasp": "Self-aligning magnetic snap lock with mechanical twist lock",
+      "waterResistance": "100% Waterproof and rust-resistant",
+      "packaging": "Signature ELVORA velvet presentation box & care instructions",
+      "care": "Rinse in freshwater if exposed to sea salt and pat dry"
+    },
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "updatedAt": "2026-11-06T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-05",
+    "slug": "heart-sword-pendant-necklace",
+    "name": "Heart Sword Pendant Necklace",
+    "tagline": "Vivid crimson gemstone pierced by a pave-encrusted silver dagger",
+    "price": 499,
+    "originalPrice": 799,
+    "description": "Silver layered necklace featuring a red heart-shaped gemstone and sword pendant. A dramatic statement of passion and courage, featuring an artisanal ruby-red faceted crystal embraced by micro-pave zirconia, suspended on a tiered double silver chain.",
+    "category": "Necklaces",
+    "categorySlug": "necklaces",
+    "colours": ["Silver"],
+    "inStock": true,
+    "stock": 65,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "/images/products/heart-sword-pendant-necklace/hero.jpg",
+      "/images/products/heart-sword-pendant-necklace/macro.jpg",
+      "/images/products/heart-sword-pendant-necklace/lifestyle.jpg",
+      "/images/products/heart-sword-pendant-necklace/editorial.jpg"
+    ],
+    "variants": [
+      {
+        "id": "v-necklace-std",
+        "name": "Sterling Silver Tiered Chain with Ruby Pendant",
+        "inStock": true,
+        "stock": 65
+      }
+    ],
+    "details": {
+      "material": "925 Sterling Silver Plated Hypoallergenic Alloy",
+      "stone": "Heart-Cut Vivid Crimson Faceted Crystal with 5A Cubic Zirconia Pave",
+      "chain": "Layered double chain (Choker curb chain 42cm + Pendant spiral chain 48cm + 6cm extender)",
+      "tag": "Engraved ELVORA brand tag at closure",
+      "packaging": "Signature ELVORA cream jewelry box & authenticity card",
+      "care": "Store in dry compartment; avoid direct spray of perfumes"
+    },
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "updatedAt": "2026-11-06T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-06",
+    "slug": "golden-lantern-pearl-earrings",
+    "name": "Golden Lantern Pearl Earrings",
+    "tagline": "Architectural lantern silhouette with tiered freshwater pearl bells",
+    "price": 399,
+    "originalPrice": 599,
+    "description": "Golden lantern-style chandelier earrings with pearl details. Drawing inspiration from classical oriental pavilion lanterns, these earrings feature openwork gold frames adorned with delicate tiers of lustrous freshwater pearls and golden floral drop bells that chime with graceful movement.",
+    "category": "Earrings",
+    "categorySlug": "earrings",
+    "colours": ["Gold", "White"],
+    "inStock": true,
+    "stock": 80,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "/images/products/golden-lantern-pearl-earrings/hero.jpg",
+      "/images/products/golden-lantern-pearl-earrings/card.jpg",
+      "/images/products/golden-lantern-pearl-earrings/macro.jpg",
+      "/images/products/golden-lantern-pearl-earrings/lifestyle.jpg"
+    ],
+    "variants": [
+      {
+        "id": "v-earrings-pair",
+        "name": "Golden Lantern Pearl Chandelier Pair",
+        "inStock": true,
+        "stock": 80
+      }
+    ],
+    "details": {
+      "material": "18K Champagne Gold Plated Eco-Brass & Freshwater Cultured Pearls",
+      "finish": "Hand-polished satin gold architectural framework",
+      "earWire": "Hypoallergenic French hooks with comfort-fit silicone stoppers",
+      "weight": "Ultra-lightweight 6.8 grams per earring for prolonged luxury wear",
+      "packaging": "Signature ELVORA velvet presentation box & care cloth",
+      "care": "Keep pearls away from citrus and ultrasonic cleaners"
+    },
+    "createdAt": "2026-11-01T10:00:00.000Z",
+    "updatedAt": "2026-11-06T12:00:00.000Z"
+  }
+]
+

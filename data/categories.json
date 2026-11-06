@@ -1,0 +1,27 @@
+[
+  {
+    "id": "cat-01",
+    "slug": "couple-bracelets",
+    "name": "Couple Bracelets",
+    "description": "Exquisite matching bracelets embodying shared devotion, celestial harmony, and tactile connection.",
+    "image": "/images/products/touch-distance-bracelet/hero.jpg",
+    "itemCount": 4
+  },
+  {
+    "id": "cat-02",
+    "slug": "necklaces",
+    "name": "Necklaces",
+    "description": "Layered statements and luminous gemstones designed to elevate personal style with grace.",
+    "image": "/images/products/heart-sword-pendant-necklace/hero.jpg",
+    "itemCount": 1
+  },
+  {
+    "id": "cat-03",
+    "slug": "earrings",
+    "name": "Earrings",
+    "description": "Architectural chandelier silhouettes and radiant pearls catching light with every turn.",
+    "image": "/images/products/golden-lantern-pearl-earrings/hero.jpg",
+    "itemCount": 1
+  }
+]
+
