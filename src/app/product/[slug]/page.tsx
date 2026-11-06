@@ -53,7 +53,7 @@ export default async function ProductDetailPage({
   const relatedProducts = allProducts.filter((p) => p.id !== product.id);
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] py-10 lg:py-16">
+    <div className="min-h-screen bg-[#F8F5F0] py-10 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <ProductDetailClient
           product={product}

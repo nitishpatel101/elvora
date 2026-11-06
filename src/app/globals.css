@@ -4,37 +4,53 @@
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
 
-  --color-ivory: #F8F6F2;
-  --color-ivory-sand: #EFEAE2;
-  --color-ivory-dark: #E6DFD5;
-  --color-charcoal: #171717;
-  --color-stone: #77736D;
-  --color-gold: #B89A69;
+  /* Editorial Luxury Palette */
+  --color-warm-ivory: #F8F5F0;
+  --color-champagne-beige: #E8DCCD;
+  --color-soft-gold: #B69A65;
   --color-gold-hover: #9F8354;
-  --color-gold-light: #D7C4A5;
-  --color-gold-tint: #F5EFE6;
-  --color-border: #E7E1D8;
+  --color-deep-black: #111111;
+  --color-dark-brown: #342A23;
+  --color-white: #FFFFFF;
+
+  /* Aliases for semantic mapping */
+  --color-ivory: #F8F5F0;
+  --color-ivory-sand: #E8DCCD;
+  --color-ivory-dark: #DED3C3;
+  --color-charcoal: #111111;
+  --color-stone: #6B655D;
+  --color-gold: #B69A65;
+  --color-gold-light: #DFCDB4;
+  --color-gold-tint: #F3ECE1;
+  --color-border: #E8DCCD;
 }
 
 @theme {
-  --color-ivory: #F8F6F2;
-  --color-ivory-sand: #EFEAE2;
-  --color-ivory-dark: #E6DFD5;
-  --color-charcoal: #171717;
-  --color-stone: #77736D;
-  --color-gold: #B89A69;
+  --color-warm-ivory: #F8F5F0;
+  --color-champagne-beige: #E8DCCD;
+  --color-soft-gold: #B69A65;
+  --color-deep-black: #111111;
+  --color-dark-brown: #342A23;
+  --color-white: #FFFFFF;
+
+  --color-ivory: #F8F5F0;
+  --color-ivory-sand: #E8DCCD;
+  --color-ivory-dark: #DED3C3;
+  --color-charcoal: #111111;
+  --color-stone: #6B655D;
+  --color-gold: #B69A65;
   --color-gold-hover: #9F8354;
-  --color-gold-light: #D7C4A5;
-  --color-gold-tint: #F5EFE6;
-  --color-border: #E7E1D8;
+  --color-gold-light: #DFCDB4;
+  --color-gold-tint: #F3ECE1;
+  --color-border: #E8DCCD;
 
   --font-serif: var(--font-serif);
   --font-sans: var(--font-sans);
 }
 
 body {
-  background-color: #F8F6F2;
-  color: #171717;
+  background-color: #F8F5F0;
+  color: #111111;
   font-family: var(--font-sans);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
@@ -46,37 +62,73 @@ h1, h2, h3, h4, .font-serif {
   letter-spacing: -0.01em;
 }
 
-/* Custom Luxury Scrollbar */
+/* Custom Editorial Luxury Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #F8F6F2;
+  background: #F8F5F0;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #D7C4A5;
+  background: #DFCDB4;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #B89A69;
+  background: #B69A65;
 }
 
-/* Luxury button and subtle hover effects */
-.luxury-gold-button {
-  background: #171717;
-  color: #F8F6F2;
-  position: relative;
-  overflow: hidden;
+/* Editorial luxury buttons */
+.luxury-btn-primary {
+  background-color: #111111;
+  color: #FFFFFF;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  border: 1px solid #111111;
+}
+
+.luxury-btn-primary:hover {
+  background-color: #B69A65;
+  border-color: #B69A65;
+  color: #FFFFFF;
+}
+
+.luxury-btn-outline {
+  background-color: transparent;
+  color: #111111;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  border: 1px solid #111111;
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.luxury-gold-button:hover {
-  background: #B89A69;
+.luxury-btn-outline:hover {
+  background-color: #111111;
   color: #FFFFFF;
+}
+
+.luxury-btn-gold {
+  background-color: #B69A65;
+  color: #FFFFFF;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.6875rem; /* 11px */
+  font-weight: 500;
+  border: 1px solid #B69A65;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.luxury-btn-gold:hover {
+  background-color: #9F8354;
+  border-color: #9F8354;
 }
 
 /* Subtle Shimmer for luxury accents */
@@ -92,9 +144,9 @@ h1, h2, h3, h4, .font-serif {
 .shimmer-gold {
   background: linear-gradient(
     90deg,
-    rgba(184, 154, 105, 0.1) 0%,
-    rgba(184, 154, 105, 0.35) 50%,
-    rgba(184, 154, 105, 0.1) 100%
+    rgba(182, 154, 101, 0.08) 0%,
+    rgba(182, 154, 101, 0.28) 50%,
+    rgba(182, 154, 101, 0.08) 100%
   );
   background-size: 200% 100%;
   animation: shimmer 4s infinite linear;

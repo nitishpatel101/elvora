@@ -40,10 +40,10 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
           <button
             key={idx}
             onClick={() => setSelectedIndex(idx)}
-            className={`relative w-18 h-18 sm:w-20 sm:h-20 shrink-0 bg-[#EFEAE2] border transition-all duration-200 overflow-hidden ${
+            className={`relative w-18 h-18 sm:w-20 sm:h-20 shrink-0 bg-[#FFFFFF] border transition-all duration-200 overflow-hidden ${
               selectedIndex === idx
-                ? 'border-[#B89A69] ring-1 ring-[#B89A69]'
-                : 'border-[#E7E1D8] opacity-70 hover:opacity-100'
+                ? 'border-[#B69A65] ring-1 ring-[#B69A65]'
+                : 'border-[#E8DCCD] opacity-70 hover:opacity-100'
             }`}
           >
             <Image
@@ -57,7 +57,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
       </div>
 
       {/* Main Image Stage */}
-      <div className="relative flex-1 aspect-square bg-[#EFEAE2] border border-[#E7E1D8] overflow-hidden group select-none">
+      <div className="relative flex-1 aspect-square bg-[#FFFFFF] border border-[#E8DCCD] overflow-hidden group select-none">
         <div
           className="relative w-full h-full cursor-zoom-in"
           onMouseEnter={() => setIsZooming(true)}
@@ -90,14 +90,14 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
             <button
               onClick={handlePrev}
               aria-label="Previous image"
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 backdrop-blur-xs flex items-center justify-center text-[#171717] hover:bg-white hover:text-[#B89A69] shadow-sm transition-all"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 backdrop-blur-xs flex items-center justify-center text-[#111111] hover:bg-white hover:text-[#B69A65] shadow-xs transition-all"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button
               onClick={handleNext}
               aria-label="Next image"
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/80 backdrop-blur-xs flex items-center justify-center text-[#171717] hover:bg-white hover:text-[#B89A69] shadow-sm transition-all"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-white/85 backdrop-blur-xs flex items-center justify-center text-[#111111] hover:bg-white hover:text-[#B69A65] shadow-xs transition-all"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -108,24 +108,24 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
         <button
           onClick={() => setLightboxOpen(true)}
           aria-label="Expand view"
-          className="absolute bottom-3 right-3 p-2 rounded-full bg-white/80 hover:bg-white text-[#171717] hover:text-[#B89A69] shadow-sm transition-colors"
+          className="absolute bottom-3 right-3 p-2 rounded-full bg-white/85 hover:bg-white text-[#111111] hover:text-[#B69A65] shadow-xs transition-colors"
         >
           <Maximize2 className="w-4 h-4" />
         </button>
 
         {/* Counter indicator */}
-        <div className="absolute bottom-3 left-3 bg-[#171717]/70 text-white text-[10px] tracking-wider px-2 py-1 rounded-none backdrop-blur-xs">
+        <div className="absolute bottom-3 left-3 bg-[#111111]/80 text-[#F8F5F0] text-[10px] tracking-wider px-2 py-1 font-light backdrop-blur-xs">
           {selectedIndex + 1} / {images.length}
         </div>
       </div>
 
       {/* Fullscreen Lightbox Modal */}
       {lightboxOpen && (
-        <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-50 bg-[#111111]/95 flex items-center justify-center p-4">
           <button
             onClick={() => setLightboxOpen(false)}
             aria-label="Close fullscreen view"
-            className="absolute top-6 right-6 text-white hover:text-[#B89A69] p-2 transition-colors z-10"
+            className="absolute top-6 right-6 text-white hover:text-[#B69A65] p-2 transition-colors z-10"
           >
             <X className="w-8 h-8" />
           </button>
@@ -143,13 +143,13 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
             <>
               <button
                 onClick={handlePrev}
-                className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-[#B89A69] p-3"
+                className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-[#B69A65] p-3"
               >
                 <ChevronLeft className="w-8 h-8" />
               </button>
               <button
                 onClick={handleNext}
-                className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-[#B89A69] p-3"
+                className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-[#B69A65] p-3"
               >
                 <ChevronRight className="w-8 h-8" />
               </button>
@@ -160,4 +160,3 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
     </div>
   );
 }
-

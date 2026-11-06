@@ -79,39 +79,44 @@ export default function ProductDetailClient({
           <div>
             {/* Category & Badge */}
             <div className="flex items-center justify-between pb-2">
-              <span className="text-[10px] tracking-[0.25em] uppercase text-[#B89A69] font-medium">
+              <span className="text-[10px] tracking-[0.25em] uppercase text-[#B69A65] font-medium">
                 {product.category}
               </span>
               {product.isBestSeller && (
-                <span className="text-[9px] uppercase tracking-[0.2em] bg-[#171717] text-white px-2 py-0.5 font-medium">
+                <span className="text-[9px] uppercase tracking-[0.2em] bg-[#111111] text-[#FFFFFF] px-2.5 py-0.5 font-light">
                   Bestseller
                 </span>
               )}
             </div>
 
             {/* Product Title */}
-            <h1 className="font-serif text-3xl sm:text-4xl text-[#171717] font-light leading-tight">
+            <h1 className="font-serif text-3xl sm:text-4xl text-[#111111] font-light leading-tight">
               {product.name}
             </h1>
 
             {product.tagline && (
-              <p className="text-xs text-[#77736D] mt-1 font-light italic">
+              <p className="text-xs text-[#6B655D] mt-1.5 font-light leading-relaxed">
                 {product.tagline}
               </p>
             )}
 
+            {/* SKU & Category Info */}
+            <div className="pt-2 text-[10px] text-[#8C867E] uppercase tracking-wider">
+              SKU: {product.id.toUpperCase()} &bull; Origin: Haute Joaillerie
+            </div>
+
             {/* Price Row */}
-            <div className="mt-4 flex items-baseline gap-3 pb-4 border-b border-[#E7E1D8]">
-              <span className="font-serif text-2xl sm:text-3xl font-light text-[#171717]">
+            <div className="mt-4 flex items-baseline gap-3 pb-4 border-b border-[#E8DCCD]">
+              <span className="font-serif text-2xl sm:text-3xl font-light text-[#111111]">
                 {format(product.price)}
               </span>
               {product.originalPrice && product.originalPrice > product.price && (
-                <span className="text-sm text-[#A39E96] line-through">
+                <span className="text-sm text-[#8C867E] line-through font-light">
                   {format(product.originalPrice)}
                 </span>
               )}
               {discountPercentage && (
-                <span className="text-xs font-medium text-[#B89A69] bg-[#F5EFE6] px-2 py-0.5">
+                <span className="text-[11px] font-medium text-[#B69A65] bg-[#E8DCCD]/40 px-2 py-0.5 uppercase tracking-wider">
                   Save {discountPercentage}%
                 </span>
               )}
@@ -124,7 +129,7 @@ export default function ProductDetailClient({
                   product.inStock ? 'bg-emerald-600' : 'bg-red-500'
                 }`}
               />
-              <span className="text-[#171717]">
+              <span className="text-[#111111] font-light">
                 {product.inStock
                   ? `In Stock (${product.stock} units available)`
                   : 'Currently Out of Stock'}
@@ -133,7 +138,7 @@ export default function ProductDetailClient({
 
             {/* Description */}
             <div className="pt-4">
-              <p className="text-xs sm:text-sm text-[#77736D] leading-relaxed font-light">
+              <p className="text-xs sm:text-sm text-[#6B655D] leading-relaxed font-light">
                 {product.description}
               </p>
             </div>
@@ -141,8 +146,8 @@ export default function ProductDetailClient({
             {/* Colour Selector if multiple */}
             {product.colours && product.colours.length > 0 && (
               <div className="pt-6 space-y-2">
-                <span className="text-xs uppercase tracking-wider text-[#171717] font-medium block">
-                  Curated Colourway: <span className="text-[#77736D]">{selectedColour}</span>
+                <span className="text-xs uppercase tracking-wider text-[#111111] font-medium block">
+                  Curated Colourway: <span className="text-[#6B655D]">{selectedColour}</span>
                 </span>
                 <div className="flex flex-wrap gap-2">
                   {product.colours.map((col) => (
@@ -151,8 +156,8 @@ export default function ProductDetailClient({
                       onClick={() => setSelectedColour(col)}
                       className={`text-xs px-3.5 py-1.5 border transition-all ${
                         selectedColour === col
-                          ? 'border-[#B89A69] bg-[#F5EFE6] text-[#171717] font-medium'
-                          : 'border-[#E7E1D8] text-[#77736D] hover:border-[#171717]'
+                          ? 'border-[#B69A65] bg-[#E8DCCD]/40 text-[#111111] font-medium'
+                          : 'border-[#E8DCCD] text-[#6B655D] hover:border-[#111111]'
                       }`}
                     >
                       {col}
@@ -165,7 +170,7 @@ export default function ProductDetailClient({
             {/* Variants if present */}
             {product.variants && product.variants.length > 1 && (
               <div className="pt-4 space-y-2">
-                <span className="text-xs uppercase tracking-wider text-[#171717] font-medium block">
+                <span className="text-xs uppercase tracking-wider text-[#111111] font-medium block">
                   Edition:
                 </span>
                 <div className="space-y-1.5">
@@ -175,13 +180,13 @@ export default function ProductDetailClient({
                       onClick={() => setSelectedVariant(v.name)}
                       className={`w-full text-left text-xs p-3 border flex items-center justify-between transition-all ${
                         selectedVariant === v.name
-                          ? 'border-[#B89A69] bg-[#F5EFE6] text-[#171717] font-medium'
-                          : 'border-[#E7E1D8] text-[#77736D] hover:border-[#171717]'
+                          ? 'border-[#B69A65] bg-[#E8DCCD]/40 text-[#111111] font-medium'
+                          : 'border-[#E8DCCD] text-[#6B655D] hover:border-[#111111]'
                       }`}
                     >
                       <span>{v.name}</span>
                       {selectedVariant === v.name && (
-                        <Check className="w-4 h-4 text-[#B89A69]" />
+                        <Check className="w-4 h-4 text-[#B69A65]" />
                       )}
                     </button>
                   ))}
@@ -191,25 +196,25 @@ export default function ProductDetailClient({
 
             {/* Quantity Selector */}
             <div className="pt-6 flex items-center gap-4">
-              <span className="text-xs uppercase tracking-wider text-[#171717] font-medium">
+              <span className="text-xs uppercase tracking-wider text-[#111111] font-medium">
                 Quantity:
               </span>
-              <div className="flex items-center border border-[#E7E1D8] bg-[#F8F6F2]">
+              <div className="flex items-center border border-[#E8DCCD] bg-[#FFFFFF]">
                 <button
                   type="button"
                   onClick={() => setQuantity((q) => Math.max(1, q - 1))}
-                  className="px-3 py-2 text-xs text-[#77736D] hover:text-[#171717]"
+                  className="px-3 py-2 text-xs text-[#6B655D] hover:text-[#111111]"
                   aria-label="Decrease quantity"
                 >
                   -
                 </button>
-                <span className="px-4 py-2 text-xs font-medium text-[#171717]">
+                <span className="px-4 py-2 text-xs font-medium text-[#111111]">
                   {quantity}
                 </span>
                 <button
                   type="button"
                   onClick={() => setQuantity((q) => Math.min(product.stock, q + 1))}
-                  className="px-3 py-2 text-xs text-[#77736D] hover:text-[#171717]"
+                  className="px-3 py-2 text-xs text-[#6B655D] hover:text-[#111111]"
                   aria-label="Increase quantity"
                 >
                   +
@@ -217,13 +222,13 @@ export default function ProductDetailClient({
               </div>
             </div>
 
-            {/* Action Buttons: Add to Cart, Buy Now, Wishlist */}
+            {/* Action Buttons: Add to Bag, Buy Now, Wishlist */}
             <div className="pt-6 space-y-3">
               <div className="flex gap-3">
                 <button
                   onClick={handleAddToCart}
                   disabled={!product.inStock}
-                  className="flex-1 bg-[#171717] text-[#F8F6F2] py-4 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#B89A69] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 bg-[#111111] text-[#FFFFFF] py-4 px-6 text-xs uppercase tracking-[0.22em] font-medium flex items-center justify-center gap-2 hover:bg-[#B69A65] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <ShoppingBag className="w-4 h-4" />
                   <span>{product.inStock ? 'Add to Bag' : 'Out of Stock'}</span>
@@ -234,18 +239,18 @@ export default function ProductDetailClient({
                   aria-label={inWish ? 'Remove from wishlist' : 'Add to wishlist'}
                   className={`p-4 border transition-colors ${
                     inWish
-                      ? 'border-[#B89A69] bg-[#F5EFE6] text-[#B89A69]'
-                      : 'border-[#E7E1D8] text-[#171717] hover:border-[#B89A69] hover:text-[#B89A69]'
+                      ? 'border-[#B69A65] bg-[#E8DCCD]/40 text-[#B69A65]'
+                      : 'border-[#E8DCCD] text-[#111111] hover:border-[#B69A65] hover:text-[#B69A65]'
                   }`}
                 >
-                  <Heart className={`w-5 h-5 ${inWish ? 'fill-[#B89A69]' : ''}`} />
+                  <Heart className={`w-5 h-5 ${inWish ? 'fill-[#B69A65]' : ''}`} />
                 </button>
               </div>
 
               {product.inStock && (
                 <button
                   onClick={handleBuyNow}
-                  className="w-full border border-[#B89A69] bg-[#B89A69] text-white py-3.5 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#9F8354] transition-colors"
+                  className="w-full border border-[#B69A65] bg-[#B69A65] text-white py-3.5 px-6 text-xs uppercase tracking-[0.22em] font-medium flex items-center justify-center gap-2 hover:bg-[#9F8354] transition-colors"
                 >
                   <Zap className="w-4 h-4" />
                   <span>Instant Checkout</span>
@@ -254,37 +259,37 @@ export default function ProductDetailClient({
             </div>
 
             {/* Micro Highlights */}
-            <div className="pt-6 border-t border-[#E7E1D8] grid grid-cols-2 gap-4 text-[11px] text-[#77736D]">
+            <div className="pt-6 border-t border-[#E8DCCD] grid grid-cols-2 gap-4 text-[11px] text-[#6B655D]">
               <div className="flex items-center gap-2">
-                <Truck className="w-4 h-4 text-[#B89A69] shrink-0" />
-                <span>Paid Insured Express Delivery</span>
+                <Truck className="w-4 h-4 text-[#B69A65] shrink-0" />
+                <span>Paid Insured Delivery</span>
               </div>
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-[#B89A69] shrink-0" />
+                <ShieldCheck className="w-4 h-4 text-[#B69A65] shrink-0" />
                 <span>Online Payment Verified</span>
               </div>
               <div className="flex items-center gap-2">
-                <Sparkles className="w-4 h-4 text-[#B89A69] shrink-0" />
-                <span>Signature Velvet Case Included</span>
+                <Sparkles className="w-4 h-4 text-[#B69A65] shrink-0" />
+                <span>Signature Velvet Case</span>
               </div>
               <div className="flex items-center gap-2">
-                <RotateCcw className="w-4 h-4 text-[#B89A69] shrink-0" />
+                <RotateCcw className="w-4 h-4 text-[#B69A65] shrink-0" />
                 <span>Authenticity Certificate</span>
               </div>
             </div>
           </div>
 
-          {/* Accordion Sections: Details, Packaging, Shipping */}
-          <div className="border-t border-[#E7E1D8] divide-y divide-[#E7E1D8]">
+          {/* Accordion Sections: Materials & Dimensions, Packaging, Shipping Policy, Care Guide */}
+          <div className="border-t border-[#E8DCCD] divide-y divide-[#E8DCCD]">
             {/* Specifications Accordion */}
             <div>
               <button
                 onClick={() =>
                   setOpenAccordion(openAccordion === 'details' ? '' : 'details')
                 }
-                className="w-full py-4 flex items-center justify-between text-xs uppercase tracking-[0.16em] text-[#171717] font-medium hover:text-[#B89A69] transition-colors"
+                className="w-full py-4 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-[#111111] font-medium hover:text-[#B69A65] transition-colors"
               >
-                <span>Material & Specifications</span>
+                <span>Materials &amp; Dimensions</span>
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${
                     openAccordion === 'details' ? 'rotate-180' : ''
@@ -293,11 +298,11 @@ export default function ProductDetailClient({
               </button>
 
               {openAccordion === 'details' && (
-                <div className="pb-4 text-xs text-[#77736D] space-y-2">
+                <div className="pb-4 text-xs text-[#6B655D] space-y-2">
                   {product.details ? (
                     Object.entries(product.details).map(([key, value]) => (
-                      <div key={key} className="flex justify-between py-1 border-b border-[#E7E1D8]/50">
-                        <span className="capitalize font-medium text-[#171717]">
+                      <div key={key} className="flex justify-between py-1 border-b border-[#E8DCCD]/50">
+                        <span className="capitalize font-medium text-[#111111]">
                           {key.replace(/([A-Z])/g, ' $1')}
                         </span>
                         <span className="text-right max-w-xs">{value}</span>
@@ -316,7 +321,7 @@ export default function ProductDetailClient({
                 onClick={() =>
                   setOpenAccordion(openAccordion === 'packaging' ? '' : 'packaging')
                 }
-                className="w-full py-4 flex items-center justify-between text-xs uppercase tracking-[0.16em] text-[#171717] font-medium hover:text-[#B89A69] transition-colors"
+                className="w-full py-4 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-[#111111] font-medium hover:text-[#B69A65] transition-colors"
               >
                 <span>Luxury Presentation Case</span>
                 <ChevronDown
@@ -327,8 +332,8 @@ export default function ProductDetailClient({
               </button>
 
               {openAccordion === 'packaging' && (
-                <div className="pb-4 text-xs text-[#77736D] leading-relaxed">
-                  Every order arrives in ELVORA&rsquo;s custom debossed ivory or black velvet presentation case with gold-stamped interior, twin storage pouches, a lint-free polishing cloth, and a serialized Certificate of Authenticity.
+                <div className="pb-4 text-xs text-[#6B655D] leading-relaxed">
+                  Every order arrives in ELVORA&rsquo;s custom debossed presentation case with gold-stamped interior, twin storage pouches, a lint-free polishing cloth, and a serialized Certificate of Authenticity.
                 </div>
               )}
             </div>
@@ -339,9 +344,9 @@ export default function ProductDetailClient({
                 onClick={() =>
                   setOpenAccordion(openAccordion === 'shipping' ? '' : 'shipping')
                 }
-                className="w-full py-4 flex items-center justify-between text-xs uppercase tracking-[0.16em] text-[#171717] font-medium hover:text-[#B89A69] transition-colors"
+                className="w-full py-4 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-[#111111] font-medium hover:text-[#B69A65] transition-colors"
               >
-                <span>Paid Shipping & Dispatch</span>
+                <span>Paid Shipping &amp; Dispatch</span>
                 <ChevronDown
                   className={`w-4 h-4 transition-transform duration-200 ${
                     openAccordion === 'shipping' ? 'rotate-180' : ''
@@ -350,16 +355,41 @@ export default function ProductDetailClient({
               </button>
 
               {openAccordion === 'shipping' && (
-                <div className="pb-4 text-xs text-[#77736D] leading-relaxed space-y-2">
+                <div className="pb-4 text-xs text-[#6B655D] leading-relaxed space-y-2">
                   <p>
                     <strong>India:</strong> Standard Express Paid Shipping (₹99) via Blue Dart / Delhivery Express. Delivery in 3-5 business days.
                   </p>
                   <p>
                     <strong>International:</strong> DHL Express Air (₹1,299 / $15 USD). Delivery in 7-10 business days.
                   </p>
-                  <p className="text-[11px] text-[#A39E96]">
+                  <p className="text-[11px] text-[#8C867E]">
                     * Orders are dispatched only upon 100% verified online payment. Cash on Delivery is strictly unavailable.
                   </p>
+                </div>
+              )}
+            </div>
+
+            {/* Care Guide Accordion */}
+            <div>
+              <button
+                onClick={() =>
+                  setOpenAccordion(openAccordion === 'care' ? '' : 'care')
+                }
+                className="w-full py-4 flex items-center justify-between text-xs uppercase tracking-[0.18em] text-[#111111] font-medium hover:text-[#B69A65] transition-colors"
+              >
+                <span>Jewellery Care Guide</span>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    openAccordion === 'care' ? 'rotate-180' : ''
+                  }`}
+                />
+              </button>
+
+              {openAccordion === 'care' && (
+                <div className="pb-4 text-xs text-[#6B655D] leading-relaxed space-y-1">
+                  <p>&bull; Store in the supplied ELVORA anti-tarnish velvet case when not in use.</p>
+                  <p>&bull; Clean gently with the provided microfiber polishing cloth.</p>
+                  <p>&bull; Avoid direct contact with heavy perfumes, chlorine pools, or harsh domestic chemicals.</p>
                 </div>
               )}
             </div>
@@ -369,12 +399,12 @@ export default function ProductDetailClient({
 
       {/* Related Products Recommendation Carousel */}
       {relatedProducts.length > 0 && (
-        <div className="pt-16 border-t border-[#E7E1D8]">
+        <div className="pt-16 border-t border-[#E8DCCD]">
           <div className="text-center max-w-xl mx-auto mb-10">
-            <span className="text-[10px] tracking-[0.25em] uppercase text-[#B89A69] font-medium block">
-              Curated Pairings
+            <span className="text-[10px] tracking-[0.25em] uppercase text-[#B69A65] font-medium block">
+              CURATED PAIRINGS
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl text-[#171717] font-light mt-1">
+            <h2 className="font-serif text-2xl sm:text-3xl text-[#111111] font-light mt-1">
               You May Also Admire
             </h2>
           </div>
@@ -388,9 +418,9 @@ export default function ProductDetailClient({
       )}
 
       {/* Sticky Mobile Add to Cart Bar */}
-      <div className="fixed bottom-0 inset-x-0 z-30 lg:hidden bg-[#F8F6F2]/95 backdrop-blur-md border-t border-[#E7E1D8] p-3 shadow-lg flex items-center justify-between gap-3">
+      <div className="fixed bottom-0 inset-x-0 z-30 lg:hidden bg-[#F8F5F0]/95 backdrop-blur-md border-t border-[#E8DCCD] p-3 shadow-lg flex items-center justify-between gap-3">
         <div className="flex items-center gap-2.5 min-w-0">
-          <div className="relative w-11 h-11 bg-[#EFEAE2] border border-[#E7E1D8] overflow-hidden shrink-0">
+          <div className="relative w-11 h-11 bg-[#FFFFFF] border border-[#E8DCCD] overflow-hidden shrink-0">
             <Image
               src={product.images[0] || '/images/products/touch-distance-bracelet/hero.jpg'}
               alt={product.name}
@@ -399,10 +429,10 @@ export default function ProductDetailClient({
             />
           </div>
           <div className="min-w-0">
-            <h4 className="text-xs font-serif text-[#171717] truncate font-medium">
+            <h4 className="text-xs font-serif text-[#111111] truncate font-light">
               {product.name}
             </h4>
-            <span className="text-xs font-semibold text-[#171717]">
+            <span className="text-xs font-medium text-[#111111]">
               {format(product.price)}
             </span>
           </div>
@@ -412,7 +442,7 @@ export default function ProductDetailClient({
           <button
             onClick={handleAddToCart}
             disabled={!product.inStock}
-            className="bg-[#171717] text-white py-2.5 px-4 text-[11px] uppercase tracking-wider font-medium flex items-center gap-1.5 active:bg-[#B89A69] transition-colors disabled:opacity-50"
+            className="bg-[#111111] text-white py-2.5 px-4 text-[10px] uppercase tracking-wider font-medium flex items-center gap-1.5 active:bg-[#B69A65] transition-colors disabled:opacity-50"
           >
             <ShoppingBag className="w-3.5 h-3.5" />
             <span>{product.inStock ? 'Add to Bag' : 'Sold Out'}</span>
@@ -422,4 +452,3 @@ export default function ProductDetailClient({
     </div>
   );
 }
-

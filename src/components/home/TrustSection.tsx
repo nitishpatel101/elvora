@@ -1,71 +1,71 @@
 'use client';
 
 import React from 'react';
-import { Lock, ShieldCheck, Truck, Headphones, Sparkles, CheckCircle2 } from 'lucide-react';
+import { Lock, PackageCheck, Headphones, Truck, Check } from 'lucide-react';
 
 export default function TrustSection() {
-  const trustPillars = [
+  const benefits = [
     {
       icon: Lock,
-      title: 'Online Payments Only',
+      title: 'Secure Online Payments',
       description:
-        'Cash on Delivery is strictly prohibited across all orders. All transactions are securely processed and 256-bit SSL encrypted.',
+        'All orders are processed through encrypted 256-bit SSL gateways. Cash on Delivery is strictly prohibited.',
     },
     {
-      icon: Truck,
-      title: 'Paid Insured Shipping',
+      icon: PackageCheck,
+      title: 'Carefully Packed Orders',
       description:
-        'Every parcel is dispatched with tamper-proof seal and tracked door-to-door via premium express logistics partners.',
-    },
-    {
-      icon: Sparkles,
-      title: 'Noble Materials',
-      description:
-        'Engineered with 316L hypoallergenic stainless steel, natural semiprecious gemstones, and multi-micron 18K PVD gold plating.',
+        'Every piece is individually sealed in protective jewel cases and arrives in signature presentation packaging.',
     },
     {
       icon: Headphones,
-      title: 'Direct Brand Concierge',
+      title: 'Customer Support',
       description:
-        'Dedicated advisory support available for sizing assistance, gifting advice, and priority order dispatch assistance.',
+        'Our dedicated concierge team is available to assist you with inquiries, sizing, and order tracking.',
+    },
+    {
+      icon: Truck,
+      title: 'Shipping Information',
+      description:
+        'Reliable paid express delivery across India (₹99) and internationally (₹1,299 / $15 USD) with door-to-door tracking.',
     },
   ];
 
   return (
-    <section className="py-20 bg-[#EFEAE2]/40 border-b border-[#E7E1D8]">
+    <section className="py-20 bg-[#FFFFFF] border-b border-[#E8DCCD]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-14">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#B89A69] font-medium block">
-            The ELVORA Standard
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#B69A65] font-medium block">
+            OUR PROMISE
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#171717] font-light mt-1">
-            Uncompromising Excellence
+          <h2 className="font-serif text-3xl sm:text-4xl text-[#111111] font-light mt-1 tracking-tight">
+            The ELVORA Standard
           </h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {trustPillars.map((item, idx) => {
+          {benefits.map((item, idx) => {
             const Icon = item.icon;
             return (
               <div
                 key={idx}
-                className="bg-[#F8F6F2] p-8 border border-[#E7E1D8] shadow-xs flex flex-col justify-between"
+                className="bg-[#F8F5F0] p-8 border border-[#E8DCCD] flex flex-col justify-between transition-colors hover:border-[#B69A65]/60"
               >
                 <div>
-                  <div className="w-12 h-12 rounded-full bg-[#EFEAE2] flex items-center justify-center text-[#B89A69] mb-5">
-                    <Icon className="w-6 h-6" />
+                  <div className="w-11 h-11 bg-[#FFFFFF] border border-[#E8DCCD] flex items-center justify-center text-[#B69A65] mb-5">
+                    <Icon className="w-5 h-5 stroke-[1.4]" />
                   </div>
-                  <h3 className="font-serif text-lg text-[#171717] font-normal mb-2">
+                  <h3 className="font-serif text-lg text-[#111111] font-light mb-2">
                     {item.title}
                   </h3>
-                  <p className="text-xs text-[#77736D] leading-relaxed">
+                  <p className="text-xs text-[#6B655D] leading-relaxed font-light">
                     {item.description}
                   </p>
                 </div>
 
-                <div className="pt-6 mt-6 border-t border-[#E7E1D8] flex items-center gap-1.5 text-[11px] text-[#B89A69] font-medium">
-                  <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Verified Standard</span>
+                <div className="pt-6 mt-6 border-t border-[#E8DCCD] flex items-center gap-1.5 text-[10px] uppercase tracking-[0.16em] text-[#B69A65] font-medium">
+                  <Check className="w-3.5 h-3.5" />
+                  <span>Guaranteed Policy</span>
                 </div>
               </div>
             );
@@ -75,4 +75,3 @@ export default function TrustSection() {
     </section>
   );
 }
-

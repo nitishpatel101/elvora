@@ -1,5 +1,337 @@
 [
   {
+    "id": "ELV-132804",
+    "customerEmail": "kavita@example.com",
+    "customerName": "Kavita Das",
+    "customerPhone": "+91 97777 44444",
+    "shippingAddress": {
+      "fullName": "Kavita Das",
+      "email": "kavita@example.com",
+      "phone": "+91 97777 44444",
+      "addressLine1": "Indiranagar",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pincode": "560038",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-06",
+        "productName": "Golden Lantern Pearl Earrings",
+        "productImage": "/images/products/golden-lantern-pearl-earrings/hero.jpg",
+        "priceAtPurchase": 399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 498,
+    "currency": "INR",
+    "status": "PAID",
+    "paymentMethod": "ONLINE",
+    "paymentGateway": "RAZORPAY",
+    "razorpayOrderId": "order_5l31j6rh51",
+    "createdAt": "2026-11-06T18:01:04.230Z",
+    "updatedAt": "2026-11-06T18:01:04.243Z",
+    "paymentId": "pay_dup_test_1793988064236"
+  },
+  {
+    "id": "ELV-585944",
+    "customerEmail": "siddharth@example.com",
+    "customerName": "Siddharth Roy",
+    "customerPhone": "+91 98888 33333",
+    "shippingAddress": {
+      "fullName": "Siddharth Roy",
+      "email": "siddharth@example.com",
+      "phone": "+91 98888 33333",
+      "addressLine1": "Jubilee Hills",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "pincode": "500033",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-05",
+        "productName": "Heart Sword Pendant Necklace",
+        "productImage": "/images/products/heart-sword-pendant-necklace/hero.jpg",
+        "priceAtPurchase": 499,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 499,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 598,
+    "currency": "INR",
+    "status": "PAID",
+    "paymentMethod": "ONLINE",
+    "paymentGateway": "RAZORPAY",
+    "razorpayOrderId": "order_691druuhpa",
+    "createdAt": "2026-11-06T18:01:04.204Z",
+    "updatedAt": "2026-11-06T18:01:04.217Z",
+    "paymentId": "pay_valid_1793988064210"
+  },
+  {
+    "id": "ELV-542105",
+    "customerEmail": "test@example.com",
+    "customerName": "Test Client",
+    "customerPhone": "+91 99999 22222",
+    "shippingAddress": {
+      "fullName": "Test Client",
+      "email": "test@example.com",
+      "phone": "+91 99999 22222",
+      "addressLine1": "Marine Drive",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400020",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-06",
+        "productName": "Golden Lantern Pearl Earrings",
+        "productImage": "/images/products/golden-lantern-pearl-earrings/hero.jpg",
+        "priceAtPurchase": 399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 498,
+    "currency": "INR",
+    "status": "PAYMENT_PENDING",
+    "paymentMethod": "ONLINE",
+    "paymentGateway": "RAZORPAY",
+    "razorpayOrderId": "order_id99rz5t9n",
+    "createdAt": "2026-11-06T18:01:04.187Z",
+    "updatedAt": "2026-11-06T18:01:04.187Z"
+  },
+  {
+    "id": "ELV-939429",
+    "customerEmail": "ananya@example.com",
+    "customerName": "Ananya Birla",
+    "customerPhone": "+91 99999 11111",
+    "shippingAddress": {
+      "fullName": "Ananya Birla",
+      "email": "ananya@example.com",
+      "phone": "+91 99999 11111",
+      "addressLine1": "Altamount Road",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400026",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-01",
+        "productName": "Touch Distance Couple Bracelet",
+        "productImage": "/images/products/touch-distance-bracelet/hero.jpg",
+        "priceAtPurchase": 1399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1498,
+    "currency": "INR",
+    "status": "PAYMENT_PENDING",
+    "paymentMethod": "ONLINE",
+    "paymentGateway": "RAZORPAY",
+    "razorpayOrderId": "order_0etpjf3tgm",
+    "createdAt": "2026-11-06T18:01:04.178Z",
+    "updatedAt": "2026-11-06T18:01:04.178Z"
+  },
+  {
+    "id": "ELV-332555",
+    "customerEmail": "kavita@example.com",
+    "customerName": "Kavita Das",
+    "customerPhone": "+91 97777 44444",
+    "shippingAddress": {
+      "fullName": "Kavita Das",
+      "email": "kavita@example.com",
+      "phone": "+91 97777 44444",
+      "addressLine1": "Indiranagar",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pincode": "560038",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-06",
+        "productName": "Golden Lantern Pearl Earrings",
+        "productImage": "/images/products/golden-lantern-pearl-earrings/hero.jpg",
+        "priceAtPurchase": 399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 498,
+    "currency": "INR",
+    "status": "PAID",
+    "paymentMethod": "ONLINE",
+    "paymentGateway": "RAZORPAY",
+    "razorpayOrderId": "order_nlzmk4o0n6",
+    "createdAt": "2026-11-06T17:57:44.623Z",
+    "updatedAt": "2026-11-06T17:57:44.646Z",
+    "paymentId": "pay_dup_test_1793987864630"
+  },
+  {
+    "id": "ELV-487592",
+    "customerEmail": "siddharth@example.com",
+    "customerName": "Siddharth Roy",
+    "customerPhone": "+91 98888 33333",
+    "shippingAddress": {
+      "fullName": "Siddharth Roy",
+      "email": "siddharth@example.com",
+      "phone": "+91 98888 33333",
+      "addressLine1": "Jubilee Hills",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "pincode": "500033",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-05",
+        "productName": "Heart Sword Pendant Necklace",
+        "productImage": "/images/products/heart-sword-pendant-necklace/hero.jpg",
+        "priceAtPurchase": 499,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 499,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 598,
+    "currency": "INR",
+    "status": "PAID",
+    "paymentMethod": "ONLINE",
+    "paymentGateway": "RAZORPAY",
+    "razorpayOrderId": "order_dz48bmxuz2",
+    "createdAt": "2026-11-06T17:57:44.563Z",
+    "updatedAt": "2026-11-06T17:57:44.588Z",
+    "paymentId": "pay_valid_1793987864569"
+  },
+  {
+    "id": "ELV-184782",
+    "customerEmail": "test@example.com",
+    "customerName": "Test Client",
+    "customerPhone": "+91 99999 22222",
+    "shippingAddress": {
+      "fullName": "Test Client",
+      "email": "test@example.com",
+      "phone": "+91 99999 22222",
+      "addressLine1": "Marine Drive",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400020",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-06",
+        "productName": "Golden Lantern Pearl Earrings",
+        "productImage": "/images/products/golden-lantern-pearl-earrings/hero.jpg",
+        "priceAtPurchase": 399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 498,
+    "currency": "INR",
+    "status": "PAYMENT_PENDING",
+    "paymentMethod": "ONLINE",
+    "paymentGateway": "RAZORPAY",
+    "razorpayOrderId": "order_k8uny0uvre",
+    "createdAt": "2026-11-06T17:57:44.523Z",
+    "updatedAt": "2026-11-06T17:57:44.524Z"
+  },
+  {
+    "id": "ELV-597293",
+    "customerEmail": "ananya@example.com",
+    "customerName": "Ananya Birla",
+    "customerPhone": "+91 99999 11111",
+    "shippingAddress": {
+      "fullName": "Ananya Birla",
+      "email": "ananya@example.com",
+      "phone": "+91 99999 11111",
+      "addressLine1": "Altamount Road",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400026",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-01",
+        "productName": "Touch Distance Couple Bracelet",
+        "productImage": "/images/products/touch-distance-bracelet/hero.jpg",
+        "priceAtPurchase": 1399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1498,
+    "currency": "INR",
+    "status": "PAYMENT_PENDING",
+    "paymentMethod": "ONLINE",
+    "paymentGateway": "RAZORPAY",
+    "razorpayOrderId": "order_ci1fy080p2",
+    "createdAt": "2026-11-06T17:57:44.504Z",
+    "updatedAt": "2026-11-06T17:57:44.504Z"
+  },
+  {
+    "id": "ELV-156788",
+    "customerEmail": "n70105453@gmail.com",
+    "customerName": "Npatel kumar",
+    "customerPhone": "9794852980",
+    "shippingAddress": {
+      "fullName": "Npatel kumar",
+      "email": "n70105453@gmail.com",
+      "phone": "9794852980",
+      "addressLine1": "Hettimpur road narkatiya bazar",
+      "addressLine2": "",
+      "city": "Kushinagar",
+      "state": "Uttar Pradesh",
+      "pincode": "274402",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-01",
+        "productName": "Touch Distance Couple Bracelet",
+        "productImage": "/images/products/touch-distance-bracelet/hero.jpg",
+        "priceAtPurchase": 1399,
+        "quantity": 1,
+        "selectedVariant": "Complete Matching Pair (Gold & Black)",
+        "selectedColour": "Gold"
+      }
+    ],
+    "subtotal": 1399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1498,
+    "currency": "INR",
+    "status": "PAID",
+    "paymentMethod": "ONLINE",
+    "paymentGateway": "RAZORPAY",
+    "razorpayOrderId": "order_fb9x2now40",
+    "createdAt": "2026-11-06T17:35:15.005Z",
+    "updatedAt": "2026-11-06T17:35:22.792Z",
+    "paymentId": "pay_4vevhrywqa"
+  },
+  {
     "id": "ELV-929435",
     "customerEmail": "kavita@example.com",
     "customerName": "Kavita Das",

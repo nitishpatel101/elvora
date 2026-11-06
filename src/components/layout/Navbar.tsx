@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useCart } from '@/context/CartContext';
@@ -14,8 +14,8 @@ import {
   Search,
   Menu,
   X,
-  ChevronRight,
-  ShieldCheck,
+  ChevronDown,
+  ArrowRight,
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -23,12 +23,16 @@ export default function Navbar() {
   const router = useRouter();
   const { totalItems, setIsCartDrawerOpen } = useCart();
   const { totalWishlist } = useWishlist();
-  const { isCustomerLoggedIn, isAdminLoggedIn } = useAuth();
+  const { isCustomerLoggedIn } = useAuth();
 
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [scrolled, setScrolled] = useState(false);
+
+  // Dropdown states for Desktop
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+  const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,11 +42,23 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Close mobile menu when pathname changes
+  // Close menus when pathname changes
   useEffect(() => {
     setMobileMenuOpen(false);
     setSearchOpen(false);
+    setActiveDropdown(null);
   }, [pathname]);
+
+  const handleMouseEnter = (menu: string) => {
+    if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
+    setActiveDropdown(menu);
+  };
+
+  const handleMouseLeave = () => {
+    dropdownTimeoutRef.current = setTimeout(() => {
+      setActiveDropdown(null);
+    }, 180);
+  };
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -53,12 +69,18 @@ export default function Navbar() {
     }
   };
 
-  const navLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'Shop All', href: '/shop' },
-    { label: 'Couple Bracelets', href: '/shop/couple-bracelets' },
-    { label: 'Necklaces', href: '/shop/necklaces' },
-    { label: 'Earrings', href: '/shop/earrings' },
+  const shopSublinks = [
+    { label: 'All Jewellery', href: '/shop', desc: 'Browse the entire curated catalogue' },
+    { label: 'Couple Bracelets', href: '/shop/couple-bracelets', desc: 'Touch Distance & Celestial pairs' },
+    { label: 'Necklaces & Pendants', href: '/shop/necklaces', desc: 'Gemstones, chokers & layered silver' },
+    { label: 'Lantern Earrings', href: '/shop/earrings', desc: 'Gold chandeliers with freshwater pearls' },
+  ];
+
+  const collectionsSublinks = [
+    { label: 'The Couple Series', href: '/shop/couple-bracelets', desc: 'Matched bracelets bridging distance' },
+    { label: 'The Crimson Heart', href: '/product/heart-sword-pendant-necklace', desc: 'Dramatic ruby crystal & pierced sword' },
+    { label: 'Golden Lanterns', href: '/product/golden-lantern-pearl-earrings', desc: 'Architectural lanterns with cascading pearls' },
+    { label: 'Gift Curations', href: '/shop?collection=gifts', desc: 'Complimentary signature velvet packaging' },
   ];
 
   return (
@@ -66,70 +88,149 @@ export default function Navbar() {
       <header
         className={`sticky top-0 z-40 transition-all duration-300 ${
           scrolled
-            ? 'bg-[#F8F6F2]/95 backdrop-blur-md shadow-xs border-b border-[#E7E1D8]'
-            : 'bg-[#F8F6F2] border-b border-[#E7E1D8]'
+            ? 'bg-[#F8F5F0]/95 backdrop-blur-md shadow-xs border-b border-[#E8DCCD]'
+            : 'bg-[#F8F5F0] border-b border-[#E8DCCD]'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
-            {/* Mobile Hamburger Button */}
-            <div className="flex items-center lg:hidden">
+            {/* Left: Mobile Menu Toggle & Brand Logo */}
+            <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(true)}
-                className="p-2 text-[#171717] hover:text-[#B89A69] transition-colors"
-                aria-label="Open menu"
+                className="lg:hidden p-2 text-[#111111] hover:text-[#B69A65] transition-colors"
+                aria-label="Open mobile menu"
               >
-                <Menu className="w-6 h-6" />
+                <Menu className="w-5 h-5" />
               </button>
-              <button
-                type="button"
-                onClick={() => setSearchOpen(true)}
-                className="p-2 text-[#171717] hover:text-[#B89A69] transition-colors ml-1"
-                aria-label="Search"
-              >
-                <Search className="w-5 h-5" />
-              </button>
-            </div>
 
-            {/* Brand Logo */}
-            <div className="flex-1 lg:flex-none text-center lg:text-left">
-              <Link href="/" className="inline-block group">
-                <span className="font-serif text-2xl sm:text-3xl tracking-[0.25em] font-light text-[#171717] uppercase transition-colors group-hover:text-[#B89A69]">
+              <Link href="/" className="group inline-flex flex-col">
+                <span className="font-serif text-2xl sm:text-3xl tracking-[0.24em] font-light text-[#111111] uppercase transition-colors group-hover:text-[#B69A65]">
                   ELVORA
                 </span>
-                <span className="block text-[8px] tracking-[0.4em] uppercase text-[#77736D] text-center">
+                <span className="text-[7.5px] tracking-[0.42em] uppercase text-[#6B655D] -mt-0.5 font-light">
                   Haute Joaillerie
                 </span>
               </Link>
             </div>
 
-            {/* Desktop Navigation Links */}
-            <nav className="hidden lg:flex items-center space-x-8">
-              {navLinks.map((link) => {
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className={`text-xs uppercase tracking-[0.18em] transition-colors relative py-1 ${
-                      isActive
-                        ? 'text-[#B89A69] font-medium'
-                        : 'text-[#171717] hover:text-[#B89A69]'
-                    }`}
-                  >
-                    {link.label}
-                    {isActive && (
-                      <span className="absolute bottom-0 left-0 right-0 h-[1.5px] bg-[#B89A69]" />
-                    )}
-                  </Link>
-                );
-              })}
+            {/* Center: Luxury Navigation */}
+            <nav className="hidden lg:flex items-center space-x-10 text-[11px] tracking-[0.22em] uppercase font-light text-[#111111]">
+              {/* Shop Link with Dropdown */}
+              <div
+                className="relative py-7"
+                onMouseEnter={() => handleMouseEnter('shop')}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Link
+                  href="/shop"
+                  className={`inline-flex items-center gap-1 hover:text-[#B69A65] transition-colors ${
+                    pathname.startsWith('/shop') && pathname !== '/shop/couple-bracelets'
+                      ? 'text-[#B69A65] font-medium'
+                      : ''
+                  }`}
+                >
+                  <span>Shop</span>
+                  <ChevronDown className="w-3 h-3 text-[#B69A65] transition-transform duration-200" />
+                </Link>
+
+                {activeDropdown === 'shop' && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-80 bg-[#FFFFFF] border border-[#E8DCCD] shadow-xl p-5 z-50">
+                    <div className="text-[9px] uppercase tracking-[0.25em] text-[#B69A65] mb-3 pb-2 border-b border-[#E8DCCD]">
+                      Shop by Category
+                    </div>
+                    <div className="space-y-3">
+                      {shopSublinks.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block group/item transition-colors"
+                        >
+                          <div className="text-xs font-serif text-[#111111] group-hover/item:text-[#B69A65] transition-colors">
+                            {item.label}
+                          </div>
+                          <div className="text-[10px] text-[#6B655D] tracking-normal capitalize font-light mt-0.5">
+                            {item.desc}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="mt-4 pt-3 border-t border-[#E8DCCD]">
+                      <Link
+                        href="/shop"
+                        className="text-[10px] tracking-[0.18em] uppercase text-[#111111] hover:text-[#B69A65] inline-flex items-center gap-1 font-medium"
+                      >
+                        <span>View Entire Vault</span>
+                        <ArrowRight className="w-3 h-3" />
+                      </Link>
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* Best Sellers Link */}
+              <Link
+                href="/shop?filter=bestsellers"
+                className="hover:text-[#B69A65] transition-colors py-7"
+              >
+                Best Sellers
+              </Link>
+
+              {/* Collections Link with Dropdown */}
+              <div
+                className="relative py-7"
+                onMouseEnter={() => handleMouseEnter('collections')}
+                onMouseLeave={handleMouseLeave}
+              >
+                <Link
+                  href="/shop/couple-bracelets"
+                  className={`inline-flex items-center gap-1 hover:text-[#B69A65] transition-colors ${
+                    pathname === '/shop/couple-bracelets' ? 'text-[#B69A65] font-medium' : ''
+                  }`}
+                >
+                  <span>Collections</span>
+                  <ChevronDown className="w-3 h-3 text-[#B69A65] transition-transform duration-200" />
+                </Link>
+
+                {activeDropdown === 'collections' && (
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-80 bg-[#FFFFFF] border border-[#E8DCCD] shadow-xl p-5 z-50">
+                    <div className="text-[9px] uppercase tracking-[0.25em] text-[#B69A65] mb-3 pb-2 border-b border-[#E8DCCD]">
+                      Signature Capsule
+                    </div>
+                    <div className="space-y-3">
+                      {collectionsSublinks.map((item) => (
+                        <Link
+                          key={item.href}
+                          href={item.href}
+                          className="block group/item transition-colors"
+                        >
+                          <div className="text-xs font-serif text-[#111111] group-hover/item:text-[#B69A65] transition-colors">
+                            {item.label}
+                          </div>
+                          <div className="text-[10px] text-[#6B655D] tracking-normal capitalize font-light mt-0.5">
+                            {item.desc}
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* About Link */}
+              <Link
+                href="/about"
+                className={`hover:text-[#B69A65] transition-colors py-7 ${
+                  pathname === '/about' ? 'text-[#B69A65] font-medium' : ''
+                }`}
+              >
+                About
+              </Link>
             </nav>
 
-            {/* Right Action Icons & Currency */}
-            <div className="flex items-center space-x-3 sm:space-x-5">
-              {/* Currency Selector */}
+            {/* Right: Currency & Action Icons */}
+            <div className="flex items-center space-x-3 sm:space-x-5 text-[#111111]">
               <div className="hidden sm:block">
                 <CurrencySelector />
               </div>
@@ -137,175 +238,175 @@ export default function Navbar() {
               {/* Search Toggle */}
               <button
                 type="button"
-                onClick={() => setSearchOpen(true)}
-                className="hidden lg:flex p-1.5 text-[#171717] hover:text-[#B89A69] transition-colors"
-                aria-label="Search"
+                onClick={() => setSearchOpen(!searchOpen)}
+                aria-label="Search catalogue"
+                className="p-2 hover:text-[#B69A65] transition-colors"
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-4 h-4" />
               </button>
 
               {/* Account Link */}
               <Link
                 href={isCustomerLoggedIn ? '/account' : '/auth/login'}
-                className="p-1.5 text-[#171717] hover:text-[#B89A69] transition-colors"
-                aria-label="Account"
-                title={isCustomerLoggedIn ? 'My Account' : 'Sign In'}
+                aria-label="Client account"
+                className="p-2 hover:text-[#B69A65] transition-colors"
               >
-                <User className="w-5 h-5" />
+                <User className="w-4 h-4" />
               </Link>
 
               {/* Wishlist Link */}
               <Link
                 href="/wishlist"
-                className="p-1.5 text-[#171717] hover:text-[#B89A69] transition-colors relative"
                 aria-label="Wishlist"
+                className="p-2 hover:text-[#B69A65] transition-colors relative"
               >
-                <Heart className="w-5 h-5" />
+                <Heart className="w-4 h-4" />
                 {totalWishlist > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#B89A69] text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-semibold">
+                  <span className="absolute 1 top-1 -right-0.5 w-4 h-4 rounded-full bg-[#B69A65] text-white text-[9px] flex items-center justify-center font-medium">
                     {totalWishlist}
                   </span>
                 )}
               </Link>
 
-              {/* Shopping Bag Button */}
+              {/* Shopping Bag */}
               <button
                 type="button"
                 onClick={() => setIsCartDrawerOpen(true)}
-                className="p-1.5 text-[#171717] hover:text-[#B89A69] transition-colors relative"
-                aria-label="Shopping Cart"
+                aria-label="Shopping bag"
+                className="p-2 hover:text-[#B69A65] transition-colors relative"
               >
-                <ShoppingBag className="w-5 h-5" />
+                <ShoppingBag className="w-4 h-4" />
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-[#171717] text-[#F8F6F2] text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-semibold">
+                  <span className="absolute top-1 -right-0.5 w-4 h-4 rounded-full bg-[#111111] text-[#F8F5F0] text-[9px] flex items-center justify-center font-medium">
                     {totalItems}
                   </span>
                 )}
               </button>
-
-              {/* Admin Link shortcut if logged in */}
-              {isAdminLoggedIn && (
-                <Link
-                  href="/admin"
-                  className="hidden xl:flex items-center gap-1 text-[10px] uppercase tracking-wider text-[#B89A69] border border-[#B89A69] px-2 py-0.5"
-                  title="Admin Dashboard"
-                >
-                  <ShieldCheck className="w-3 h-3" />
-                  Admin
-                </Link>
-              )}
             </div>
           </div>
         </div>
 
-        {/* Search Bar Flyout */}
+        {/* Search Overlay Bar */}
         {searchOpen && (
-          <div className="absolute top-full left-0 right-0 bg-[#F8F6F2] border-b border-[#E7E1D8] p-4 shadow-md transition-all duration-200">
-            <form onSubmit={handleSearchSubmit} className="max-w-3xl mx-auto flex items-center gap-3">
-              <Search className="w-5 h-5 text-[#77736D]" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search rings, couple bracelets, pendants, earrings..."
-                autoFocus
-                className="flex-1 bg-transparent border-none text-[#171717] placeholder-[#77736D] text-sm focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="text-xs uppercase tracking-wider bg-[#171717] text-white px-4 py-2 hover:bg-[#B89A69] transition-colors"
-              >
-                Search
-              </button>
-              <button
-                type="button"
-                onClick={() => setSearchOpen(false)}
-                className="p-1 text-[#77736D] hover:text-[#171717]"
-                aria-label="Close search"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </form>
+          <div className="border-t border-[#E8DCCD] bg-[#FFFFFF] py-4 px-4 sm:px-8 shadow-md animate-fadeIn">
+            <div className="max-w-3xl mx-auto">
+              <form onSubmit={handleSearchSubmit} className="relative flex items-center">
+                <Search className="w-4 h-4 text-[#6B655D] absolute left-3" />
+                <input
+                  type="text"
+                  autoFocus
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search bracelets, necklaces, earrings or gold keepsakes..."
+                  className="w-full pl-10 pr-10 py-2.5 text-xs text-[#111111] bg-transparent border-b border-[#E8DCCD] focus:border-[#B69A65] focus:outline-none placeholder-[#6B655D] tracking-wide"
+                />
+                <button
+                  type="button"
+                  onClick={() => setSearchOpen(false)}
+                  className="absolute right-2 text-[#6B655D] hover:text-[#111111]"
+                  aria-label="Close search"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </form>
+            </div>
           </div>
         )}
       </header>
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden flex">
-          {/* Backdrop */}
+        <div className="fixed inset-0 z-50 lg:hidden">
           <div
             className="fixed inset-0 bg-black/40 backdrop-blur-xs transition-opacity"
             onClick={() => setMobileMenuOpen(false)}
           />
-
-          {/* Drawer content */}
-          <div className="relative w-4/5 max-w-xs bg-[#F8F6F2] h-full shadow-2xl flex flex-col justify-between z-10 p-6 overflow-y-auto">
+          <div className="fixed inset-y-0 left-0 w-full max-w-xs bg-[#F8F5F0] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto">
             <div>
-              <div className="flex items-center justify-between pb-6 border-b border-[#E7E1D8]">
-                <Link href="/" className="font-serif text-xl tracking-[0.2em] uppercase text-[#171717]">
-                  ELVORA
+              <div className="flex items-center justify-between pb-6 border-b border-[#E8DCCD]">
+                <Link href="/" onClick={() => setMobileMenuOpen(false)}>
+                  <span className="font-serif text-2xl tracking-[0.24em] font-light text-[#111111] uppercase">
+                    ELVORA
+                  </span>
                 </Link>
                 <button
-                  type="button"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-1 text-[#171717]"
+                  className="p-2 text-[#111111] hover:text-[#B69A65]"
                   aria-label="Close menu"
                 >
-                  <X className="w-6 h-6" />
+                  <X className="w-5 h-5" />
                 </button>
               </div>
 
-              {/* Currency Selector for mobile */}
-              <div className="py-4 border-b border-[#E7E1D8] flex items-center justify-between">
-                <span className="text-xs uppercase tracking-wider text-[#77736D]">Currency</span>
-                <CurrencySelector />
-              </div>
-
-              {/* Navigation Links */}
-              <nav className="py-6 space-y-4">
-                {navLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    className="flex items-center justify-between text-sm uppercase tracking-[0.16em] text-[#171717] hover:text-[#B89A69] py-2"
-                  >
-                    <span>{link.label}</span>
-                    <ChevronRight className="w-4 h-4 text-[#77736D]" />
-                  </Link>
-                ))}
-              </nav>
-
-              <div className="border-t border-[#E7E1D8] pt-6 space-y-3">
+              {/* Mobile Navigation Links */}
+              <nav className="py-6 space-y-4 text-xs uppercase tracking-[0.2em] font-light text-[#111111]">
                 <Link
-                  href="/track-order"
-                  className="block text-xs uppercase tracking-wider text-[#77736D] hover:text-[#171717]"
+                  href="/shop"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
                 >
-                  Track My Order
+                  Shop All Jewellery
+                </Link>
+                <Link
+                  href="/shop?filter=bestsellers"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                >
+                  Best Sellers
+                </Link>
+                <Link
+                  href="/shop/couple-bracelets"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                >
+                  Couple Bracelets
+                </Link>
+                <Link
+                  href="/shop/necklaces"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                >
+                  Necklaces & Pendants
+                </Link>
+                <Link
+                  href="/shop/earrings"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
+                >
+                  Lantern Earrings
                 </Link>
                 <Link
                   href="/about"
-                  className="block text-xs uppercase tracking-wider text-[#77736D] hover:text-[#171717]"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="block py-2 border-b border-[#E8DCCD]/60 hover:text-[#B69A65]"
                 >
-                  About The Brand
+                  About the Maison
                 </Link>
-                <Link
-                  href="/contact"
-                  className="block text-xs uppercase tracking-wider text-[#77736D] hover:text-[#171717]"
-                >
-                  Customer Concierge
-                </Link>
-                <Link
-                  href="/admin/login"
-                  className="block text-xs uppercase tracking-wider text-[#B89A69] hover:underline pt-2"
-                >
-                  Admin Portal
-                </Link>
-              </div>
+              </nav>
             </div>
 
-            <div className="pt-6 border-t border-[#E7E1D8] text-[11px] text-[#77736D] tracking-wider text-center">
-              &copy; {new Date().getFullYear()} ELVORA Haute Joaillerie
+            {/* Mobile Footer & Currency */}
+            <div className="pt-6 border-t border-[#E8DCCD] space-y-4">
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-wider text-[#6B655D]">Currency</span>
+                <CurrencySelector />
+              </div>
+              <div className="grid grid-cols-2 gap-2 pt-2">
+                <Link
+                  href={isCustomerLoggedIn ? '/account' : '/auth/login'}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="luxury-btn-outline text-center py-2 text-[10px]"
+                >
+                  Account
+                </Link>
+                <Link
+                  href="/wishlist"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="luxury-btn-primary text-center py-2 text-[10px]"
+                >
+                  Wishlist ({totalWishlist})
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -313,4 +414,3 @@ export default function Navbar() {
     </>
   );
 }
-

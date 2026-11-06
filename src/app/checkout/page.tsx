@@ -245,16 +245,16 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-[#F8F6F2] py-20">
-        <div className="max-w-md mx-auto text-center p-8 bg-[#EFEAE2]/50 border border-[#E7E1D8]">
-          <h1 className="font-serif text-2xl text-[#171717]">Your bag is empty</h1>
-          <p className="text-xs text-[#77736D] mt-2">
+      <div className="min-h-screen bg-[#F8F5F0] py-20">
+        <div className="max-w-md mx-auto text-center p-8 bg-[#FFFFFF] border border-[#E8DCCD] shadow-sm">
+          <h1 className="font-serif text-2xl text-[#111111] font-light">Your bag is empty</h1>
+          <p className="text-xs text-[#6B655D] mt-2 font-light">
             Please select jewellery creations before proceeding to checkout.
           </p>
           <div className="pt-4">
             <Link
               href="/shop"
-              className="inline-block bg-[#171717] text-white text-xs uppercase tracking-wider px-6 py-3 hover:bg-[#B89A69] transition-colors"
+              className="inline-block bg-[#111111] text-white text-xs uppercase tracking-wider px-6 py-3 hover:bg-[#B69A65] transition-colors"
             >
               Browse Catalogue
             </Link>
@@ -265,13 +265,13 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F6F2] py-12 lg:py-20">
+    <div className="min-h-screen bg-[#F8F5F0] py-12 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-xl mx-auto mb-12">
-          <span className="text-[10px] tracking-[0.3em] uppercase text-[#B89A69] font-medium block">
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#B69A65] font-medium block">
             End-to-End Encrypted
           </span>
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#171717] font-light mt-1">
+          <h1 className="font-serif text-3xl sm:text-4xl text-[#111111] font-light mt-1 tracking-tight">
             Secure Online Checkout
           </h1>
         </div>
@@ -288,8 +288,8 @@ export default function CheckoutPage() {
             {/* Left Column: Delivery Address & Payment Method */}
             <div className="lg:col-span-7 space-y-8">
               {/* Delivery Details */}
-              <div className="bg-[#F8F6F2] border border-[#E7E1D8] p-6 space-y-4">
-                <h2 className="font-serif text-xl text-[#171717] font-normal pb-3 border-b border-[#E7E1D8]">
+              <div className="bg-[#FFFFFF] border border-[#E8DCCD] p-6 space-y-4 shadow-2xs">
+                <h2 className="font-serif text-xl text-[#111111] font-light pb-3 border-b border-[#E8DCCD]">
                   1. Delivery Destination
                 </h2>
 
@@ -436,24 +436,24 @@ export default function CheckoutPage() {
               </div>
 
               {/* Payment Methods */}
-              <div className="bg-[#F8F6F2] border border-[#E7E1D8] p-6 space-y-4">
-                <div className="flex items-center justify-between pb-3 border-b border-[#E7E1D8]">
-                  <h2 className="font-serif text-xl text-[#171717] font-normal">
+              <div className="bg-[#FFFFFF] border border-[#E8DCCD] p-6 space-y-4 shadow-2xs">
+                <div className="flex items-center justify-between pb-3 border-b border-[#E8DCCD]">
+                  <h2 className="font-serif text-xl text-[#111111] font-light">
                     2. Payment Method
                   </h2>
-                  <div className="flex items-center gap-1.5 text-[11px] text-[#B89A69]">
+                  <div className="flex items-center gap-1.5 text-[11px] text-[#B69A65]">
                     <ShieldCheck className="w-4 h-4" />
                     <span>256-Bit SSL Encrypted</span>
                   </div>
                 </div>
 
                 {/* COD Strictly Prohibited Notice Banner */}
-                <div className="bg-[#171717] text-[#EFEAE2] p-4 text-xs space-y-1">
-                  <div className="flex items-center gap-2 font-medium text-[#B89A69]">
+                <div className="bg-[#111111] text-[#F8F5F0] p-4 text-xs space-y-1">
+                  <div className="flex items-center gap-2 font-medium text-[#B69A65]">
                     <Lock className="w-4 h-4" />
                     <span>STRICT POLICY: ONLINE PAYMENTS ONLY</span>
                   </div>
-                  <p className="text-[#A39E96] text-[11px] leading-relaxed">
+                  <p className="text-[#8C867E] text-[11px] leading-relaxed font-light">
                     To maintain strict chain-of-custody for fine jewellery and guarantee tamper-evident delivery, Cash on Delivery (COD) is strictly prohibited. Orders are dispatched upon electronic confirmation.
                   </p>
                 </div>
@@ -463,18 +463,18 @@ export default function CheckoutPage() {
                     onClick={() => setSelectedMethod('UPI')}
                     className={`block p-4 border cursor-pointer transition-all ${
                       selectedMethod === 'UPI'
-                        ? 'border-[#B89A69] bg-[#F5EFE6]'
-                        : 'border-[#E7E1D8] hover:border-[#171717]'
+                        ? 'border-[#B69A65] bg-[#E8DCCD]/30'
+                        : 'border-[#E8DCCD] hover:border-[#111111]'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <Smartphone className="w-5 h-5 text-[#B89A69]" />
+                        <Smartphone className="w-5 h-5 text-[#B69A65]" />
                         <div>
-                          <span className="text-xs uppercase tracking-wider font-semibold text-[#171717] block">
+                          <span className="text-xs uppercase tracking-wider font-medium text-[#111111] block">
                             Instant UPI
                           </span>
-                          <span className="text-[11px] text-[#77736D]">
+                          <span className="text-[11px] text-[#6B655D] font-light">
                             Google Pay, PhonePe, Paytm, BHIM & QR
                           </span>
                         </div>
@@ -483,7 +483,7 @@ export default function CheckoutPage() {
                         type="radio"
                         checked={selectedMethod === 'UPI'}
                         onChange={() => setSelectedMethod('UPI')}
-                        className="accent-[#B89A69]"
+                        className="accent-[#B69A65]"
                       />
                     </div>
                   </label>
@@ -492,18 +492,18 @@ export default function CheckoutPage() {
                     onClick={() => setSelectedMethod('CARD')}
                     className={`block p-4 border cursor-pointer transition-all ${
                       selectedMethod === 'CARD'
-                        ? 'border-[#B89A69] bg-[#F5EFE6]'
-                        : 'border-[#E7E1D8] hover:border-[#171717]'
+                        ? 'border-[#B69A65] bg-[#E8DCCD]/30'
+                        : 'border-[#E8DCCD] hover:border-[#111111]'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <CreditCard className="w-5 h-5 text-[#B89A69]" />
+                        <CreditCard className="w-5 h-5 text-[#B69A65]" />
                         <div>
-                          <span className="text-xs uppercase tracking-wider font-semibold text-[#171717] block">
+                          <span className="text-xs uppercase tracking-wider font-medium text-[#111111] block">
                             Credit & Debit Cards
                           </span>
-                          <span className="text-[11px] text-[#77736D]">
+                          <span className="text-[11px] text-[#6B655D] font-light">
                             Visa, MasterCard, American Express, RuPay
                           </span>
                         </div>
@@ -512,7 +512,7 @@ export default function CheckoutPage() {
                         type="radio"
                         checked={selectedMethod === 'CARD'}
                         onChange={() => setSelectedMethod('CARD')}
-                        className="accent-[#B89A69]"
+                        className="accent-[#B69A65]"
                       />
                     </div>
                   </label>
@@ -521,18 +521,18 @@ export default function CheckoutPage() {
                     onClick={() => setSelectedMethod('NETBANKING')}
                     className={`block p-4 border cursor-pointer transition-all ${
                       selectedMethod === 'NETBANKING'
-                        ? 'border-[#B89A69] bg-[#F5EFE6]'
-                        : 'border-[#E7E1D8] hover:border-[#171717]'
+                        ? 'border-[#B69A65] bg-[#E8DCCD]/30'
+                        : 'border-[#E8DCCD] hover:border-[#111111]'
                     }`}
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <Building className="w-5 h-5 text-[#B89A69]" />
+                        <Building className="w-5 h-5 text-[#B69A65]" />
                         <div>
-                          <span className="text-xs uppercase tracking-wider font-semibold text-[#171717] block">
+                          <span className="text-xs uppercase tracking-wider font-medium text-[#111111] block">
                             Net Banking & Verified Wallets
                           </span>
-                          <span className="text-[11px] text-[#77736D]">
+                          <span className="text-[11px] text-[#6B655D] font-light">
                             HDFC, ICICI, SBI, Axis & 50+ Top Banks
                           </span>
                         </div>
@@ -541,7 +541,7 @@ export default function CheckoutPage() {
                         type="radio"
                         checked={selectedMethod === 'NETBANKING'}
                         onChange={() => setSelectedMethod('NETBANKING')}
-                        className="accent-[#B89A69]"
+                        className="accent-[#B69A65]"
                       />
                     </div>
                   </label>
@@ -550,8 +550,8 @@ export default function CheckoutPage() {
             </div>
 
             {/* Right Column: Order Review & Total */}
-            <div className="lg:col-span-5 bg-[#EFEAE2]/60 border border-[#E7E1D8] p-6 space-y-6">
-              <h2 className="font-serif text-xl text-[#171717] font-normal pb-3 border-b border-[#E7E1D8]">
+            <div className="lg:col-span-5 bg-[#FFFFFF] border border-[#E8DCCD] p-6 space-y-6 shadow-2xs">
+              <h2 className="font-serif text-xl text-[#111111] font-light pb-3 border-b border-[#E8DCCD]">
                 Review Your Curations
               </h2>
 
@@ -561,7 +561,7 @@ export default function CheckoutPage() {
                     key={`${item.productId}-${item.selectedVariant || 'default'}`}
                     className="flex gap-3 items-center"
                   >
-                    <div className="relative w-16 h-16 bg-[#F8F6F2] border border-[#E7E1D8] overflow-hidden shrink-0">
+                    <div className="relative w-16 h-16 bg-[#F8F5F0] border border-[#E8DCCD] overflow-hidden shrink-0">
                       <Image
                         src={item.product.images[0] || '/images/products/touch-distance-bracelet/hero.jpg'}
                         alt={item.product.name}
@@ -570,14 +570,14 @@ export default function CheckoutPage() {
                       />
                     </div>
                     <div className="flex-1 min-w-0">
-                      <h4 className="text-xs font-serif text-[#171717] truncate">
+                      <h4 className="text-xs font-serif text-[#111111] truncate font-light">
                         {item.product.name}
                       </h4>
-                      <p className="text-[11px] text-[#77736D]">
+                      <p className="text-[11px] text-[#6B655D]">
                         Qty: {item.quantity} {item.selectedVariant ? `• ${item.selectedVariant}` : ''}
                       </p>
                     </div>
-                    <div className="text-xs font-medium text-[#171717]">
+                    <div className="text-xs font-serif text-[#111111]">
                       {format(item.product.price * item.quantity)}
                     </div>
                   </div>
@@ -585,31 +585,31 @@ export default function CheckoutPage() {
               </div>
 
               {/* Price Breakdown */}
-              <div className="pt-4 border-t border-[#E7E1D8] space-y-2.5 text-xs">
-                <div className="flex justify-between text-[#77736D]">
+              <div className="pt-4 border-t border-[#E8DCCD] space-y-2.5 text-xs font-light">
+                <div className="flex justify-between text-[#6B655D]">
                   <span>Subtotal</span>
-                  <span className="text-[#171717] font-medium">{format(subtotalInr)}</span>
+                  <span className="text-[#111111] font-medium">{format(subtotalInr)}</span>
                 </div>
 
-                <div className="flex justify-between text-[#77736D]">
+                <div className="flex justify-between text-[#6B655D]">
                   <div>
                     <span>Insured Paid Express Shipping</span>
-                    <span className="block text-[10px] text-[#A39E96]">
+                    <span className="block text-[10px] text-[#8C867E]">
                       {isDomestic ? 'Domestic Express Courier' : 'International DHL Air'}
                     </span>
                   </div>
-                  <span className="text-[#171717] font-medium">{format(shippingInr)}</span>
+                  <span className="text-[#111111] font-medium">{format(shippingInr)}</span>
                 </div>
 
                 {currency === 'USD' && (
-                  <div className="p-2.5 bg-[#F5EFE6] border border-[#D7C4A5] text-[11px] text-[#77736D]">
-                    <span className="font-semibold text-[#171717]">Currency Settlement Notice:</span> Displayed in USD ($). Razorpay gateway processes transaction securely in Indian Rupee standard equivalent ({new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(grandTotalInr)}) without hidden markup.
+                  <div className="p-2.5 bg-[#F8F5F0] border border-[#E8DCCD] text-[11px] text-[#6B655D]">
+                    <span className="font-medium text-[#111111]">Currency Settlement Notice:</span> Displayed in USD ($). Razorpay gateway processes transaction securely in Indian Rupee standard equivalent ({new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(grandTotalInr)}) without hidden markup.
                   </div>
                 )}
 
-                <div className="pt-3 border-t border-[#E7E1D8] flex justify-between items-baseline text-base font-semibold text-[#171717]">
+                <div className="pt-3 border-t border-[#E8DCCD] flex justify-between items-baseline text-base font-light text-[#111111]">
                   <span>Total Payable</span>
-                  <span className="font-serif text-2xl text-[#171717]">{format(grandTotalInr)}</span>
+                  <span className="font-serif text-2xl font-medium text-[#111111]">{format(grandTotalInr)}</span>
                 </div>
               </div>
 
@@ -617,7 +617,7 @@ export default function CheckoutPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full bg-[#171717] text-white py-4 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#B89A69] transition-all duration-300 disabled:opacity-60"
+                className="w-full bg-[#111111] text-white py-4 px-6 text-xs uppercase tracking-[0.22em] font-medium flex items-center justify-center gap-2 hover:bg-[#B69A65] transition-all duration-300 disabled:opacity-60"
               >
                 {loading ? (
                   <>
@@ -643,40 +643,40 @@ export default function CheckoutPage() {
       {/* Interactive Sandboxed Payment Simulation Modal (For local testing before production keys) */}
       {sandboxOrderData && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-[#F8F6F2] border border-[#E7E1D8] max-w-md w-full p-6 shadow-2xl space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E7E1D8]">
+          <div className="bg-[#FFFFFF] border border-[#E8DCCD] max-w-md w-full p-6 shadow-2xl space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-[#E8DCCD]">
               <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#B89A69]" />
-                <h3 className="font-serif text-lg text-[#171717]">
+                <ShieldCheck className="w-5 h-5 text-[#B69A65]" />
+                <h3 className="font-serif text-lg text-[#111111] font-light">
                   Razorpay Secure Gateway
                 </h3>
               </div>
-              <span className="text-[10px] uppercase tracking-wider bg-[#B89A69] text-white px-2 py-0.5">
+              <span className="text-[10px] uppercase tracking-wider bg-[#B69A65] text-white px-2 py-0.5">
                 Online Verification
               </span>
             </div>
 
-            <div className="space-y-3 text-xs text-[#77736D]">
-              <div className="p-3 bg-[#EFEAE2] border border-[#E7E1D8] space-y-1">
+            <div className="space-y-3 text-xs text-[#6B655D]">
+              <div className="p-3 bg-[#F8F5F0] border border-[#E8DCCD] space-y-1 font-light">
                 <div className="flex justify-between">
                   <span>Order Identifier:</span>
-                  <span className="font-mono text-[#171717] font-bold">{sandboxOrderData.orderId}</span>
+                  <span className="font-mono text-[#111111] font-bold">{sandboxOrderData.orderId}</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Merchant:</span>
-                  <span className="text-[#171717]">ELVORA Haute Joaillerie</span>
+                  <span className="text-[#111111]">ELVORA Haute Joaillerie</span>
                 </div>
                 <div className="flex justify-between">
                   <span>Customer:</span>
-                  <span className="text-[#171717]">{sandboxOrderData.customer.name}</span>
+                  <span className="text-[#111111]">{sandboxOrderData.customer.name}</span>
                 </div>
-                <div className="flex justify-between font-semibold text-sm text-[#171717] pt-1 border-t border-[#E7E1D8]">
+                <div className="flex justify-between font-semibold text-sm text-[#111111] pt-1 border-t border-[#E8DCCD]">
                   <span>Amount to Settle:</span>
                   <span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(sandboxOrderData.amountInr)}</span>
                 </div>
               </div>
 
-              <p className="text-[11px] leading-relaxed">
+              <p className="text-[11px] leading-relaxed font-light">
                 This verification checkpoint cryptographically signs the transaction and executes backend HMAC-SHA256 verification against the order repository.
               </p>
             </div>
@@ -685,7 +685,7 @@ export default function CheckoutPage() {
               <button
                 type="button"
                 onClick={handleSimulatedPaymentSuccess}
-                className="w-full bg-[#171717] text-white py-3 text-xs uppercase tracking-wider font-medium hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-[#111111] text-white py-3 text-xs uppercase tracking-wider font-medium hover:bg-emerald-700 transition-colors flex items-center justify-center gap-2"
               >
                 <CheckCircle2 className="w-4 h-4 text-emerald-400" />
                 <span>Simulate Successful Bank Authorization</span>

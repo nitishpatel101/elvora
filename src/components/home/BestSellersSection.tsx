@@ -26,29 +26,30 @@ export default function BestSellersSection({ initialProducts }: BestSellersSecti
       : initialProducts.filter((p) => p.categorySlug === activeCategory);
 
   return (
-    <section className="py-20 bg-[#F8F6F2] border-b border-[#E7E1D8]">
+    <section className="py-20 lg:py-24 bg-[#F8F5F0] border-b border-[#E8DCCD]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="text-[10px] tracking-[0.25em] uppercase text-[#B89A69] font-medium block">
-            Client Favorites
+        {/* Editorial Section Header */}
+        <div className="text-center max-w-2xl mx-auto mb-14">
+          <span className="text-[10px] tracking-[0.3em] uppercase text-[#B69A65] font-medium block">
+            THE CATALOGUE
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl text-[#171717] font-light mt-1">
-            Bestselling Creations
+          <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl text-[#111111] font-light mt-1.5 tracking-tight">
+            CURATED FOR YOU
           </h2>
-          <p className="text-xs text-[#77736D] mt-3">
-            Handcrafted with meticulous precision, designed for enduring elegance and meaningful connection.
+          <p className="text-xs sm:text-sm text-[#6B655D] mt-3 font-light leading-relaxed">
+            Discover pieces designed to make every connection special.
           </p>
 
-          {/* Category Filter Pills */}
+          {/* Minimalist Filter Tabs */}
           <div className="flex flex-wrap items-center justify-center gap-2 pt-6">
             {categories.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
-                className={`text-xs uppercase tracking-[0.16em] px-4 py-2 border transition-all duration-200 ${
+                className={`text-[11px] uppercase tracking-[0.2em] px-4 py-2 transition-all duration-200 border ${
                   activeCategory === cat.value
-                    ? 'bg-[#171717] text-white border-[#171717]'
-                    : 'bg-transparent text-[#171717] border-[#E7E1D8] hover:border-[#B89A69]'
+                    ? 'bg-[#111111] text-[#FFFFFF] border-[#111111]'
+                    : 'bg-transparent text-[#6B655D] border-[#E8DCCD] hover:border-[#111111] hover:text-[#111111]'
                 }`}
               >
                 {cat.label}
@@ -64,12 +65,13 @@ export default function BestSellersSection({ initialProducts }: BestSellersSecti
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        {/* Bottom CTA */}
+        <div className="text-center mt-14">
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 border border-[#171717] text-[#171717] px-8 py-3.5 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#171717] hover:text-white transition-all duration-300"
+            className="inline-flex items-center gap-2 border border-[#111111] text-[#111111] px-9 py-4 text-xs uppercase tracking-[0.24em] font-medium hover:bg-[#111111] hover:text-[#FFFFFF] transition-all duration-300"
           >
-            <span>View Full Jewellery Vault</span>
+            <span>DISCOVER COMPLETE VAULT</span>
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
@@ -77,4 +79,3 @@ export default function BestSellersSection({ initialProducts }: BestSellersSecti
     </section>
   );
 }
-
