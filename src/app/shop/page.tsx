@@ -30,6 +30,7 @@ export default async function ShopPage({
 
         {/* Dynamic Client Grid with AUrate Filters and Sorting */}
         <ProductGridClient
+          key={category || 'all'}
           initialProducts={products}
           categories={categories}
           initialSearch={search}

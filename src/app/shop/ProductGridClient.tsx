@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Product, Category } from '@/types';
@@ -29,6 +29,18 @@ export default function ProductGridClient({
   const [sortBy, setSortBy] = useState<'featured' | 'price-asc' | 'price-desc' | 'newest'>('featured');
   const [inStockOnly, setInStockOnly] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
+
+  useEffect(() => {
+    if (initialCategory) {
+      setSelectedCategory(initialCategory);
+    }
+  }, [initialCategory]);
+
+  useEffect(() => {
+    if (initialSearch !== undefined) {
+      setSearch(initialSearch);
+    }
+  }, [initialSearch]);
 
   const filteredAndSortedProducts = useMemo(() => {
     return initialProducts
