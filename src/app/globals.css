@@ -173,3 +173,82 @@ h1, h2, h3, h4, .font-serif {
   background-size: 200% 100%;
   animation: shimmer 4s infinite linear;
 }
+
+/* D2C Infinite Marquee Animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Radar Wave for WhatsApp Pill */
+@keyframes radar-wave {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
+}
+
+.animate-radar {
+  animation: radar-wave 2s cubic-bezier(0, 0.2, 0.8, 1) infinite;
+}
+
+/* Floating animation */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float {
+  animation: float-slow 3s ease-in-out infinite;
+}
+
+/* Pulse Glow for CTA Buttons */
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 12px rgba(245, 196, 0, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(245, 196, 0, 0.8);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2.2s infinite ease-in-out;
+}
+
+/* Story Ring Rotation */
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 12s linear infinite;
+}
+

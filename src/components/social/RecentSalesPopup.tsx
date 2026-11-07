@@ -126,7 +126,7 @@ export default function RecentSalesPopup() {
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-20 sm:bottom-4 left-3 sm:left-4 z-40 max-w-sm w-[calc(100vw-1.5rem)] sm:w-auto animate-fade-in-up transition-all duration-300"
+      className="fixed bottom-20 sm:bottom-24 left-3 sm:left-6 z-40 max-w-sm w-[calc(100vw-2rem)] sm:w-auto animate-fade-in-up transition-all duration-300"
     >
       <div className="bg-white/95 backdrop-blur-md border border-[#C5A265]/30 rounded-xl shadow-2xl p-2.5 sm:p-3.5 flex items-center gap-2.5 sm:gap-3 relative hover:shadow-xl hover:border-[#C5A265] transition-all group">
         {/* Dismiss Button */}

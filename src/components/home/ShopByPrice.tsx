@@ -126,24 +126,30 @@ export default function ShopByPrice() {
             <Link
               key={prod.name}
               href={`/product/${prod.slug}`}
-              className="bg-white rounded-2xl border border-stone-200 overflow-hidden hover:shadow-lg transition-all duration-300 flex flex-col group"
+              className="bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 overflow-hidden hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col group p-2.5 sm:p-3"
             >
-              <div className="relative aspect-square w-full bg-stone-50 overflow-hidden">
+              <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-stone-50 mb-2">
                 <Image
                   src={prod.image}
                   alt={prod.name}
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-108 transition-transform duration-700"
                   unoptimized
                 />
               </div>
 
-              <div className="p-4 flex flex-col flex-1 justify-between">
-                <h3 className="text-xs sm:text-sm font-semibold text-stone-900 line-clamp-2 mb-2 group-hover:text-[#DDB373] transition-colors leading-snug">
-                  {prod.name}
-                </h3>
-                <span className="text-sm sm:text-base font-bold text-stone-900">
+              <div className="p-2 flex flex-col flex-1 justify-between">
+                <div>
+                  <div className="flex items-center gap-1 text-[#F5C400] text-[10px] mb-1">
+                    <span>★★★★★</span>
+                    <span className="text-stone-500 font-bold">4.9</span>
+                  </div>
+                  <h3 className="text-xs sm:text-sm font-bold text-stone-900 line-clamp-1 mb-1 group-hover:text-[#A58200] transition-colors leading-snug">
+                    {prod.name}
+                  </h3>
+                </div>
+                <span className="text-xs sm:text-sm font-extrabold text-stone-900 mt-2">
                   {prod.price}
                 </span>
               </div>

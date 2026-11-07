@@ -49,26 +49,30 @@ export default function OccasionTrendingSection() {
             <Link
               key={prod.slug}
               href={`/product/${prod.slug}`}
-              className="group block flex flex-col justify-between"
+              className="group block flex flex-col justify-between bg-white rounded-2xl sm:rounded-3xl p-3 border border-stone-200/80 hover:border-[#F5C400] hover:shadow-2xl hover:-translate-y-2 transition-all duration-300"
             >
-              <div className="relative aspect-square w-full rounded-2xl sm:rounded-3xl overflow-hidden bg-stone-50 border border-stone-200 mb-3 shadow-xs group-hover:shadow-lg transition-all duration-300">
+              <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl overflow-hidden bg-stone-50 mb-3 shadow-xs">
                 <Image
                   src={prod.image}
                   alt={prod.name}
                   fill
                   sizes="(max-width: 768px) 50vw, 25vw"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover group-hover:scale-108 transition-transform duration-700"
                   unoptimized
                 />
                 {prod.onSale && (
-                  <span className="absolute bottom-3 left-3 bg-black/85 text-white text-[11px] font-semibold px-2.5 py-1 rounded-md">
-                    Sale
+                  <span className="absolute bottom-3 left-3 bg-[#F5C400] text-black text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full shadow-md">
+                    Sale 🔥
                   </span>
                 )}
               </div>
 
               <div>
-                <h3 className="text-xs sm:text-sm font-semibold text-stone-900 group-hover:text-[#DDB373] transition-colors leading-snug">
+                <div className="flex items-center gap-1 text-[#F5C400] text-[10px] mb-1">
+                  <span>★★★★★</span>
+                  <span className="text-stone-500 font-bold">4.9</span>
+                </div>
+                <h3 className="text-xs sm:text-sm font-bold text-stone-900 group-hover:text-[#A58200] transition-colors leading-snug line-clamp-1">
                   {prod.name}
                 </h3>
                 <div className="flex items-baseline gap-2 mt-1">
@@ -77,7 +81,7 @@ export default function OccasionTrendingSection() {
                       {prod.originalPrice}
                     </span>
                   )}
-                  <span className="text-xs sm:text-sm font-bold text-stone-900">
+                  <span className="text-xs sm:text-sm font-extrabold text-stone-900">
                     {prod.price}
                   </span>
                 </div>

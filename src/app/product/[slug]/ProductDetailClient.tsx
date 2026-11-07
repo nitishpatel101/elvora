@@ -120,22 +120,35 @@ export default function ProductDetailClient({
               Shipping calculated at checkout.
             </p>
 
-            {/* Reviews Stars */}
-            <div className="flex items-center gap-1.5 pt-1">
-              <div className="flex text-[#F5C400]">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-current text-[#F5C400]" />
-                ))}
+            {/* Reviews Stars & Live Viewers */}
+            <div className="flex flex-wrap items-center gap-3 pt-1">
+              <div className="flex items-center gap-1.5">
+                <div className="flex text-[#F5C400]">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-current text-[#F5C400]" />
+                  ))}
+                </div>
+                <span className="text-xs font-semibold text-stone-700">
+                  44 reviews
+                </span>
               </div>
-              <span className="text-xs font-semibold text-stone-700">
-                44 reviews
-              </span>
+
+              <div className="flex items-center gap-1.5 bg-rose-50 text-rose-700 px-2.5 py-0.5 rounded-full text-[11px] font-bold border border-rose-200">
+                <span className="w-2 h-2 rounded-full bg-rose-500 animate-ping" />
+                <span>🔥 29 people viewing right now</span>
+              </div>
             </div>
 
-            {/* Expected Delivery */}
-            <div className="flex items-center gap-2 pt-2 text-xs font-medium text-stone-800">
-              <Truck className="w-4 h-4 text-stone-700" />
-              <span>Expected Delivery: 3-5 Business Days across India</span>
+            {/* Expected Delivery & Countdown */}
+            <div className="p-3 bg-stone-50 rounded-xl border border-stone-200 space-y-1.5">
+              <div className="flex items-center gap-2 text-xs font-semibold text-stone-800">
+                <Truck className="w-4 h-4 text-[#F5C400]" />
+                <span>Expected Delivery: 3-5 Business Days across India</span>
+              </div>
+              <p className="text-[11px] text-emerald-700 font-medium flex items-center gap-1">
+                <span>⚡</span>
+                <span>Order within <strong>03h 24m</strong> for Dispatch Tomorrow!</span>
+              </p>
             </div>
 
             {/* Variant Pill Selectors matching Giftify frame 025 & 030 */}
@@ -282,6 +295,32 @@ export default function ProductDetailClient({
             {relatedProducts.slice(0, 4).map((item) => (
               <ProductCard key={item.id} product={item} />
             ))}
+          </div>
+        </div>
+      )}
+
+      {/* Floating Gift Assistant / Save Incentive Pill (Giftify Frame 036) */}
+      {showIncentive && savingsAmount > 0 && (
+        <div className="fixed bottom-6 right-4 sm:right-8 z-40 flex flex-col items-end gap-2 animate-bounce-subtle pointer-events-auto">
+          {/* Question bubble */}
+          <div className="bg-stone-900 text-white text-[11px] sm:text-xs font-semibold py-1.5 px-3 rounded-2xl shadow-xl border border-stone-700 flex items-center gap-1.5">
+            <span>💭</span>
+            <span>Is this a good gift for anniversaries?</span>
+          </div>
+
+          {/* Action pill */}
+          <div className="bg-white text-stone-900 border border-stone-200 rounded-full pl-3 pr-2 py-1.5 shadow-2xl flex items-center gap-2 text-xs font-extrabold hover:border-[#F5C400] transition-colors">
+            <span className="w-5 h-5 rounded-full bg-[#111111] text-[#F5C400] flex items-center justify-center text-[10px]">
+              ✨
+            </span>
+            <span>Save ₹{savingsAmount.toLocaleString('en-IN')}.00 off original price</span>
+            <button
+              onClick={() => setShowIncentive(false)}
+              className="text-stone-400 hover:text-black p-1 text-sm leading-none ml-1 cursor-pointer"
+              aria-label="Dismiss incentive"
+            >
+              &times;
+            </button>
           </div>
         </div>
       )}
