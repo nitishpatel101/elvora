@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { X, ChevronDown } from 'lucide-react';
 import { useCurrency } from '@/context/CurrencyContext';
 
@@ -9,11 +9,32 @@ interface AnnouncementBarProps {
 }
 
 export default function AnnouncementBar({
-  initialText = 'BIGGEST. EVER. FESTIVE. SALE. 30% off! Use Code: ELVORA30',
+  initialText = 'BLACK FRIDAY SALE • 30% OFF • USE CODE: ELVORA30',
 }: AnnouncementBarProps) {
   const [visible, setVisible] = useState(true);
+  const [announcementText, setAnnouncementText] = useState(initialText);
+  const [subText, setSubText] = useState('FREE EXPRESS SHIPPING ON ORDERS ₹99+');
   const { currency, setCurrency } = useCurrency();
   const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
+
+  useEffect(() => {
+    fetch('/api/settings')
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (data) {
+          if (data.announcementVisible === false) {
+            setVisible(false);
+          }
+          if (data.announcementText) {
+            setAnnouncementText(data.announcementText);
+          }
+          if (data.announcementSubText) {
+            setSubText(data.announcementSubText);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   if (!visible) return null;
 
@@ -23,10 +44,10 @@ export default function AnnouncementBar({
       <div className="bg-[#24332C] text-[#FAF8F5] text-[10px] sm:text-[11px] tracking-[0.2em] uppercase py-2 px-4 relative font-medium">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="hidden sm:block text-[10px] tracking-[0.2em] text-[#A3B2A9]">
-            FREE EXPRESS SHIPPING ON ORDERS ₹99+
+            {subText}
           </div>
           <div className="flex-1 text-center truncate px-2 font-semibold tracking-[0.22em]">
-            {initialText}
+            {announcementText}
           </div>
           <button
             onClick={() => setVisible(false)}

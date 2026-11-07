@@ -1,5 +1,308 @@
 [
   {
+    "id": "ELV-834121",
+    "customerEmail": "919876543210@customer.elvora.com",
+    "customerName": "Pooja Hegde",
+    "customerPhone": "+91 98765 43210",
+    "shippingAddress": {
+      "fullName": "Pooja Hegde",
+      "phone": "+91 98765 43210",
+      "addressLine1": "Bandra West, Hill Road",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400050",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-02",
+        "productName": "Beaded Couple Bracelet",
+        "productImage": "/images/products/beaded-couple-bracelet/hero.jpg",
+        "priceAtPurchase": 1699,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1699,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1798,
+    "currency": "INR",
+    "status": "PAYMENT_PENDING",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_ex6d80v33t",
+    "createdAt": "2026-11-07T03:03:15.596Z",
+    "updatedAt": "2026-11-07T03:03:15.596Z"
+  },
+  {
+    "id": "ELV-953086",
+    "customerEmail": "rohit@example.com",
+    "customerName": "Rohit Sharma",
+    "customerPhone": "+91 96666 44444",
+    "shippingAddress": {
+      "fullName": "Rohit Sharma",
+      "email": "rohit@example.com",
+      "phone": "+91 96666 44444",
+      "addressLine1": "Worli Sea Face",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400030",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-02",
+        "productName": "Beaded Couple Bracelet",
+        "productImage": "/images/products/beaded-couple-bracelet/hero.jpg",
+        "priceAtPurchase": 1699,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1699,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1798,
+    "currency": "INR",
+    "status": "PAYMENT_REJECTED",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_oj6ozc16pf",
+    "createdAt": "2026-11-07T03:03:15.555Z",
+    "updatedAt": "2026-11-07T03:03:15.567Z",
+    "rejectionReason": "UTR mismatch: Credit of ₹1,798 not found in bank account"
+  },
+  {
+    "id": "ELV-676994",
+    "customerEmail": "vikram@example.com",
+    "customerName": "Vikram Malhotra",
+    "customerPhone": "+91 97777 55555",
+    "shippingAddress": {
+      "fullName": "Vikram Malhotra",
+      "email": "vikram@example.com",
+      "phone": "+91 97777 55555",
+      "addressLine1": "Bandra West",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400050",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-01",
+        "productName": "Touch Distance Couple Bracelet",
+        "productImage": "/images/products/touch-distance-bracelet/hero.jpg",
+        "priceAtPurchase": 1399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1498,
+    "currency": "INR",
+    "status": "PAID",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_cf6wt0l0ri",
+    "createdAt": "2026-11-07T03:03:15.472Z",
+    "updatedAt": "2026-11-07T03:03:15.520Z",
+    "upiScreenshot": "/images/uploads/test_receipt.png",
+    "upiUtr": "SCREENSHOT_ATTACHED",
+    "paymentSubmittedAt": "2026-11-07T03:03:15.488Z",
+    "verifiedBy": "owner@elvora.com",
+    "verifiedAt": "2026-11-07T03:03:15.518Z"
+  },
+  {
+    "id": "ELV-885915",
+    "customerEmail": "kavita@example.com",
+    "customerName": "Kavita Das",
+    "customerPhone": "+91 97777 44444",
+    "shippingAddress": {
+      "fullName": "Kavita Das",
+      "email": "kavita@example.com",
+      "phone": "+91 97777 44444",
+      "addressLine1": "Indiranagar",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pincode": "560038",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-06",
+        "productName": "Golden Lantern Pearl Earrings",
+        "productImage": "/images/products/golden-lantern-pearl-earrings/hero.jpg",
+        "priceAtPurchase": 399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 498,
+    "currency": "INR",
+    "status": "PAID",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_xzfd7z9b79",
+    "createdAt": "2026-11-07T03:03:14.853Z",
+    "updatedAt": "2026-11-07T03:03:14.870Z",
+    "paymentId": "pay_dup_test_1794020594865"
+  },
+  {
+    "id": "ELV-943922",
+    "customerEmail": "siddharth@example.com",
+    "customerName": "Siddharth Roy",
+    "customerPhone": "+91 98888 33333",
+    "shippingAddress": {
+      "fullName": "Siddharth Roy",
+      "email": "siddharth@example.com",
+      "phone": "+91 98888 33333",
+      "addressLine1": "Jubilee Hills",
+      "city": "Hyderabad",
+      "state": "Telangana",
+      "pincode": "500033",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-05",
+        "productName": "Heart Sword Pendant Necklace",
+        "productImage": "/images/products/heart-sword-pendant-necklace/hero.jpg",
+        "priceAtPurchase": 499,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 499,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 598,
+    "currency": "INR",
+    "status": "PAID",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_o0ltodgmfr",
+    "createdAt": "2026-11-07T03:03:14.820Z",
+    "updatedAt": "2026-11-07T03:03:14.836Z",
+    "paymentId": "pay_valid_1794020594832"
+  },
+  {
+    "id": "ELV-977193",
+    "customerEmail": "test@example.com",
+    "customerName": "Test Client",
+    "customerPhone": "+91 99999 22222",
+    "shippingAddress": {
+      "fullName": "Test Client",
+      "email": "test@example.com",
+      "phone": "+91 99999 22222",
+      "addressLine1": "Marine Drive",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400020",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-06",
+        "productName": "Golden Lantern Pearl Earrings",
+        "productImage": "/images/products/golden-lantern-pearl-earrings/hero.jpg",
+        "priceAtPurchase": 399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 498,
+    "currency": "INR",
+    "status": "PAYMENT_PENDING",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_2qhc8lvsz2",
+    "createdAt": "2026-11-07T03:03:14.801Z",
+    "updatedAt": "2026-11-07T03:03:14.801Z"
+  },
+  {
+    "id": "ELV-809672",
+    "customerEmail": "ananya@example.com",
+    "customerName": "Ananya Birla",
+    "customerPhone": "+91 99999 11111",
+    "shippingAddress": {
+      "fullName": "Ananya Birla",
+      "email": "ananya@example.com",
+      "phone": "+91 99999 11111",
+      "addressLine1": "Altamount Road",
+      "city": "Mumbai",
+      "state": "Maharashtra",
+      "pincode": "400026",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-01",
+        "productName": "Touch Distance Couple Bracelet",
+        "productImage": "/images/products/touch-distance-bracelet/hero.jpg",
+        "priceAtPurchase": 1399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1498,
+    "currency": "INR",
+    "status": "PAYMENT_PENDING",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_j12eex74ue",
+    "createdAt": "2026-11-07T03:03:14.789Z",
+    "updatedAt": "2026-11-07T03:03:14.789Z"
+  },
+  {
+    "id": "ELV-245065",
+    "customerEmail": "n70105453@gmail.com",
+    "customerName": "Npatel kumar",
+    "customerPhone": "9794852980",
+    "shippingAddress": {
+      "fullName": "Npatel kumar",
+      "email": "n70105453@gmail.com",
+      "phone": "9794852980",
+      "addressLine1": "Hettimpur road narkatiya bazar",
+      "addressLine2": "",
+      "city": "Kushinagar",
+      "state": "Uttar Pradesh",
+      "pincode": "274402",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-01",
+        "productName": "Touch Distance Couple Bracelet",
+        "productImage": "/images/products/touch-distance-bracelet/hero.jpg",
+        "priceAtPurchase": 1399,
+        "quantity": 1,
+        "selectedVariant": "Complete Matching Pair (Gold & Black)",
+        "selectedColour": "Gold"
+      }
+    ],
+    "subtotal": 1399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1498,
+    "currency": "INR",
+    "status": "PAID",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_vvdg1lgsfl",
+    "createdAt": "2026-11-07T02:45:33.012Z",
+    "updatedAt": "2026-11-07T02:47:37.107Z",
+    "upiScreenshot": "/images/uploads/1794019545489_syllabus.jpeg",
+    "upiUtr": "SCREENSHOT_ATTACHED",
+    "paymentSubmittedAt": "2026-11-07T02:45:45.505Z",
+    "verifiedBy": "admin@elvora.com",
+    "verifiedAt": "2026-11-07T02:47:37.105Z"
+  },
+  {
     "id": "ELV-639313",
     "customerEmail": "919820012345@customer.elvora.com",
     "customerName": "Aarav Sharma",
@@ -370,15 +673,17 @@
     "discount": 0,
     "totalAmount": 598,
     "currency": "INR",
-    "status": "PAYMENT_SUBMITTED",
+    "status": "PAID",
     "paymentMethod": "UPI_QR",
     "paymentGateway": "MANUAL_UPI",
     "razorpayOrderId": "order_skpy866zgk",
     "createdAt": "2026-11-07T02:32:20.728Z",
-    "updatedAt": "2026-11-07T02:33:15.972Z",
+    "updatedAt": "2026-11-07T02:47:47.499Z",
     "upiScreenshot": "/images/uploads/1794018762786_ChatGPT_Image_Nov_6__2026__04_08_19_PM.png",
     "upiUtr": "SCREENSHOT_ATTACHED",
-    "paymentSubmittedAt": "2026-11-07T02:33:15.969Z"
+    "paymentSubmittedAt": "2026-11-07T02:33:15.969Z",
+    "verifiedBy": "admin@elvora.com",
+    "verifiedAt": "2026-11-07T02:47:47.497Z"
   },
   {
     "id": "ELV-591304",

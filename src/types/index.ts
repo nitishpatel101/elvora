@@ -137,6 +137,13 @@ export interface Order {
 
 export interface StoreSettings {
   announcementText?: string;
+  announcementSubText?: string;
+  announcementVisible?: boolean;
+  heroHeading?: string;
+  heroSubheading?: string;
+  heroButtonText?: string;
+  heroLink?: string;
+  heroImage?: string;
   brandTagline?: string;
   supportEmail: string;
   supportPhone: string;

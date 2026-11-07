@@ -193,7 +193,14 @@ export async function getCategories(): Promise<Category[]> {
 
 export async function getStoreSettings(): Promise<StoreSettings> {
   const defaultSettings: StoreSettings = {
-    announcementText: 'DISCOVER THE ART OF GIFTING | ELEGANCE IN EVERY DETAIL',
+    announcementText: 'BLACK FRIDAY SALE • 30% OFF • USE CODE: ELVORA30',
+    announcementSubText: 'FREE EXPRESS SHIPPING ON ORDERS ₹99+',
+    announcementVisible: true,
+    heroHeading: '30% OFF',
+    heroSubheading: 'BLACK FRIDAY SALE',
+    heroButtonText: 'SHOP NOW',
+    heroLink: '/shop',
+    heroImage: '/images/hero/hero-couple-tight.png',
     brandTagline: 'Haute Joaillerie',
     supportEmail: 'concierge@elvora.com',
     supportPhone: '+91 98765 43210',
