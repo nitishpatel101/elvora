@@ -168,9 +168,21 @@ export default function AdminDashboardPage() {
 
   const fetchHeroSlides = async () => {
     try {
+      const local = localStorage.getItem('elvora_hero_slides');
+      if (local) {
+        const parsed = JSON.parse(local);
+        if (Array.isArray(parsed) && parsed.length > 0) setHeroSlides(parsed);
+      }
+    } catch {}
+    try {
       const res = await fetch(`/api/hero-slides?t=${Date.now()}`, { cache: 'no-store' });
       const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) setHeroSlides(data);
+      if (Array.isArray(data) && data.length > 0) {
+        setHeroSlides(data);
+        try {
+          localStorage.setItem('elvora_hero_slides', JSON.stringify(data));
+        } catch {}
+      }
     } catch {}
   };
 
@@ -178,6 +190,9 @@ export default function AdminDashboardPage() {
     const targetSlides = Array.isArray(slidesToSave) ? slidesToSave : heroSlides;
     setSavingHeroSlides(true);
     setHeroSlidesSaved(false);
+    try {
+      localStorage.setItem('elvora_hero_slides', JSON.stringify(targetSlides));
+    } catch {}
     try {
       const res = await fetch('/api/hero-slides', {
         method: 'POST',
@@ -216,6 +231,9 @@ export default function AdminDashboardPage() {
       if (res.ok && data.url) {
         const updated = heroSlides.map((s) => (s.id === slideId ? { ...s, image: data.url } : s));
         setHeroSlides(updated);
+        try {
+          localStorage.setItem('elvora_hero_slides', JSON.stringify(updated));
+        } catch {}
         // Immediately persist to server
         await handleSaveHeroSlides(updated);
       } else {
@@ -241,7 +259,9 @@ export default function AdminDashboardPage() {
     };
     const updated = [...heroSlides, newSlide];
     setHeroSlides(updated);
-    // Auto-persist immediately so user sees it right away
+    try {
+      localStorage.setItem('elvora_hero_slides', JSON.stringify(updated));
+    } catch {}
     await handleSaveHeroSlides(updated);
   };
 
@@ -252,6 +272,9 @@ export default function AdminDashboardPage() {
     }
     const updated = heroSlides.filter((s) => s.id !== slideId);
     setHeroSlides(updated);
+    try {
+      localStorage.setItem('elvora_hero_slides', JSON.stringify(updated));
+    } catch {}
     await handleSaveHeroSlides(updated);
   };
 
@@ -1548,9 +1571,11 @@ export default function AdminDashboardPage() {
                           <input
                             type="text"
                             value={slide.image || ''}
-                            onChange={(e) =>
-                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, image: e.target.value } : s)))
-                            }
+                            onChange={(e) => {
+                              const updated = heroSlides.map((s) => (s.id === slide.id ? { ...s, image: e.target.value } : s));
+                              setHeroSlides(updated);
+                              try { localStorage.setItem('elvora_hero_slides', JSON.stringify(updated)); } catch {}
+                            }}
                             placeholder="Image URL (e.g. /images/...)"
                             className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm font-mono text-[11px]"
                           />

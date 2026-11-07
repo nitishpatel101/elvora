@@ -17,17 +17,38 @@ interface HeroSlide {
   highlight: string;
 }
 
-export default function HeroSection() {
-  const [slides, setSlides] = useState<HeroSlide[]>(defaultSlides);
+interface HeroSectionProps {
+  initialSlides?: HeroSlide[];
+}
+
+export default function HeroSection({ initialSlides }: HeroSectionProps) {
+  const [slides, setSlides] = useState<HeroSlide[]>(
+    initialSlides && initialSlides.length > 0 ? initialSlides : defaultSlides
+  );
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Fetch updated slides from API dynamically with cache-busting
+  // Sync with localStorage (instant across browser tabs) and fetch updated slides from API
   useEffect(() => {
+    // 1. Instant check from localStorage
+    try {
+      const local = localStorage.getItem('elvora_hero_slides');
+      if (local) {
+        const parsed = JSON.parse(local);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setSlides(parsed);
+        }
+      }
+    } catch {}
+
+    // 2. Fresh fetch from server API
     fetch(`/api/hero-slides?t=${Date.now()}`, { cache: 'no-store' })
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
           setSlides(data);
+          try {
+            localStorage.setItem('elvora_hero_slides', JSON.stringify(data));
+          } catch {}
         }
       })
       .catch(() => {});

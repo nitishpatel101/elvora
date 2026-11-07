@@ -1,4 +1,4 @@
-import { getAllProducts } from '@/lib/db';
+import { getAllProducts, getHeroSlides } from '@/lib/db';
 import StoryCircles from '@/components/home/StoryCircles';
 import HeroSection from '@/components/home/HeroSection';
 import BestSellersSection from '@/components/home/BestSellersSection';
@@ -10,6 +10,7 @@ export const revalidate = 0; // Dynamic products from database
 
 export default async function HomePage() {
   const products = await getAllProducts(false);
+  const heroSlides = await getHeroSlides();
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
@@ -17,7 +18,7 @@ export default async function HomePage() {
       <StoryCircles />
 
       {/* 2. Hero Section: Memories That Glow Forever */}
-      <HeroSection />
+      <HeroSection initialSlides={heroSlides} />
 
       {/* 3. Best Sellers Carousel */}
       <BestSellersSection initialProducts={products} />

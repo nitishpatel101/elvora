@@ -32,19 +32,20 @@ const inMemoryStore = new Map<string, string>();
 
 export async function safeReadFile(primaryPath: string): Promise<string> {
   const filename = path.basename(primaryPath);
-  if (inMemoryStore.has(filename)) {
-    return inMemoryStore.get(filename)!;
-  }
 
-  // Try /tmp directory first (serverless runtime persistence)
+  // Always check /tmp directory first (serverless runtime persistence across calls)
   try {
     const tmpPath = path.join('/tmp', filename);
     const data = await fs.readFile(tmpPath, 'utf-8');
-    if (data) {
+    if (data && data.trim().length > 0) {
       inMemoryStore.set(filename, data);
       return data;
     }
-  } catch {}
+  } catch { }
+
+  if (inMemoryStore.has(filename)) {
+    return inMemoryStore.get(filename)!;
+  }
 
   const raw = await fs.readFile(primaryPath, 'utf-8');
   inMemoryStore.set(filename, raw);
@@ -55,17 +56,16 @@ export async function safeWriteFile(primaryPath: string, content: string): Promi
   const filename = path.basename(primaryPath);
   inMemoryStore.set(filename, content);
 
+  // Always write to /tmp for serverless runtime persistence
+  try {
+    const tmpPath = path.join('/tmp', filename);
+    await fs.writeFile(tmpPath, content, 'utf-8');
+  } catch {}
+
+  // Also write to primary path if filesystem is writable (local development)
   try {
     await fs.writeFile(primaryPath, content, 'utf-8');
-  } catch {
-    // If running in read-only serverless environment (e.g. Vercel)
-    try {
-      const tmpPath = path.join('/tmp', filename);
-      await fs.writeFile(tmpPath, content, 'utf-8');
-    } catch {
-      // Memory store is already updated as fallback
-    }
-  }
+  } catch {}
 }
 
 // --- PRODUCT REPOSITORY ---
