@@ -1,0 +1,38 @@
+[
+  {
+    "id": "occ-1",
+    "name": "Birthdays",
+    "emoji": "🎂",
+    "image": "/images/giftify/occasions/birthdays.jpg",
+    "href": "/shop?category=birthday-gifts"
+  },
+  {
+    "id": "occ-2",
+    "name": "Anniversaries",
+    "emoji": "🥂",
+    "image": "/images/giftify/occasions/anniversaries.jpg",
+    "href": "/shop?category=anniversary-gifts"
+  },
+  {
+    "id": "occ-3",
+    "name": "Weddings",
+    "emoji": "💍",
+    "image": "/images/giftify/occasions/weddings.jpg",
+    "href": "/shop?category=couple-gifts"
+  },
+  {
+    "id": "occ-4",
+    "name": "Valentine's Day",
+    "emoji": "💖",
+    "image": "/images/giftify/occasions/valentines.jpg",
+    "href": "/shop?category=couple-gifts"
+  },
+  {
+    "id": "occ-5",
+    "name": "Festive Gifting",
+    "emoji": "🪔",
+    "image": "/images/giftify/occasions/festive.jpg",
+    "href": "/shop?category=personalized-gifts"
+  }
+]
+

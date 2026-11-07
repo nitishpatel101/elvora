@@ -142,6 +142,141 @@ export default function AdminDashboardPage() {
     } catch {}
   };
 
+  // Hero Carousel Slides State & Management (Main Banner Slider)
+  const [heroSlides, setHeroSlides] = useState<any[]>([]);
+  const [savingHeroSlides, setSavingHeroSlides] = useState(false);
+  const [heroSlidesSaved, setHeroSlidesSaved] = useState(false);
+  const [uploadingSlideId, setUploadingSlideId] = useState<string | null>(null);
+
+  const fetchHeroSlides = async () => {
+    try {
+      const res = await fetch('/api/hero-slides');
+      const data = await res.json();
+      if (Array.isArray(data)) setHeroSlides(data);
+    } catch {}
+  };
+
+  const handleSaveHeroSlides = async () => {
+    setSavingHeroSlides(true);
+    setHeroSlidesSaved(false);
+    try {
+      const res = await fetch('/api/hero-slides', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(heroSlides),
+      });
+      if (res.ok) {
+        setHeroSlidesSaved(true);
+        setTimeout(() => setHeroSlidesSaved(false), 3000);
+      }
+    } finally {
+      setSavingHeroSlides(false);
+    }
+  };
+
+  const handleSlideImageUpload = async (slideId: string, file: File) => {
+    setUploadingSlideId(slideId);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+      if (res.ok && data.url) {
+        const updated = heroSlides.map((s) => (s.id === slideId ? { ...s, image: data.url } : s));
+        setHeroSlides(updated);
+        await fetch('/api/hero-slides', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated),
+        });
+        setHeroSlidesSaved(true);
+        setTimeout(() => setHeroSlidesSaved(false), 3000);
+      }
+    } finally {
+      setUploadingSlideId(null);
+    }
+  };
+
+  const handleAddSlide = () => {
+    const newSlide = {
+      id: `slide-${Date.now()}`,
+      title: 'New Featured Offer',
+      subtitle: 'Write an attractive description of this special gift collection.',
+      cta: 'Shop Now',
+      link: '/shop',
+      image: '/images/giftify/hero-banner.jpg',
+      tag: '✨ Special Edition',
+      highlight: 'Limited Time Exclusive',
+    };
+    setHeroSlides([...heroSlides, newSlide]);
+  };
+
+  const handleDeleteSlide = (slideId: string) => {
+    if (heroSlides.length <= 1) return;
+    setHeroSlides(heroSlides.filter((s) => s.id !== slideId));
+  };
+
+  // Occasions State & Management (3D Character Cards)
+  const [occasions, setOccasions] = useState<any[]>([]);
+  const [savingOccasions, setSavingOccasions] = useState(false);
+  const [occasionsSaved, setOccasionsSaved] = useState(false);
+  const [uploadingOccasionId, setUploadingOccasionId] = useState<string | null>(null);
+
+  const fetchOccasions = async () => {
+    try {
+      const res = await fetch('/api/occasions');
+      const data = await res.json();
+      if (Array.isArray(data)) setOccasions(data);
+    } catch {}
+  };
+
+  const handleSaveOccasions = async () => {
+    setSavingOccasions(true);
+    setOccasionsSaved(false);
+    try {
+      const res = await fetch('/api/occasions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(occasions),
+      });
+      if (res.ok) {
+        setOccasionsSaved(true);
+        setTimeout(() => setOccasionsSaved(false), 3000);
+      }
+    } finally {
+      setSavingOccasions(false);
+    }
+  };
+
+  const handleOccasionImageUpload = async (occId: string, file: File) => {
+    setUploadingOccasionId(occId);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+      if (res.ok && data.url) {
+        const updated = occasions.map((o) => (o.id === occId || o.name === occId ? { ...o, image: data.url } : o));
+        setOccasions(updated);
+        await fetch('/api/occasions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated),
+        });
+        setOccasionsSaved(true);
+        setTimeout(() => setOccasionsSaved(false), 3000);
+      }
+    } finally {
+      setUploadingOccasionId(null);
+    }
+  };
+
   useEffect(() => {
     if (!isAdminLoggedIn) {
       router.push('/admin/login');
@@ -151,6 +286,8 @@ export default function AdminDashboardPage() {
     fetchOrders();
     fetchSettings();
     fetchStories();
+    fetchHeroSlides();
+    fetchOccasions();
   }, [isAdminLoggedIn, router]);
 
   const handleSaveStories = async () => {
@@ -1088,138 +1225,246 @@ export default function AdminDashboardPage() {
               </div>
             </div>
 
-            {/* Homepage Hero Banner Customizer */}
+            {/* Homepage Hero Carousel Slides Manager (Main Banner Slider) */}
             <div className="bg-white border border-[#E7E1D8] p-6 sm:p-8 space-y-6 shadow-xs">
-              <div className="flex items-center gap-3 pb-4 border-b border-[#E7E1D8]">
-                <ImageIcon className="w-5 h-5 text-[#B89A69]" />
-                <div>
-                  <h3 className="font-serif text-xl text-[#181818] font-light">
-                    Homepage Editorial Hero Banner
-                  </h3>
-                  <p className="text-xs text-[#708579]">
-                    Change the main banner image, headline, discount offer, and button link on the homepage.
-                  </p>
-                </div>
-              </div>
-
-              {/* Hero Banner Preview */}
-              <div>
-                <span className="text-[10px] uppercase tracking-wider text-[#708579] font-medium block mb-2">
-                  Hero Preview:
-                </span>
-                <div className="relative w-full aspect-[2.6/1] max-h-72 bg-[#181818] overflow-hidden border border-[#181818] shadow-sm">
-                  <Image
-                    src={settings.heroImage || '/images/hero/hero-couple-tight.png'}
-                    alt="Hero Banner"
-                    fill
-                    unoptimized
-                    className="object-cover object-[center_35%]"
-                  />
-                  <div className="absolute inset-0 bg-black/20" />
-                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-                    <span className="text-[11px] uppercase tracking-[0.3em] font-medium text-white/95 mb-1 drop-shadow-md">
-                      {settings.heroSubheading || 'BLACK FRIDAY SALE'}
-                    </span>
-                    <h2 className="font-sans text-2xl sm:text-4xl font-light text-white tracking-[0.06em] mb-2 drop-shadow-lg">
-                      {settings.heroHeading || '30% OFF'}
-                    </h2>
-                    <span className="text-[11px] uppercase tracking-[0.25em] font-semibold text-white pb-0.5 border-b-2 border-white">
-                      {settings.heroButtonText || 'SHOP NOW'}
-                    </span>
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E7E1D8]">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-[#FAF5E6] border border-[#F5C400]/40 flex items-center justify-center text-[#D9A300]">
+                    <Sparkles className="w-5 h-5 text-[#D9A300]" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-xl text-[#181818] font-light">
+                      Homepage Hero Carousel Slides (Main Banner Slider)
+                    </h3>
+                    <p className="text-xs text-[#708579]">
+                      Edit all sliding hero banners on the homepage (Heat Activated Lockets, Couple Bracelets, Crystal Cubes, etc.). Upload photos, change headlines, badges, buttons, and links.
+                    </p>
                   </div>
                 </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#181818] font-medium mb-1.5">
-                    Hero Subtitle (Small Top Line)
-                  </label>
-                  <input
-                    type="text"
-                    value={settings.heroSubheading || ''}
-                    onChange={(e) => setSettings({ ...settings, heroSubheading: e.target.value })}
-                    placeholder="e.g. BLACK FRIDAY SALE or FESTIVE COLLECTION"
-                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#181818] font-medium mb-1.5">
-                    Hero Main Heading / Offer
-                  </label>
-                  <input
-                    type="text"
-                    value={settings.heroHeading || ''}
-                    onChange={(e) => setSettings({ ...settings, heroHeading: e.target.value })}
-                    placeholder="e.g. 30% OFF or THE TOUCH OF LOVE"
-                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#181818] font-medium mb-1.5">
-                    Action Button Label
-                  </label>
-                  <input
-                    type="text"
-                    value={settings.heroButtonText || ''}
-                    onChange={(e) => setSettings({ ...settings, heroButtonText: e.target.value })}
-                    placeholder="e.g. SHOP NOW"
-                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#181818] font-medium mb-1.5">
-                    Action Button Destination URL
-                  </label>
-                  <input
-                    type="text"
-                    value={settings.heroLink || ''}
-                    onChange={(e) => setSettings({ ...settings, heroLink: e.target.value })}
-                    placeholder="e.g. /shop or /shop/couple-bracelets"
-                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
-                  />
-                </div>
-              </div>
-
-              {/* Replace Hero Image */}
-              <div className="pt-2">
-                <label className="block text-xs uppercase tracking-wider text-[#181818] font-medium mb-1.5">
-                  Replace Hero Banner Image
-                </label>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="file"
-                    accept="image/*"
-                    id="replace-hero-file"
-                    onChange={handleHeroUpload}
-                    className="hidden"
-                  />
-                  <label
-                    htmlFor="replace-hero-file"
-                    className="cursor-pointer inline-flex items-center gap-1.5 px-4 py-2 bg-[#24332C] text-white text-xs uppercase tracking-wider hover:bg-[#19241F] transition-colors"
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handleAddSlide}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-md transition-colors border border-stone-300"
                   >
-                    <Upload className="w-3.5 h-3.5" />
-                    <span>{uploadingHero ? 'Uploading Banner...' : 'Upload New Hero Image'}</span>
-                  </label>
-                  <span className="text-xs text-[#708579]">
-                    Recommended size: 2400x900px or wide cinematic crop
-                  </span>
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>+ Add New Slide</span>
+                  </button>
+                  {heroSlidesSaved && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Slides Saved Live!
+                    </span>
+                  )}
                 </div>
               </div>
 
-              {/* Save Button */}
-              <div className="pt-4 border-t border-[#E7E1D8]">
+              {/* List of Slides */}
+              <div className="space-y-6">
+                {heroSlides.map((slide, idx) => (
+                  <div
+                    key={slide.id || idx}
+                    className="border border-[#E7E1D8] rounded-xl p-5 bg-[#FAF8F5]/60 hover:border-[#24332C]/40 transition-colors space-y-4"
+                  >
+                    {/* Slide Header: Index, Tag & Delete */}
+                    <div className="flex items-center justify-between pb-3 border-b border-[#E7E1D8]">
+                      <div className="flex items-center gap-2">
+                        <span className="w-6 h-6 rounded-full bg-[#24332C] text-white text-xs font-bold flex items-center justify-center">
+                          {idx + 1}
+                        </span>
+                        <span className="text-xs font-bold text-stone-900">
+                          Slide #{idx + 1}: {slide.title || 'Untitled Banner'}
+                        </span>
+                      </div>
+                      {heroSlides.length > 1 && (
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteSlide(slide.id)}
+                          className="text-stone-400 hover:text-red-600 transition-colors p-1"
+                          title="Delete this slide"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      )}
+                    </div>
+
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                      {/* Left: Live Visual Preview & Image Upload */}
+                      <div className="lg:col-span-5 space-y-3">
+                        <span className="text-[10px] uppercase tracking-wider text-[#708579] font-medium block">
+                          Slide Preview:
+                        </span>
+                        <div className="relative w-full aspect-[2/1] rounded-xl overflow-hidden bg-stone-950 border border-stone-800 shadow-sm">
+                          <Image
+                            src={slide.image || '/images/giftify/hero-banner.jpg'}
+                            alt={slide.title || 'Slide'}
+                            fill
+                            className="object-cover"
+                            unoptimized
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
+                          <div className="absolute inset-0 p-4 flex flex-col justify-center text-white">
+                            <span className="bg-[#F5C400] text-black text-[9px] font-extrabold px-2 py-0.5 rounded-full w-max mb-1">
+                              {slide.tag || 'Trending'}
+                            </span>
+                            <h4 className="font-sans font-extrabold text-sm line-clamp-1 drop-shadow-sm">
+                              {slide.title || 'Slide Title'}
+                            </h4>
+                            <p className="text-[10px] text-stone-200 line-clamp-2 mt-0.5">
+                              {slide.subtitle || 'Slide subtitle description'}
+                            </p>
+                            <span className="mt-2 bg-[#F5C400] text-black text-[9px] font-bold px-2.5 py-1 rounded w-max">
+                              {slide.cta || 'Shop Now'} &rarr;
+                            </span>
+                          </div>
+                          {uploadingSlideId === slide.id && (
+                            <div className="absolute inset-0 bg-black/70 flex items-center justify-center text-white text-xs font-bold">
+                              Uploading New Image...
+                            </div>
+                          )}
+                        </div>
+
+                        {/* Replace Image Button */}
+                        <div className="flex items-center gap-3">
+                          <label className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#24332C] hover:bg-[#19241F] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors shadow-xs">
+                            <Upload className="w-3.5 h-3.5" />
+                            <span>{uploadingSlideId === slide.id ? 'Uploading...' : 'Upload Slide Photo'}</span>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              className="hidden"
+                              onChange={(e) => e.target.files?.[0] && handleSlideImageUpload(slide.id, e.target.files[0])}
+                            />
+                          </label>
+                          <span className="text-[11px] text-[#708579]">Or enter direct URL below</span>
+                        </div>
+
+                        <div>
+                          <input
+                            type="text"
+                            value={slide.image || ''}
+                            onChange={(e) =>
+                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, image: e.target.value } : s)))
+                            }
+                            placeholder="Image URL (e.g. /images/...)"
+                            className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm font-mono text-[11px]"
+                          />
+                        </div>
+                      </div>
+
+                      {/* Right: Slide Text Fields */}
+                      <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div className="sm:col-span-2">
+                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
+                            Main Heading / Title
+                          </label>
+                          <input
+                            type="text"
+                            value={slide.title || ''}
+                            onChange={(e) =>
+                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, title: e.target.value } : s)))
+                            }
+                            placeholder="e.g. Heat Activated Magic Photo Lockets"
+                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] font-bold focus:outline-none focus:border-[#24332C] rounded-sm"
+                          />
+                        </div>
+
+                        <div className="sm:col-span-2">
+                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
+                            Subtitle / Description
+                          </label>
+                          <textarea
+                            rows={2}
+                            value={slide.subtitle || ''}
+                            onChange={(e) =>
+                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, subtitle: e.target.value } : s)))
+                            }
+                            placeholder="e.g. A discreet elegant pendant that reveals your secret love photo only when touched by body heat."
+                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm resize-none"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
+                            Badge Tag (Pill on Top)
+                          </label>
+                          <input
+                            type="text"
+                            value={slide.tag || ''}
+                            onChange={(e) =>
+                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, tag: e.target.value } : s)))
+                            }
+                            placeholder="e.g. 🔥 Secret Surprise"
+                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
+                            Highlight Text
+                          </label>
+                          <input
+                            type="text"
+                            value={slide.highlight || ''}
+                            onChange={(e) =>
+                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, highlight: e.target.value } : s)))
+                            }
+                            placeholder="e.g. 100% Water Resistant & Anti-Tarnish"
+                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
+                            Button Label (CTA)
+                          </label>
+                          <input
+                            type="text"
+                            value={slide.cta || ''}
+                            onChange={(e) =>
+                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, cta: e.target.value } : s)))
+                            }
+                            placeholder="e.g. Order Custom Locket"
+                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] font-semibold focus:outline-none focus:border-[#24332C] rounded-sm"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
+                            Button Link (Destination URL)
+                          </label>
+                          <input
+                            type="text"
+                            value={slide.link || ''}
+                            onChange={(e) =>
+                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, link: e.target.value } : s)))
+                            }
+                            placeholder="e.g. /product/heat-activated-magic-photo-necklace"
+                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Save Hero Slides Button */}
+              <div className="pt-4 border-t border-[#E7E1D8] flex items-center justify-between">
                 <button
                   type="button"
-                  onClick={handleSaveSettings}
-                  disabled={settingsSaving}
-                  className="bg-[#24332C] text-white px-6 py-3 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 cursor-pointer shadow-xs"
+                  onClick={handleSaveHeroSlides}
+                  disabled={savingHeroSlides}
+                  className="bg-[#24332C] text-white px-6 py-3 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 cursor-pointer shadow-xs inline-flex items-center gap-2"
                 >
-                  {settingsSaving ? 'Saving Changes...' : 'Save & Publish Banners'}
+                  <Sparkles className="w-3.5 h-3.5 text-[#F5C400]" />
+                  <span>{savingHeroSlides ? 'Saving Slides...' : 'Save & Publish Hero Banner Slides'}</span>
                 </button>
+                {heroSlidesSaved && (
+                  <span className="text-xs font-semibold text-emerald-700">
+                    Hero carousel updated successfully and live on homepage!
+                  </span>
+                )}
               </div>
             </div>
 
@@ -1345,6 +1590,145 @@ export default function AdminDashboardPage() {
                 {storiesSaved && (
                   <span className="text-xs font-semibold text-emerald-700">
                     All changes saved and live on homepage!
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* Gifts by Occasion Manager (3D Character Cards) */}
+            <div className="bg-white border border-[#E7E1D8] p-6 sm:p-8 space-y-6 shadow-xs">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E7E1D8]">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-[#FAF5E6] border border-[#F5C400]/40 flex items-center justify-center text-[#D9A300]">
+                    <Sparkles className="w-5 h-5 text-[#D9A300]" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-xl text-[#181818] font-light">
+                      Homepage Gifts by Occasion (3D Character Cards)
+                    </h3>
+                    <p className="text-xs text-[#708579]">
+                      Edit 3D character occasion cards (Birthdays, Anniversaries, Weddings, Valentine&apos;s, Festive). Upload photos, change names and destination links.
+                    </p>
+                  </div>
+                </div>
+                {occasionsSaved && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Occasions Saved Live!
+                  </span>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+                {occasions.map((occ, idx) => (
+                  <div
+                    key={occ.id || occ.name || idx}
+                    className="p-4 border border-[#E7E1D8] rounded-xl flex flex-col items-center space-y-3 bg-[#FAF8F5]/80 hover:border-[#24332C]/40 transition-colors"
+                  >
+                    {/* 3D Occasion Card Preview */}
+                    <div className="relative w-full aspect-[1.15/1] rounded-xl overflow-hidden border border-stone-200 bg-[#F5C400] shadow-xs">
+                      <Image
+                        src={occ.image || '/images/giftify/occasions/birthdays.jpg'}
+                        alt={occ.name || 'Occasion'}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      {uploadingOccasionId === (occ.id || occ.name) && (
+                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white text-[10px] font-bold">
+                          Uploading...
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Upload Image Button */}
+                    <label className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#24332C] hover:bg-[#19241F] text-white text-[10px] font-bold uppercase tracking-wider rounded-md transition-colors shadow-xs">
+                      <Upload className="w-3 h-3" />
+                      <span>{uploadingOccasionId === (occ.id || occ.name) ? 'Uploading...' : 'Change Photo'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) =>
+                          e.target.files?.[0] &&
+                          handleOccasionImageUpload(occ.id || occ.name, e.target.files[0])
+                        }
+                      />
+                    </label>
+
+                    {/* Inputs */}
+                    <div className="w-full space-y-2 pt-1 text-left">
+                      <div>
+                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
+                          Occasion Name
+                        </label>
+                        <input
+                          type="text"
+                          value={occ.name || ''}
+                          onChange={(e) =>
+                            setOccasions(
+                              occasions.map((o) =>
+                                (o.id === occ.id || o.name === occ.name) ? { ...o, name: e.target.value } : o
+                              )
+                            )
+                          }
+                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] font-bold focus:outline-none focus:border-[#24332C] rounded-sm"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
+                          Emoji Icon
+                        </label>
+                        <input
+                          type="text"
+                          value={occ.emoji || ''}
+                          onChange={(e) =>
+                            setOccasions(
+                              occasions.map((o) =>
+                                (o.id === occ.id || o.name === occ.name) ? { ...o, emoji: e.target.value } : o
+                              )
+                            )
+                          }
+                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-center focus:outline-none focus:border-[#24332C] rounded-sm"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
+                          Destination Link
+                        </label>
+                        <input
+                          type="text"
+                          value={occ.href || ''}
+                          onChange={(e) =>
+                            setOccasions(
+                              occasions.map((o) =>
+                                (o.id === occ.id || o.name === occ.name) ? { ...o, href: e.target.value } : o
+                              )
+                            )
+                          }
+                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Save Occasions Button */}
+              <div className="pt-4 border-t border-[#E7E1D8] flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={handleSaveOccasions}
+                  disabled={savingOccasions}
+                  className="bg-[#24332C] text-white px-6 py-3 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 cursor-pointer shadow-xs inline-flex items-center gap-2"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#F5C400]" />
+                  <span>{savingOccasions ? 'Saving Occasions...' : 'Save & Update Occasion Cards'}</span>
+                </button>
+                {occasionsSaved && (
+                  <span className="text-xs font-semibold text-emerald-700">
+                    Occasion cards saved and live on homepage!
                   </span>
                 )}
               </div>

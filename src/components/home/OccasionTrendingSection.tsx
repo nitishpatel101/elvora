@@ -1,42 +1,18 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Sparkles, ArrowRight } from 'lucide-react';
+import defaultOccasions from '../../../data/occasions.json';
 
-const OCCASIONS = [
-  {
-    name: 'Birthdays',
-    emoji: '🎂',
-    image: '/images/giftify/occasions/birthdays.jpg',
-    href: '/shop?category=birthday-gifts',
-  },
-  {
-    name: 'Anniversaries',
-    emoji: '🥂',
-    image: '/images/giftify/occasions/anniversaries.jpg',
-    href: '/shop?category=anniversary-gifts',
-  },
-  {
-    name: 'Weddings',
-    emoji: '💍',
-    image: '/images/giftify/occasions/weddings.jpg',
-    href: '/shop?category=couple-gifts',
-  },
-  {
-    name: "Valentine's Day",
-    emoji: '💖',
-    image: '/images/giftify/occasions/valentines.jpg',
-    href: '/shop?category=couple-gifts',
-  },
-  {
-    name: 'Festive Gifting',
-    emoji: '🪔',
-    image: '/images/giftify/occasions/festive.jpg',
-    href: '/shop?category=personalized-gifts',
-  },
-];
+interface OccasionItem {
+  id?: string;
+  name: string;
+  emoji: string;
+  image: string;
+  href: string;
+}
 
 const OCCASION_PRODUCTS = [
   {
@@ -74,6 +50,19 @@ const OCCASION_PRODUCTS = [
 ];
 
 export default function OccasionTrendingSection() {
+  const [occasions, setOccasions] = useState<OccasionItem[]>(defaultOccasions);
+
+  useEffect(() => {
+    fetch('/api/occasions')
+      .then((r) => r.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setOccasions(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
+
   return (
     <section className="bg-white py-14 sm:py-20 border-b border-stone-200">
       <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -89,7 +78,7 @@ export default function OccasionTrendingSection() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-6 max-w-6xl mx-auto">
-            {OCCASIONS.map((occ) => (
+            {occasions.map((occ) => (
               <Link
                 key={occ.name}
                 href={occ.href}
