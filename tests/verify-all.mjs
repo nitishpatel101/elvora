@@ -442,14 +442,13 @@ async function runTests() {
     assert.strictEqual(order.status, 'PAYMENT_PENDING', 'Initial order status must be PAYMENT_PENDING');
   });
 
-  // TEST 21: Customer submits UTR -> status becomes PAYMENT_SUBMITTED
-  await test('21. Customer submits UTR and screenshot -> status moves to PAYMENT_SUBMITTED', async () => {
+  // TEST 21: Customer submits screenshot -> status becomes PAYMENT_SUBMITTED
+  await test('21. Customer submits payment screenshot -> status moves to PAYMENT_SUBMITTED', async () => {
     assert(upiOrderId);
     const res = await fetch(`${BASE}/api/orders/${upiOrderId}/submit-payment`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        utr: '439018274910',
         screenshotUrl: '/images/uploads/test_receipt.png',
       }),
     });
@@ -457,21 +456,21 @@ async function runTests() {
     assert.strictEqual(res.status, 200);
     const data = await res.json();
     assert.strictEqual(data.status, 'PAYMENT_SUBMITTED');
-    assert.strictEqual(data.upiUtr, '439018274910');
+    assert.strictEqual(data.upiScreenshot, '/images/uploads/test_receipt.png');
 
     // Verify in repository
     const getRes = await fetch(`${BASE}/api/orders/${upiOrderId}`);
     const order = await getRes.json();
     assert.strictEqual(order.status, 'PAYMENT_SUBMITTED');
-    assert.strictEqual(order.upiUtr, '439018274910');
+    assert.strictEqual(order.upiScreenshot, '/images/uploads/test_receipt.png');
   });
 
-  // TEST 22: Reject invalid/empty UTR submission
-  await test('22. Customer submission with missing/invalid UTR is rejected', async () => {
+  // TEST 22: Reject submission with missing screenshot
+  await test('22. Customer submission with missing screenshot is rejected', async () => {
     const res = await fetch(`${BASE}/api/orders/${upiOrderId}/submit-payment`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ utr: '   ' }),
+      body: JSON.stringify({}),
     });
     assert.strictEqual(res.status, 400);
     const data = await res.json();

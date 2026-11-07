@@ -9,11 +9,8 @@ import { useCurrency } from '@/context/CurrencyContext';
 import { useAuth } from '@/context/AuthContext';
 import {
   Lock,
-  ShieldCheck,
-  Smartphone,
   AlertCircle,
   Loader2,
-  CheckCircle2,
 } from 'lucide-react';
 
 export default function CheckoutPage() {
@@ -34,7 +31,6 @@ export default function CheckoutPage() {
     country: 'India',
   });
 
-  const [selectedMethod, setSelectedMethod] = useState<'UPI' | 'CARD' | 'NETBANKING'>('UPI');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -145,7 +141,7 @@ export default function CheckoutPage() {
               {/* Delivery Details */}
               <div className="bg-[#FFFFFF] border border-[#E8DCCD] p-6 space-y-4 shadow-2xs">
                 <h2 className="font-serif text-xl text-[#111111] font-light pb-3 border-b border-[#E8DCCD]">
-                  1. Delivery Destination
+                  Delivery Destination
                 </h2>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -287,62 +283,6 @@ export default function CheckoutPage() {
                       <option value="Australia">Australia ($15 DHL Express)</option>
                     </select>
                   </div>
-                </div>
-              </div>
-
-              {/* Payment Methods */}
-              <div className="bg-[#FFFFFF] border border-[#E8DCCD] p-6 space-y-4 shadow-2xs">
-                <div className="flex items-center justify-between pb-3 border-b border-[#E8DCCD]">
-                  <h2 className="font-serif text-xl text-[#111111] font-light">
-                    2. Payment Method
-                  </h2>
-                  <div className="flex items-center gap-1.5 text-[11px] text-[#B69A65]">
-                    <ShieldCheck className="w-4 h-4" />
-                    <span>256-Bit SSL Encrypted</span>
-                  </div>
-                </div>
-
-                {/* COD Strictly Prohibited Notice Banner */}
-                <div className="bg-[#19241F] text-[#FAF8F5] p-4 text-xs space-y-1">
-                  <div className="flex items-center gap-2 font-medium text-[#D5E0D9]">
-                    <Lock className="w-4 h-4 text-[#A3B2A9]" />
-                    <span>STRICT POLICY: ONLINE PAYMENTS ONLY</span>
-                  </div>
-                  <p className="text-[#A3B2A9] text-[11px] leading-relaxed font-light">
-                    To maintain strict chain-of-custody for fine jewellery and guarantee tamper-evident delivery, Cash on Delivery (COD) is strictly prohibited. Orders are dispatched upon electronic confirmation.
-                  </p>
-                </div>
-
-                <div className="space-y-3 pt-2">
-                  <label
-                    onClick={() => setSelectedMethod('UPI')}
-                    className="block p-4 border cursor-pointer border-[#24332C] bg-[#EEF3F0] transition-all"
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Smartphone className="w-5 h-5 text-[#24332C]" />
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <span className="text-xs uppercase tracking-wider font-semibold text-[#181818]">
-                              Store Owner UPI QR Code
-                            </span>
-                            <span className="text-[9px] bg-[#24332C] text-white px-2 py-0.5 uppercase tracking-wider font-medium">
-                              Direct Bank Transfer
-                            </span>
-                          </div>
-                          <span className="text-[11px] text-[#5C5852] font-light mt-0.5 block">
-                            Scan &amp; pay via Google Pay, PhonePe, Paytm, BHIM, CRED or any banking app on the next screen.
-                          </span>
-                        </div>
-                      </div>
-                      <input
-                        type="radio"
-                        checked={selectedMethod === 'UPI'}
-                        onChange={() => setSelectedMethod('UPI')}
-                        className="accent-[#24332C]"
-                      />
-                    </div>
-                  </label>
                 </div>
               </div>
             </div>

@@ -1,18 +1,23 @@
 'use client';
 
-import React, { useEffect, useState, useCallback, use } from 'react';
+import React, { useEffect, useState, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  Copy,
-  Check,
+  QrCode,
   ShieldCheck,
   Clock,
   CheckCircle2,
   XCircle,
   Upload,
   RefreshCw,
+  ExternalLink,
+  ArrowRight,
   AlertCircle,
+  Camera,
+  Check,
+  HelpCircle,
+  Smartphone,
 } from 'lucide-react';
 import { Order, StoreSettings } from '@/types';
 
@@ -29,17 +34,15 @@ export default function UPIPaymentScreen({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // Submission Form State
-  const [utr, setUtr] = useState('');
+  // Screenshot Upload & Form State
   const [screenshotUrl, setScreenshotUrl] = useState('');
   const [uploadingImage, setUploadingImage] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-  const [copied, setCopied] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
   // Fetch Order & Settings
-  const fetchData = useCallback(async (silent = false) => {
+  const fetchData = async (silent = false) => {
     if (!silent) setLoading(true);
     try {
       const [orderRes, settingsRes] = await Promise.all([
@@ -64,13 +67,13 @@ export default function UPIPaymentScreen({
     } finally {
       if (!silent) setLoading(false);
     }
-  }, [orderId]);
+  };
 
   useEffect(() => {
     fetchData();
-  }, [fetchData]);
+  }, [orderId]);
 
-  // Auto-poll status when payment has been submitted to detect admin verification in real-time
+  // Auto-poll status when payment screenshot is submitted to detect admin verification in real-time
   useEffect(() => {
     if (order?.status !== 'PAYMENT_SUBMITTED') return;
 
@@ -79,21 +82,14 @@ export default function UPIPaymentScreen({
     }, 4000);
 
     return () => clearInterval(interval);
-  }, [order?.status, fetchData]);
-
-  const handleCopyUpiId = () => {
-    const upi = settings?.upiId || 'elvora@upi';
-    navigator.clipboard.writeText(upi);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
+  }, [order?.status]);
 
   const handleScreenshotUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
 
     if (!file.type.startsWith('image/')) {
-      setSubmitError('Please upload an image file (JPEG, PNG, WebP).');
+      setSubmitError('Please select a valid image file (JPEG, PNG, WebP).');
       return;
     }
 
@@ -125,8 +121,8 @@ export default function UPIPaymentScreen({
 
   const handleSubmitPayment = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!utr.trim()) {
-      setSubmitError('Please enter the 12-digit UPI transaction reference (UTR) number.');
+    if (!screenshotUrl) {
+      setSubmitError('Please select and upload your payment screenshot first.');
       return;
     }
 
@@ -138,19 +134,18 @@ export default function UPIPaymentScreen({
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          utr: utr.trim(),
-          screenshotUrl: screenshotUrl || undefined,
+          screenshotUrl,
         }),
       });
 
       const data = await res.json();
       if (!res.ok) {
-        throw new Error(data.error || 'Failed to submit payment details');
+        throw new Error(data.error || 'Failed to submit payment screenshot');
       }
 
       await fetchData(true);
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Error submitting payment';
+      const msg = err instanceof Error ? err.message : 'Error submitting screenshot';
       setSubmitError(msg);
     } finally {
       setSubmitting(false);
@@ -162,7 +157,7 @@ export default function UPIPaymentScreen({
       <div className="min-h-screen bg-[#FAF8F5] py-20 flex items-center justify-center">
         <div className="text-center space-y-3">
           <div className="w-10 h-10 border-2 border-[#24332C] border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs tracking-widest uppercase text-[#5C5852]">Loading Order Payment Screen...</p>
+          <p className="text-xs tracking-widest uppercase text-[#5C5852]">Loading Payment Screen...</p>
         </div>
       </div>
     );
@@ -189,26 +184,25 @@ export default function UPIPaymentScreen({
   const isConfirmed = order.status === 'PAID' || order.status === 'CONFIRMED';
   const isSubmitted = order.status === 'PAYMENT_SUBMITTED';
   const isRejected = order.status === 'PAYMENT_REJECTED';
+  const isPending = order.status === 'PAYMENT_PENDING';
 
-  const upiId = settings?.upiId || 'elvora@upi';
-  const payeeName = settings?.payeeName || 'ELVORA Luxury Jewels';
   const qrImage = settings?.upiQrImage || '/images/qr/upi-qr.jpg';
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] py-10 lg:py-16">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        {/* Top Header Ribbon */}
+        {/* Header Ribbon */}
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EEF3F0] border border-[#D5E0D9] text-[10px] tracking-[0.24em] uppercase text-[#24332C] font-medium">
-            <span>ELVORA MANUAL UPI SETTLEMENT</span>
+            <span>ELVORA SECURE UPI PAYMENT</span>
           </div>
 
           <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light">
             {isConfirmed
               ? 'Order Confirmed & Verified'
               : isSubmitted
-              ? 'Payment Verification in Progress'
-              : 'Complete Your UPI Payment'}
+              ? 'Payment Screenshot Submitted'
+              : 'Scan QR Code & Pay'}
           </h1>
 
           <div className="flex items-center justify-center gap-3 text-xs text-[#5C5852] pt-1">
@@ -220,16 +214,16 @@ export default function UPIPaymentScreen({
 
         {/* STATUS BANNER */}
         {isConfirmed ? (
-          <div className="bg-[#EEF3F0] border border-[#D5E0D9] p-6 text-center space-y-3">
+          <div className="bg-[#EEF3F0] border border-[#D5E0D9] p-6 text-center space-y-3 shadow-xs">
             <div className="w-12 h-12 bg-[#24332C] text-white rounded-full flex items-center justify-center mx-auto">
               <CheckCircle2 className="w-6 h-6" />
             </div>
-            <h2 className="font-serif text-xl text-[#181818]">Payment Verified by Boutique Concierge</h2>
+            <h2 className="font-serif text-xl text-[#181818]">Payment Verified &bull; Order Confirmed!</h2>
             <p className="text-xs text-[#5C5852] max-w-lg mx-auto leading-relaxed">
-              Your payment has been reconciled with our receiving bank account and your order is officially confirmed. Our master artisans are now preparing your pieces for express dispatch.
+              Your payment receipt has been verified with our receiving bank account. Our artisans are now preparing your pieces for insured express dispatch.
             </p>
             {order.verifiedAt && (
-              <span className="text-[10px] uppercase tracking-wider text-[#708579] block">
+              <span className="text-[10px] uppercase tracking-wider text-[#708579] block font-mono">
                 Verified on {new Date(order.verifiedAt).toLocaleString()}
               </span>
             )}
@@ -249,22 +243,39 @@ export default function UPIPaymentScreen({
             </div>
           </div>
         ) : isSubmitted ? (
-          <div className="bg-[#FFFBF0] border border-[#F0E6D2] p-6 text-center space-y-3">
+          <div className="bg-[#FFFBF0] border border-[#F0E6D2] p-6 text-center space-y-3 shadow-xs">
             <div className="w-12 h-12 bg-[#B69A65] text-white rounded-full flex items-center justify-center mx-auto animate-pulse">
               <Clock className="w-6 h-6" />
             </div>
-            <h2 className="font-serif text-xl text-[#181818]">Payment Submitted &bull; Awaiting Bank Verification</h2>
+            <h2 className="font-serif text-xl text-[#181818]">Payment Screenshot Submitted</h2>
             <p className="text-xs text-[#5C5852] max-w-lg mx-auto leading-relaxed">
-              We have received your transaction reference <strong className="font-mono text-[#181818]">{order.upiUtr}</strong>. The store owner will verify the incoming credit directly in our bank account before confirming.
+              We have received your payment screenshot. The boutique owner is verifying the transfer directly in our receiving bank account. This page will update automatically once confirmed!
             </p>
-            <div className="flex items-center justify-center gap-2 pt-2">
+
+            {order.upiScreenshot && (
+              <div className="pt-2">
+                <span className="text-[10px] uppercase tracking-wider text-[#708579] block mb-1">
+                  Submitted Receipt:
+                </span>
+                <div className="relative w-28 h-28 mx-auto border border-[#EAE5DE] bg-white overflow-hidden shadow-2xs">
+                  <Image
+                    src={order.upiScreenshot}
+                    alt="Submitted Receipt"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            )}
+
+            <div className="flex items-center justify-center gap-2 pt-3">
               <button
                 onClick={async () => {
                   setIsRefreshing(true);
                   await fetchData(true);
                   setTimeout(() => setIsRefreshing(false), 800);
                 }}
-                className="inline-flex items-center gap-1.5 text-xs text-[#24332C] font-semibold border border-[#D5E0D9] bg-white px-4 py-2 hover:bg-[#EEF3F0] transition-colors"
+                className="inline-flex items-center gap-1.5 text-xs text-[#24332C] font-semibold border border-[#D5E0D9] bg-white px-4 py-2 hover:bg-[#EEF3F0] transition-colors shadow-2xs"
               >
                 <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
                 <span>Check Verification Status</span>
@@ -276,35 +287,36 @@ export default function UPIPaymentScreen({
             <div className="w-12 h-12 bg-red-700 text-white rounded-full flex items-center justify-center mx-auto">
               <AlertCircle className="w-6 h-6" />
             </div>
-            <h2 className="font-serif text-xl text-red-900">Payment Verification Unsuccessful</h2>
+            <h2 className="font-serif text-xl text-red-900">Payment Verification Issue</h2>
             <p className="text-xs text-red-700 max-w-lg mx-auto leading-relaxed">
-              Reason: {order.rejectionReason || 'The submitted UTR number could not be matched with incoming bank credits.'}
+              {order.rejectionReason || 'The payment screenshot could not be verified with our bank credit.'}
             </p>
             <p className="text-[11px] text-[#5C5852]">
-              Please check your banking app, ensure the transfer was completed to the correct UPI ID, and submit the valid 12-digit UTR below.
+              Please ensure you made the transfer using the QR code below, and upload the clear payment screenshot.
             </p>
           </div>
         ) : null}
 
-        {/* MAIN PAYMENT GRID */}
+        {/* MAIN PAYMENT GRID (ONLY IF NOT CONFIRMED) */}
         {!isConfirmed && (
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-            {/* Left Column: QR Code & UPI Credentials */}
-            <div className="md:col-span-6 bg-white border border-[#EAE5DE] p-6 sm:p-8 space-y-6 shadow-xs">
-              <div className="text-center pb-4 border-b border-[#EAE5DE]">
+            {/* Left Column: ONLY THE QR CODE */}
+            <div className="md:col-span-6 bg-white border border-[#EAE5DE] p-6 sm:p-8 space-y-6 shadow-xs text-center">
+              {/* Exact Amount Header */}
+              <div className="pb-4 border-b border-[#EAE5DE]">
                 <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
-                  EXACT ORDER AMOUNT PAYABLE
+                  AMOUNT TO PAY
                 </span>
                 <div className="font-serif text-3xl sm:text-4xl text-[#181818] font-light mt-1">
                   &#8377;{order.totalAmount.toLocaleString('en-IN')}
                 </div>
                 <div className="text-[11px] text-[#5C5852] mt-1 font-light">
-                  Subtotal: &#8377;{order.subtotal.toLocaleString('en-IN')} + Paid Express Air: &#8377;{order.shippingCharge}
+                  Subtotal: &#8377;{order.subtotal.toLocaleString('en-IN')} + Insured Express Air: &#8377;{order.shippingCharge}
                 </div>
               </div>
 
-              {/* QR Image Container */}
-              <div className="relative aspect-square w-64 max-w-full mx-auto bg-[#F8F5F0] border-2 border-[#181818] p-3 shadow-sm">
+              {/* QR Image Container - ONLY QR CODE AS REQUESTED */}
+              <div className="relative aspect-square w-72 max-w-full mx-auto bg-white border-2 border-[#181818] p-3 shadow-sm">
                 <div className="relative w-full h-full">
                   <Image
                     src={qrImage}
@@ -316,139 +328,95 @@ export default function UPIPaymentScreen({
                 </div>
               </div>
 
-              {/* Payee Info & Copy UPI ID Button */}
-              <div className="bg-[#FAF8F5] border border-[#EAE5DE] p-4 space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] uppercase tracking-wider text-[#708579] font-medium">
-                    Verified Payee:
-                  </span>
-                  <span className="text-xs text-[#181818] font-semibold">{payeeName}</span>
-                </div>
-
-                <div className="flex items-center justify-between pt-1 border-t border-[#EAE5DE]">
-                  <div>
-                    <span className="text-[10px] uppercase tracking-wider text-[#708579] font-medium block">
-                      Official UPI ID:
-                    </span>
-                    <span className="text-xs font-mono text-[#181818] font-semibold">{upiId}</span>
-                  </div>
-
-                  <button
-                    onClick={handleCopyUpiId}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#24332C] text-white text-[11px] uppercase tracking-wider hover:bg-[#19241F] transition-colors"
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="w-3.5 h-3.5" />
-                        <span>Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span>Copy ID</span>
-                      </>
-                    )}
-                  </button>
-                </div>
-              </div>
-
-              {/* Compatible UPI Apps */}
-              <div className="text-center pt-2">
+              {/* Compatible UPI Apps Row */}
+              <div className="pt-2">
                 <span className="text-[10px] uppercase tracking-wider text-[#708579] block mb-2 font-medium">
-                  Scan using any UPI App:
+                  Scan with any UPI Application:
                 </span>
                 <div className="flex items-center justify-center gap-2 text-[11px] font-medium text-[#181818] flex-wrap">
                   <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">Google Pay</span>
                   <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">PhonePe</span>
                   <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">Paytm</span>
-                  <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">BHIM UPI</span>
+                  <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">BHIM</span>
                   <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">CRED</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Payment Submission Form */}
+            {/* Right Column: SUPER EASY SCREENSHOT UPLOAD ONLY */}
             <div className="md:col-span-6 space-y-6">
-              {/* Payment Submission Box */}
               <div className="bg-white border border-[#EAE5DE] p-6 sm:p-8 space-y-6 shadow-xs">
                 <div>
                   <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
-                    STEP 2 OF 2
+                    STEP 2
                   </span>
                   <h3 className="font-serif text-xl text-[#181818] font-light mt-0.5">
-                    Submit Payment Details
+                    Upload Payment Screenshot
                   </h3>
                   <p className="text-xs text-[#5C5852] mt-1 font-light leading-relaxed">
-                    Once you complete the payment on your UPI app, enter the 12-digit transaction reference number (UTR) generated by your bank.
+                    After completing payment in your UPI app, simply take a screenshot of the payment receipt and upload it here.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmitPayment} className="space-y-4">
-                  {/* UTR Input */}
+                <form onSubmit={handleSubmitPayment} className="space-y-5">
+                  {/* Big Friendly Screenshot Upload Target */}
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#181818] font-medium mb-1.5">
-                      UPI Reference / UTR Number <span className="text-red-600">*</span>
-                    </label>
                     <input
-                      type="text"
-                      required
-                      value={utr}
-                      onChange={(e) => {
-                        setUtr(e.target.value);
-                        setSubmitError(null);
-                      }}
-                      placeholder="e.g. 431289102456"
-                      className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-sm font-mono text-[#181818] focus:outline-none focus:border-[#24332C]"
+                      type="file"
+                      accept="image/*"
+                      id="payment-screenshot-input"
+                      onChange={handleScreenshotUpload}
+                      className="hidden"
                     />
-                    <span className="text-[10px] text-[#708579] mt-1 block">
-                      Found in your UPI payment receipt under &ldquo;UPI Ref ID&rdquo; or &ldquo;UTR&rdquo;.
-                    </span>
-                  </div>
 
-                  {/* Screenshot Upload (Optional) */}
-                  <div>
-                    <label className="block text-xs uppercase tracking-wider text-[#181818] font-medium mb-1.5">
-                      Upload Payment Screenshot (Optional)
-                    </label>
-                    <div className="border border-dashed border-[#EAE5DE] bg-[#FAF8F5] p-4 text-center">
-                      {screenshotUrl ? (
-                        <div className="space-y-2">
-                          <div className="relative w-28 h-28 mx-auto border border-[#EAE5DE] bg-white overflow-hidden">
-                            <Image
-                              src={screenshotUrl}
-                              alt="Uploaded Payment Receipt"
-                              fill
-                              className="object-cover"
-                            />
-                          </div>
-                          <button
-                            type="button"
-                            onClick={() => setScreenshotUrl('')}
-                            className="text-[10px] text-red-700 uppercase tracking-wider hover:underline"
-                          >
-                            Remove Screenshot
-                          </button>
+                    {screenshotUrl ? (
+                      <div className="border-2 border-[#24332C] bg-[#EEF3F0]/40 p-4 text-center space-y-3">
+                        <div className="flex items-center justify-center gap-1.5 text-xs text-[#24332C] font-semibold">
+                          <Check className="w-4 h-4 text-emerald-700" />
+                          <span>Screenshot Uploaded Successfully</span>
                         </div>
-                      ) : (
-                        <div>
-                          <input
-                            type="file"
-                            accept="image/*"
-                            id="screenshot-file"
-                            onChange={handleScreenshotUpload}
-                            className="hidden"
+
+                        <div className="relative w-36 h-36 mx-auto border border-[#EAE5DE] bg-white overflow-hidden shadow-xs">
+                          <Image
+                            src={screenshotUrl}
+                            alt="Uploaded Payment Screenshot"
+                            fill
+                            className="object-cover"
                           />
-                          <label
-                            htmlFor="screenshot-file"
-                            className="cursor-pointer inline-flex items-center gap-2 text-xs text-[#24332C] hover:text-[#181818] font-medium"
-                          >
-                            <Upload className="w-4 h-4" />
-                            <span>{uploadingImage ? 'Uploading...' : 'Choose Receipt Image'}</span>
-                          </label>
-                          <p className="text-[10px] text-[#708579] mt-1">PNG, JPG, WebP up to 5MB</p>
                         </div>
-                      )}
-                    </div>
+
+                        <div>
+                          <label
+                            htmlFor="payment-screenshot-input"
+                            className="cursor-pointer text-xs text-[#24332C] hover:text-[#181818] font-medium underline inline-block"
+                          >
+                            Change / Replace Screenshot
+                          </label>
+                        </div>
+                      </div>
+                    ) : (
+                      <label
+                        htmlFor="payment-screenshot-input"
+                        className="border-2 border-dashed border-[#D5E0D9] bg-[#FAF8F5] p-8 text-center cursor-pointer hover:border-[#24332C] hover:bg-[#EEF3F0]/30 transition-all flex flex-col items-center justify-center space-y-3 block"
+                      >
+                        <div className="w-12 h-12 rounded-full bg-[#EEF3F0] text-[#24332C] flex items-center justify-center">
+                          {uploadingImage ? (
+                            <RefreshCw className="w-6 h-6 animate-spin" />
+                          ) : (
+                            <Camera className="w-6 h-6" />
+                          )}
+                        </div>
+
+                        <div>
+                          <span className="text-xs font-semibold uppercase tracking-wider text-[#181818] block">
+                            {uploadingImage ? 'Uploading Screenshot...' : 'Tap to Upload Payment Screenshot'}
+                          </span>
+                          <span className="text-[11px] text-[#708579] font-light mt-0.5 block">
+                            Select from your phone gallery or files (PNG, JPG, WebP)
+                          </span>
+                        </div>
+                      </label>
+                    )}
                   </div>
 
                   {submitError && (
@@ -458,28 +426,33 @@ export default function UPIPaymentScreen({
                     </div>
                   )}
 
+                  {/* Big Single Submit Button */}
                   <button
                     type="submit"
-                    disabled={submitting || uploadingImage}
-                    className="w-full bg-[#24332C] text-white py-3.5 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50"
+                    disabled={submitting || uploadingImage || !screenshotUrl}
+                    className="w-full bg-[#24332C] text-white py-3.5 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
                   >
-                    {submitting ? 'Submitting Verification...' : 'Submit Payment Verification'}
+                    {submitting ? (
+                      <>
+                        <RefreshCw className="w-4 h-4 animate-spin" />
+                        <span>Submitting Verification...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Upload className="w-4 h-4" />
+                        <span>Submit Payment Screenshot</span>
+                      </>
+                    )}
                   </button>
                 </form>
 
-                {/* Important Notice */}
-                <div className="p-3.5 bg-[#EEF3F0]/60 border border-[#D5E0D9] text-[11px] text-[#24332C] space-y-1">
-                  <div className="flex items-center gap-1.5 font-semibold uppercase text-[10px] tracking-wider">
-                    <ShieldCheck className="w-3.5 h-3.5" />
-                    <span>Real-Time Bank Verification</span>
-                  </div>
-                  <p className="leading-relaxed">
-                    ELVORA maintains strict anti-fraud standards. Orders are confirmed only after the credit is received and verified by our boutique admin.
-                  </p>
+                <div className="p-3 bg-[#FAF8F5] border border-[#EAE5DE] text-[11px] text-[#5C5852] flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#24332C] shrink-0" />
+                  <span>Your order is held safely and confirmed as soon as payment is verified.</span>
                 </div>
               </div>
 
-              {/* Order Items Summary */}
+              {/* Order Items Preview */}
               <div className="bg-white border border-[#EAE5DE] p-6 space-y-3 shadow-xs">
                 <h4 className="text-xs uppercase tracking-wider font-semibold text-[#181818]">
                   Order Items ({order.items.length})
@@ -506,19 +479,6 @@ export default function UPIPaymentScreen({
                       </span>
                     </div>
                   ))}
-                </div>
-
-                <div className="pt-2 border-t border-[#EAE5DE] text-xs space-y-1 text-[#5C5852]">
-                  <div className="flex justify-between">
-                    <span>Delivery Address:</span>
-                    <span className="text-[#181818] font-medium text-right max-w-[200px] truncate">
-                      {order.shippingAddress.fullName}, {order.shippingAddress.city}
-                    </span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span>Shipping Method:</span>
-                    <span className="text-[#181818] font-medium">Insured Express Air (Paid)</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -556,8 +516,7 @@ export default function UPIPaymentScreen({
                   Payment Verification Record:
                 </span>
                 <div className="mt-1 space-y-1 font-mono text-[11px] text-[#181818]">
-                  <div>UTR / Reference: <strong>{order.upiUtr || 'VERIFIED'}</strong></div>
-                  <div>Settlement Method: Manual UPI QR</div>
+                  <div>Settlement Method: Manual UPI QR Code</div>
                   <div>Verified By: {order.verifiedBy || 'Store Admin'}</div>
                   <div>Status: <span className="text-emerald-700 font-bold">PAID &bull; CONFIRMED</span></div>
                 </div>
@@ -600,4 +559,3 @@ export default function UPIPaymentScreen({
     </div>
   );
 }
-

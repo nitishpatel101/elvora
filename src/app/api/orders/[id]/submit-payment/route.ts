@@ -23,25 +23,23 @@ export async function POST(
     const body = await req.json();
     const { utr, screenshotUrl } = body as { utr?: string; screenshotUrl?: string };
 
-    if (!utr || !utr.trim()) {
+    if (!screenshotUrl && !utr) {
       return NextResponse.json(
-        { error: 'UPI transaction reference number (UTR) is required' },
+        { error: 'Please upload your payment screenshot to verify payment.' },
         { status: 400 }
       );
     }
 
-    const cleanUtr = utr.trim().replace(/\s+/g, '');
-    if (cleanUtr.length < 6 || cleanUtr.length > 40) {
-      return NextResponse.json(
-        { error: 'Invalid UPI reference number (UTR). Please enter a valid reference.' },
-        { status: 400 }
-      );
-    }
-
-    order.upiUtr = cleanUtr;
     if (screenshotUrl && typeof screenshotUrl === 'string') {
       order.upiScreenshot = screenshotUrl.trim();
     }
+
+    if (utr && utr.trim()) {
+      order.upiUtr = utr.trim().replace(/\s+/g, '');
+    } else if (!order.upiUtr) {
+      order.upiUtr = 'SCREENSHOT_ATTACHED';
+    }
+
     order.status = 'PAYMENT_SUBMITTED';
     order.paymentSubmittedAt = new Date().toISOString();
     order.updatedAt = new Date().toISOString();
@@ -52,6 +50,7 @@ export async function POST(
       success: true,
       orderId: order.id,
       status: order.status,
+      upiScreenshot: order.upiScreenshot,
       upiUtr: order.upiUtr,
       paymentSubmittedAt: order.paymentSubmittedAt,
     });
