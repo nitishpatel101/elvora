@@ -39,6 +39,7 @@ export default function HeroSection() {
           alt="ELVORA Long-Distance Connection - Made for Two"
           fill
           priority
+          unoptimized
           sizes="100vw"
           className="object-cover object-[center_35%] transition-transform duration-1000 ease-out group-hover:scale-[1.01]"
         />

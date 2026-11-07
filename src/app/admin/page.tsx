@@ -726,6 +726,7 @@ export default function AdminDashboardPage() {
                                     src={ord.upiScreenshot}
                                     alt="Receipt Screenshot"
                                     fill
+                                    unoptimized
                                     className="object-cover"
                                   />
                                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center text-white transition-opacity">
@@ -865,6 +866,7 @@ export default function AdminDashboardPage() {
                                 src={prod.images[0] || '/images/products/touch-distance-bracelet/hero.jpg'}
                                 alt={prod.name}
                                 fill
+                                unoptimized
                                 className="object-cover"
                               />
                             </div>
@@ -1051,6 +1053,7 @@ export default function AdminDashboardPage() {
                     src={settings.heroImage || '/images/hero/hero-couple-tight.png'}
                     alt="Hero Banner"
                     fill
+                    unoptimized
                     className="object-cover object-[center_35%]"
                   />
                   <div className="absolute inset-0 bg-black/20" />
@@ -1319,6 +1322,7 @@ export default function AdminDashboardPage() {
                       src={settings.upiQrImage || '/images/qr/upi-qr.jpg'}
                       alt="Store Owner UPI QR Code"
                       fill
+                      unoptimized
                       className="object-contain"
                     />
                   </div>
@@ -1428,7 +1432,7 @@ export default function AdminDashboardPage() {
                 {managingImagesProduct.images.map((imgUrl, idx) => (
                   <div key={idx} className="relative group border border-[#E7E1D8] bg-[#FAF8F5] p-2 space-y-2">
                     <div className="relative aspect-square w-full bg-white overflow-hidden">
-                      <Image src={imgUrl} alt="Product view" fill className="object-cover" />
+                      <Image src={imgUrl} alt="Product view" fill unoptimized className="object-cover" />
                       {idx === 0 && (
                         <span className="absolute top-1 left-1 bg-[#24332C] text-white text-[9px] uppercase tracking-widest px-1.5 py-0.5 font-bold">
                           Cover
@@ -1638,6 +1642,7 @@ export default function AdminDashboardPage() {
                 src={previewScreenshot}
                 alt="Payment Receipt"
                 fill
+                unoptimized
                 className="object-contain"
               />
             </div>

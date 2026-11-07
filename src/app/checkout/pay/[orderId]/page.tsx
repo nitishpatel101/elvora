@@ -381,6 +381,7 @@ export default function UPIPaymentScreen({
                       src={order.upiScreenshot}
                       alt="Submitted Screenshot Receipt"
                       fill
+                      unoptimized
                       className="object-cover"
                     />
                   </div>
@@ -577,6 +578,7 @@ export default function UPIPaymentScreen({
                     alt="ELVORA Official UPI QR Code"
                     fill
                     priority
+                    unoptimized
                     className="object-contain"
                   />
                 </div>
@@ -636,6 +638,7 @@ export default function UPIPaymentScreen({
                           src={localPreview || screenshotUrl}
                           alt="Selected Payment Screenshot"
                           fill
+                          unoptimized
                           className="object-cover"
                         />
                       </div>
