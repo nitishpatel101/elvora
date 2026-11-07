@@ -334,6 +334,39 @@ export default function AdminDashboardPage() {
     }
   };
 
+  const handleAddStory = () => {
+    const newStory = {
+      id: `s-${Date.now()}`,
+      label: 'New Story',
+      image: '/images/giftify/stories/anniversary.png',
+      href: '/shop',
+      headline: 'Special Collection ✨',
+      tagline: 'Discover trending gifts handcrafted with love',
+    };
+    setStories([...stories, newStory]);
+  };
+
+  const handleDeleteStory = (storyId: string) => {
+    if (stories.length <= 1) return;
+    setStories(stories.filter((s) => s.id !== storyId));
+  };
+
+  const handleAddOccasion = () => {
+    const newOcc = {
+      id: `occ-${Date.now()}`,
+      name: 'New Occasion',
+      emoji: '🎉',
+      image: '/images/giftify/occasions/birthdays.jpg',
+      href: '/shop',
+    };
+    setOccasions([...occasions, newOcc]);
+  };
+
+  const handleDeleteOccasion = (occId: string) => {
+    if (occasions.length <= 1) return;
+    setOccasions(occasions.filter((o) => (o.id || o.name) !== occId));
+  };
+
   // Save Settings
   const handleSaveSettings = async (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -372,32 +405,37 @@ export default function AdminDashboardPage() {
     }
   };
 
-  // Quick Product Image Upload
+  // Quick Product Image Upload (Supports Multiple Files at Once)
   const handleProductImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!managingImagesProduct) return;
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
 
     setUploadingProductImage(true);
     setImageActionSuccess(null);
 
     try {
-      const formData = new FormData();
-      formData.append('file', file);
+      const newUrls: string[] = [];
+      for (let i = 0; i < files.length; i++) {
+        const formData = new FormData();
+        formData.append('file', files[i]);
 
-      const uploadRes = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
+        const uploadRes = await fetch('/api/upload', {
+          method: 'POST',
+          body: formData,
+        });
 
-      const uploadData = await uploadRes.json();
-      if (!uploadRes.ok || !uploadData.url) {
-        throw new Error(uploadData.error || 'Failed to upload photo');
+        const uploadData = await uploadRes.json();
+        if (uploadRes.ok && uploadData.url) {
+          newUrls.push(uploadData.url);
+        }
       }
 
-      const updatedImages = [...managingImagesProduct.images, uploadData.url];
-      await updateProductImages(managingImagesProduct.id, updatedImages);
-      setImageActionSuccess('Photo uploaded and added to product!');
+      if (newUrls.length > 0) {
+        const updatedImages = [...managingImagesProduct.images, ...newUrls];
+        await updateProductImages(managingImagesProduct.id, updatedImages);
+        setImageActionSuccess(`${newUrls.length} photograph(s) uploaded and added to product!`);
+      }
     } catch (err: unknown) {
       alert(err instanceof Error ? err.message : 'Upload failed');
     } finally {
@@ -1484,19 +1522,40 @@ export default function AdminDashboardPage() {
                     </p>
                   </div>
                 </div>
-                {storiesSaved && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Stories Saved Live!
-                  </span>
-                )}
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handleAddStory}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-md transition-colors border border-stone-300"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>+ Add New Story Bubble</span>
+                  </button>
+                  {storiesSaved && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Stories Saved Live!
+                    </span>
+                  )}
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {stories.map((story, idx) => (
                   <div
                     key={story.id || idx}
-                    className="p-4 border border-[#E7E1D8] rounded-xl flex flex-col items-center space-y-3 bg-[#FAF8F5]/80 hover:border-[#24332C]/40 transition-colors"
+                    className="p-4 border border-[#E7E1D8] rounded-xl flex flex-col items-center space-y-3 bg-[#FAF8F5]/80 hover:border-[#24332C]/40 transition-colors relative"
                   >
+                    {/* Delete story button */}
+                    {stories.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteStory(story.id)}
+                        className="absolute top-2 right-2 text-stone-400 hover:text-red-600 transition-colors p-1"
+                        title="Delete this story"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    )}
                     {/* Circle Image Preview */}
                     <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-[#F5C400] shadow-sm bg-white shrink-0 group">
                       <Image
@@ -1611,19 +1670,40 @@ export default function AdminDashboardPage() {
                     </p>
                   </div>
                 </div>
-                {occasionsSaved && (
-                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
-                    <CheckCircle2 className="w-3.5 h-3.5" /> Occasions Saved Live!
-                  </span>
-                )}
+                <div className="flex items-center gap-3">
+                  <button
+                    type="button"
+                    onClick={handleAddOccasion}
+                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-md transition-colors border border-stone-300"
+                  >
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>+ Add New Occasion Card</span>
+                  </button>
+                  {occasionsSaved && (
+                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> Occasions Saved Live!
+                    </span>
+                  )}
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
                 {occasions.map((occ, idx) => (
                   <div
                     key={occ.id || occ.name || idx}
-                    className="p-4 border border-[#E7E1D8] rounded-xl flex flex-col items-center space-y-3 bg-[#FAF8F5]/80 hover:border-[#24332C]/40 transition-colors"
+                    className="p-4 border border-[#E7E1D8] rounded-xl flex flex-col items-center space-y-3 bg-[#FAF8F5]/80 hover:border-[#24332C]/40 transition-colors relative"
                   >
+                    {/* Delete occasion button */}
+                    {occasions.length > 1 && (
+                      <button
+                        type="button"
+                        onClick={() => handleDeleteOccasion(occ.id || occ.name)}
+                        className="absolute top-2 right-2 text-stone-400 hover:text-red-600 transition-colors p-1"
+                        title="Delete this occasion card"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    )}
                     {/* 3D Occasion Card Preview */}
                     <div className="relative w-full aspect-[1.15/1] rounded-xl overflow-hidden border border-stone-200 bg-[#F5C400] shadow-xs">
                       <Image
@@ -2047,6 +2127,7 @@ export default function AdminDashboardPage() {
                 <div>
                   <input
                     type="file"
+                    multiple
                     accept="image/*"
                     id="add-product-image-file"
                     onChange={handleProductImageUpload}
@@ -2057,7 +2138,7 @@ export default function AdminDashboardPage() {
                     className="cursor-pointer inline-flex items-center gap-1.5 px-4 py-2 bg-[#24332C] text-white text-xs uppercase tracking-wider hover:bg-[#19241F] transition-colors"
                   >
                     <Upload className="w-3.5 h-3.5" />
-                    <span>{uploadingProductImage ? 'Uploading...' : 'Upload from Device'}</span>
+                    <span>{uploadingProductImage ? 'Uploading Photos...' : 'Upload Photo(s) from Device'}</span>
                   </label>
                 </div>
 

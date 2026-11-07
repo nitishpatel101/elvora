@@ -67,27 +67,32 @@ export default function ProductForm({ initialData, isEditing = false }: ProductF
   };
 
   const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
 
     setUploading(true);
     setError(null);
 
-    const data = new FormData();
-    data.append('file', file);
-
     try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: data,
-      });
+      const uploadedUrls: string[] = [];
+      for (let i = 0; i < files.length; i++) {
+        const data = new FormData();
+        data.append('file', files[i]);
 
-      const json = await res.json();
-      if (!res.ok || !json.url) {
-        throw new Error(json.error || 'Upload failed');
+        const res = await fetch('/api/upload', {
+          method: 'POST',
+          body: data,
+        });
+
+        const json = await res.json();
+        if (res.ok && json.url) {
+          uploadedUrls.push(json.url);
+        }
       }
 
-      setImages((prev) => [...prev, json.url]);
+      if (uploadedUrls.length > 0) {
+        setImages((prev) => [...prev, ...uploadedUrls]);
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Upload error';
       setError(msg);
@@ -506,11 +511,12 @@ export default function ProductForm({ initialData, isEditing = false }: ProductF
               <label className="block w-full border border-dashed border-[#24332C]/40 p-4 text-center cursor-pointer hover:bg-[#EEF3F0]/40 transition-colors">
                 <Upload className="w-5 h-5 text-[#24332C] mx-auto mb-1" />
                 <span className="text-xs uppercase tracking-wider text-[#181818] block font-medium">
-                  {uploading ? 'Uploading image...' : 'Upload Image File'}
+                  {uploading ? 'Uploading image(s)...' : 'Upload Image File(s)'}
                 </span>
-                <span className="text-[10px] text-[#708579]">PNG, JPG, WebP up to 10MB</span>
+                <span className="text-[10px] text-[#708579]">PNG, JPG, WebP up to 10MB (Multiple selection enabled)</span>
                 <input
                   type="file"
+                  multiple
                   accept="image/*"
                   onChange={handleFileUpload}
                   disabled={uploading}
