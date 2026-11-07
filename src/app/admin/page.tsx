@@ -81,7 +81,7 @@ export default function AdminDashboardPage() {
     heroImage: '/images/hero/hero-couple-tight.png',
     brandTagline: 'Haute Joaillerie',
     supportEmail: 'concierge@elvora.com',
-    supportPhone: '+91 98765 43210',
+    supportPhone: '+91 63866 45203',
     upiId: 'elvora@upi',
     payeeName: 'ELVORA Luxury Jewels',
     upiQrImage: '/images/qr/upi-qr.jpg',

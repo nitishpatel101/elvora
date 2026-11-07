@@ -65,6 +65,7 @@ export default function Footer() {
                 Support
               </h5>
               <ul className="space-y-2 text-xs text-[#A3B2A9] font-light">
+                <li><a href="https://wa.me/916386645203" target="_blank" rel="noopener noreferrer" className="text-emerald-300 hover:text-white transition-colors font-medium">WHATSAPP: +91 63866 45203</a></li>
                 <li><Link href="/contact" className="hover:text-white transition-colors">FAQ</Link></li>
                 <li><Link href="/contact" className="hover:text-white transition-colors">CONTACT US</Link></li>
                 <li><Link href="/track-order" className="hover:text-white transition-colors">TRACK ORDER</Link></li>
@@ -105,6 +106,7 @@ export default function Footer() {
           <div className="pt-8 border-t border-[#34463C] flex flex-wrap items-center justify-between gap-4 text-[10px] tracking-[0.16em] uppercase text-[#A3B2A9]">
             <div className="flex flex-wrap items-center gap-6">
               <span>&copy;2026 ELVORA</span>
+              <a href="https://wa.me/916386645203" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">WHATSAPP: +91 63866 45203</a>
               <Link href="/privacy-policy" className="hover:text-white transition-colors">PRIVACY POLICY</Link>
               <Link href="/terms" className="hover:text-white transition-colors">TERMS &amp; CONDITIONS</Link>
             </div>
