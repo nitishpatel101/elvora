@@ -192,7 +192,7 @@
       "Silver"
     ],
     "inStock": true,
-    "stock": 51,
+    "stock": 50,
     "isFeatured": true,
     "isBestSeller": true,
     "isNewArrival": false,
@@ -220,7 +220,7 @@
       "care": "Store in dry compartment; avoid direct spray of perfumes"
     },
     "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-07T02:30:29.893Z"
+    "updatedAt": "2026-11-07T02:42:48.450Z"
   },
   {
     "id": "elv-prod-06",
@@ -237,7 +237,7 @@
       "White"
     ],
     "inStock": true,
-    "stock": 66,
+    "stock": 65,
     "isFeatured": true,
     "isBestSeller": true,
     "isNewArrival": false,
@@ -265,6 +265,6 @@
       "care": "Keep pearls away from citrus and ultrasonic cleaners"
     },
     "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-07T02:30:29.929Z"
+    "updatedAt": "2026-11-07T02:42:48.535Z"
   }
 ]
