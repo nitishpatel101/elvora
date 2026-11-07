@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 import { useCurrency } from '@/context/CurrencyContext';
 import { Product, Order, StoreSettings, OrderStatus } from '@/types';
+import { compressImage } from '@/lib/imageCompression';
 import {
   Plus,
   Edit,
@@ -167,25 +168,34 @@ export default function AdminDashboardPage() {
 
   const fetchHeroSlides = async () => {
     try {
-      const res = await fetch('/api/hero-slides', { cache: 'no-store' });
+      const res = await fetch(`/api/hero-slides?t=${Date.now()}`, { cache: 'no-store' });
       const data = await res.json();
-      if (Array.isArray(data)) setHeroSlides(data);
+      if (Array.isArray(data) && data.length > 0) setHeroSlides(data);
     } catch {}
   };
 
-  const handleSaveHeroSlides = async () => {
+  const handleSaveHeroSlides = async (slidesToSave?: any[] | React.MouseEvent | unknown) => {
+    const targetSlides = Array.isArray(slidesToSave) ? slidesToSave : heroSlides;
     setSavingHeroSlides(true);
     setHeroSlidesSaved(false);
     try {
       const res = await fetch('/api/hero-slides', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(heroSlides),
+        body: JSON.stringify(targetSlides),
       });
       if (res.ok) {
         setHeroSlidesSaved(true);
-        setTimeout(() => setHeroSlidesSaved(false), 3000);
+        setTimeout(() => setHeroSlidesSaved(false), 4000);
+        return true;
+      } else {
+        const err = await res.json().catch(() => ({}));
+        alert(`Failed to save slides: ${err.error || res.statusText}`);
+        return false;
       }
+    } catch (err: any) {
+      alert(`Network error saving slides: ${err.message || 'Please check connection'}`);
+      return false;
     } finally {
       setSavingHeroSlides(false);
     }
@@ -194,8 +204,10 @@ export default function AdminDashboardPage() {
   const handleSlideImageUpload = async (slideId: string, file: File) => {
     setUploadingSlideId(slideId);
     try {
+      // Compress large smartphone/laptop images client-side before upload to prevent payload size errors
+      const compressed = await compressImage(file, 1920, 1080, 0.82);
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', compressed);
       const res = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
@@ -204,20 +216,19 @@ export default function AdminDashboardPage() {
       if (res.ok && data.url) {
         const updated = heroSlides.map((s) => (s.id === slideId ? { ...s, image: data.url } : s));
         setHeroSlides(updated);
-        await fetch('/api/hero-slides', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updated),
-        });
-        setHeroSlidesSaved(true);
-        setTimeout(() => setHeroSlidesSaved(false), 3000);
+        // Immediately persist to server
+        await handleSaveHeroSlides(updated);
+      } else {
+        alert(data.error || 'Failed to upload photo');
       }
+    } catch (err: any) {
+      alert(`Upload error: ${err.message || 'Upload failed'}`);
     } finally {
       setUploadingSlideId(null);
     }
   };
 
-  const handleAddSlide = () => {
+  const handleAddSlide = async () => {
     const newSlide = {
       id: `slide-${Date.now()}`,
       title: 'New Featured Offer',
@@ -228,12 +239,20 @@ export default function AdminDashboardPage() {
       tag: '✨ Special Edition',
       highlight: 'Limited Time Exclusive',
     };
-    setHeroSlides([...heroSlides, newSlide]);
+    const updated = [...heroSlides, newSlide];
+    setHeroSlides(updated);
+    // Auto-persist immediately so user sees it right away
+    await handleSaveHeroSlides(updated);
   };
 
-  const handleDeleteSlide = (slideId: string) => {
-    if (heroSlides.length <= 1) return;
-    setHeroSlides(heroSlides.filter((s) => s.id !== slideId));
+  const handleDeleteSlide = async (slideId: string) => {
+    if (heroSlides.length <= 1) {
+      alert('You must have at least one hero banner slide.');
+      return;
+    }
+    const updated = heroSlides.filter((s) => s.id !== slideId);
+    setHeroSlides(updated);
+    await handleSaveHeroSlides(updated);
   };
 
   // Occasions State & Management (3D Character Cards)
@@ -271,8 +290,9 @@ export default function AdminDashboardPage() {
   const handleOccasionImageUpload = async (occId: string, file: File) => {
     setUploadingOccasionId(occId);
     try {
+      const compressed = await compressImage(file, 800, 800, 0.85);
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', compressed);
       const res = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
@@ -329,8 +349,9 @@ export default function AdminDashboardPage() {
   const handleStoryImageUpload = async (storyId: string, file: File) => {
     setUploadingStoryId(storyId);
     try {
+      const compressed = await compressImage(file, 600, 600, 0.85);
       const formData = new FormData();
-      formData.append('file', file);
+      formData.append('file', compressed);
       const res = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
@@ -594,8 +615,9 @@ export default function AdminDashboardPage() {
     setUploadingProductImage(true);
     try {
       for (let i = 0; i < files.length; i++) {
+        const compressed = await compressImage(files[i], 1200, 1200, 0.85);
         const formData = new FormData();
-        formData.append('file', files[i]);
+        formData.append('file', compressed);
         const res = await fetch('/api/upload', { method: 'POST', body: formData });
         const data = await res.json();
         if (res.ok && data.url) {
@@ -1447,16 +1469,28 @@ export default function AdminDashboardPage() {
                           Slide #{idx + 1}: {slide.title || 'Untitled Banner'}
                         </span>
                       </div>
-                      {heroSlides.length > 1 && (
+                      <div className="flex items-center gap-2">
                         <button
                           type="button"
-                          onClick={() => handleDeleteSlide(slide.id)}
-                          className="text-stone-400 hover:text-red-600 transition-colors p-1"
-                          title="Delete this slide"
+                          onClick={() => handleSaveHeroSlides()}
+                          disabled={savingHeroSlides}
+                          className="inline-flex items-center gap-1 px-3 py-1 bg-[#24332C] hover:bg-[#19241F] text-white text-xs font-bold rounded shadow-xs cursor-pointer transition-colors disabled:opacity-50"
+                          title="Save this slide live to website"
                         >
-                          <Trash2 className="w-4 h-4" />
+                          <Check className="w-3.5 h-3.5 text-[#F5C400]" />
+                          <span>Save Live</span>
                         </button>
-                      )}
+                        {heroSlides.length > 1 && (
+                          <button
+                            type="button"
+                            onClick={() => handleDeleteSlide(slide.id)}
+                            className="text-stone-400 hover:text-red-600 transition-colors p-1"
+                            title="Delete this slide"
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
@@ -1624,7 +1658,7 @@ export default function AdminDashboardPage() {
               <div className="pt-4 border-t border-[#E7E1D8] flex items-center justify-between">
                 <button
                   type="button"
-                  onClick={handleSaveHeroSlides}
+                  onClick={() => handleSaveHeroSlides()}
                   disabled={savingHeroSlides}
                   className="bg-[#24332C] text-white px-6 py-3 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 cursor-pointer shadow-xs inline-flex items-center gap-2"
                 >

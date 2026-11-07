@@ -21,9 +21,9 @@ export default function HeroSection() {
   const [slides, setSlides] = useState<HeroSlide[]>(defaultSlides);
   const [currentSlide, setCurrentSlide] = useState(0);
 
-  // Fetch updated slides from API dynamically
+  // Fetch updated slides from API dynamically with cache-busting
   useEffect(() => {
-    fetch('/api/hero-slides', { cache: 'no-store' })
+    fetch(`/api/hero-slides?t=${Date.now()}`, { cache: 'no-store' })
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

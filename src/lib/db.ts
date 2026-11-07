@@ -413,9 +413,17 @@ export async function saveReview(newReview: Review): Promise<Review> {
 export async function getHeroSlides(): Promise<any[]> {
   try {
     const raw = await safeReadFile(HERO_SLIDES_FILE);
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    if (Array.isArray(parsed) && parsed.length > 0) {
+      return parsed;
+    }
   } catch (err) {
     console.error('Failed to read hero slides:', err);
+  }
+  try {
+    const fallbackRaw = await fs.readFile(HERO_SLIDES_FILE, 'utf-8');
+    return JSON.parse(fallbackRaw);
+  } catch {
     return [];
   }
 }

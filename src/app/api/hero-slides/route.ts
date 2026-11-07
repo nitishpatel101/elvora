@@ -29,7 +29,9 @@ export async function POST(req: Request) {
         'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
       },
     });
-  } catch {
-    return NextResponse.json({ error: 'Failed to update hero slides' }, { status: 500 });
+  } catch (err: unknown) {
+    console.error('HERO SLIDES POST ERROR:', err);
+    const message = err instanceof Error ? err.message : 'Failed to update hero slides';
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

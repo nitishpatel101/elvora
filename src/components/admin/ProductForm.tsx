@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Product } from '@/types';
+import { compressImage } from '@/lib/imageCompression';
 import {
   Upload,
   Trash2,
@@ -76,8 +77,9 @@ export default function ProductForm({ initialData, isEditing = false }: ProductF
     try {
       const uploadedUrls: string[] = [];
       for (let i = 0; i < files.length; i++) {
+        const compressed = await compressImage(files[i], 1200, 1200, 0.85);
         const data = new FormData();
-        data.append('file', files[i]);
+        data.append('file', compressed);
 
         const res = await fetch('/api/upload', {
           method: 'POST',
