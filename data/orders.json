@@ -1,5 +1,44 @@
 [
   {
+    "id": "ELV-978529",
+    "customerEmail": "85251135125@customer.elvora.com",
+    "customerName": "Npatel kumar",
+    "customerPhone": "85251135125",
+    "shippingAddress": {
+      "fullName": "Npatel kumar",
+      "email": "",
+      "phone": "85251135125",
+      "addressLine1": "Hettimpur road narkatiya bazar",
+      "addressLine2": "",
+      "city": "Kushinagar",
+      "state": "Uttar Pradesh",
+      "pincode": "274402",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-03",
+        "productName": "Sun & Moon Chain Bracelet",
+        "productImage": "/images/products/sun-moon-chain-bracelet/hero.jpg",
+        "priceAtPurchase": 1199,
+        "quantity": 1,
+        "selectedVariant": "Sun (Gunmetal) & Moon (Rose Gold) Pair",
+        "selectedColour": "Black"
+      }
+    ],
+    "subtotal": 1199,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1298,
+    "currency": "INR",
+    "status": "PAYMENT_PENDING",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_mczqnc820r",
+    "createdAt": "2026-11-07T03:55:16.541Z",
+    "updatedAt": "2026-11-07T03:55:16.541Z"
+  },
+  {
     "id": "ELV-376915",
     "customerEmail": "919876543210@customer.elvora.com",
     "customerName": "Pooja Hegde",

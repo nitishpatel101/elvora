@@ -23,6 +23,47 @@ const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
 const STORE_SETTINGS_FILE = path.join(DATA_DIR, 'store-settings.json');
 
+// Memory cache fallback for serverless deployments
+const inMemoryStore = new Map<string, string>();
+
+async function safeReadFile(primaryPath: string): Promise<string> {
+  const filename = path.basename(primaryPath);
+  if (inMemoryStore.has(filename)) {
+    return inMemoryStore.get(filename)!;
+  }
+
+  // Try /tmp directory first (serverless runtime persistence)
+  try {
+    const tmpPath = path.join('/tmp', filename);
+    const data = await fs.readFile(tmpPath, 'utf-8');
+    if (data) {
+      inMemoryStore.set(filename, data);
+      return data;
+    }
+  } catch {}
+
+  const raw = await fs.readFile(primaryPath, 'utf-8');
+  inMemoryStore.set(filename, raw);
+  return raw;
+}
+
+async function safeWriteFile(primaryPath: string, content: string): Promise<void> {
+  const filename = path.basename(primaryPath);
+  inMemoryStore.set(filename, content);
+
+  try {
+    await fs.writeFile(primaryPath, content, 'utf-8');
+  } catch {
+    // If running in read-only serverless environment (e.g. Vercel)
+    try {
+      const tmpPath = path.join('/tmp', filename);
+      await fs.writeFile(tmpPath, content, 'utf-8');
+    } catch {
+      // Memory store is already updated as fallback
+    }
+  }
+}
+
 // --- PRODUCT REPOSITORY ---
 
 export async function getAllProducts(includeUnpublished = false): Promise<Product[]> {
@@ -39,7 +80,7 @@ export async function getAllProducts(includeUnpublished = false): Promise<Produc
 
   // Fallback to local persistent JSON store
   try {
-    const raw = await fs.readFile(PRODUCTS_FILE, 'utf-8');
+    const raw = await safeReadFile(PRODUCTS_FILE);
     const products: Product[] = JSON.parse(raw);
     if (includeUnpublished) return products;
     return products.filter((p) => p.isPublished);
@@ -93,7 +134,7 @@ export async function saveProduct(product: Product): Promise<Product> {
   }
 
   // Persistent JSON Store
-  const raw = await fs.readFile(PRODUCTS_FILE, 'utf-8');
+  const raw = await safeReadFile(PRODUCTS_FILE);
   const products: Product[] = JSON.parse(raw);
   const existingIdx = products.findIndex((p) => p.id === product.id);
 
@@ -107,7 +148,7 @@ export async function saveProduct(product: Product): Promise<Product> {
     });
   }
 
-  await fs.writeFile(PRODUCTS_FILE, JSON.stringify(products, null, 2), 'utf-8');
+  await safeWriteFile(PRODUCTS_FILE, JSON.stringify(products, null, 2));
   return product;
 }
 
@@ -121,11 +162,11 @@ export async function deleteProduct(id: string): Promise<boolean> {
     return !error;
   }
 
-  const raw = await fs.readFile(PRODUCTS_FILE, 'utf-8');
+  const raw = await safeReadFile(PRODUCTS_FILE);
   const products: Product[] = JSON.parse(raw);
   // Soft-delete or filter out if no orders reference it
   const updatedProducts = products.map((p) => (p.id === id ? { ...p, isPublished: false } : p));
-  await fs.writeFile(PRODUCTS_FILE, JSON.stringify(updatedProducts, null, 2), 'utf-8');
+  await safeWriteFile(PRODUCTS_FILE, JSON.stringify(updatedProducts, null, 2));
   return true;
 }
 
@@ -140,7 +181,7 @@ export async function getAllOrders(): Promise<Order[]> {
   }
 
   try {
-    const raw = await fs.readFile(ORDERS_FILE, 'utf-8');
+    const raw = await safeReadFile(ORDERS_FILE);
     return JSON.parse(raw);
   } catch {
     return [];
@@ -174,7 +215,7 @@ export async function saveOrder(order: Order): Promise<Order> {
   } else {
     orders.unshift(order);
   }
-  await fs.writeFile(ORDERS_FILE, JSON.stringify(orders, null, 2), 'utf-8');
+  await safeWriteFile(ORDERS_FILE, JSON.stringify(orders, null, 2));
   return order;
 }
 
@@ -182,7 +223,7 @@ export async function saveOrder(order: Order): Promise<Order> {
 
 export async function getCategories(): Promise<Category[]> {
   try {
-    const raw = await fs.readFile(CATEGORIES_FILE, 'utf-8');
+    const raw = await safeReadFile(CATEGORIES_FILE);
     return JSON.parse(raw);
   } catch {
     return [];
@@ -210,7 +251,7 @@ export async function getStoreSettings(): Promise<StoreSettings> {
   };
 
   try {
-    const raw = await fs.readFile(STORE_SETTINGS_FILE, 'utf-8');
+    const raw = await safeReadFile(STORE_SETTINGS_FILE);
     const parsed = JSON.parse(raw);
     return { ...defaultSettings, ...parsed };
   } catch {
@@ -221,7 +262,7 @@ export async function getStoreSettings(): Promise<StoreSettings> {
 export async function saveStoreSettings(settings: Partial<StoreSettings>): Promise<StoreSettings> {
   const current = await getStoreSettings();
   const updated: StoreSettings = { ...current, ...settings };
-  await fs.writeFile(STORE_SETTINGS_FILE, JSON.stringify(updated, null, 2), 'utf-8');
+  await safeWriteFile(STORE_SETTINGS_FILE, JSON.stringify(updated, null, 2));
   return updated;
 }
 
