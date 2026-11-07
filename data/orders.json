@@ -1,5 +1,47 @@
 [
   {
+    "id": "ELV-898472",
+    "customerEmail": "919811122334@customer.elvora.com",
+    "customerName": "Kavita Iyer",
+    "customerPhone": "+91 98111 22334",
+    "shippingAddress": {
+      "fullName": "Kavita Iyer",
+      "phone": "+91 98111 22334",
+      "addressLine1": "Indiranagar 100ft Road",
+      "city": "Bengaluru",
+      "state": "Karnataka",
+      "pincode": "560038",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-prod-01",
+        "productName": "Touch Distance Couple Bracelet",
+        "productImage": "/images/products/touch-distance-bracelet/hero.jpg",
+        "priceAtPurchase": 1399,
+        "quantity": 1
+      }
+    ],
+    "subtotal": 1399,
+    "shippingCharge": 99,
+    "discount": 0,
+    "totalAmount": 1498,
+    "currency": "INR",
+    "status": "SHIPPED",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_rpc3dn17d3",
+    "createdAt": "2026-11-07T04:03:24.152Z",
+    "updatedAt": "2026-11-07T04:03:24.204Z",
+    "upiScreenshot": "/images/uploads/1794020845494_Connected_Moments_in_Paris.png",
+    "upiUtr": "SCREENSHOT_ATTACHED",
+    "paymentSubmittedAt": "2026-11-07T04:03:24.176Z",
+    "verifiedBy": "ELVORA Executive Admin",
+    "verifiedAt": "2026-11-07T04:03:24.185Z",
+    "trackingNumber": "BLUEDART-894210",
+    "trackingCourier": "BlueDart Air Express"
+  },
+  {
     "id": "ELV-978529",
     "customerEmail": "85251135125@customer.elvora.com",
     "customerName": "Npatel kumar",
