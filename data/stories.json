@@ -1,0 +1,67 @@
+[
+  {
+    "id": "s-anniversary",
+    "label": "Anniversary",
+    "image": "/images/giftify/stories/anniversary.png",
+    "href": "/shop?category=anniversary-gifts",
+    "headline": "Anniversary Specials 🥂",
+    "tagline": "Memories that stay forever young and close to heart"
+  },
+  {
+    "id": "s-couple",
+    "label": "Couple",
+    "image": "/images/giftify/stories/couple.png",
+    "href": "/shop?category=couple-gifts",
+    "headline": "For You & Your Forever ❤️",
+    "tagline": "Vibrating touch bracelets & couple lockets"
+  },
+  {
+    "id": "s-birthday",
+    "label": "Birthday",
+    "image": "/images/giftify/stories/birthday.png",
+    "href": "/shop?category=birthday-gifts",
+    "headline": "Make Their Birthday Magical 🎂",
+    "tagline": "Customized currency notes, magic mugs & crystal cubes"
+  },
+  {
+    "id": "s-personalized",
+    "label": "Personalized",
+    "image": "/images/giftify/stories/personalized.png",
+    "href": "/shop?category=personalized-gifts",
+    "headline": "Handcrafted With Your Names ✨",
+    "tagline": "Engraved wooden frames & 3D name flips"
+  },
+  {
+    "id": "s-for-him",
+    "label": "For Him",
+    "image": "/images/giftify/stories/for-him.png",
+    "href": "/shop?category=couple-gifts",
+    "headline": "Thoughtful Gifts For Him 🎁",
+    "tagline": "Personalized wallets, keychains & projection bracelets"
+  },
+  {
+    "id": "s-for-her",
+    "label": "For Her",
+    "image": "/images/giftify/stories/for-her.png",
+    "href": "/shop?category=anniversary-gifts",
+    "headline": "Surprise Her Like Never Before 💖",
+    "tagline": "Love pearl oysters, magic photo lockets & glow lamps"
+  },
+  {
+    "id": "s-love",
+    "label": "Love",
+    "image": "/images/giftify/stories/love.png",
+    "href": "/shop?category=couple-gifts",
+    "headline": "Express What Words Cannot 💌",
+    "tagline": "Pure romance and everlasting keepsakes"
+  },
+  {
+    "id": "s-surprise",
+    "label": "Surprise",
+    "image": "/images/giftify/stories/surprise.png",
+    "href": "/shop",
+    "headline": "Unbox Pure Happiness 🎉",
+    "tagline": "Trending gifts that bring happy tears"
+  }
+]
+

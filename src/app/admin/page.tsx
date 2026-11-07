@@ -128,6 +128,20 @@ export default function AdminDashboardPage() {
     }
   };
 
+  // Story Circles State & Management
+  const [stories, setStories] = useState<any[]>([]);
+  const [savingStories, setSavingStories] = useState(false);
+  const [storiesSaved, setStoriesSaved] = useState(false);
+  const [uploadingStoryId, setUploadingStoryId] = useState<string | null>(null);
+
+  const fetchStories = async () => {
+    try {
+      const res = await fetch('/api/stories');
+      const data = await res.json();
+      if (Array.isArray(data)) setStories(data);
+    } catch {}
+  };
+
   useEffect(() => {
     if (!isAdminLoggedIn) {
       router.push('/admin/login');
@@ -136,7 +150,52 @@ export default function AdminDashboardPage() {
     fetchProducts();
     fetchOrders();
     fetchSettings();
+    fetchStories();
   }, [isAdminLoggedIn, router]);
+
+  const handleSaveStories = async () => {
+    setSavingStories(true);
+    setStoriesSaved(false);
+    try {
+      const res = await fetch('/api/stories', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(stories),
+      });
+      if (res.ok) {
+        setStoriesSaved(true);
+        setTimeout(() => setStoriesSaved(false), 3000);
+      }
+    } finally {
+      setSavingStories(false);
+    }
+  };
+
+  const handleStoryImageUpload = async (storyId: string, file: File) => {
+    setUploadingStoryId(storyId);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      const res = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      const data = await res.json();
+      if (res.ok && data.url) {
+        const updated = stories.map((s) => (s.id === storyId ? { ...s, image: data.url } : s));
+        setStories(updated);
+        await fetch('/api/stories', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updated),
+        });
+        setStoriesSaved(true);
+        setTimeout(() => setStoriesSaved(false), 3000);
+      }
+    } finally {
+      setUploadingStoryId(null);
+    }
+  };
 
   // Save Settings
   const handleSaveSettings = async (e?: React.FormEvent) => {
@@ -1161,6 +1220,133 @@ export default function AdminDashboardPage() {
                 >
                   {settingsSaving ? 'Saving Changes...' : 'Save & Publish Banners'}
                 </button>
+              </div>
+            </div>
+
+            {/* Story Circles Manager */}
+            <div className="bg-white border border-[#E7E1D8] p-6 sm:p-8 space-y-6 shadow-xs">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E7E1D8]">
+                <div className="flex items-center gap-3">
+                  <div className="w-9 h-9 rounded-full bg-[#FAF5E6] border border-[#F5C400]/40 flex items-center justify-center text-[#D9A300]">
+                    <Sparkles className="w-5 h-5 text-[#D9A300]" />
+                  </div>
+                  <div>
+                    <h3 className="font-serif text-xl text-[#181818] font-light">
+                      Homepage Story Circles (Top Bubbles)
+                    </h3>
+                    <p className="text-xs text-[#708579]">
+                      Upload photos, change titles, links &amp; popup text for each of the 8 story circles on the homepage.
+                    </p>
+                  </div>
+                </div>
+                {storiesSaved && (
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
+                    <CheckCircle2 className="w-3.5 h-3.5" /> Stories Saved Live!
+                  </span>
+                )}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {stories.map((story, idx) => (
+                  <div
+                    key={story.id || idx}
+                    className="p-4 border border-[#E7E1D8] rounded-xl flex flex-col items-center space-y-3 bg-[#FAF8F5]/80 hover:border-[#24332C]/40 transition-colors"
+                  >
+                    {/* Circle Image Preview */}
+                    <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-[#F5C400] shadow-sm bg-white shrink-0 group">
+                      <Image
+                        src={story.image || '/images/giftify/stories/anniversary.png'}
+                        alt={story.label || 'Story'}
+                        fill
+                        className="object-cover"
+                        unoptimized
+                      />
+                      {uploadingStoryId === story.id && (
+                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white text-[10px] font-bold">
+                          Uploading...
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Change Photo Button */}
+                    <label className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#24332C] hover:bg-[#19241F] text-white text-[10px] font-bold uppercase tracking-wider rounded-md transition-colors shadow-xs">
+                      <Upload className="w-3 h-3" />
+                      <span>{uploadingStoryId === story.id ? 'Uploading...' : 'Upload Image'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => e.target.files?.[0] && handleStoryImageUpload(story.id, e.target.files[0])}
+                      />
+                    </label>
+
+                    {/* Inputs */}
+                    <div className="w-full space-y-2 pt-1 text-left">
+                      <div>
+                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
+                          Circle Label
+                        </label>
+                        <input
+                          type="text"
+                          value={story.label || ''}
+                          onChange={(e) =>
+                            setStories(stories.map((s) => (s.id === story.id ? { ...s, label: e.target.value } : s)))
+                          }
+                          placeholder="e.g. Anniversary"
+                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] font-medium focus:outline-none focus:border-[#24332C] rounded-sm"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
+                          Redirect Link (URL)
+                        </label>
+                        <input
+                          type="text"
+                          value={story.href || ''}
+                          onChange={(e) =>
+                            setStories(stories.map((s) => (s.id === story.id ? { ...s, href: e.target.value } : s)))
+                          }
+                          placeholder="e.g. /shop?category=anniversary-gifts"
+                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
+                          Popup Headline
+                        </label>
+                        <input
+                          type="text"
+                          value={story.headline || ''}
+                          onChange={(e) =>
+                            setStories(stories.map((s) => (s.id === story.id ? { ...s, headline: e.target.value } : s)))
+                          }
+                          placeholder="e.g. Anniversary Specials 🥂"
+                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Save Stories Button */}
+              <div className="pt-4 border-t border-[#E7E1D8] flex items-center justify-between">
+                <button
+                  type="button"
+                  onClick={handleSaveStories}
+                  disabled={savingStories}
+                  className="bg-[#24332C] text-white px-6 py-3 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 cursor-pointer shadow-xs inline-flex items-center gap-2"
+                >
+                  <Sparkles className="w-3.5 h-3.5 text-[#F5C400]" />
+                  <span>{savingStories ? 'Saving Stories...' : 'Save & Update Story Circles'}</span>
+                </button>
+                {storiesSaved && (
+                  <span className="text-xs font-semibold text-emerald-700">
+                    All changes saved and live on homepage!
+                  </span>
+                )}
               </div>
             </div>
           </div>

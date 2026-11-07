@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react';
+import storiesData from '../../../data/stories.json';
 
 interface StoryItem {
   id: string;
@@ -14,76 +15,24 @@ interface StoryItem {
   tagline: string;
 }
 
-const STORIES: StoryItem[] = [
-  {
-    id: 's-anniversary',
-    label: 'Anniversary',
-    image: '/images/giftify/stories/anniversary.jpg',
-    href: '/shop?category=anniversary-gifts',
-    headline: 'Anniversary Specials 🥂',
-    tagline: 'Memories that stay forever young and close to heart',
-  },
-  {
-    id: 's-couple',
-    label: 'Couple',
-    image: '/images/giftify/stories/couple.jpg',
-    href: '/shop?category=couple-gifts',
-    headline: 'For You & Your Forever ❤️',
-    tagline: 'Vibrating touch bracelets & couple lockets',
-  },
-  {
-    id: 's-birthday',
-    label: 'Birthday',
-    image: '/images/giftify/stories/birthday.jpg',
-    href: '/shop?category=birthday-gifts',
-    headline: 'Make Their Birthday Magical 🎂',
-    tagline: 'Customized currency notes, magic mugs & crystal cubes',
-  },
-  {
-    id: 's-personalized',
-    label: 'Personalized',
-    image: '/images/giftify/stories/personalized.jpg',
-    href: '/shop?category=personalized-gifts',
-    headline: 'Handcrafted With Your Names ✨',
-    tagline: 'Engraved wooden frames & 3D name flips',
-  },
-  {
-    id: 's-for-him',
-    label: 'For Him',
-    image: '/images/giftify/stories/for-him.jpg',
-    href: '/shop?category=couple-gifts',
-    headline: 'Thoughtful Gifts For Him 🎁',
-    tagline: 'Personalized wallets, keychains & projection bracelets',
-  },
-  {
-    id: 's-for-her',
-    label: 'For Her',
-    image: '/images/giftify/stories/for-her.jpg',
-    href: '/shop?category=anniversary-gifts',
-    headline: 'Surprise Her Like Never Before 💖',
-    tagline: 'Love pearl oysters, magic photo lockets & glow lamps',
-  },
-  {
-    id: 's-love',
-    label: 'Love',
-    image: '/images/giftify/stories/love.jpg',
-    href: '/shop?category=couple-gifts',
-    headline: 'Express What Words Cannot 💌',
-    tagline: 'Pure romance and everlasting keepsakes',
-  },
-  {
-    id: 's-surprise',
-    label: 'Surprise',
-    image: '/images/giftify/stories/surprise.jpg',
-    href: '/shop',
-    headline: 'Unbox Pure Happiness 🎉',
-    tagline: 'Trending gifts that bring happy tears',
-  },
-];
+const DEFAULT_STORIES: StoryItem[] = storiesData;
 
 export default function StoryCircles() {
+  const [stories, setStories] = useState<StoryItem[]>(DEFAULT_STORIES);
   const [activeStoryIndex, setActiveStoryIndex] = useState<number | null>(null);
   const [progress, setProgress] = useState(0);
+
+  // Fetch updated stories dynamically from admin API
+  useEffect(() => {
+    fetch('/api/stories')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          setStories(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Auto-progress timer for Instagram Story viewer
   useEffect(() => {
@@ -96,7 +45,7 @@ export default function StoryCircles() {
       setProgress((prev) => {
         if (prev >= 100) {
           // Go to next story or close
-          if (activeStoryIndex < STORIES.length - 1) {
+          if (activeStoryIndex < stories.length - 1) {
             setActiveStoryIndex(activeStoryIndex + 1);
             return 0;
           } else {
@@ -109,7 +58,7 @@ export default function StoryCircles() {
     }, 100);
 
     return () => clearInterval(interval);
-  }, [activeStoryIndex]);
+  }, [activeStoryIndex, stories.length]);
 
   const openStory = (idx: number, e: React.MouseEvent) => {
     e.preventDefault();
@@ -118,7 +67,7 @@ export default function StoryCircles() {
   };
 
   const nextStory = () => {
-    if (activeStoryIndex !== null && activeStoryIndex < STORIES.length - 1) {
+    if (activeStoryIndex !== null && activeStoryIndex < stories.length - 1) {
       setActiveStoryIndex(activeStoryIndex + 1);
       setProgress(0);
     } else {
@@ -138,7 +87,7 @@ export default function StoryCircles() {
       <section className="bg-white py-5 sm:py-6 border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex items-center justify-start sm:justify-center gap-4 sm:gap-8 overflow-x-auto pb-2 scrollbar-none px-2 snap-x snap-mandatory scroll-smooth">
-            {STORIES.map((story, idx) => (
+            {stories.map((story, idx) => (
               <button
                 key={story.id}
                 onClick={(e) => openStory(idx, e)}
@@ -165,7 +114,7 @@ export default function StoryCircles() {
       </section>
 
       {/* Instagram Story Viewer Modal */}
-      {activeStoryIndex !== null && (
+      {activeStoryIndex !== null && stories[activeStoryIndex] && (
         <div className="fixed inset-0 z-50 bg-black/90 backdrop-blur-md flex items-center justify-center p-2 sm:p-4 animate-in fade-in duration-200">
           {/* Close button */}
           <button
@@ -198,8 +147,8 @@ export default function StoryCircles() {
           <div className="relative w-full max-w-sm sm:max-w-md aspect-[9/16] rounded-3xl overflow-hidden shadow-2xl bg-black border border-stone-800 flex flex-col justify-between">
             {/* Background Story Image */}
             <Image
-              src={STORIES[activeStoryIndex].image}
-              alt={STORIES[activeStoryIndex].headline}
+              src={stories[activeStoryIndex].image}
+              alt={stories[activeStoryIndex].headline}
               fill
               className="object-cover"
               priority
@@ -210,7 +159,7 @@ export default function StoryCircles() {
             <div className="relative z-10 p-4 bg-gradient-to-b from-black/80 via-black/40 to-transparent">
               {/* Progress bars row */}
               <div className="flex gap-1.5 mb-3">
-                {STORIES.map((_, i) => (
+                {stories.map((_, i) => (
                   <div
                     key={i}
                     className="flex-1 h-1 rounded-full bg-white/30 overflow-hidden"
@@ -243,7 +192,7 @@ export default function StoryCircles() {
                     </span>
                   </h4>
                   <span className="text-stone-300 text-[10px]">
-                    {STORIES[activeStoryIndex].label} Spotlight
+                    {stories[activeStoryIndex].label} Spotlight
                   </span>
                 </div>
               </div>
@@ -261,14 +210,14 @@ export default function StoryCircles() {
                 <Sparkles className="w-3.5 h-3.5" /> Spotlight
               </span>
               <h3 className="text-white text-xl sm:text-2xl font-extrabold mb-1 drop-shadow-md">
-                {STORIES[activeStoryIndex].headline}
+                {stories[activeStoryIndex].headline}
               </h3>
               <p className="text-stone-200 text-xs sm:text-sm mb-4 leading-relaxed line-clamp-2">
-                {STORIES[activeStoryIndex].tagline}
+                {stories[activeStoryIndex].tagline}
               </p>
 
               <Link
-                href={STORIES[activeStoryIndex].href}
+                href={stories[activeStoryIndex].href}
                 onClick={() => setActiveStoryIndex(null)}
                 className="w-full bg-[#F5C400] hover:bg-[#FFD747] text-black font-extrabold text-sm py-3.5 px-4 rounded-xl flex items-center justify-center gap-2 shadow-lg transition-transform hover:scale-[1.02]"
               >
