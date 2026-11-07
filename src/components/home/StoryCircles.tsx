@@ -137,29 +137,25 @@ export default function StoryCircles() {
     <>
       <section className="bg-white py-5 sm:py-6 border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-start sm:justify-center gap-3 sm:gap-7 overflow-x-auto pb-2 scrollbar-none">
+          <div className="flex items-center justify-start sm:justify-center gap-4 sm:gap-8 overflow-x-auto pb-2 scrollbar-none px-2">
             {STORIES.map((story, idx) => (
               <button
                 key={story.id}
                 onClick={(e) => openStory(idx, e)}
-                className="flex flex-col items-center group flex-shrink-0 cursor-pointer text-left focus:outline-hidden"
+                className="flex flex-col items-center group flex-shrink-0 cursor-pointer text-center focus:outline-hidden"
               >
-                {/* Story Gradient Ring */}
-                <div className="w-[74px] h-[74px] sm:w-[88px] sm:h-[88px] rounded-full p-[2.5px] bg-gradient-to-tr from-[#F5C400] via-[#FF5E62] to-[#F5C400] shadow-sm group-hover:scale-105 transition-all duration-300">
-                  <div className="relative w-full h-full rounded-full overflow-hidden bg-white p-[2px]">
-                    <div className="relative w-full h-full rounded-full overflow-hidden">
-                      <Image
-                        src={story.image}
-                        alt={story.label}
-                        fill
-                        sizes="88px"
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        unoptimized
-                      />
-                    </div>
-                  </div>
+                {/* Clean Giftify Yellow Story Circle matching frame 001 */}
+                <div className="relative w-[76px] h-[76px] sm:w-[90px] sm:h-[90px] rounded-full overflow-hidden shadow-xs group-hover:shadow-lg group-hover:scale-105 active:scale-95 transition-all duration-300 bg-white">
+                  <Image
+                    src={story.image}
+                    alt={story.label}
+                    fill
+                    sizes="(max-width: 640px) 76px, 90px"
+                    className="object-cover"
+                    unoptimized
+                  />
                 </div>
-                <span className="text-[11px] sm:text-xs font-semibold text-stone-800 mt-1.5 group-hover:text-[#F5C400] transition-colors">
+                <span className="text-xs sm:text-sm font-semibold text-stone-900 mt-2 group-hover:text-[#F5C400] transition-colors tracking-tight">
                   {story.label}
                 </span>
               </button>
