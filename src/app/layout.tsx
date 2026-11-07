@@ -10,6 +10,7 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/cart/CartDrawer';
 import FloatingChatBubble from '@/components/common/FloatingChatBubble';
+import RecentSalesPopup from '@/components/social/RecentSalesPopup';
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -112,6 +113,7 @@ export default function RootLayout({
                 <Footer />
                 <CartDrawer />
                 <FloatingChatBubble />
+                <RecentSalesPopup />
               </WishlistProvider>
             </CartProvider>
           </CurrencyProvider>

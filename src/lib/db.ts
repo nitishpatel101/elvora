@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import fs from 'fs/promises';
 import path from 'path';
-import { Product, Order, Category, StoreSettings } from '@/types';
+import { Product, Order, Category, StoreSettings, Review } from '@/types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -22,6 +22,7 @@ const PRODUCTS_FILE = path.join(DATA_DIR, 'products.json');
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
 const STORE_SETTINGS_FILE = path.join(DATA_DIR, 'store-settings.json');
+const REVIEWS_FILE = path.join(DATA_DIR, 'reviews.json');
 
 // Memory cache fallback for serverless deployments
 const inMemoryStore = new Map<string, string>();
@@ -319,6 +320,7 @@ function mapModelToSupabaseProduct(p: Product): any {
   };
 }
 
+
 function mapSupabaseOrderToModel(o: any): Order {
   return {
     id: o.id,
@@ -381,4 +383,26 @@ function mapModelToSupabaseOrder(o: Order): any {
     updated_at: new Date().toISOString(),
   };
 }
+
+export async function getAllReviews(productId?: string): Promise<Review[]> {
+  try {
+    const raw = await safeReadFile(REVIEWS_FILE);
+    const reviews: Review[] = JSON.parse(raw);
+    if (productId) {
+      return reviews.filter(r => !r.productId || r.productId === productId);
+    }
+    return reviews;
+  } catch (err) {
+    console.error('Failed to read reviews:', err);
+    return [];
+  }
+}
+
+export async function saveReview(newReview: Review): Promise<Review> {
+  const reviews = await getAllReviews();
+  const updated = [newReview, ...reviews];
+  await safeWriteFile(REVIEWS_FILE, JSON.stringify(updated, null, 2));
+  return newReview;
+}
+
 

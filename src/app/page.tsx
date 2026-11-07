@@ -6,6 +6,7 @@ import BurgundyBanner from '@/components/home/BurgundyBanner';
 import LifestyleCampaign from '@/components/home/LifestyleCampaign';
 import BrandStory from '@/components/home/BrandStory';
 import TrustSection from '@/components/home/TrustSection';
+import CustomerReviewsSection from '@/components/reviews/CustomerReviewsSection';
 
 export const revalidate = 0; // Dynamic products from database
 
@@ -32,7 +33,10 @@ export default async function HomePage() {
       {/* 6. Brand Story Section: More Than Jewellery. A Feeling. */}
       <BrandStory />
 
-      {/* 7. Clean Trust Guarantees */}
+      {/* 7. Verified Hinglish Customer Reviews & Write a Review */}
+      <CustomerReviewsSection />
+
+      {/* 8. Clean Trust Guarantees */}
       <TrustSection />
     </div>
   );

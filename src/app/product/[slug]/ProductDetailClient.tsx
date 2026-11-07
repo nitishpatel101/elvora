@@ -9,6 +9,7 @@ import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 import ProductGallery from '@/components/product/ProductGallery';
 import ProductCard from '@/components/product/ProductCard';
+import CustomerReviewsSection from '@/components/reviews/CustomerReviewsSection';
 import {
   Heart,
   ShoppingBag,
@@ -396,6 +397,12 @@ export default function ProductDetailClient({
           </div>
         </div>
       </div>
+
+      {/* Verified Customer Reviews & Stories */}
+      <CustomerReviewsSection
+        productId={product.id}
+        productName={product.name}
+      />
 
       {/* Related Products Recommendation Carousel */}
       {relatedProducts.length > 0 && (

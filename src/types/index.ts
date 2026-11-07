@@ -168,3 +168,18 @@ export interface CustomerUser {
   createdAt: string;
 }
 
+export interface Review {
+  id: string;
+  productId?: string;
+  productName?: string;
+  authorName: string;
+  city?: string;
+  rating: number; // 1 to 5
+  title: string;
+  content: string;
+  images?: string[];
+  verified: boolean;
+  timeAgo?: string;
+  createdAt: string;
+}
+
