@@ -48,33 +48,33 @@ export default function HeroSection() {
   if (!slide) return null;
 
   return (
-    <section className="bg-white py-4 sm:py-6">
-      <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative w-full aspect-[2/1] sm:aspect-[2.6/1] md:aspect-[3.1/1] min-h-[250px] sm:min-h-[380px] md:min-h-[460px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-stone-200 group bg-stone-900">
-          {/* Slides Images with Smooth Crossfade */}
-          {slides.map((s, idx) => (
-            <div
-              key={s.id || idx}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-              }`}
-            >
-              <Image
-                src={s.image}
-                alt={s.title}
-                fill
-                priority={idx === 0}
-                sizes="100vw"
-                className="object-cover object-center scale-100 group-hover:scale-[1.02] transition-transform duration-1000"
-                unoptimized
-              />
-              {/* Vignette Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent sm:from-black/75 sm:via-black/25" />
-            </div>
-          ))}
+    <section className="w-full relative overflow-hidden bg-stone-950">
+      <div className="relative w-full aspect-[16/9] sm:aspect-[2.2/1] md:aspect-[2.8/1] lg:aspect-[3.2/1] min-h-[280px] sm:min-h-[380px] md:min-h-[460px] lg:min-h-[520px] overflow-hidden group bg-stone-900">
+        {/* Slides Images with Smooth Crossfade */}
+        {slides.map((s, idx) => (
+          <div
+            key={s.id || idx}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+            }`}
+          >
+            <Image
+              src={s.image}
+              alt={s.title}
+              fill
+              priority={idx === 0}
+              sizes="100vw"
+              className="object-cover object-center scale-100 group-hover:scale-[1.02] transition-transform duration-1000"
+              unoptimized
+            />
+            {/* Vignette Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent sm:from-black/75 sm:via-black/25" />
+          </div>
+        ))}
 
-          {/* Slide Text Content */}
-          <div className="relative z-20 h-full flex flex-col justify-center px-6 sm:px-12 md:px-16 max-w-xl text-white">
+        {/* Slide Text Content */}
+        <div className="relative z-20 h-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 flex flex-col justify-center text-white">
+          <div className="max-w-xl">
             {/* Pill Tag */}
             <div className="animate-float mb-2 sm:mb-3">
               <span className="inline-flex items-center gap-1.5 bg-[#F5C400] text-black text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
@@ -112,46 +112,46 @@ export default function HeroSection() {
               </Link>
             </div>
           </div>
-
-          {/* Left / Right Carousel Buttons */}
-          {slides.length > 1 && (
-            <>
-              <button
-                onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
-                className="absolute left-3 sm:left-5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-xs text-white flex items-center justify-center transition-colors"
-                aria-label="Previous slide"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-
-              <button
-                onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
-                className="absolute right-3 sm:right-5 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-black/70 backdrop-blur-xs text-white flex items-center justify-center transition-colors"
-                aria-label="Next slide"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </>
-          )}
-
-          {/* Carousel Slide Indicators */}
-          {slides.length > 1 && (
-            <div className="absolute bottom-4 sm:bottom-6 right-6 sm:right-10 z-30 flex items-center gap-2">
-              {slides.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentSlide(i)}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    i === activeIndex
-                      ? 'w-7 sm:w-9 bg-[#F5C400] shadow-md'
-                      : 'w-2 sm:w-2.5 bg-white/40 hover:bg-white/70'
-                  }`}
-                  aria-label={`Go to slide ${i + 1}`}
-                />
-              ))}
-            </div>
-          )}
         </div>
+
+        {/* Left / Right Carousel Buttons */}
+        {slides.length > 1 && (
+          <>
+            <button
+              onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+              className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/75 backdrop-blur-xs text-white flex items-center justify-center transition-colors shadow-lg"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+
+            <button
+              onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+              className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-30 w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-black/40 hover:bg-black/75 backdrop-blur-xs text-white flex items-center justify-center transition-colors shadow-lg"
+              aria-label="Next slide"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+          </>
+        )}
+
+        {/* Carousel Slide Indicators */}
+        {slides.length > 1 && (
+          <div className="absolute bottom-4 sm:bottom-6 right-6 sm:right-12 z-30 flex items-center gap-2">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentSlide(i)}
+                className={`h-2 rounded-full transition-all duration-300 ${
+                  i === activeIndex
+                    ? 'w-7 sm:w-9 bg-[#F5C400] shadow-md'
+                    : 'w-2 sm:w-2.5 bg-white/40 hover:bg-white/70'
+                }`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
