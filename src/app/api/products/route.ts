@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { getAllProducts, saveProduct } from '@/lib/db';
 import { Product } from '@/types';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(req: Request) {
   try {
     const { searchParams } = new URL(req.url);
@@ -40,7 +43,11 @@ export async function GET(req: Request) {
       );
     }
 
-    return NextResponse.json(filtered);
+    return NextResponse.json(filtered, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      },
+    });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Failed to retrieve products';
     return NextResponse.json({ error: message }, { status: 500 });
@@ -93,7 +100,12 @@ export async function POST(req: Request) {
     };
 
     const saved = await saveProduct(newProduct);
-    return NextResponse.json(saved, { status: 201 });
+    return NextResponse.json(saved, {
+      status: 201,
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      },
+    });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Failed to save product';
     return NextResponse.json({ error: message }, { status: 500 });

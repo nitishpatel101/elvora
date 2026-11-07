@@ -7,13 +7,21 @@ import ProductForm from '@/components/admin/ProductForm';
 
 export default function NewProductPage() {
   const router = useRouter();
-  const { isAdminLoggedIn } = useAuth();
+  const { isAdminLoggedIn, isAuthInitialized } = useAuth();
 
   useEffect(() => {
-    if (!isAdminLoggedIn) {
+    if (isAuthInitialized && !isAdminLoggedIn) {
       router.push('/admin/login');
     }
-  }, [isAdminLoggedIn, router]);
+  }, [isAdminLoggedIn, isAuthInitialized, router]);
+
+  if (!isAuthInitialized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FAF8F5]">
+        <div className="w-8 h-8 border-2 border-[#D79648] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   if (!isAdminLoggedIn) return null;
 

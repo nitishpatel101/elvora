@@ -23,7 +23,7 @@ export default function HeroSection() {
 
   // Fetch updated slides from API dynamically
   useEffect(() => {
-    fetch('/api/hero-slides')
+    fetch('/api/hero-slides', { cache: 'no-store' })
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

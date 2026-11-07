@@ -9,7 +9,10 @@
     "description": "Engraved with Jane Austen's quote 'My heart is, and always will be yours'. When you tap your bracelet, your loved one's bracelet lights up and vibrates instantly, no matter the distance.",
     "category": "Couple Gifts",
     "categorySlug": "couple-gifts",
-    "colours": ["Sun & Moon Rose Gold", "Obsidian Black"],
+    "colours": [
+      "Sun & Moon Rose Gold",
+      "Obsidian Black"
+    ],
     "inStock": true,
     "stock": 50,
     "isFeatured": true,
@@ -27,10 +30,30 @@
       "/images/products/touch-distance-couple-bracelet/product-8.jpg"
     ],
     "variants": [
-      { "id": "v-rope", "name": "Rope model", "inStock": true, "stock": 25 },
-      { "id": "v-metal", "name": "Metal model", "inStock": true, "stock": 15 },
-      { "id": "v-morse", "name": "Morse Love Bracelet", "inStock": true, "stock": 10 },
-      { "id": "v-candy", "name": "Candy model Bracelet", "inStock": true, "stock": 8 }
+      {
+        "id": "v-rope",
+        "name": "Rope model",
+        "inStock": true,
+        "stock": 25
+      },
+      {
+        "id": "v-metal",
+        "name": "Metal model",
+        "inStock": true,
+        "stock": 15
+      },
+      {
+        "id": "v-morse",
+        "name": "Morse Love Bracelet",
+        "inStock": true,
+        "stock": 10
+      },
+      {
+        "id": "v-candy",
+        "name": "Candy model Bracelet",
+        "inStock": true,
+        "stock": 8
+      }
     ],
     "details": {
       "material": "Surgical Stainless Steel & Braided Waterproof Milanese Cord",
@@ -49,10 +72,13 @@
     "tagline": "Black stone transforms into your secret photo when warmed by touch",
     "price": 999,
     "originalPrice": 1499,
-    "description": "Under 30°C it appears as a sleek black pendant. When warmed by body heat or touch (>30°C), the stone reveals your custom hidden photo magically.",
+    "description": "Under 30\u00b0C it appears as a sleek black pendant. When warmed by body heat or touch (>30\u00b0C), the stone reveals your custom hidden photo magically.",
     "category": "Personalized Gifts",
     "categorySlug": "personalized-gifts",
-    "colours": ["Gold", "Silver"],
+    "colours": [
+      "Gold",
+      "Silver"
+    ],
     "inStock": true,
     "stock": 65,
     "isFeatured": true,
@@ -63,8 +89,18 @@
       "/images/giftify/products/heat-activated-necklace.jpg"
     ],
     "variants": [
-      { "id": "v-gold", "name": "18K Gold Plated", "inStock": true, "stock": 35 },
-      { "id": "v-silver", "name": "Pure Silver Finish", "inStock": true, "stock": 30 }
+      {
+        "id": "v-gold",
+        "name": "18K Gold Plated",
+        "inStock": true,
+        "stock": 35
+      },
+      {
+        "id": "v-silver",
+        "name": "Pure Silver Finish",
+        "inStock": true,
+        "stock": 30
+      }
     ],
     "details": {
       "material": "High Grade Stainless Steel with Thermo-Chromic Crystal",
@@ -83,7 +119,9 @@
     "description": "An unforgettable experience. Open the sealed tin can with a real oyster, discover your genuine pearl, and place it into the heart pendant.",
     "category": "Anniversary Gifts",
     "categorySlug": "anniversary-gifts",
-    "colours": ["Silver"],
+    "colours": [
+      "Silver"
+    ],
     "inStock": true,
     "stock": 90,
     "isFeatured": true,
@@ -94,7 +132,12 @@
       "/images/giftify/products/love-pearl-necklace.jpg"
     ],
     "variants": [
-      { "id": "v-box", "name": "Gift Box Complete Set", "inStock": true, "stock": 90 }
+      {
+        "id": "v-box",
+        "name": "Gift Box Complete Set",
+        "inStock": true,
+        "stock": 90
+      }
     ],
     "details": {
       "material": "Natural Cultured Pearl & Rhodium Plated Heart Locket"
@@ -112,7 +155,10 @@
     "description": "Crafted as two loving hands wrapping gently around your wrist. A heartwarming reminder of your warmth and embrace.",
     "category": "Couple Gifts",
     "categorySlug": "couple-gifts",
-    "colours": ["Sterling Silver", "Rose Gold"],
+    "colours": [
+      "Sterling Silver",
+      "Rose Gold"
+    ],
     "inStock": true,
     "stock": 40,
     "isFeatured": true,
@@ -123,8 +169,18 @@
       "/images/giftify/products/hug-bracelet.jpg"
     ],
     "variants": [
-      { "id": "v-silver", "name": "Sterling Silver", "inStock": true, "stock": 25 },
-      { "id": "v-rose", "name": "Rose Gold", "inStock": true, "stock": 15 }
+      {
+        "id": "v-silver",
+        "name": "Sterling Silver",
+        "inStock": true,
+        "stock": 25
+      },
+      {
+        "id": "v-rose",
+        "name": "Rose Gold",
+        "inStock": true,
+        "stock": 15
+      }
     ],
     "details": {
       "material": "925 Sterling Silver Plated with anti-tarnish coating"
@@ -142,7 +198,9 @@
     "description": "Geometric facets with secret nanotech projection lens. Shine your phone flashlight through the center stone to project I Love You in 100 languages.",
     "category": "Couple Gifts",
     "categorySlug": "couple-gifts",
-    "colours": ["Silver"],
+    "colours": [
+      "Silver"
+    ],
     "inStock": true,
     "stock": 30,
     "isFeatured": true,
@@ -153,7 +211,12 @@
       "/images/giftify/products/couple-ring.jpg"
     ],
     "variants": [
-      { "id": "v-pair", "name": "Matching Pair (His & Hers Adjustable)", "inStock": true, "stock": 30 }
+      {
+        "id": "v-pair",
+        "name": "Matching Pair (His & Hers Adjustable)",
+        "inStock": true,
+        "stock": 30
+      }
     ],
     "details": {
       "material": "Titanium Steel with Nano Optical Projection Crystal"
@@ -171,7 +234,9 @@
     "description": "High purity K9 optical crystal engraved with cutting-edge 3D laser technology. Includes color changing multi-LED wooden light stand.",
     "category": "Personalized Gifts",
     "categorySlug": "personalized-gifts",
-    "colours": ["Clear K9 Crystal"],
+    "colours": [
+      "Clear K9 Crystal"
+    ],
     "inStock": true,
     "stock": 50,
     "isFeatured": true,
@@ -182,7 +247,12 @@
       "/images/giftify/products/3d-crystal-photo-cube.jpg"
     ],
     "variants": [
-      { "id": "v-cube", "name": "Cube + LED Base", "inStock": true, "stock": 50 }
+      {
+        "id": "v-cube",
+        "name": "Cube + LED Base",
+        "inStock": true,
+        "stock": 50
+      }
     ],
     "details": {
       "material": "K9 Optical Crystal & Natural Pine Wood Base"
@@ -200,7 +270,9 @@
     "description": "Framed genuine currency note featuring serial digits matching your or your loved one's special birthday date in a luxury presentation stand.",
     "category": "Birthday Gifts",
     "categorySlug": "birthday-gifts",
-    "colours": ["Gold / Clear Frame"],
+    "colours": [
+      "Gold / Clear Frame"
+    ],
     "inStock": true,
     "stock": 75,
     "isFeatured": false,
@@ -211,7 +283,12 @@
       "/images/giftify/products/birthday-currency-note.jpg"
     ],
     "variants": [
-      { "id": "v-acrylic", "name": "Deluxe Acrylic Stand", "inStock": true, "stock": 75 }
+      {
+        "id": "v-acrylic",
+        "name": "Deluxe Acrylic Stand",
+        "inStock": true,
+        "stock": 75
+      }
     ],
     "details": {
       "material": "Genuine Currency Note in UV Protected Acrylic Case"
@@ -229,7 +306,9 @@
     "description": "A rare artistic masterpiece. Hand-painted micro portrait on an authentic white natural feather, preserving timeless memories forever.",
     "category": "Personalized Gifts",
     "categorySlug": "personalized-gifts",
-    "colours": ["Natural White"],
+    "colours": [
+      "Natural White"
+    ],
     "inStock": true,
     "stock": 20,
     "isFeatured": false,
@@ -240,7 +319,12 @@
       "/images/giftify/products/feather-painting.jpg"
     ],
     "variants": [
-      { "id": "v-frame", "name": "Feather with Glass Deep Shadow Box", "inStock": true, "stock": 20 }
+      {
+        "id": "v-frame",
+        "name": "Feather with Glass Deep Shadow Box",
+        "inStock": true,
+        "stock": 20
+      }
     ],
     "details": {
       "material": "Authentic Treated Feather with Acrylic Fine-liner Art"
@@ -258,7 +342,9 @@
     "description": "Warm wooden plaque laser-engraved with your photo, names, and anniversary date. Ideal for table desks and bedside stands.",
     "category": "Anniversary Gifts",
     "categorySlug": "anniversary-gifts",
-    "colours": ["Natural Beech Wood"],
+    "colours": [
+      "Natural Beech Wood"
+    ],
     "inStock": true,
     "stock": 85,
     "isFeatured": false,
@@ -269,8 +355,18 @@
       "/images/giftify/products/wooden-engraving-gift.jpg"
     ],
     "variants": [
-      { "id": "v-small", "name": "Standard (6x4 inch)", "inStock": true, "stock": 50 },
-      { "id": "v-large", "name": "Large (8x6 inch)", "inStock": true, "stock": 35 }
+      {
+        "id": "v-small",
+        "name": "Standard (6x4 inch)",
+        "inStock": true,
+        "stock": 50
+      },
+      {
+        "id": "v-large",
+        "name": "Large (8x6 inch)",
+        "inStock": true,
+        "stock": 35
+      }
     ],
     "details": {
       "material": "100% Solid Natural Beech Wood"
@@ -288,7 +384,9 @@
     "description": "Ultra detailed handmade miniature dolls sculpted from your real photos. Captures your outfits, poses, and expressions with incredible likeness.",
     "category": "Anniversary Gifts",
     "categorySlug": "anniversary-gifts",
-    "colours": ["Custom Hand Painted"],
+    "colours": [
+      "Custom Hand Painted"
+    ],
     "inStock": true,
     "stock": 15,
     "isFeatured": true,
@@ -299,7 +397,12 @@
       "/images/giftify/products/3d-miniature.jpg"
     ],
     "variants": [
-      { "id": "v-couple", "name": "Couple Figurine (6 inch)", "inStock": true, "stock": 15 }
+      {
+        "id": "v-couple",
+        "name": "Couple Figurine (6 inch)",
+        "inStock": true,
+        "stock": 15
+      }
     ],
     "details": {
       "material": "Poly-resin and polymer clay with UV protective matte glaze"

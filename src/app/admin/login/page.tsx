@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
-import { ShieldCheck, AlertCircle, ArrowRight, ArrowLeft } from 'lucide-react';
+import { AlertCircle, ArrowRight, ArrowLeft } from 'lucide-react';
 
 export default function AdminLoginPage() {
   const router = useRouter();

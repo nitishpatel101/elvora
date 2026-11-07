@@ -14,7 +14,6 @@ import {
   Search,
   ExternalLink,
   LogOut,
-  ShieldCheck,
   CheckCircle2,
   XCircle,
   Package,
@@ -30,11 +29,12 @@ import {
   Truck,
   TrendingUp,
   Sparkles,
+  Loader2,
 } from 'lucide-react';
 
 export default function AdminDashboardPage() {
   const router = useRouter();
-  const { admin, isAdminLoggedIn, logoutAdmin } = useAuth();
+  const { admin, isAdminLoggedIn, isAuthInitialized, logoutAdmin } = useAuth();
   const { format } = useCurrency();
 
   // Navigation Tabs: Added 'banners' tab
@@ -51,6 +51,23 @@ export default function AdminDashboardPage() {
   const [uploadingProductImage, setUploadingProductImage] = useState(false);
   const [newImageUrlInput, setNewImageUrlInput] = useState('');
   const [imageActionSuccess, setImageActionSuccess] = useState<string | null>(null);
+
+  // Quick Add Product Modal State
+  const [isAddingProduct, setIsAddingProduct] = useState(false);
+  const [newProdName, setNewProdName] = useState('');
+  const [newProdCategory, setNewProdCategory] = useState('Couple Gifts');
+  const [newProdPrice, setNewProdPrice] = useState('');
+  const [newProdOriginalPrice, setNewProdOriginalPrice] = useState('');
+  const [newProdStock, setNewProdStock] = useState('25');
+  const [newProdTagline, setNewProdTagline] = useState('');
+  const [newProdDescription, setNewProdDescription] = useState('');
+  const [newProdImages, setNewProdImages] = useState<string[]>([]);
+  const [newProdImageUrlInput, setNewProdImageUrlInput] = useState('');
+  const [newProdIsFeatured, setNewProdIsFeatured] = useState(true);
+  const [newProdIsBestSeller, setNewProdIsBestSeller] = useState(false);
+  const [creatingProduct, setCreatingProduct] = useState(false);
+  const [createProductError, setCreateProductError] = useState<string | null>(null);
+  const [createProductSuccess, setCreateProductSuccess] = useState<string | null>(null);
 
   // Orders & Payment Verification State
   const [orders, setOrders] = useState<Order[]>([]);
@@ -95,7 +112,7 @@ export default function AdminDashboardPage() {
   const fetchProducts = async () => {
     setProductsLoading(true);
     try {
-      const res = await fetch('/api/products?admin=true');
+      const res = await fetch('/api/products?admin=true', { cache: 'no-store' });
       const data = await res.json();
       if (Array.isArray(data)) setProducts(data);
     } finally {
@@ -107,7 +124,7 @@ export default function AdminDashboardPage() {
   const fetchOrders = async () => {
     setOrdersLoading(true);
     try {
-      const res = await fetch('/api/orders?admin=true');
+      const res = await fetch('/api/orders?admin=true', { cache: 'no-store' });
       const data = await res.json();
       if (Array.isArray(data)) setOrders(data);
     } finally {
@@ -118,7 +135,7 @@ export default function AdminDashboardPage() {
   // Fetch Settings
   const fetchSettings = async () => {
     try {
-      const res = await fetch('/api/settings');
+      const res = await fetch('/api/settings', { cache: 'no-store' });
       const data = await res.json();
       if (data && data.upiId) {
         setSettings((prev) => ({ ...prev, ...data }));
@@ -136,7 +153,7 @@ export default function AdminDashboardPage() {
 
   const fetchStories = async () => {
     try {
-      const res = await fetch('/api/stories');
+      const res = await fetch('/api/stories', { cache: 'no-store' });
       const data = await res.json();
       if (Array.isArray(data)) setStories(data);
     } catch {}
@@ -150,7 +167,7 @@ export default function AdminDashboardPage() {
 
   const fetchHeroSlides = async () => {
     try {
-      const res = await fetch('/api/hero-slides');
+      const res = await fetch('/api/hero-slides', { cache: 'no-store' });
       const data = await res.json();
       if (Array.isArray(data)) setHeroSlides(data);
     } catch {}
@@ -227,7 +244,7 @@ export default function AdminDashboardPage() {
 
   const fetchOccasions = async () => {
     try {
-      const res = await fetch('/api/occasions');
+      const res = await fetch('/api/occasions', { cache: 'no-store' });
       const data = await res.json();
       if (Array.isArray(data)) setOccasions(data);
     } catch {}
@@ -278,6 +295,7 @@ export default function AdminDashboardPage() {
   };
 
   useEffect(() => {
+    if (!isAuthInitialized) return;
     if (!isAdminLoggedIn) {
       router.push('/admin/login');
       return;
@@ -288,7 +306,7 @@ export default function AdminDashboardPage() {
     fetchStories();
     fetchHeroSlides();
     fetchOccasions();
-  }, [isAdminLoggedIn, router]);
+  }, [isAdminLoggedIn, isAuthInitialized, router]);
 
   const handleSaveStories = async () => {
     setSavingStories(true);
@@ -489,6 +507,106 @@ export default function AdminDashboardPage() {
     }
   };
 
+  // Quick Create Product
+  const handleCreateProduct = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newProdName.trim()) {
+      setCreateProductError('Product Title is required');
+      return;
+    }
+    if (!newProdPrice || Number(newProdPrice) <= 0) {
+      setCreateProductError('Please enter a valid selling price');
+      return;
+    }
+
+    setCreatingProduct(true);
+    setCreateProductError(null);
+    setCreateProductSuccess(null);
+
+    const categorySlugMap: Record<string, string> = {
+      'Couple Gifts': 'couple-gifts',
+      'Anniversary Gifts': 'anniversary-gifts',
+      'Personalized Gifts': 'personalized-gifts',
+      'Birthday Gifts': 'birthday-gifts',
+    };
+
+    const finalImages =
+      newProdImages.length > 0
+        ? newProdImages
+        : ['/images/products/touch-distance-bracelet/hero.jpg'];
+
+    const payload = {
+      name: newProdName.trim(),
+      category: newProdCategory,
+      categorySlug: categorySlugMap[newProdCategory] || newProdCategory.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+      price: Number(newProdPrice),
+      originalPrice: newProdOriginalPrice ? Number(newProdOriginalPrice) : undefined,
+      stock: Number(newProdStock) || 25,
+      tagline: newProdTagline.trim(),
+      description:
+        newProdDescription.trim() ||
+        `${newProdName.trim()} — A handcrafted, heartfelt gift designed to celebrate your most precious moments.`,
+      images: finalImages,
+      isFeatured: newProdIsFeatured,
+      isBestSeller: newProdIsBestSeller,
+      isPublished: true,
+      inStock: (Number(newProdStock) || 25) > 0,
+      colours: ['Gold', 'Silver', 'Black'],
+    };
+
+    try {
+      const res = await fetch('/api/products', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || 'Failed to create product');
+      }
+
+      setCreateProductSuccess('Product successfully created & published live!');
+      await fetchProducts();
+
+      setTimeout(() => {
+        setIsAddingProduct(false);
+        setNewProdName('');
+        setNewProdPrice('');
+        setNewProdOriginalPrice('');
+        setNewProdStock('25');
+        setNewProdTagline('');
+        setNewProdDescription('');
+        setNewProdImages([]);
+        setNewProdImageUrlInput('');
+        setCreateProductSuccess(null);
+      }, 1200);
+    } catch (err: unknown) {
+      setCreateProductError(err instanceof Error ? err.message : 'Error creating product');
+    } finally {
+      setCreatingProduct(false);
+    }
+  };
+
+  const handleUploadNewProductImages = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files || files.length === 0) return;
+    setUploadingProductImage(true);
+    try {
+      for (let i = 0; i < files.length; i++) {
+        const formData = new FormData();
+        formData.append('file', files[i]);
+        const res = await fetch('/api/upload', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (res.ok && data.url) {
+          setNewProdImages((prev) => [...prev, data.url]);
+        }
+      }
+    } finally {
+      setUploadingProductImage(false);
+    }
+  };
+
   // Verify Payment Action
   const handleVerifyPayment = async (orderId: string) => {
     const confirmVerify = window.confirm(
@@ -670,6 +788,14 @@ export default function AdminDashboardPage() {
       (o.upiUtr && o.upiUtr.toLowerCase().includes(q))
     );
   });
+
+  if (!isAuthInitialized) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FAF8F5]">
+        <div className="w-8 h-8 border-2 border-[#D79648] border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#F8F6F2] py-8 lg:py-12">
@@ -1063,13 +1189,14 @@ export default function AdminDashboardPage() {
                 <span>
                   Total Products: <strong className="text-[#171717]">{products.length}</strong>
                 </span>
-                <Link
-                  href="/admin/products/new"
-                  className="inline-flex items-center gap-1.5 bg-[#24332C] text-white px-4 py-2 text-xs uppercase tracking-wider font-medium hover:bg-[#19241F] shadow-2xs"
+                <button
+                  type="button"
+                  onClick={() => setIsAddingProduct(true)}
+                  className="inline-flex items-center gap-1.5 bg-[#24332C] text-white px-4 py-2 text-xs uppercase tracking-wider font-medium hover:bg-[#19241F] shadow-2xs cursor-pointer"
                 >
                   <Plus className="w-3.5 h-3.5" />
-                  <span>Add New Product</span>
-                </Link>
+                  <span>+ Add New Product</span>
+                </button>
               </div>
             </div>
 
@@ -2340,6 +2467,259 @@ export default function AdminDashboardPage() {
                 Confirm Rejection
               </button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================== */}
+      {/* MODAL: QUICK ADD NEW PRODUCT */}
+      {/* ======================================================== */}
+      {isAddingProduct && (
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto animate-in fade-in">
+          <div className="bg-white border border-[#E7E1D8] w-full max-w-2xl my-8 p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-4 border-b border-[#E7E1D8] mb-6">
+              <div>
+                <h3 className="font-serif text-2xl text-[#181818] font-light">
+                  Add New Product to Store
+                </h3>
+                <p className="text-xs text-[#77736D] mt-0.5">
+                  Instantly publish a new creation to the website catalogue.
+                </p>
+              </div>
+              <button
+                onClick={() => setIsAddingProduct(false)}
+                className="text-stone-400 hover:text-black p-1 text-2xl leading-none"
+              >
+                &times;
+              </button>
+            </div>
+
+            {createProductError && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 text-red-700 text-xs">
+                {createProductError}
+              </div>
+            )}
+
+            {createProductSuccess && (
+              <div className="mb-4 p-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold">
+                {createProductSuccess}
+              </div>
+            )}
+
+            <form onSubmit={handleCreateProduct} className="space-y-4 text-xs">
+              <div>
+                <label className="block font-semibold text-[#181818] mb-1 uppercase tracking-wider">
+                  Product Title *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={newProdName}
+                  onChange={(e) => setNewProdName(e.target.value)}
+                  placeholder="e.g. Glowing Photo Crystal Cube"
+                  className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="block font-semibold text-[#181818] mb-1 uppercase tracking-wider">
+                    Category *
+                  </label>
+                  <select
+                    value={newProdCategory}
+                    onChange={(e) => setNewProdCategory(e.target.value)}
+                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
+                  >
+                    <option value="Couple Gifts">Couple Gifts</option>
+                    <option value="Anniversary Gifts">Anniversary Gifts</option>
+                    <option value="Personalized Gifts">Personalized Gifts</option>
+                    <option value="Birthday Gifts">Birthday Gifts</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-[#181818] mb-1 uppercase tracking-wider">
+                    Tagline / Badge
+                  </label>
+                  <input
+                    type="text"
+                    value={newProdTagline}
+                    onChange={(e) => setNewProdTagline(e.target.value)}
+                    placeholder="e.g. Rotating LED Base Included"
+                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                <div>
+                  <label className="block font-semibold text-[#181818] mb-1 uppercase tracking-wider">
+                    Selling Price (₹) *
+                  </label>
+                  <input
+                    type="number"
+                    required
+                    min="1"
+                    value={newProdPrice}
+                    onChange={(e) => setNewProdPrice(e.target.value)}
+                    placeholder="899"
+                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] font-bold focus:outline-none focus:border-[#24332C]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-[#181818] mb-1 uppercase tracking-wider">
+                    Original Price (₹)
+                  </label>
+                  <input
+                    type="number"
+                    value={newProdOriginalPrice}
+                    onChange={(e) => setNewProdOriginalPrice(e.target.value)}
+                    placeholder="1299"
+                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
+                  />
+                </div>
+
+                <div>
+                  <label className="block font-semibold text-[#181818] mb-1 uppercase tracking-wider">
+                    Stock Units
+                  </label>
+                  <input
+                    type="number"
+                    value={newProdStock}
+                    onChange={(e) => setNewProdStock(e.target.value)}
+                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block font-semibold text-[#181818] mb-1 uppercase tracking-wider">
+                  Product Description
+                </label>
+                <textarea
+                  rows={3}
+                  value={newProdDescription}
+                  onChange={(e) => setNewProdDescription(e.target.value)}
+                  placeholder="Describe this beautiful gift, materials, and why customers love it..."
+                  className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
+                />
+              </div>
+
+              {/* Product Images */}
+              <div className="pt-3 border-t border-[#E7E1D8]">
+                <label className="block font-semibold text-[#181818] mb-2 uppercase tracking-wider">
+                  Product Photographs
+                </label>
+
+                {/* Previews */}
+                {newProdImages.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-3">
+                    {newProdImages.map((img, i) => (
+                      <div key={i} className="relative w-16 h-16 border border-stone-300 rounded overflow-hidden group">
+                        <Image src={img} alt="preview" fill className="object-cover" unoptimized />
+                        <button
+                          type="button"
+                          onClick={() => setNewProdImages(newProdImages.filter((_, idx) => idx !== i))}
+                          className="absolute top-0 right-0 bg-red-600 text-white w-4 h-4 text-[10px] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+                        >
+                          &times;
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                <div className="flex flex-col sm:flex-row gap-2">
+                  <label className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded cursor-pointer border border-stone-300 transition-colors">
+                    <Upload className="w-3.5 h-3.5" />
+                    <span>{uploadingProductImage ? 'Uploading Photos...' : 'Upload Photos (Multiple)'}</span>
+                    <input
+                      type="file"
+                      multiple
+                      accept="image/*"
+                      onChange={handleUploadNewProductImages}
+                      disabled={uploadingProductImage}
+                      className="hidden"
+                    />
+                  </label>
+
+                  <div className="flex-1 flex gap-2">
+                    <input
+                      type="text"
+                      value={newProdImageUrlInput}
+                      onChange={(e) => setNewProdImageUrlInput(e.target.value)}
+                      placeholder="Or paste image URL..."
+                      className="flex-1 bg-[#FAF8F5] border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818]"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => {
+                        if (newProdImageUrlInput.trim()) {
+                          setNewProdImages([...newProdImages, newProdImageUrlInput.trim()]);
+                          setNewProdImageUrlInput('');
+                        }
+                      }}
+                      className="px-3 py-2 bg-stone-800 text-white text-xs hover:bg-black font-semibold"
+                    >
+                      Add URL
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              {/* Toggles */}
+              <div className="flex items-center gap-6 pt-3 border-t border-[#E7E1D8]">
+                <label className="inline-flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={newProdIsFeatured}
+                    onChange={(e) => setNewProdIsFeatured(e.target.checked)}
+                    className="rounded border-[#E7E1D8] text-[#24332C]"
+                  />
+                  <span className="font-medium text-[#181818]">Show in Featured Collection</span>
+                </label>
+
+                <label className="inline-flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={newProdIsBestSeller}
+                    onChange={(e) => setNewProdIsBestSeller(e.target.checked)}
+                    className="rounded border-[#E7E1D8] text-[#24332C]"
+                  />
+                  <span className="font-medium text-[#181818]">Best Seller Badge</span>
+                </label>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="pt-4 border-t border-[#E7E1D8] flex items-center justify-end gap-3">
+                <button
+                  type="button"
+                  onClick={() => setIsAddingProduct(false)}
+                  className="px-4 py-2.5 border border-[#E7E1D8] text-xs uppercase tracking-wider text-[#77736D] hover:text-black font-medium"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  disabled={creatingProduct}
+                  className="bg-[#24332C] hover:bg-[#19241F] text-white px-6 py-2.5 text-xs uppercase tracking-wider font-bold shadow-md disabled:opacity-50 inline-flex items-center gap-2 cursor-pointer"
+                >
+                  {creatingProduct ? (
+                    <>
+                      <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                      <span>Publishing Creation...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Publish Product Live</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       )}

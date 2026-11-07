@@ -1,16 +1,17 @@
 import { NextResponse } from 'next/server';
-import fs from 'fs';
-import path from 'path';
+import { getOccasions, saveOccasions } from '@/lib/db';
 
-const occasionsFilePath = path.join(process.cwd(), 'data', 'occasions.json');
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export async function GET() {
   try {
-    if (!fs.existsSync(occasionsFilePath)) {
-      return NextResponse.json([]);
-    }
-    const data = fs.readFileSync(occasionsFilePath, 'utf8');
-    return NextResponse.json(JSON.parse(data));
+    const occasions = await getOccasions();
+    return NextResponse.json(occasions, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      },
+    });
   } catch {
     return NextResponse.json({ error: 'Failed to read occasions' }, { status: 500 });
   }
@@ -22,10 +23,13 @@ export async function POST(req: Request) {
     if (!Array.isArray(updated)) {
       return NextResponse.json({ error: 'Invalid data format' }, { status: 400 });
     }
-    fs.writeFileSync(occasionsFilePath, JSON.stringify(updated, null, 2), 'utf8');
-    return NextResponse.json({ success: true, occasions: updated });
+    const saved = await saveOccasions(updated);
+    return NextResponse.json({ success: true, occasions: saved }, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate, proxy-revalidate',
+      },
+    });
   } catch {
     return NextResponse.json({ error: 'Failed to update occasions' }, { status: 500 });
   }
 }
-

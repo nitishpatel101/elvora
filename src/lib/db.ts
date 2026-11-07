@@ -23,11 +23,14 @@ const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
 const STORE_SETTINGS_FILE = path.join(DATA_DIR, 'store-settings.json');
 const REVIEWS_FILE = path.join(DATA_DIR, 'reviews.json');
+const HERO_SLIDES_FILE = path.join(DATA_DIR, 'hero_slides.json');
+const STORIES_FILE = path.join(DATA_DIR, 'stories.json');
+const OCCASIONS_FILE = path.join(DATA_DIR, 'occasions.json');
 
 // Memory cache fallback for serverless deployments
 const inMemoryStore = new Map<string, string>();
 
-async function safeReadFile(primaryPath: string): Promise<string> {
+export async function safeReadFile(primaryPath: string): Promise<string> {
   const filename = path.basename(primaryPath);
   if (inMemoryStore.has(filename)) {
     return inMemoryStore.get(filename)!;
@@ -48,7 +51,7 @@ async function safeReadFile(primaryPath: string): Promise<string> {
   return raw;
 }
 
-async function safeWriteFile(primaryPath: string, content: string): Promise<void> {
+export async function safeWriteFile(primaryPath: string, content: string): Promise<void> {
   const filename = path.basename(primaryPath);
   inMemoryStore.set(filename, content);
 
@@ -404,5 +407,57 @@ export async function saveReview(newReview: Review): Promise<Review> {
   await safeWriteFile(REVIEWS_FILE, JSON.stringify(updated, null, 2));
   return newReview;
 }
+
+// --- HERO CAROUSEL SLIDES REPOSITORY ---
+
+export async function getHeroSlides(): Promise<any[]> {
+  try {
+    const raw = await safeReadFile(HERO_SLIDES_FILE);
+    return JSON.parse(raw);
+  } catch (err) {
+    console.error('Failed to read hero slides:', err);
+    return [];
+  }
+}
+
+export async function saveHeroSlides(slides: any[]): Promise<any[]> {
+  await safeWriteFile(HERO_SLIDES_FILE, JSON.stringify(slides, null, 2));
+  return slides;
+}
+
+// --- STORY CIRCLES REPOSITORY ---
+
+export async function getStories(): Promise<any[]> {
+  try {
+    const raw = await safeReadFile(STORIES_FILE);
+    return JSON.parse(raw);
+  } catch (err) {
+    console.error('Failed to read stories:', err);
+    return [];
+  }
+}
+
+export async function saveStories(stories: any[]): Promise<any[]> {
+  await safeWriteFile(STORIES_FILE, JSON.stringify(stories, null, 2));
+  return stories;
+}
+
+// --- OCCASIONS REPOSITORY ---
+
+export async function getOccasions(): Promise<any[]> {
+  try {
+    const raw = await safeReadFile(OCCASIONS_FILE);
+    return JSON.parse(raw);
+  } catch (err) {
+    console.error('Failed to read occasions:', err);
+    return [];
+  }
+}
+
+export async function saveOccasions(occasions: any[]): Promise<any[]> {
+  await safeWriteFile(OCCASIONS_FILE, JSON.stringify(occasions, null, 2));
+  return occasions;
+}
+
 
 

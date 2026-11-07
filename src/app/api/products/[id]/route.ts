@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server';
 import { getProductById, saveProduct, deleteProduct } from '@/lib/db';
 import { Product } from '@/types';
 
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+
 export async function GET(
   req: Request,
   { params }: { params: Promise<{ id: string }> }
@@ -44,7 +47,11 @@ export async function PUT(
     };
 
     const saved = await saveProduct(updated);
-    return NextResponse.json(saved);
+    return NextResponse.json(saved, {
+      headers: {
+        'Cache-Control': 'no-store, no-cache, must-revalidate',
+      },
+    });
   } catch (err: unknown) {
     const message = err instanceof Error ? err.message : 'Error updating product';
     return NextResponse.json({ error: message }, { status: 500 });

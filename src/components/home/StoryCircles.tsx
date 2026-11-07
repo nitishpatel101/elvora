@@ -21,7 +21,7 @@ export default function StoryCircles() {
 
   // Fetch updated stories dynamically from admin API
   useEffect(() => {
-    fetch('/api/stories')
+    fetch('/api/stories', { cache: 'no-store' })
       .then((res) => res.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {

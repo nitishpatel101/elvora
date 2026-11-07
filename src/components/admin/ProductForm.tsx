@@ -30,7 +30,7 @@ export default function ProductForm({ initialData, isEditing = false }: ProductF
     price: initialData?.price || '',
     originalPrice: initialData?.originalPrice || '',
     description: initialData?.description || '',
-    category: initialData?.category || 'Couple Bracelets',
+    category: initialData?.category || 'Couple Gifts',
     colours: initialData?.colours?.join(', ') || 'Gold, Black',
     stock: initialData?.stock !== undefined ? initialData.stock : 25,
     isFeatured: initialData?.isFeatured ?? true,
@@ -124,8 +124,20 @@ export default function ProductForm({ initialData, isEditing = false }: ProductF
     setSubmitting(true);
 
     try {
+      const categorySlug =
+        formData.category === 'Couple Gifts'
+          ? 'couple-gifts'
+          : formData.category === 'Anniversary Gifts'
+          ? 'anniversary-gifts'
+          : formData.category === 'Personalized Gifts'
+          ? 'personalized-gifts'
+          : formData.category === 'Birthday Gifts'
+          ? 'birthday-gifts'
+          : formData.category.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+
       const payload = {
         ...formData,
+        categorySlug,
         price: Number(formData.price),
         originalPrice: formData.originalPrice ? Number(formData.originalPrice) : undefined,
         stock: Number(formData.stock),
@@ -400,11 +412,10 @@ export default function ProductForm({ initialData, isEditing = false }: ProductF
                 onChange={handleInputChange}
                 className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] transition-colors"
               >
-                <option value="Couple Bracelets">Couple Bracelets</option>
-                <option value="Necklaces">Necklaces</option>
-                <option value="Earrings">Earrings</option>
-                <option value="Rings">Rings</option>
-                <option value="Fine Chains">Fine Chains</option>
+                <option value="Couple Gifts">Couple Gifts</option>
+                <option value="Anniversary Gifts">Anniversary Gifts</option>
+                <option value="Personalized Gifts">Personalized Gifts</option>
+                <option value="Birthday Gifts">Birthday Gifts</option>
               </select>
             </div>
 

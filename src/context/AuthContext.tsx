@@ -8,6 +8,7 @@ interface AuthContextType {
   admin: AdminUser | null;
   isCustomerLoggedIn: boolean;
   isAdminLoggedIn: boolean;
+  isAuthInitialized: boolean;
   loginCustomer: (email: string, name?: string) => Promise<boolean>;
   registerCustomer: (email: string, name: string, phone: string) => Promise<boolean>;
   logoutCustomer: () => void;
@@ -20,6 +21,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [customer, setCustomer] = useState<CustomerUser | null>(null);
   const [admin, setAdmin] = useState<AdminUser | null>(null);
+  const [isAuthInitialized, setIsAuthInitialized] = useState(false);
 
   useEffect(() => {
     try {
@@ -30,6 +32,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       if (savedAdmin) setAdmin(JSON.parse(savedAdmin));
     } catch (e) {
       console.warn('Failed to restore auth sessions', e);
+    } finally {
+      setIsAuthInitialized(true);
     }
   }, []);
 
@@ -94,6 +98,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         admin,
         isCustomerLoggedIn: Boolean(customer),
         isAdminLoggedIn: Boolean(admin),
+        isAuthInitialized,
         loginCustomer,
         registerCustomer,
         logoutCustomer,

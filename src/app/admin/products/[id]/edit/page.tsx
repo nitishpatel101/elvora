@@ -13,11 +13,12 @@ export default function EditProductPage({
 }) {
   const { id } = use(params);
   const router = useRouter();
-  const { isAdminLoggedIn } = useAuth();
+  const { isAdminLoggedIn, isAuthInitialized } = useAuth();
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!isAuthInitialized) return;
     if (!isAdminLoggedIn) {
       router.push('/admin/login');
       return;
@@ -31,7 +32,7 @@ export default function EditProductPage({
         }
       })
       .finally(() => setLoading(false));
-  }, [id, isAdminLoggedIn, router]);
+  }, [id, isAdminLoggedIn, isAuthInitialized, router]);
 
   if (!isAdminLoggedIn) return null;
 

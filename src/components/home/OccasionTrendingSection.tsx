@@ -53,7 +53,7 @@ export default function OccasionTrendingSection() {
   const [occasions, setOccasions] = useState<OccasionItem[]>(defaultOccasions);
 
   useEffect(() => {
-    fetch('/api/occasions')
+    fetch('/api/occasions', { cache: 'no-store' })
       .then((r) => r.json())
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
