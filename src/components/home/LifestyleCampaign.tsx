@@ -9,7 +9,7 @@ export default function LifestyleCampaign() {
   const [isPlaying, setIsPlaying] = useState(true);
 
   return (
-    <section className="relative w-full h-[65vh] sm:h-[80vh] min-h-[480px] max-h-[820px] bg-[#181818] overflow-hidden">
+    <section className="relative w-full h-[55vh] sm:h-[80vh] min-h-[380px] sm:min-h-[480px] max-h-[820px] bg-[#181818] overflow-hidden">
       {/* High-fashion Editorial Campaign Image / Background */}
       <div className="absolute inset-0">
         <Image
@@ -27,16 +27,16 @@ export default function LifestyleCampaign() {
 
       {/* Centered Campaign Heading matching AUrate frame 013 */}
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
-        <span className="text-[10px] sm:text-xs tracking-[0.3em] uppercase font-semibold text-white/90 block mb-3">
+        <span className="text-[9px] sm:text-xs tracking-[0.24em] sm:tracking-[0.3em] uppercase font-semibold text-white/90 block mb-2 sm:mb-3">
           HOLIDAY CAMPAIGN
         </span>
-        <h2 className="text-2xl sm:text-4xl lg:text-5xl font-light text-white tracking-[0.2em] uppercase font-sans">
+        <h2 className="text-xl sm:text-4xl lg:text-5xl font-light text-white tracking-[0.14em] sm:tracking-[0.2em] uppercase font-sans">
           ELVORA &times; CONNECTION
         </h2>
-        <div className="mt-6">
+        <div className="mt-4 sm:mt-6">
           <Link
             href="/shop"
-            className="inline-block text-xs uppercase tracking-[0.24em] font-semibold text-white pb-1 border-b border-white hover:text-white/80 hover:border-white/80 transition-colors"
+            className="inline-block text-[11px] sm:text-xs uppercase tracking-[0.2em] sm:tracking-[0.24em] font-semibold text-white pb-1 border-b border-white hover:text-white/80 hover:border-white/80 transition-colors"
           >
             DISCOVER THE CAMPAIGN
           </Link>
@@ -44,7 +44,7 @@ export default function LifestyleCampaign() {
       </div>
 
       {/* Pause / Play Control on Bottom Right matching AUrate frame 013 & 015 */}
-      <div className="absolute right-6 sm:right-10 bottom-6 sm:bottom-10 z-20">
+      <div className="absolute right-4 sm:right-10 bottom-4 sm:bottom-10 z-20">
         <button
           onClick={() => setIsPlaying(!isPlaying)}
           aria-label={isPlaying ? 'Pause campaign visual' : 'Play campaign visual'}

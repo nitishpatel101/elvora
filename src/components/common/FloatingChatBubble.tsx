@@ -21,11 +21,11 @@ export default function FloatingChatBubble() {
   };
 
   return (
-    <aside aria-label="Customer Concierge" className="fixed bottom-5 right-5 z-40">
+    <aside aria-label="Customer Concierge" className="fixed bottom-20 sm:bottom-5 right-3 sm:right-5 z-40">
       {/* Floating Circular Trigger matching AUrate recording exactly */}
       <button
         onClick={() => setOpen(!open)}
-        className="w-12 h-12 rounded-full bg-[#24332C] hover:bg-[#19241F] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95"
+        className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-[#24332C] hover:bg-[#19241F] text-white flex items-center justify-center shadow-lg transition-transform hover:scale-105 active:scale-95"
         aria-label="Open concierge chat"
       >
         {open ? (
@@ -41,7 +41,7 @@ export default function FloatingChatBubble() {
 
       {/* Flyout Concierge Card */}
       {open && (
-        <div className="absolute bottom-16 right-0 w-80 sm:w-96 bg-white border border-[#EAE5DE] shadow-2xl p-5 animate-in fade-in slide-in-from-bottom-2 duration-200">
+        <div className="absolute bottom-14 sm:bottom-16 right-0 w-[calc(100vw-2rem)] sm:w-96 max-w-sm bg-white border border-[#EAE5DE] shadow-2xl p-4 sm:p-5 animate-in fade-in slide-in-from-bottom-2 duration-200">
           <div className="pb-3 border-b border-[#EAE5DE] mb-3">
             <span className="text-[10px] uppercase tracking-[0.24em] text-[#708579] font-medium block">
               Maison Concierge

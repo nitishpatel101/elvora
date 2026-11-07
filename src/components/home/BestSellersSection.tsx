@@ -26,26 +26,26 @@ export default function BestSellersSection({ initialProducts }: BestSellersSecti
       : initialProducts.filter((p) => p.categorySlug === activeCategory);
 
   return (
-    <section className="py-16 sm:py-20 bg-white border-b border-[#EAE5DE]">
-      <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="py-10 sm:py-20 bg-white border-b border-[#EAE5DE]">
+      <div className="max-w-[1780px] mx-auto px-3 sm:px-6 lg:px-8">
         {/* Exact AUrate Section Header */}
-        <div className="mb-8 sm:mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#EAE5DE] pb-4">
+        <div className="mb-6 sm:mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b border-[#EAE5DE] pb-4">
           <div>
-            <h2 className="text-xl sm:text-2xl lg:text-3xl font-normal tracking-[0.22em] uppercase text-[#24332C]">
+            <h2 className="text-lg sm:text-2xl lg:text-3xl font-normal tracking-[0.22em] uppercase text-[#24332C]">
               BESTSELLERS
             </h2>
-            <p className="text-xs text-[#708579] tracking-wider uppercase mt-1">
+            <p className="text-[11px] sm:text-xs text-[#708579] tracking-wider uppercase mt-0.5 sm:mt-1">
               Curated pieces designed to bring hearts closer
             </p>
           </div>
 
           {/* Minimalist Filter Tabs */}
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
             {categories.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
-                className={`text-[10px] sm:text-[11px] uppercase tracking-[0.16em] px-3 py-1.5 transition-all duration-200 border ${
+                className={`text-[9px] sm:text-[11px] uppercase tracking-[0.14em] sm:tracking-[0.16em] px-2.5 sm:px-3 py-1 sm:py-1.5 transition-all duration-200 border ${
                   activeCategory === cat.value
                     ? 'bg-[#24332C] text-white border-[#24332C] font-semibold'
                     : 'bg-white text-[#5C5852] border-[#EAE5DE] hover:border-[#24332C] hover:text-[#181818]'
@@ -58,7 +58,7 @@ export default function BestSellersSection({ initialProducts }: BestSellersSecti
         </div>
 
         {/* Product Grid: 4 columns across matching AUrate layout */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
           {filteredProducts.slice(0, 6).map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

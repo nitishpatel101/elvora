@@ -112,7 +112,7 @@ export default function CustomerReviewsSection({
     <section className="py-16 bg-[#FCFBF9] border-t border-b border-[#EAE5DE]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-[#EAE5DE]">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 pb-8 sm:pb-12 border-b border-[#EAE5DE]">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <span className="text-[10px] tracking-[0.24em] uppercase text-[#708579] font-medium">
@@ -123,7 +123,7 @@ export default function CustomerReviewsSection({
                 100% Genuine Orders
               </span>
             </div>
-            <h2 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light">
+            <h2 className="font-serif text-2xl sm:text-4xl text-[#181818] font-light">
               Customer Reviews & Real Stories
             </h2>
             <p className="text-xs sm:text-sm text-[#5C5852] mt-2 max-w-xl font-light">
@@ -132,22 +132,22 @@ export default function CustomerReviewsSection({
           </div>
 
           {/* Overall Rating & Write Review CTA */}
-          <div className="flex items-center gap-4 flex-shrink-0">
-            <div className="text-right">
-              <div className="flex items-center justify-end gap-1 text-[#C5A265]">
+          <div className="flex flex-col sm:flex-row sm:items-center gap-4 flex-shrink-0">
+            <div className="flex items-center sm:block justify-between sm:text-right">
+              <div className="flex items-center sm:justify-end gap-1 text-[#C5A265]">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-4 h-4 fill-current text-[#C5A265]" />
                 ))}
                 <span className="font-semibold text-sm text-stone-900 ml-1.5">4.9 / 5.0</span>
               </div>
-              <span className="text-[11px] text-stone-500 font-light">
+              <span className="text-[11px] text-stone-500 font-light block">
                 {reviews.length}+ verified buyer reviews
               </span>
             </div>
 
             <button
               onClick={() => setIsModalOpen(true)}
-              className="bg-[#24332C] hover:bg-[#18231E] text-white px-5 py-3 text-xs tracking-wider uppercase font-medium flex items-center gap-2 transition-all shadow-sm hover:shadow active:scale-95"
+              className="bg-[#24332C] hover:bg-[#18231E] text-white px-5 py-3 text-xs tracking-wider uppercase font-medium flex items-center justify-center gap-2 transition-all shadow-sm hover:shadow active:scale-95 w-full sm:w-auto"
             >
               <Edit3 className="w-3.5 h-3.5 text-[#C5A265]" />
               <span>Write a Review</span>
@@ -286,8 +286,8 @@ export default function CustomerReviewsSection({
 
       {/* Write a Review Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
-          <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden border border-[#C5A265]/40 animate-fade-in-up">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white w-full max-w-lg max-h-[92vh] overflow-y-auto rounded-2xl shadow-2xl border border-[#C5A265]/40 animate-fade-in-up">
             {/* Modal Header */}
             <div className="bg-[#24332C] text-white px-6 py-4 flex items-center justify-between">
               <div>

@@ -33,9 +33,9 @@ export default function CategoryGrid() {
   ];
 
   return (
-    <section className="bg-white py-12 sm:py-16 border-b border-[#EAE5DE]">
-      <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+    <section className="bg-white py-8 sm:py-16 border-b border-[#EAE5DE]">
+      <div className="max-w-[1780px] mx-auto px-3 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
           {categories.map((cat) => (
             <Link
               key={cat.label}

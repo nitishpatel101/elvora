@@ -126,9 +126,9 @@ export default function RecentSalesPopup() {
     <div
       role="status"
       aria-live="polite"
-      className="fixed bottom-4 left-4 z-40 max-w-sm w-[calc(100vw-2rem)] sm:w-auto animate-fade-in-up transition-all duration-300"
+      className="fixed bottom-20 sm:bottom-4 left-3 sm:left-4 z-40 max-w-sm w-[calc(100vw-1.5rem)] sm:w-auto animate-fade-in-up transition-all duration-300"
     >
-      <div className="bg-white/95 backdrop-blur-md border border-[#C5A265]/30 rounded-xl shadow-2xl p-3 sm:p-3.5 flex items-center gap-3 relative hover:shadow-xl hover:border-[#C5A265] transition-all group">
+      <div className="bg-white/95 backdrop-blur-md border border-[#C5A265]/30 rounded-xl shadow-2xl p-2.5 sm:p-3.5 flex items-center gap-2.5 sm:gap-3 relative hover:shadow-xl hover:border-[#C5A265] transition-all group">
         {/* Dismiss Button */}
         <button
           onClick={(e) => {
@@ -137,7 +137,7 @@ export default function RecentSalesPopup() {
             setClosedByUser(true);
           }}
           aria-label="Dismiss notification"
-          className="absolute top-1.5 right-1.5 text-stone-400 hover:text-stone-700 p-1 rounded-full hover:bg-stone-100 transition-colors"
+          className="absolute top-1 right-1 text-stone-400 hover:text-stone-700 p-1 rounded-full hover:bg-stone-100 transition-colors"
         >
           <X className="w-3.5 h-3.5" />
         </button>
@@ -145,7 +145,7 @@ export default function RecentSalesPopup() {
         {/* Product Thumbnail */}
         <Link
           href={`/product/${current.productSlug}`}
-          className="relative w-14 h-14 rounded-lg overflow-hidden flex-shrink-0 bg-stone-100 border border-stone-200"
+          className="relative w-12 h-12 sm:w-14 sm:h-14 rounded-lg overflow-hidden flex-shrink-0 bg-stone-100 border border-stone-200"
         >
           <Image
             src={current.productImage}
@@ -158,23 +158,23 @@ export default function RecentSalesPopup() {
         </Link>
 
         {/* Content */}
-        <Link href={`/product/${current.productSlug}`} className="flex-1 min-w-0 pr-4">
+        <Link href={`/product/${current.productSlug}`} className="flex-1 min-w-0 pr-3 sm:pr-4">
           <div className="flex items-center gap-1.5 mb-0.5">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span className="text-[11px] font-medium text-emerald-800 flex items-center gap-1">
-              <CheckCircle className="w-3 h-3 text-emerald-600 inline" />
-              Verified Order • <span className="text-stone-500">{current.timeAgo}</span>
+            <span className="text-[10px] sm:text-[11px] font-medium text-emerald-800 flex items-center gap-1 truncate">
+              <CheckCircle className="w-3 h-3 text-emerald-600 inline shrink-0" />
+              <span>Verified Order • <span className="text-stone-500">{current.timeAgo}</span></span>
             </span>
           </div>
 
-          <p className="text-xs font-semibold text-stone-900 truncate">
+          <p className="text-[11px] sm:text-xs font-semibold text-stone-900 truncate">
             {current.customerName} <span className="font-normal text-stone-500">from {current.city}</span>
           </p>
 
-          <p className="text-[11px] text-stone-600 truncate mt-0.5 flex items-center gap-1">
+          <p className="text-[10px] sm:text-[11px] text-stone-600 truncate mt-0.5 flex items-center gap-1">
             <ShoppingBag className="w-3 h-3 text-[#C5A265] flex-shrink-0" />
             <span className="truncate">{current.productName}</span>
             <span className="font-semibold text-stone-900 flex-shrink-0">({current.price})</span>

@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Playfair_Display, Plus_Jakarta_Sans } from 'next/font/google';
 import './globals.css';
 import { CurrencyProvider } from '@/context/CurrencyContext';
@@ -11,6 +11,13 @@ import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/cart/CartDrawer';
 import FloatingChatBubble from '@/components/common/FloatingChatBubble';
 import RecentSalesPopup from '@/components/social/RecentSalesPopup';
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#24332C',
+};
 
 const playfair = Playfair_Display({
   subsets: ['latin'],

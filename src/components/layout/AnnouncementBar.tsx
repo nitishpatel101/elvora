@@ -33,7 +33,7 @@ export default function AnnouncementBar({
           }
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   if (!visible) return null;
@@ -41,12 +41,12 @@ export default function AnnouncementBar({
   return (
     <div className="w-full text-xs font-sans">
       {/* Tier 1: Dark Forest Green Promotional Bar */}
-      <div className="bg-[#24332C] text-[#FAF8F5] text-[10px] sm:text-[11px] tracking-[0.2em] uppercase py-2 px-4 relative font-medium">
+      <div className="bg-[#24332C] text-[#FAF8F5] text-[9px] sm:text-[11px] tracking-[0.14em] sm:tracking-[0.2em] uppercase py-2 px-2.5 sm:px-4 relative font-medium">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <div className="hidden sm:block text-[10px] tracking-[0.2em] text-[#A3B2A9]">
             {subText}
           </div>
-          <div className="flex-1 text-center truncate px-2 font-semibold tracking-[0.22em]">
+          <div className="flex-1 text-center truncate px-1.5 sm:px-2 font-semibold tracking-[0.14em] sm:tracking-[0.22em]">
             {announcementText}
           </div>
           <button
@@ -84,9 +84,8 @@ export default function AnnouncementBar({
                     setCurrency('INR');
                     setCurrencyDropdownOpen(false);
                   }}
-                  className={`w-full text-left px-3 py-1.5 text-[10px] uppercase tracking-wider ${
-                    currency === 'INR' ? 'bg-[#EEF3F0] font-bold text-[#24332C]' : 'text-[#181818] hover:bg-[#FAF8F5]'
-                  }`}
+                  className={`w-full text-left px-3 py-1.5 text-[10px] uppercase tracking-wider ${currency === 'INR' ? 'bg-[#EEF3F0] font-bold text-[#24332C]' : 'text-[#181818] hover:bg-[#FAF8F5]'
+                    }`}
                 >
                   IN (₹)
                 </button>
@@ -95,9 +94,8 @@ export default function AnnouncementBar({
                     setCurrency('USD');
                     setCurrencyDropdownOpen(false);
                   }}
-                  className={`w-full text-left px-3 py-1.5 text-[10px] uppercase tracking-wider ${
-                    currency === 'USD' ? 'bg-[#EEF3F0] font-bold text-[#24332C]' : 'text-[#181818] hover:bg-[#FAF8F5]'
-                  }`}
+                  className={`w-full text-left px-3 py-1.5 text-[10px] uppercase tracking-wider ${currency === 'USD' ? 'bg-[#EEF3F0] font-bold text-[#24332C]' : 'text-[#181818] hover:bg-[#FAF8F5]'
+                    }`}
                 >
                   US ($)
                 </button>

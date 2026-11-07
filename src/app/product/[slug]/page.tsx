@@ -88,7 +88,7 @@ export default async function ProductDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(productJsonLd) }}
       />
-      <div className="min-h-screen bg-[#FAF8F5] py-10 lg:py-16">
+      <div className="min-h-screen bg-[#FAF8F5] py-6 pb-28 sm:py-10 lg:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ProductDetailClient
             product={product}
