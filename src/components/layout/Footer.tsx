@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Link from 'next/link';
 
 const InstagramIcon = ({ className }: { className?: string }) => (
@@ -17,150 +17,108 @@ const FacebookIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 
-const TwitterIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z" />
-  </svg>
-);
-
-const PinterestIcon = ({ className }: { className?: string }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="12" y1="4" x2="12" y2="20" />
-    <path d="M8 8a4 4 0 1 1 8 0c0 3-2 6-4 9" />
+const YoutubeIcon = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
   </svg>
 );
 
 export default function Footer() {
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email && email.includes('@')) {
-      setSubscribed(true);
-      setEmail('');
-    }
-  };
-
   return (
-    <footer className="border-t border-[#24332C]">
-      {/* Split 2-Color AUrate Footer: Left Deep Forest Green, Right Sage Green */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[420px]">
-        {/* Left Side: Deep Forest Green (Col span 8) */}
-        <div className="lg:col-span-8 bg-[#24332C] text-[#FAF8F5] p-8 sm:p-12 lg:p-16 flex flex-col justify-between">
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-12">
-            {/* Column 1: Fine Jewelry Born & Raised In */}
-            <div className="space-y-4 col-span-2 sm:col-span-1">
-              <span className="text-[10px] uppercase tracking-[0.24em] text-[#A3B2A9] font-medium block leading-tight">
-                FINE JEWELRY<br />BORN &amp; RAISED IN
-              </span>
-              <div className="inline-block border border-white/40 px-4 py-2 text-center text-xs tracking-[0.24em] font-light text-white uppercase">
-                MUMBAI &bull; NYC
-              </div>
-            </div>
+    <footer className="bg-[#0A0A0A] text-stone-300 pt-16 pb-12 border-t border-stone-800">
+      <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 sm:gap-12 pb-12 border-b border-stone-800">
+          {/* Column 1: Collections */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
+              Categories
+            </h4>
+            <ul className="space-y-2 text-xs text-stone-400">
+              <li><Link href="/shop" className="hover:text-[#F5C400] transition-colors">Best Seller</Link></li>
+              <li><Link href="/shop?category=anniversary-gifts" className="hover:text-[#F5C400] transition-colors">Anniversary Gift</Link></li>
+              <li><Link href="/shop?category=birthday-gifts" className="hover:text-[#F5C400] transition-colors">Birthday Gifts</Link></li>
+              <li><Link href="/shop?category=couple-gifts" className="hover:text-[#F5C400] transition-colors">Couple gifts</Link></li>
+              <li><Link href="/shop?category=anniversary-gifts" className="hover:text-[#F5C400] transition-colors">Gift for Her</Link></li>
+              <li><Link href="/shop?category=couple-gifts" className="hover:text-[#F5C400] transition-colors">Valentine day Gift</Link></li>
+              <li><Link href="/shop?category=couple-gifts" className="hover:text-[#F5C400] transition-colors">Gift For Him</Link></li>
+              <li><Link href="/shop?category=personalized-gifts" className="hover:text-[#F5C400] transition-colors">3D Gifts</Link></li>
+              <li><Link href="/shop?category=personalized-gifts" className="hover:text-[#F5C400] transition-colors">Handmade Gifts</Link></li>
+              <li><Link href="/shop?category=personalized-gifts" className="hover:text-[#F5C400] transition-colors">Photo Frames</Link></li>
+              <li><Link href="/shop?category=couple-gifts" className="hover:text-[#F5C400] transition-colors">Photo Projection Gifts</Link></li>
+            </ul>
+          </div>
 
-            {/* Column 2: Support */}
-            <div className="space-y-3">
-              <h5 className="text-[11px] uppercase tracking-[0.2em] text-white font-semibold">
-                Support
-              </h5>
-              <ul className="space-y-2 text-xs text-[#A3B2A9] font-light">
-                <li><a href="https://wa.me/916386645203" target="_blank" rel="noopener noreferrer" className="text-emerald-300 hover:text-white transition-colors font-medium">WHATSAPP: +91 63866 45203</a></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">FAQ</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">CONTACT US</Link></li>
-                <li><Link href="/track-order" className="hover:text-white transition-colors">TRACK ORDER</Link></li>
-                <li><Link href="/refund-policy" className="hover:text-white transition-colors">RETURNS</Link></li>
-                <li><Link href="/shipping-policy" className="hover:text-white transition-colors">LIFETIME GUARANTEE</Link></li>
-                <li><Link href="/about" className="hover:text-white transition-colors">JEWELRY CARE</Link></li>
-              </ul>
-            </div>
+          {/* Column 2: Quick Links */}
+          <div className="space-y-3">
+            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
+              Quick Links
+            </h4>
+            <ul className="space-y-2.5 text-xs text-stone-400">
+              <li><Link href="/" className="hover:text-[#F5C400] transition-colors">Home</Link></li>
+              <li><Link href="/about" className="hover:text-[#F5C400] transition-colors">About Us</Link></li>
+              <li><Link href="/contact" className="hover:text-[#F5C400] transition-colors">Contact</Link></li>
+              <li><Link href="/track-order" className="hover:text-[#F5C400] transition-colors">Track Order</Link></li>
+              <li><Link href="/privacy-policy" className="hover:text-[#F5C400] transition-colors">Privacy Policy</Link></li>
+              <li><Link href="/terms" className="hover:text-[#F5C400] transition-colors">Terms of Service</Link></li>
+              <li><Link href="/refund-policy" className="hover:text-[#F5C400] transition-colors">Return and Refund Policy</Link></li>
+              <li><Link href="/shipping-policy" className="hover:text-[#F5C400] transition-colors">Shipping Policy</Link></li>
+              <li><Link href="/admin/login" className="hover:text-[#F5C400] transition-colors text-stone-500">Admin Portal</Link></li>
+            </ul>
+          </div>
 
-            {/* Column 3: About Us */}
-            <div className="space-y-3">
-              <h5 className="text-[11px] uppercase tracking-[0.2em] text-white font-semibold">
-                About Us
-              </h5>
-              <ul className="space-y-2 text-xs text-[#A3B2A9] font-light">
-                <li><Link href="/about" className="hover:text-white transition-colors">OUR STORY</Link></li>
-                <li><Link href="/about" className="hover:text-white transition-colors">SUSTAINABILITY</Link></li>
-                <li><Link href="/shop" className="hover:text-white transition-colors">REVIEWS</Link></li>
-                <li><Link href="/shop" className="hover:text-white transition-colors">ETHICAL CRAFT</Link></li>
-              </ul>
-            </div>
-
-            {/* Column 4: Links */}
-            <div className="space-y-3">
-              <h5 className="text-[11px] uppercase tracking-[0.2em] text-white font-semibold">
-                Links
-              </h5>
-              <ul className="space-y-2 text-xs text-[#A3B2A9] font-light">
-                <li><Link href="/shop?collection=gifts" className="hover:text-white transition-colors">DIGITAL GIFT CARD</Link></li>
-                <li><Link href="/shop" className="hover:text-white transition-colors">REFER-A-FRIEND</Link></li>
-                <li><Link href="/shop" className="hover:text-white transition-colors">HOLIDAY OFFERS</Link></li>
-                <li><Link href="/admin/login" className="hover:text-white transition-colors">ADMIN PORTAL</Link></li>
-              </ul>
+          {/* Column 3: Contact */}
+          <div className="space-y-4">
+            <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
+              Get In Touch
+            </h4>
+            <div className="space-y-3 text-xs text-stone-400">
+              <p>
+                <span className="text-stone-300 font-medium block">Email:</span>
+                <a href="mailto:concierge@elvora.com" className="text-white hover:text-[#F5C400] transition-colors font-mono">
+                  concierge@elvora.com
+                </a>
+              </p>
+              <p>
+                <span className="text-stone-300 font-medium block">WhatsApp &amp; Mobile:</span>
+                <a href="https://wa.me/916386645203" target="_blank" rel="noopener noreferrer" className="text-[#25D366] font-bold text-sm font-mono block hover:underline">
+                  +91 63866 45203
+                </a>
+              </p>
+              <p className="text-[11px] text-stone-500">
+                Operating Hours: Monday &ndash; Saturday 10:00 AM &ndash; 7:00 PM IST
+              </p>
             </div>
           </div>
 
-          {/* Bottom Legal Strip */}
-          <div className="pt-8 border-t border-[#34463C] flex flex-wrap items-center justify-between gap-4 text-[10px] tracking-[0.16em] uppercase text-[#A3B2A9]">
-            <div className="flex flex-wrap items-center gap-6">
-              <span>&copy;2026 ELVORA</span>
-              <a href="https://wa.me/916386645203" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">WHATSAPP: +91 63866 45203</a>
-              <Link href="/privacy-policy" className="hover:text-white transition-colors">PRIVACY POLICY</Link>
-              <Link href="/terms" className="hover:text-white transition-colors">TERMS &amp; CONDITIONS</Link>
+          {/* Column 4: Brand About & Social */}
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <span className="text-2xl">🎁</span>
+              <span className="font-extrabold text-2xl text-[#F5C400] tracking-wider">
+                ELVORA
+              </span>
             </div>
-            <div className="font-mono text-[#D5E0D9]">
-              CARE@ELVORA.COM
+            <p className="text-xs text-stone-400 leading-relaxed font-light">
+              ELVORA is your one-stop gifting and keepsake shop. Our sole aim is to make people happy with our beautiful customized gifts. ELVORA has all kinds of gifts that can be gifted on all occasions like Valentine&apos;s Day, Birthday, Anniversary, and Weddings.
+            </p>
+            <div className="flex items-center gap-4 text-stone-300 pt-2">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-[#F5C400] transition-colors">
+                <FacebookIcon className="w-5 h-5" />
+              </a>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#F5C400] transition-colors">
+                <InstagramIcon className="w-5 h-5" />
+              </a>
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-[#F5C400] transition-colors">
+                <YoutubeIcon className="w-5 h-5" />
+              </a>
             </div>
           </div>
         </div>
 
-        {/* Right Side: Sage Green Newsletter Column (Col span 4) matching AUrate frame 016 */}
-        <div className="lg:col-span-4 bg-[#B5C7B9] text-[#1E2C23] p-8 sm:p-12 lg:p-16 flex flex-col justify-between">
-          <div className="space-y-6">
-            <h4 className="font-serif text-2xl sm:text-3xl text-[#1E2C23] font-light leading-tight">
-              Keep up with our creations
-            </h4>
-            <p className="text-xs text-[#304537] leading-relaxed">
-              Sign up for private releases, festive gifting invitations, and member privileges.
-            </p>
-
-            <form onSubmit={handleSubscribe} className="space-y-3">
-              <div className="flex">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="Enter your email"
-                  required
-                  className="w-full bg-white/70 border border-[#7A9881] px-3.5 py-3 text-xs text-[#1E2C23] placeholder-[#4F6855] focus:outline-none focus:bg-white focus:border-[#24332C]"
-                />
-                <button
-                  type="submit"
-                  className="bg-[#24332C] hover:bg-[#19241F] text-white px-5 py-3 text-xs uppercase tracking-wider font-semibold transition-colors shrink-0"
-                >
-                  {subscribed ? 'Subscribed' : 'Subscribe'}
-                </button>
-              </div>
-            </form>
-          </div>
-
-          {/* Social Icons matching AUrate bottom right */}
-          <div className="pt-8 flex items-center space-x-6 text-[#24332C]">
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:opacity-75 transition-opacity">
-              <InstagramIcon className="w-5 h-5" />
-            </a>
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:opacity-75 transition-opacity">
-              <FacebookIcon className="w-5 h-5" />
-            </a>
-            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hover:opacity-75 transition-opacity">
-              <TwitterIcon className="w-5 h-5" />
-            </a>
-            <a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" aria-label="Pinterest" className="hover:opacity-75 transition-opacity">
-              <PinterestIcon className="w-5 h-5" />
-            </a>
-          </div>
+        {/* Bottom Strip */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-stone-500">
+          <p>&copy; {new Date().getFullYear()} ELVORA Gifts &bull; All Rights Reserved.</p>
+          <p className="text-stone-400">Made with ❤️ for Indian Celebrations</p>
         </div>
       </div>
     </footer>

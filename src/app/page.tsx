@@ -1,12 +1,12 @@
 import { getAllProducts } from '@/lib/db';
+import StoryCircles from '@/components/home/StoryCircles';
 import HeroSection from '@/components/home/HeroSection';
-import CategoryGrid from '@/components/home/CategoryGrid';
 import BestSellersSection from '@/components/home/BestSellersSection';
-import BurgundyBanner from '@/components/home/BurgundyBanner';
-import LifestyleCampaign from '@/components/home/LifestyleCampaign';
-import BrandStory from '@/components/home/BrandStory';
-import TrustSection from '@/components/home/TrustSection';
-import CustomerReviewsSection from '@/components/reviews/CustomerReviewsSection';
+import ShopFromVideos from '@/components/home/ShopFromVideos';
+import PhotoReviewsSection from '@/components/home/PhotoReviewsSection';
+import OccasionTrendingSection from '@/components/home/OccasionTrendingSection';
+import WhyChooseUs from '@/components/home/WhyChooseUs';
+import ShopByPrice from '@/components/home/ShopByPrice';
 
 export const revalidate = 0; // Dynamic products from database
 
@@ -15,29 +15,29 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      {/* 1. AUrate Editorial Hero Section */}
+      {/* 1. Instagram Story-Style Category Circles */}
+      <StoryCircles />
+
+      {/* 2. Hero Section: Memories That Glow Forever */}
       <HeroSection />
 
-      {/* 2. AUrate 4-Image Category Showcase (from Frame 004 of recording) */}
-      <CategoryGrid />
-
-      {/* 3. AUrate Bestsellers Section (from Frame 004 & 007 of recording) */}
+      {/* 3. Best Sellers Carousel */}
       <BestSellersSection initialProducts={products} />
 
-      {/* 4. AUrate Deep Burgundy Editorial Banner (from Frame 008 of recording) */}
-      <BurgundyBanner />
+      {/* 4. Shop From Videos (Reels / Shorts) */}
+      <ShopFromVideos />
 
-      {/* 5. AUrate Full-Width Lifestyle Campaign with Play/Pause (from Frame 013 & 015) */}
-      <LifestyleCampaign />
+      {/* 5. Real Photo Customer Reviews (★★★★★ 4.88) */}
+      <PhotoReviewsSection />
 
-      {/* 6. Brand Story Section: More Than Jewellery. A Feeling. */}
-      <BrandStory />
+      {/* 6. Trending Gifts in Occasion Category (Sale Badges) */}
+      <OccasionTrendingSection />
 
-      {/* 7. Verified Hinglish Customer Reviews & Write a Review */}
-      <CustomerReviewsSection />
+      {/* 7. Why People Choose ELVORA (Yellow Banner + Trust Badges) */}
+      <WhyChooseUs />
 
-      {/* 8. Clean Trust Guarantees */}
-      <TrustSection />
+      {/* 8. Shop by Price (Under ₹199, ₹499, ₹999, ₹1999, Premium) */}
+      <ShopByPrice />
     </div>
   );
 }

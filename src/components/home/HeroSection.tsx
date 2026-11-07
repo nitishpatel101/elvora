@@ -1,73 +1,46 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function HeroSection() {
-  const [heroImage, setHeroImage] = useState('/images/hero/hero-couple-tight.png');
-  const [heroSubheading, setHeroSubheading] = useState('BLACK FRIDAY SALE');
-  const [heroHeading, setHeroHeading] = useState('30% OFF');
-  const [heroButtonText, setHeroButtonText] = useState('SHOP NOW');
-  const [heroLink, setHeroLink] = useState('/shop');
-
-  useEffect(() => {
-    fetch('/api/settings')
-      .then((res) => (res.ok ? res.json() : null))
-      .then((data) => {
-        if (data) {
-          if (data.heroImage) setHeroImage(data.heroImage);
-          if (data.heroSubheading !== undefined) setHeroSubheading(data.heroSubheading);
-          if (data.heroHeading !== undefined) setHeroHeading(data.heroHeading);
-          if (data.heroButtonText !== undefined) setHeroButtonText(data.heroButtonText);
-          if (data.heroLink) setHeroLink(data.heroLink);
-        }
-      })
-      .catch(() => {});
-  }, []);
-
   return (
-    <section className="relative w-full bg-[#181818] overflow-hidden border-b border-[#EAE5DE]">
-      {/* Responsive, mobile-fitted editorial hero banner */}
-      <Link
-        href={heroLink}
-        className="block relative w-full aspect-[2.1/1] sm:aspect-[2.5/1] md:aspect-[2.8/1] min-h-[175px] sm:min-h-[320px] md:min-h-[380px] lg:min-h-[440px] max-h-[540px] group cursor-pointer overflow-hidden"
-        aria-label={`ELVORA Fine Jewellery - ${heroSubheading || 'Collection'} ${heroHeading || ''} - ${heroButtonText || 'Shop'}`}
-      >
-        <Image
-          src={heroImage}
-          alt="ELVORA Fine Jewellery - Made for Two"
-          fill
-          priority
-          unoptimized
-          sizes="100vw"
-          className="object-cover object-center sm:object-[center_35%] transition-transform duration-700 ease-out group-hover:scale-[1.01]"
-        />
+    <section className="bg-white py-6 sm:py-8">
+      <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
+        <Link
+          href="/shop"
+          className="block relative w-full aspect-[2/1] sm:aspect-[2.6/1] md:aspect-[3.1/1] min-h-[220px] sm:min-h-[360px] md:min-h-[440px] rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl border border-stone-200 group cursor-pointer"
+        >
+          <Image
+            src="/images/giftify/hero-banner.jpg"
+            alt="Memories That Glow Forever - Illuminated Crystal Keepsakes"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.01]"
+            unoptimized
+          />
 
-        {/* Subtle cinematic gradient overlay to ensure text contrast */}
-        <div className="absolute inset-0 bg-black/20 group-hover:bg-black/15 transition-colors duration-300" />
+          {/* Overlay gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent sm:from-black/60 sm:via-transparent" />
 
-        {/* Proportional centered typography optimized for mobile & desktop */}
-        {(heroSubheading || heroHeading || heroButtonText) && (
-          <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-3 sm:px-6 z-10 pointer-events-none">
-            {heroSubheading && (
-              <span className="text-[9px] sm:text-xs md:text-sm uppercase tracking-[0.22em] sm:tracking-[0.32em] font-medium text-white/95 mb-1 sm:mb-2 drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                {heroSubheading}
+          {/* Text Content */}
+          <div className="absolute inset-0 flex flex-col justify-center px-6 sm:px-12 md:px-16 max-w-xl text-white z-10">
+            <h1 className="font-serif text-2xl sm:text-4xl md:text-5xl font-normal leading-tight text-white mb-2 sm:mb-3 drop-shadow">
+              Memories That<br />Glow Forever
+            </h1>
+            <p className="text-xs sm:text-sm text-stone-200 font-light max-w-md mb-4 sm:mb-6 line-clamp-2 sm:line-clamp-none drop-shadow-sm">
+              Turn your favorite photo, baby scan, or cherished moment into a beautifully illuminated crystal keepsake.
+            </p>
+            <div>
+              <span className="inline-block bg-[#DDB373] hover:bg-[#C9A060] text-black font-semibold text-xs sm:text-sm px-6 py-2.5 sm:px-8 sm:py-3 rounded-lg shadow-md transition-all group-hover:scale-105">
+                Get Now
               </span>
-            )}
-            {heroHeading && (
-              <h1 className="font-sans text-xl sm:text-4xl md:text-5xl lg:text-6xl font-light text-white tracking-[0.04em] sm:tracking-[0.06em] mb-1.5 sm:mb-3 drop-shadow-[0_2px_6px_rgba(0,0,0,0.85)]">
-                {heroHeading}
-              </h1>
-            )}
-            {heroButtonText && (
-              <span className="inline-block text-[9px] sm:text-xs md:text-sm uppercase tracking-[0.18em] sm:tracking-[0.28em] font-semibold text-white pb-0.5 sm:pb-1 border-b sm:border-b-2 border-white group-hover:border-white/80 transition-all drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                {heroButtonText}
-              </span>
-            )}
+            </div>
           </div>
-        )}
-      </Link>
+        </Link>
+      </div>
     </section>
   );
 }

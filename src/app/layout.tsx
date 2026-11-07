@@ -11,6 +11,7 @@ import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/cart/CartDrawer';
 import FloatingChatBubble from '@/components/common/FloatingChatBubble';
 import RecentSalesPopup from '@/components/social/RecentSalesPopup';
+import FloatingWhatsAppPill from '@/components/common/FloatingWhatsAppPill';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -120,6 +121,7 @@ export default function RootLayout({
                 <Footer />
                 <CartDrawer />
                 <FloatingChatBubble />
+                <FloatingWhatsAppPill />
                 <RecentSalesPopup />
               </WishlistProvider>
             </CartProvider>

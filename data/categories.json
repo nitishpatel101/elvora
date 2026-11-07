@@ -1,27 +1,34 @@
 [
   {
     "id": "cat-01",
-    "slug": "couple-bracelets",
-    "name": "Couple Bracelets",
-    "description": "Exquisite matching bracelets embodying shared devotion, celestial harmony, and tactile connection.",
-    "image": "/images/products/touch-distance-bracelet/hero.jpg",
+    "slug": "couple-gifts",
+    "name": "Couple Gifts",
+    "description": "Matching long-distance bracelets, couple bands, and romantic keepsakes for partners.",
+    "image": "/images/giftify/products/touch-vibration-bracelet.jpg",
     "itemCount": 4
   },
   {
     "id": "cat-02",
-    "slug": "necklaces",
-    "name": "Necklaces",
-    "description": "Layered statements and luminous gemstones designed to elevate personal style with grace.",
-    "image": "/images/products/heart-sword-pendant-necklace/hero.jpg",
-    "itemCount": 1
+    "slug": "anniversary-gifts",
+    "name": "Anniversary Gifts",
+    "description": "Cherished personalized gifts and oysters designed to celebrate wedding & dating milestones.",
+    "image": "/images/giftify/products/love-pearl-necklace.jpg",
+    "itemCount": 3
   },
   {
     "id": "cat-03",
-    "slug": "earrings",
-    "name": "Earrings",
-    "description": "Architectural chandelier silhouettes and radiant pearls catching light with every turn.",
-    "image": "/images/products/golden-lantern-pearl-earrings/hero.jpg",
-    "itemCount": 1
+    "slug": "personalized-gifts",
+    "name": "Personalized Gifts",
+    "description": "Customized crystal cubes, magic heat necklaces, and custom art engraved with your photos.",
+    "image": "/images/giftify/products/heat-activated-necklace.jpg",
+    "itemCount": 4
+  },
+  {
+    "id": "cat-04",
+    "slug": "birthday-gifts",
+    "name": "Birthday Gifts",
+    "description": "Special birthday currency note keepsakes, lamps, and unforgettable birthday surprises.",
+    "image": "/images/giftify/products/birthday-currency-note.jpg",
+    "itemCount": 2
   }
 ]
-

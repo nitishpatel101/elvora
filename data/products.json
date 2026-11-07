@@ -2,269 +2,306 @@
   {
     "id": "elv-prod-01",
     "slug": "touch-distance-couple-bracelet",
-    "name": "Touch Distance Couple Bracelet",
-    "tagline": "Stay connected across distance with illuminated tactile touch",
-    "price": 1399,
-    "originalPrice": 1999,
-    "description": "Matching gold and black couple bracelets featuring moon and sun symbols. Engineered with advanced responsive connection indicators that illuminate in celestial synchrony when touched, bridging hearts across any distance.",
-    "category": "Couple Bracelets",
-    "categorySlug": "couple-bracelets",
-    "colours": [
-      "Gold",
-      "Black"
-    ],
+    "name": "Long Distance Touch Vibration Bracelet for Couples - Totwoo bracelet",
+    "tagline": "Tap to vibrate and glow your partner's bracelet anywhere in the world",
+    "price": 7499,
+    "originalPrice": 12999,
+    "description": "Engraved with Jane Austen's quote 'My heart is, and always will be yours'. When you tap your bracelet, your loved one's bracelet lights up and vibrates instantly, no matter the distance.",
+    "category": "Couple Gifts",
+    "categorySlug": "couple-gifts",
+    "colours": ["Sun & Moon Rose Gold", "Obsidian Black"],
     "inStock": true,
-    "stock": 43,
+    "stock": 50,
     "isFeatured": true,
     "isBestSeller": true,
     "isNewArrival": false,
     "isPublished": true,
     "images": [
-      "/images/products/touch-distance-bracelet/hero.jpg",
-      "/images/products/touch-distance-bracelet/ivory.jpg",
-      "/images/products/touch-distance-bracelet/macro.jpg",
-      "/images/hero/hero-couple-connection.png",
-      "/images/products/touch-distance-bracelet/lifestyle.jpg"
+      "/images/giftify/products/touch-vibration-bracelet.jpg",
+      "/images/giftify/products/touch-thumb-1.jpg",
+      "/images/giftify/products/touch-thumb-2.jpg",
+      "/images/giftify/products/touch-thumb-3.jpg",
+      "/images/giftify/products/touch-thumb-4.jpg"
     ],
     "variants": [
-      {
-        "id": "v-pair-standard",
-        "name": "Complete Matching Pair (Gold & Black)",
-        "inStock": true,
-        "stock": 45
-      }
+      { "id": "v-rope", "name": "Rope model", "inStock": true, "stock": 25 },
+      { "id": "v-metal", "name": "Metal model", "inStock": true, "stock": 15 },
+      { "id": "v-morse", "name": "Morse Love Bracelet", "inStock": true, "stock": 10 },
+      { "id": "v-candy", "name": "Candy model Bracelet", "inStock": true, "stock": 8 }
     ],
     "details": {
-      "material": "Surgical 316L Stainless Steel with Optical Translucent Bezel",
-      "finish": "18K PVD Champagne Gold & Obsidian Matte Ion Plating",
-      "clasp": "Reinforced lobster clasp with 5cm adjustable extension links",
-      "waterResistance": "IP67 Water & Dust Resistant",
-      "packaging": "Signature ELVORA velvet presentation box, authenticity guarantee card & twin USB magnetic chargers",
-      "care": "Wipe with provided microfiber cloth; avoid submerging in chlorinated or saltwater"
+      "material": "Surgical Stainless Steel & Braided Waterproof Milanese Cord",
+      "finish": "18K PVD Rose Gold & Obsidian Titanium Plating",
+      "connectivity": "Bluetooth Low Energy (iOS & Android App compatible)",
+      "battery": "Magnetic USB Charging (Lasts 5-7 days on single charge)",
+      "packaging": "Signature Giftify luxury velvet presentation box with warranty card"
     },
     "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-06T19:47:18.943Z"
+    "updatedAt": "2026-11-07T12:00:00.000Z"
   },
   {
     "id": "elv-prod-02",
-    "slug": "beaded-couple-bracelet",
-    "name": "Beaded Couple Bracelet",
-    "tagline": "Hand-selected natural stones paired with ocean and mountain medallions",
-    "price": 1699,
-    "originalPrice": 2299,
-    "description": "Matching pink and black beaded couple bracelets with decorative central charms. Crafted with genuine strawberry rose quartz and volcanic matte onyx, featuring intricately engraved mountain and wave medallions symbolizing eternal devotion through earth and sea.",
-    "category": "Couple Bracelets",
-    "categorySlug": "couple-bracelets",
-    "colours": [
-      "Pink",
-      "Black"
-    ],
+    "slug": "heat-activated-magic-photo-necklace",
+    "name": "Heat Activated Necklace - Magic Photo Necklace",
+    "tagline": "Black stone transforms into your secret photo when warmed by touch",
+    "price": 999,
+    "originalPrice": 1499,
+    "description": "Under 30°C it appears as a sleek black pendant. When warmed by body heat or touch (>30°C), the stone reveals your custom hidden photo magically.",
+    "category": "Personalized Gifts",
+    "categorySlug": "personalized-gifts",
+    "colours": ["Gold", "Silver"],
     "inStock": true,
-    "stock": 32,
+    "stock": 65,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "/images/giftify/products/heat-activated-necklace.jpg"
+    ],
+    "variants": [
+      { "id": "v-gold", "name": "18K Gold Plated", "inStock": true, "stock": 35 },
+      { "id": "v-silver", "name": "Pure Silver Finish", "inStock": true, "stock": 30 }
+    ],
+    "details": {
+      "material": "High Grade Stainless Steel with Thermo-Chromic Crystal",
+      "chainLength": "45cm + 5cm adjustable extension"
+    },
+    "createdAt": "2026-11-02T10:00:00.000Z",
+    "updatedAt": "2026-11-07T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-03",
+    "slug": "love-pearl-oyster-necklace",
+    "name": "Love Pearl Oyster Necklace",
+    "tagline": "Open your real genuine oyster to reveal your natural genuine freshwater pearl",
+    "price": 349,
+    "originalPrice": 599,
+    "description": "An unforgettable experience. Open the sealed tin can with a real oyster, discover your genuine pearl, and place it into the heart pendant.",
+    "category": "Anniversary Gifts",
+    "categorySlug": "anniversary-gifts",
+    "colours": ["Silver"],
+    "inStock": true,
+    "stock": 90,
     "isFeatured": true,
     "isBestSeller": true,
     "isNewArrival": false,
     "isPublished": true,
     "images": [
-      "/images/products/beaded-couple-bracelet/hero.jpg",
-      "/images/products/beaded-couple-bracelet/detail.jpg",
-      "/images/products/beaded-couple-bracelet/lifestyle.jpg",
-      "/images/hero/hero-couple-connection.png"
+      "/images/giftify/products/love-pearl-necklace.jpg"
     ],
     "variants": [
-      {
-        "id": "v-bead-set",
-        "name": "Dual Set (Pink Quartz + Matte Onyx)",
-        "inStock": true,
-        "stock": 32
-      }
+      { "id": "v-box", "name": "Gift Box Complete Set", "inStock": true, "stock": 90 }
     ],
     "details": {
-      "material": "Natural Strawberry Rose Quartz, Matte Black Onyx & Rose Gold Plated Accents",
-      "finish": "Artisanal hand-strung braided cord with adjustable macramé tension lock",
-      "dimensions": "Adjustable fit for 15cm - 23cm wrist circumferences",
-      "charms": "Micro-etched Mountain & Wave medallion charms",
-      "packaging": "Signature ELVORA velvet presentation box & gemological authenticity certificate",
-      "care": "Clean gently with damp cloth; keep away from harsh perfumes and chemicals"
+      "material": "Natural Cultured Pearl & Rhodium Plated Heart Locket"
     },
-    "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-06T12:00:00.000Z"
+    "createdAt": "2026-11-03T10:00:00.000Z",
+    "updatedAt": "2026-11-07T12:00:00.000Z"
   },
   {
-    "id": "elv-prod-03",
-    "slug": "sun-moon-chain-bracelet",
-    "name": "Sun & Moon Chain Bracelet",
-    "tagline": "Precision-machined dual bezels with celestial engravings & snake-curb chain",
-    "price": 1199,
-    "originalPrice": 1599,
-    "description": "Matching black and rose-gold chain bracelets featuring sun and moon designs. Features engraved ELVORA luxury bezels enclosing deep luminous celestial motifs, finished with high-polish interlinked curb chain links and double fluid cords.",
-    "category": "Couple Bracelets",
-    "categorySlug": "couple-bracelets",
-    "colours": [
-      "Black",
-      "Rose Gold"
+    "id": "elv-prod-04",
+    "slug": "hug-bracelet",
+    "name": "Hug Bracelet - Love Embracing Arms",
+    "tagline": "A daily wearable hug when you can't be there in person",
+    "price": 999,
+    "originalPrice": 1499,
+    "description": "Crafted as two loving hands wrapping gently around your wrist. A heartwarming reminder of your warmth and embrace.",
+    "category": "Couple Gifts",
+    "categorySlug": "couple-gifts",
+    "colours": ["Sterling Silver", "Rose Gold"],
+    "inStock": true,
+    "stock": 40,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "/images/giftify/products/hug-bracelet.jpg"
     ],
+    "variants": [
+      { "id": "v-silver", "name": "Sterling Silver", "inStock": true, "stock": 25 },
+      { "id": "v-rose", "name": "Rose Gold", "inStock": true, "stock": 15 }
+    ],
+    "details": {
+      "material": "925 Sterling Silver Plated with anti-tarnish coating"
+    },
+    "createdAt": "2026-11-04T10:00:00.000Z",
+    "updatedAt": "2026-11-07T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-05",
+    "slug": "light-sculpted-couple-ring",
+    "name": "Light Sculpted 'I Love You' Couple Ring",
+    "tagline": "Projection ring revealing I Love You in 100 languages with light",
+    "price": 1499,
+    "originalPrice": 2499,
+    "description": "Geometric facets with secret nanotech projection lens. Shine your phone flashlight through the center stone to project I Love You in 100 languages.",
+    "category": "Couple Gifts",
+    "categorySlug": "couple-gifts",
+    "colours": ["Silver"],
+    "inStock": true,
+    "stock": 30,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "/images/giftify/products/couple-ring.jpg"
+    ],
+    "variants": [
+      { "id": "v-pair", "name": "Matching Pair (His & Hers Adjustable)", "inStock": true, "stock": 30 }
+    ],
+    "details": {
+      "material": "Titanium Steel with Nano Optical Projection Crystal"
+    },
+    "createdAt": "2026-11-05T10:00:00.000Z",
+    "updatedAt": "2026-11-07T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-06",
+    "slug": "3d-crystal-photo-cube",
+    "name": "3D Crystal Photo Cube with LED Base",
+    "tagline": "Sub-surface laser engraving creating a 3D hologram of your photo",
+    "price": 899,
+    "originalPrice": 1249,
+    "description": "High purity K9 optical crystal engraved with cutting-edge 3D laser technology. Includes color changing multi-LED wooden light stand.",
+    "category": "Personalized Gifts",
+    "categorySlug": "personalized-gifts",
+    "colours": ["Clear K9 Crystal"],
     "inStock": true,
     "stock": 50,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "/images/giftify/products/3d-crystal-photo-cube.jpg"
+    ],
+    "variants": [
+      { "id": "v-cube", "name": "Cube + LED Base", "inStock": true, "stock": 50 }
+    ],
+    "details": {
+      "material": "K9 Optical Crystal & Natural Pine Wood Base"
+    },
+    "createdAt": "2026-11-06T10:00:00.000Z",
+    "updatedAt": "2026-11-07T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-07",
+    "slug": "birthday-currency-note",
+    "name": "Birthday Currency Note Keepsake",
+    "tagline": "Original currency note matching your birthday serial date",
+    "price": 650,
+    "originalPrice": 999,
+    "description": "Framed genuine currency note featuring serial digits matching your or your loved one's special birthday date in a luxury presentation stand.",
+    "category": "Birthday Gifts",
+    "categorySlug": "birthday-gifts",
+    "colours": ["Gold / Clear Frame"],
+    "inStock": true,
+    "stock": 75,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "/images/giftify/products/birthday-currency-note.jpg"
+    ],
+    "variants": [
+      { "id": "v-acrylic", "name": "Deluxe Acrylic Stand", "inStock": true, "stock": 75 }
+    ],
+    "details": {
+      "material": "Genuine Currency Note in UV Protected Acrylic Case"
+    },
+    "createdAt": "2026-11-06T11:00:00.000Z",
+    "updatedAt": "2026-11-07T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-08",
+    "slug": "feather-painting",
+    "name": "Handmade Real Feather Portrait Painting",
+    "tagline": "Your portrait painted with micro-precision on an authentic natural feather",
+    "price": 2500,
+    "originalPrice": 3499,
+    "description": "A rare artistic masterpiece. Hand-painted micro portrait on an authentic white natural feather, preserving timeless memories forever.",
+    "category": "Personalized Gifts",
+    "categorySlug": "personalized-gifts",
+    "colours": ["Natural White"],
+    "inStock": true,
+    "stock": 20,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "/images/giftify/products/feather-painting.jpg"
+    ],
+    "variants": [
+      { "id": "v-frame", "name": "Feather with Glass Deep Shadow Box", "inStock": true, "stock": 20 }
+    ],
+    "details": {
+      "material": "Authentic Treated Feather with Acrylic Fine-liner Art"
+    },
+    "createdAt": "2026-11-06T12:00:00.000Z",
+    "updatedAt": "2026-11-07T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-09",
+    "slug": "personalized-wooden-engraving-gift",
+    "name": "Personalized Wooden Engraving Plaque Gift",
+    "tagline": "Laser engraved on natural steamed beech wood with heartfelt anniversary message",
+    "price": 399,
+    "originalPrice": 699,
+    "description": "Warm wooden plaque laser-engraved with your photo, names, and anniversary date. Ideal for table desks and bedside stands.",
+    "category": "Anniversary Gifts",
+    "categorySlug": "anniversary-gifts",
+    "colours": ["Natural Beech Wood"],
+    "inStock": true,
+    "stock": 85,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "/images/giftify/products/wooden-engraving-gift.jpg"
+    ],
+    "variants": [
+      { "id": "v-small", "name": "Standard (6x4 inch)", "inStock": true, "stock": 50 },
+      { "id": "v-large", "name": "Large (8x6 inch)", "inStock": true, "stock": 35 }
+    ],
+    "details": {
+      "material": "100% Solid Natural Beech Wood"
+    },
+    "createdAt": "2026-11-06T13:00:00.000Z",
+    "updatedAt": "2026-11-07T12:00:00.000Z"
+  },
+  {
+    "id": "elv-prod-10",
+    "slug": "3d-miniature",
+    "name": "Custom 3D Couple Miniature Figurine",
+    "tagline": "Handmade 3D replicas sculpted from your real photos",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Ultra detailed handmade miniature dolls sculpted from your real photos. Captures your outfits, poses, and expressions with incredible likeness.",
+    "category": "Anniversary Gifts",
+    "categorySlug": "anniversary-gifts",
+    "colours": ["Custom Hand Painted"],
+    "inStock": true,
+    "stock": 15,
     "isFeatured": true,
     "isBestSeller": false,
     "isNewArrival": true,
     "isPublished": true,
     "images": [
-      "/images/products/sun-moon-chain-bracelet/hero.jpg",
-      "/images/products/sun-moon-chain-bracelet/editorial.jpg",
-      "/images/products/sun-moon-chain-bracelet/showcase.jpg"
+      "/images/giftify/products/3d-miniature.jpg"
     ],
     "variants": [
-      {
-        "id": "v-chain-pair",
-        "name": "Sun (Gunmetal) & Moon (Rose Gold) Pair",
-        "inStock": true,
-        "stock": 50
-      }
+      { "id": "v-couple", "name": "Couple Figurine (6 inch)", "inStock": true, "stock": 15 }
     ],
     "details": {
-      "material": "Surgical Grade 316L Stainless Steel with Sapphire Glass Inserts",
-      "finish": "Champagne Rose Gold PVD & Deep Gunmetal Black Titanium Ion Plating",
-      "chainType": "Hybrid snake cord & curb link extension",
-      "clasp": "Custom jewelry clasp with micro-adjustment holes",
-      "packaging": "Signature ELVORA velvet presentation box & warranty card",
-      "care": "Tarnish-free and sweat-resistant for daily luxury wear"
+      "material": "Poly-resin and polymer clay with UV protective matte glaze"
     },
-    "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-06T12:00:00.000Z"
-  },
-  {
-    "id": "elv-prod-04",
-    "slug": "sun-moon-rope-bracelet",
-    "name": "Sun & Moon Rope Bracelet",
-    "tagline": "Double-rope architectural weave with celestial disc emblems",
-    "price": 1299,
-    "originalPrice": 1799,
-    "description": "Matching black and rose-gold double-rope style bracelets. Engineered with sleek double milanaise cord structure framing high-contrast sun and moon medallions, celebrating harmonious unity.",
-    "category": "Couple Bracelets",
-    "categorySlug": "couple-bracelets",
-    "colours": [
-      "Black",
-      "Rose Gold"
-    ],
-    "inStock": true,
-    "stock": 38,
-    "isFeatured": false,
-    "isBestSeller": true,
-    "isNewArrival": false,
-    "isPublished": true,
-    "images": [
-      "/images/products/sun-moon-rope-bracelet/hero.jpg",
-      "/images/products/sun-moon-rope-bracelet/editorial.jpg",
-      "/images/products/sun-moon-rope-bracelet/detail.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-rope-pair",
-        "name": "Double-Rope Matching Pair",
-        "inStock": true,
-        "stock": 38
-      }
-    ],
-    "details": {
-      "material": "Double-strand Steel Mesh Cord & Solid Stainless Steel Core",
-      "finish": "High-luster Rose Gold and Satin Matte Gunmetal",
-      "clasp": "Self-aligning magnetic snap lock with mechanical twist lock",
-      "waterResistance": "100% Waterproof and rust-resistant",
-      "packaging": "Signature ELVORA velvet presentation box & care instructions",
-      "care": "Rinse in freshwater if exposed to sea salt and pat dry"
-    },
-    "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-06T12:00:00.000Z"
-  },
-  {
-    "id": "elv-prod-05",
-    "slug": "heart-sword-pendant-necklace",
-    "name": "Heart Sword Pendant Necklace",
-    "tagline": "Vivid crimson gemstone pierced by a pave-encrusted silver dagger",
-    "price": 499,
-    "originalPrice": 799,
-    "description": "Silver layered necklace featuring a red heart-shaped gemstone and sword pendant. A dramatic statement of passion and courage, featuring an artisanal ruby-red faceted crystal embraced by micro-pave zirconia, suspended on a tiered double silver chain.",
-    "category": "Necklaces",
-    "categorySlug": "necklaces",
-    "colours": [
-      "Silver"
-    ],
-    "inStock": true,
-    "stock": 47,
-    "isFeatured": true,
-    "isBestSeller": true,
-    "isNewArrival": false,
-    "isPublished": true,
-    "images": [
-      "/images/products/heart-sword-pendant-necklace/hero.jpg",
-      "/images/products/heart-sword-pendant-necklace/macro.jpg",
-      "/images/products/heart-sword-pendant-necklace/lifestyle.jpg",
-      "/images/products/heart-sword-pendant-necklace/editorial.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-necklace-std",
-        "name": "Sterling Silver Tiered Chain with Ruby Pendant",
-        "inStock": true,
-        "stock": 65
-      }
-    ],
-    "details": {
-      "material": "925 Sterling Silver Plated Hypoallergenic Alloy",
-      "stone": "Heart-Cut Vivid Crimson Faceted Crystal with 5A Cubic Zirconia Pave",
-      "chain": "Layered double chain (Choker curb chain 42cm + Pendant spiral chain 48cm + 6cm extender)",
-      "tag": "Engraved ELVORA brand tag at closure",
-      "packaging": "Signature ELVORA cream jewelry box & authenticity card",
-      "care": "Store in dry compartment; avoid direct spray of perfumes"
-    },
-    "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-07T03:51:08.461Z"
-  },
-  {
-    "id": "elv-prod-06",
-    "slug": "golden-lantern-pearl-earrings",
-    "name": "Golden Lantern Pearl Earrings",
-    "tagline": "Architectural lantern silhouette with tiered freshwater pearl bells",
-    "price": 399,
-    "originalPrice": 599,
-    "description": "Golden lantern-style chandelier earrings with pearl details. Drawing inspiration from classical oriental pavilion lanterns, these earrings feature openwork gold frames adorned with delicate tiers of lustrous freshwater pearls and golden floral drop bells that chime with graceful movement.",
-    "category": "Earrings",
-    "categorySlug": "earrings",
-    "colours": [
-      "Gold",
-      "White"
-    ],
-    "inStock": true,
-    "stock": 62,
-    "isFeatured": true,
-    "isBestSeller": true,
-    "isNewArrival": false,
-    "isPublished": true,
-    "images": [
-      "/images/products/golden-lantern-pearl-earrings/hero.jpg",
-      "/images/products/golden-lantern-pearl-earrings/card.jpg",
-      "/images/products/golden-lantern-pearl-earrings/macro.jpg",
-      "/images/products/golden-lantern-pearl-earrings/lifestyle.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-earrings-pair",
-        "name": "Golden Lantern Pearl Chandelier Pair",
-        "inStock": true,
-        "stock": 80
-      }
-    ],
-    "details": {
-      "material": "18K Champagne Gold Plated Eco-Brass & Freshwater Cultured Pearls",
-      "finish": "Hand-polished satin gold architectural framework",
-      "earWire": "Hypoallergenic French hooks with comfort-fit silicone stoppers",
-      "weight": "Ultra-lightweight 6.8 grams per earring for prolonged luxury wear",
-      "packaging": "Signature ELVORA velvet presentation box & care cloth",
-      "care": "Keep pearls away from citrus and ultrasonic cleaners"
-    },
-    "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-07T03:51:08.524Z"
+    "createdAt": "2026-11-06T14:00:00.000Z",
+    "updatedAt": "2026-11-07T12:00:00.000Z"
   }
 ]
