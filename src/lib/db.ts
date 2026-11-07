@@ -1,7 +1,7 @@
 import { createClient } from '@supabase/supabase-js';
 import fs from 'fs/promises';
 import path from 'path';
-import { Product, Order, Category } from '@/types';
+import { Product, Order, Category, StoreSettings } from '@/types';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -21,6 +21,7 @@ const DATA_DIR = path.join(process.cwd(), 'data');
 const PRODUCTS_FILE = path.join(DATA_DIR, 'products.json');
 const ORDERS_FILE = path.join(DATA_DIR, 'orders.json');
 const CATEGORIES_FILE = path.join(DATA_DIR, 'categories.json');
+const STORE_SETTINGS_FILE = path.join(DATA_DIR, 'store-settings.json');
 
 // --- PRODUCT REPOSITORY ---
 
@@ -188,6 +189,35 @@ export async function getCategories(): Promise<Category[]> {
   }
 }
 
+// --- STORE SETTINGS ---
+
+export async function getStoreSettings(): Promise<StoreSettings> {
+  const defaultSettings: StoreSettings = {
+    announcementText: 'DISCOVER THE ART OF GIFTING | ELEGANCE IN EVERY DETAIL',
+    brandTagline: 'Haute Joaillerie',
+    supportEmail: 'concierge@elvora.com',
+    supportPhone: '+91 98765 43210',
+    upiId: 'elvora@upi',
+    payeeName: 'ELVORA Luxury Jewels',
+    upiQrImage: '/images/qr/upi-qr.jpg',
+  };
+
+  try {
+    const raw = await fs.readFile(STORE_SETTINGS_FILE, 'utf-8');
+    const parsed = JSON.parse(raw);
+    return { ...defaultSettings, ...parsed };
+  } catch {
+    return defaultSettings;
+  }
+}
+
+export async function saveStoreSettings(settings: Partial<StoreSettings>): Promise<StoreSettings> {
+  const current = await getStoreSettings();
+  const updated: StoreSettings = { ...current, ...settings };
+  await fs.writeFile(STORE_SETTINGS_FILE, JSON.stringify(updated, null, 2), 'utf-8');
+  return updated;
+}
+
 // --- HELPER MAPPERS ---
 /* eslint-disable @typescript-eslint/no-explicit-any */
 function mapSupabaseProductToModel(p: any): Product {
@@ -256,10 +286,16 @@ function mapSupabaseOrderToModel(o: any): Order {
     totalAmount: Number(o.total_amount),
     currency: o.currency,
     status: o.status,
-    paymentMethod: o.payment_method,
-    paymentGateway: o.payment_gateway,
+    paymentMethod: o.payment_method || 'UPI_QR',
+    paymentGateway: o.payment_gateway || 'MANUAL_UPI',
     paymentId: o.payment_id,
     razorpayOrderId: o.razorpay_order_id,
+    upiUtr: o.upi_utr,
+    upiScreenshot: o.upi_screenshot,
+    paymentSubmittedAt: o.payment_submitted_at,
+    verifiedBy: o.verified_by,
+    verifiedAt: o.verified_at,
+    rejectionReason: o.rejection_reason,
     trackingNumber: o.tracking_number,
     trackingCourier: o.tracking_courier,
     createdAt: o.created_at,
@@ -286,6 +322,12 @@ function mapModelToSupabaseOrder(o: Order): any {
     payment_gateway: o.paymentGateway,
     payment_id: o.paymentId || null,
     razorpay_order_id: o.razorpayOrderId || null,
+    upi_utr: o.upiUtr || null,
+    upi_screenshot: o.upiScreenshot || null,
+    payment_submitted_at: o.paymentSubmittedAt || null,
+    verified_by: o.verifiedBy || null,
+    verified_at: o.verifiedAt || null,
+    rejection_reason: o.rejectionReason || null,
     tracking_number: o.trackingNumber || null,
     tracking_courier: o.trackingCourier || null,
     updated_at: new Date().toISOString(),

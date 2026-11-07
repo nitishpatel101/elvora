@@ -219,7 +219,10 @@ async function runTests() {
     const getRes = await fetch(`${BASE}/api/orders/${orderData.orderId}`);
     const confirmedOrder = await getRes.json();
     assert.strictEqual(confirmedOrder.status, 'PAID');
-    assert.strictEqual(confirmedOrder.paymentMethod, 'ONLINE');
+    assert(
+      confirmedOrder.paymentMethod === 'ONLINE' || confirmedOrder.paymentMethod === 'UPI_QR',
+      'Payment method must be valid'
+    );
   });
 
   // TEST 13: Duplicate payment protection (Idempotency)
@@ -401,6 +404,161 @@ async function runTests() {
       const res = await fetch(`${BASE}${page}`);
       assert.strictEqual(res.status, 200, `Page ${page} returned status ${res.status}`);
     }
+  });
+
+  // TEST 20: Manual UPI QR order initialization with PAYMENT_PENDING
+  let upiOrderId = '';
+  await test('20. Customer selects UPI QR payment and creates order with PAYMENT_PENDING', async () => {
+    const res = await fetch(`${BASE}/api/payment/create-order`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items: [{ productId: 'elv-prod-01', quantity: 1 }], // ₹1,399
+        shippingAddress: {
+          fullName: 'Vikram Malhotra',
+          email: 'vikram@example.com',
+          phone: '+91 97777 55555',
+          addressLine1: 'Bandra West',
+          city: 'Mumbai',
+          state: 'Maharashtra',
+          pincode: '400050',
+          country: 'India',
+        },
+      }),
+    });
+
+    assert.strictEqual(res.status, 200);
+    const data = await res.json();
+    assert(data.orderId.startsWith('ELV-'), 'Must return unique order ID');
+    assert.strictEqual(data.paymentMethod, 'UPI_QR');
+    assert(data.upiId, 'Must return store owner UPI ID');
+    assert(data.payeeName, 'Must return store payee name');
+    assert(data.upiQrImage, 'Must return store owner QR image URL');
+    upiOrderId = data.orderId;
+
+    // Check repository status
+    const getRes = await fetch(`${BASE}/api/orders/${upiOrderId}`);
+    const order = await getRes.json();
+    assert.strictEqual(order.status, 'PAYMENT_PENDING', 'Initial order status must be PAYMENT_PENDING');
+  });
+
+  // TEST 21: Customer submits UTR -> status becomes PAYMENT_SUBMITTED
+  await test('21. Customer submits UTR and screenshot -> status moves to PAYMENT_SUBMITTED', async () => {
+    assert(upiOrderId);
+    const res = await fetch(`${BASE}/api/orders/${upiOrderId}/submit-payment`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        utr: '439018274910',
+        screenshotUrl: '/images/uploads/test_receipt.png',
+      }),
+    });
+
+    assert.strictEqual(res.status, 200);
+    const data = await res.json();
+    assert.strictEqual(data.status, 'PAYMENT_SUBMITTED');
+    assert.strictEqual(data.upiUtr, '439018274910');
+
+    // Verify in repository
+    const getRes = await fetch(`${BASE}/api/orders/${upiOrderId}`);
+    const order = await getRes.json();
+    assert.strictEqual(order.status, 'PAYMENT_SUBMITTED');
+    assert.strictEqual(order.upiUtr, '439018274910');
+  });
+
+  // TEST 22: Reject invalid/empty UTR submission
+  await test('22. Customer submission with missing/invalid UTR is rejected', async () => {
+    const res = await fetch(`${BASE}/api/orders/${upiOrderId}/submit-payment`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ utr: '   ' }),
+    });
+    assert.strictEqual(res.status, 400);
+    const data = await res.json();
+    assert(data.error);
+  });
+
+  // TEST 23: Admin verifies bank credit -> order status moves to PAID
+  await test('23. Store admin verifies bank credit -> order confirmed as PAID', async () => {
+    assert(upiOrderId);
+    const res = await fetch(`${BASE}/api/admin/verify-payment`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        orderId: upiOrderId,
+        verifiedBy: 'owner@elvora.com',
+      }),
+    });
+
+    assert.strictEqual(res.status, 200);
+    const data = await res.json();
+    assert.strictEqual(data.status, 'PAID');
+
+    // Verify in repository
+    const getRes = await fetch(`${BASE}/api/orders/${upiOrderId}`);
+    const order = await getRes.json();
+    assert.strictEqual(order.status, 'PAID');
+    assert.strictEqual(order.verifiedBy, 'owner@elvora.com');
+    assert(order.verifiedAt);
+  });
+
+  // TEST 24: Admin payment rejection flow
+  await test('24. Admin payment rejection transitions order to PAYMENT_REJECTED with reason', async () => {
+    // Create new order
+    const createRes = await fetch(`${BASE}/api/payment/create-order`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items: [{ productId: 'elv-prod-02', quantity: 1 }],
+        shippingAddress: {
+          fullName: 'Rohit Sharma',
+          email: 'rohit@example.com',
+          phone: '+91 96666 44444',
+          addressLine1: 'Worli Sea Face',
+          city: 'Mumbai',
+          state: 'Maharashtra',
+          pincode: '400030',
+          country: 'India',
+        },
+      }),
+    });
+    const orderData = await createRes.json();
+
+    // Reject payment
+    const rejectRes = await fetch(`${BASE}/api/admin/reject-payment`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        orderId: orderData.orderId,
+        reason: 'UTR mismatch: Credit of ₹1,798 not found in bank account',
+      }),
+    });
+
+    assert.strictEqual(rejectRes.status, 200);
+    const rejectData = await rejectRes.json();
+    assert.strictEqual(rejectData.status, 'PAYMENT_REJECTED');
+    assert.strictEqual(rejectData.rejectionReason, 'UTR mismatch: Credit of ₹1,798 not found in bank account');
+  });
+
+  // TEST 25: Store & UPI Settings API
+  await test('25. Store settings API reads and updates UPI configuration', async () => {
+    const getRes = await fetch(`${BASE}/api/settings`);
+    assert.strictEqual(getRes.status, 200);
+    const settings = await getRes.json();
+    assert(settings.upiId);
+    assert(settings.payeeName);
+    assert(settings.upiQrImage);
+
+    // Save test update
+    const saveRes = await fetch(`${BASE}/api/settings`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        upiId: 'elvora@upi',
+        payeeName: 'ELVORA Luxury Jewels',
+      }),
+    });
+    assert.strictEqual(saveRes.status, 200);
   });
 
   console.log(`\n--- TEST SUITE COMPLETE: ${passed} PASSED, ${failed} FAILED ---`);

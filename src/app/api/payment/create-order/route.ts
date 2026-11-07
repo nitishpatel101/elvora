@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getProductById, saveOrder } from '@/lib/db';
+import { getProductById, saveOrder, getStoreSettings } from '@/lib/db';
 import { createRazorpayOrder, isRazorpayLive, RAZORPAY_KEY_ID } from '@/lib/razorpay';
 import { Order, OrderItem, ShippingAddress, Currency } from '@/types';
 
@@ -69,7 +69,9 @@ export async function POST(req: Request) {
       currency: 'INR', // Indian payment gateway standard
     });
 
-    // Create Initial Order Record with PAYMENT_PENDING status
+    const storeSettings = await getStoreSettings();
+
+    // Create Initial Order Record with PAYMENT_PENDING status (Manual UPI QR Payment)
     const initialOrder: Order = {
       id: uniqueOrderId,
       customerEmail: shippingAddress.email,
@@ -83,8 +85,8 @@ export async function POST(req: Request) {
       totalAmount: totalAmountInr,
       currency,
       status: 'PAYMENT_PENDING',
-      paymentMethod: 'ONLINE',
-      paymentGateway: 'RAZORPAY',
+      paymentMethod: (body.paymentMethod as 'ONLINE' | 'UPI_QR') || 'UPI_QR',
+      paymentGateway: (body.paymentGateway as 'RAZORPAY' | 'MANUAL_UPI') || 'MANUAL_UPI',
       razorpayOrderId: gatewayOrder.id,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
@@ -97,10 +99,15 @@ export async function POST(req: Request) {
       gatewayOrderId: gatewayOrder.id,
       amount: gatewayOrder.amount, // paise
       amountInr: totalAmountInr,
+      subtotalInr,
       currency: 'INR',
       keyId: RAZORPAY_KEY_ID,
       isLiveGateway: isRazorpayLive,
       shippingCharge: shippingChargeInr,
+      paymentMethod: 'UPI_QR',
+      upiId: storeSettings.upiId,
+      payeeName: storeSettings.payeeName,
+      upiQrImage: storeSettings.upiQrImage,
       customer: {
         name: shippingAddress.fullName,
         email: shippingAddress.email,

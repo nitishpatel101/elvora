@@ -85,7 +85,10 @@ export interface ShippingAddress {
 
 export type OrderStatus =
   | 'PAYMENT_PENDING'
+  | 'PAYMENT_SUBMITTED'
   | 'PAID'
+  | 'CONFIRMED'
+  | 'PAYMENT_REJECTED'
   | 'PROCESSING'
   | 'SHIPPED'
   | 'DELIVERED'
@@ -116,14 +119,30 @@ export interface Order {
   totalAmount: number;
   currency: Currency;
   status: OrderStatus;
-  paymentMethod: 'ONLINE';
-  paymentGateway: 'RAZORPAY';
+  paymentMethod: 'ONLINE' | 'UPI_QR';
+  paymentGateway: 'RAZORPAY' | 'MANUAL_UPI';
   paymentId?: string;
   razorpayOrderId?: string;
+  upiUtr?: string;
+  upiScreenshot?: string;
+  paymentSubmittedAt?: string;
+  verifiedBy?: string;
+  verifiedAt?: string;
+  rejectionReason?: string;
   trackingNumber?: string;
   trackingCourier?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+export interface StoreSettings {
+  announcementText?: string;
+  brandTagline?: string;
+  supportEmail: string;
+  supportPhone: string;
+  upiId: string;
+  payeeName: string;
+  upiQrImage: string;
 }
 
 export interface AdminUser {

@@ -14,7 +14,7 @@
       "Black"
     ],
     "inStock": true,
-    "stock": 44,
+    "stock": 43,
     "isFeatured": true,
     "isBestSeller": true,
     "isNewArrival": false,
@@ -23,6 +23,7 @@
       "/images/products/touch-distance-bracelet/hero.jpg",
       "/images/products/touch-distance-bracelet/ivory.jpg",
       "/images/products/touch-distance-bracelet/macro.jpg",
+      "/images/hero/hero-couple-connection.png",
       "/images/products/touch-distance-bracelet/lifestyle.jpg"
     ],
     "variants": [
@@ -42,7 +43,7 @@
       "care": "Wipe with provided microfiber cloth; avoid submerging in chlorinated or saltwater"
     },
     "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-06T17:35:22.783Z"
+    "updatedAt": "2026-11-06T19:47:18.943Z"
   },
   {
     "id": "elv-prod-02",
@@ -67,7 +68,8 @@
     "images": [
       "/images/products/beaded-couple-bracelet/hero.jpg",
       "/images/products/beaded-couple-bracelet/detail.jpg",
-      "/images/products/beaded-couple-bracelet/lifestyle.jpg"
+      "/images/products/beaded-couple-bracelet/lifestyle.jpg",
+      "/images/hero/hero-couple-connection.png"
     ],
     "variants": [
       {
@@ -190,7 +192,7 @@
       "Silver"
     ],
     "inStock": true,
-    "stock": 58,
+    "stock": 53,
     "isFeatured": true,
     "isBestSeller": true,
     "isNewArrival": false,
@@ -218,7 +220,7 @@
       "care": "Store in dry compartment; avoid direct spray of perfumes"
     },
     "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-06T19:17:56.433Z"
+    "updatedAt": "2026-11-07T02:06:07.534Z"
   },
   {
     "id": "elv-prod-06",
@@ -235,7 +237,7 @@
       "White"
     ],
     "inStock": true,
-    "stock": 73,
+    "stock": 68,
     "isFeatured": true,
     "isBestSeller": true,
     "isNewArrival": false,
@@ -263,6 +265,6 @@
       "care": "Keep pearls away from citrus and ultrasonic cleaners"
     },
     "createdAt": "2026-11-01T10:00:00.000Z",
-    "updatedAt": "2026-11-06T19:17:56.464Z"
+    "updatedAt": "2026-11-07T02:06:07.690Z"
   }
 ]

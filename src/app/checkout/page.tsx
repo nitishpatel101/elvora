@@ -10,56 +10,11 @@ import { useAuth } from '@/context/AuthContext';
 import {
   Lock,
   ShieldCheck,
-  CreditCard,
   Smartphone,
-  Building,
   AlertCircle,
   Loader2,
   CheckCircle2,
 } from 'lucide-react';
-
-interface RazorpayResponse {
-  razorpay_order_id: string;
-  razorpay_payment_id: string;
-  razorpay_signature: string;
-}
-
-interface RazorpayFailureResponse {
-  error?: {
-    description?: string;
-  };
-}
-
-interface RazorpayInstance {
-  open: () => void;
-  on: (event: string, callback: (resp: RazorpayFailureResponse) => void) => void;
-}
-
-interface RazorpayConstructor {
-  new (options: unknown): RazorpayInstance;
-}
-
-interface SandboxOrderPayload {
-  orderId: string;
-  gatewayOrderId: string;
-  amount: number;
-  amountInr: number;
-  currency: string;
-  keyId: string;
-  isLiveGateway: boolean;
-  shippingCharge: number;
-  customer: {
-    name: string;
-    email: string;
-    phone: string;
-  };
-}
-
-declare global {
-  interface Window {
-    Razorpay?: RazorpayConstructor;
-  }
-}
 
 export default function CheckoutPage() {
   const router = useRouter();
@@ -82,9 +37,6 @@ export default function CheckoutPage() {
   const [selectedMethod, setSelectedMethod] = useState<'UPI' | 'CARD' | 'NETBANKING'>('UPI');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // Sandboxed Simulation Modal State (if Razorpay credentials are not yet configured in production env)
-  const [sandboxOrderData, setSandboxOrderData] = useState<SandboxOrderPayload | null>(null);
 
   // Paid shipping logic
   const isDomestic = formData.country.toLowerCase() === 'india' || !formData.country;
@@ -134,113 +86,16 @@ export default function CheckoutPage() {
         throw new Error(orderData.error || 'Failed to initialize payment order');
       }
 
-      // Check if Razorpay is live and window.Razorpay is loaded
-      if (orderData.isLiveGateway && typeof window !== 'undefined' && window.Razorpay) {
-        const options = {
-          key: orderData.keyId,
-          amount: orderData.amount,
-          currency: orderData.currency,
-          name: 'ELVORA Haute Joaillerie',
-          description: `Order ${orderData.orderId}`,
-          image: '/images/products/touch-distance-bracelet/hero.jpg',
-          order_id: orderData.gatewayOrderId,
-          prefill: {
-            name: formData.fullName,
-            email: formData.email,
-            contact: formData.phone,
-          },
-          theme: {
-            color: '#171717',
-          },
-          handler: async function (response: RazorpayResponse) {
-            await verifyPayment({
-              orderId: orderData.orderId,
-              razorpayOrderId: response.razorpay_order_id,
-              razorpayPaymentId: response.razorpay_payment_id,
-              razorpaySignature: response.razorpay_signature,
-            });
-          },
-          modal: {
-            ondismiss: function () {
-              setLoading(false);
-            },
-          },
-        };
+      // Clear shopping bag upon successful order creation
+      clearCart();
 
-        const rzp = new window.Razorpay(options);
-        rzp.on('payment.failed', function (resp: RazorpayFailureResponse) {
-          router.push(
-            `/checkout/failure?orderId=${orderData.orderId}&reason=${encodeURIComponent(
-              resp.error?.description || 'Payment rejected by bank'
-            )}`
-          );
-        });
-        rzp.open();
-      } else {
-        // Safe interactive sandbox payment confirmation dialog (verifies real HMAC signature server-side)
-        setSandboxOrderData(orderData);
-        setLoading(false);
-      }
+      // Navigate to the dedicated UPI QR payment and UTR submission screen
+      router.push(`/checkout/pay/${orderData.orderId}`);
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Error during checkout initialization';
       setError(msg);
       setLoading(false);
     }
-  };
-
-  const verifyPayment = async (verificationPayload: {
-    orderId: string;
-    razorpayOrderId: string;
-    razorpayPaymentId: string;
-    razorpaySignature: string;
-  }) => {
-    setLoading(true);
-    try {
-      const verifyRes = await fetch('/api/payment/verify', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(verificationPayload),
-      });
-
-      const verifyData = await verifyRes.json();
-
-      if (verifyData.success) {
-        clearCart();
-        router.push(`/checkout/success?orderId=${verificationPayload.orderId}`);
-      } else {
-        router.push(
-          `/checkout/failure?orderId=${verificationPayload.orderId}&reason=${encodeURIComponent(
-            verifyData.error || 'Payment signature mismatch'
-          )}`
-        );
-      }
-    } catch {
-      router.push(`/checkout/failure?orderId=${verificationPayload.orderId}&reason=VerificationNetworkFailure`);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleSimulatedPaymentSuccess = async () => {
-    if (!sandboxOrderData) return;
-    const mockPaymentId = `pay_${Math.random().toString(36).substring(2, 12)}`;
-    const mockSignature = `sig_test_${Math.random().toString(36).substring(2, 16)}_${Date.now()}`;
-
-    await verifyPayment({
-      orderId: sandboxOrderData.orderId,
-      razorpayOrderId: sandboxOrderData.gatewayOrderId,
-      razorpayPaymentId: mockPaymentId,
-      razorpaySignature: mockSignature,
-    });
-  };
-
-  const handleSimulatedPaymentFailure = () => {
-    if (!sandboxOrderData) return;
-    router.push(
-      `/checkout/failure?orderId=${sandboxOrderData.orderId}&reason=${encodeURIComponent(
-        'Card authentication declined by issuer'
-      )}`
-    );
   };
 
   if (items.length === 0) {
@@ -461,21 +316,22 @@ export default function CheckoutPage() {
                 <div className="space-y-3 pt-2">
                   <label
                     onClick={() => setSelectedMethod('UPI')}
-                    className={`block p-4 border cursor-pointer transition-all ${
-                      selectedMethod === 'UPI'
-                        ? 'border-[#24332C] bg-[#EEF3F0]'
-                        : 'border-[#EAE5DE] hover:border-[#24332C]'
-                    }`}
+                    className="block p-4 border cursor-pointer border-[#24332C] bg-[#EEF3F0] transition-all"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
                         <Smartphone className="w-5 h-5 text-[#24332C]" />
                         <div>
-                          <span className="text-xs uppercase tracking-wider font-medium text-[#181818] block">
-                            Instant UPI
-                          </span>
-                          <span className="text-[11px] text-[#5C5852] font-light">
-                            Google Pay, PhonePe, Paytm, BHIM & QR
+                          <div className="flex items-center gap-2">
+                            <span className="text-xs uppercase tracking-wider font-semibold text-[#181818]">
+                              Store Owner UPI QR Code
+                            </span>
+                            <span className="text-[9px] bg-[#24332C] text-white px-2 py-0.5 uppercase tracking-wider font-medium">
+                              Direct Bank Transfer
+                            </span>
+                          </div>
+                          <span className="text-[11px] text-[#5C5852] font-light mt-0.5 block">
+                            Scan &amp; pay via Google Pay, PhonePe, Paytm, BHIM, CRED or any banking app on the next screen.
                           </span>
                         </div>
                       </div>
@@ -484,64 +340,6 @@ export default function CheckoutPage() {
                         checked={selectedMethod === 'UPI'}
                         onChange={() => setSelectedMethod('UPI')}
                         className="accent-[#24332C]"
-                      />
-                    </div>
-                  </label>
-
-                  <label
-                    onClick={() => setSelectedMethod('CARD')}
-                    className={`block p-4 border cursor-pointer transition-all ${
-                      selectedMethod === 'CARD'
-                        ? 'border-[#24332C] bg-[#EEF3F0]'
-                        : 'border-[#EAE5DE] hover:border-[#24332C]'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <CreditCard className="w-5 h-5 text-[#24332C]" />
-                        <div>
-                          <span className="text-xs uppercase tracking-wider font-medium text-[#181818] block">
-                            Credit & Debit Cards
-                          </span>
-                          <span className="text-[11px] text-[#5C5852] font-light">
-                            Visa, MasterCard, American Express, RuPay
-                          </span>
-                        </div>
-                      </div>
-                      <input
-                        type="radio"
-                        checked={selectedMethod === 'CARD'}
-                        onChange={() => setSelectedMethod('CARD')}
-                        className="accent-[#24332C]"
-                      />
-                    </div>
-                  </label>
-
-                  <label
-                    onClick={() => setSelectedMethod('NETBANKING')}
-                    className={`block p-4 border cursor-pointer transition-all ${
-                      selectedMethod === 'NETBANKING'
-                        ? 'border-[#24332C] bg-[#EEF3F0]'
-                        : 'border-[#EAE5DE] hover:border-[#24332C]'
-                    }`}
-                  >
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
-                        <Building className="w-5 h-5 text-[#24332C]" />
-                        <div>
-                          <span className="text-xs uppercase tracking-wider font-medium text-[#111111] block">
-                            Net Banking & Verified Wallets
-                          </span>
-                          <span className="text-[11px] text-[#6B655D] font-light">
-                            HDFC, ICICI, SBI, Axis & 50+ Top Banks
-                          </span>
-                        </div>
-                      </div>
-                      <input
-                        type="radio"
-                        checked={selectedMethod === 'NETBANKING'}
-                        onChange={() => setSelectedMethod('NETBANKING')}
-                        className="accent-[#B69A65]"
                       />
                     </div>
                   </label>
@@ -622,12 +420,12 @@ export default function CheckoutPage() {
                 {loading ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin text-[#A3B2A9]" />
-                    <span>Processing Secure Gateway...</span>
+                    <span>Generating UPI Payment Order...</span>
                   </>
                 ) : (
                   <>
                     <Lock className="w-4 h-4" />
-                    <span>Authorize &amp; Pay {format(grandTotalInr)}</span>
+                    <span>Proceed to UPI QR Payment ({format(grandTotalInr)})</span>
                   </>
                 )}
               </button>
@@ -639,69 +437,6 @@ export default function CheckoutPage() {
           </div>
         </form>
       </div>
-
-      {/* Interactive Sandboxed Payment Simulation Modal (For local testing before production keys) */}
-      {sandboxOrderData && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4">
-          <div className="bg-[#FFFFFF] border border-[#EAE5DE] max-w-md w-full p-6 shadow-2xl space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#EAE5DE]">
-              <div className="flex items-center gap-2">
-                <ShieldCheck className="w-5 h-5 text-[#24332C]" />
-                <h3 className="font-serif text-lg text-[#181818] font-light">
-                  Razorpay Secure Gateway
-                </h3>
-              </div>
-              <span className="text-[10px] uppercase tracking-wider bg-[#24332C] text-white px-2 py-0.5">
-                Online Verification
-              </span>
-            </div>
-
-            <div className="space-y-3 text-xs text-[#5C5852]">
-              <div className="p-3 bg-[#FAF8F5] border border-[#EAE5DE] space-y-1 font-light">
-                <div className="flex justify-between">
-                  <span>Order Identifier:</span>
-                  <span className="font-mono text-[#181818] font-bold">{sandboxOrderData.orderId}</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Merchant:</span>
-                  <span className="text-[#181818]">ELVORA Fine Jewellery</span>
-                </div>
-                <div className="flex justify-between">
-                  <span>Customer:</span>
-                  <span className="text-[#181818]">{sandboxOrderData.customer.name}</span>
-                </div>
-                <div className="flex justify-between font-semibold text-sm text-[#181818] pt-1 border-t border-[#EAE5DE]">
-                  <span>Amount to Settle:</span>
-                  <span>{new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR' }).format(sandboxOrderData.amountInr)}</span>
-                </div>
-              </div>
-
-              <p className="text-[11px] leading-relaxed font-light">
-                This verification checkpoint cryptographically signs the transaction and executes backend HMAC-SHA256 verification against the order repository.
-              </p>
-            </div>
-
-            <div className="flex flex-col gap-2 pt-2">
-              <button
-                type="button"
-                onClick={handleSimulatedPaymentSuccess}
-                className="w-full bg-[#24332C] text-white py-3 text-xs uppercase tracking-wider font-medium hover:bg-[#19241F] transition-colors flex items-center justify-center gap-2"
-              >
-                <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                <span>Simulate Successful Bank Authorization</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={handleSimulatedPaymentFailure}
-                className="w-full border border-red-300 text-red-700 py-2.5 text-xs uppercase tracking-wider hover:bg-red-50 transition-colors"
-              >
-                Simulate Payment Failure / Bank Decline
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
