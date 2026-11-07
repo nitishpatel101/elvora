@@ -165,7 +165,7 @@ export default function CartPage() {
                   className="w-full bg-[#24332C] text-white py-4 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#19241F] transition-all duration-300"
                 >
                   <ShieldCheck className="w-4 h-4" />
-                  <span>Secure Checkout</span>
+                  <span>Buy Now</span>
                 </Link>
 
                 <Link

@@ -250,10 +250,10 @@ export default function ProductDetailClient({
               {product.inStock && (
                 <button
                   onClick={handleBuyNow}
-                  className="w-full border border-[#24332C] bg-transparent text-[#24332C] py-3.5 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#24332C] hover:text-[#FFFFFF] transition-colors"
+                  className="w-full bg-[#24332C] text-white py-3.5 px-6 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#19241F] transition-colors shadow-xs"
                 >
                   <Zap className="w-4 h-4" />
-                  <span>Instant Checkout</span>
+                  <span>Buy Now</span>
                 </button>
               )}
             </div>

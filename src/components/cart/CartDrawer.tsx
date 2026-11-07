@@ -175,7 +175,7 @@ export default function CartDrawer() {
                   onClick={() => setIsCartDrawerOpen(false)}
                   className="w-full bg-[#24332C] text-[#FFFFFF] py-3.5 px-4 text-xs uppercase tracking-[0.2em] font-medium flex items-center justify-center gap-2 hover:bg-[#19241F] transition-all duration-300"
                 >
-                  <span>Proceed to Checkout</span>
+                  <span>Buy Now</span>
                   <ArrowRight className="w-4 h-4" />
                 </Link>
 
