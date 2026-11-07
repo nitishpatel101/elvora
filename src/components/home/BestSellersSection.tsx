@@ -132,13 +132,13 @@ export default function BestSellersSection({ initialProducts }: BestSellersSecti
         {/* Horizontal Carousel */}
         <div
           ref={scrollRef}
-          className="flex gap-4 sm:gap-6 overflow-x-auto pb-6 scrollbar-none scroll-smooth"
+          className="flex gap-4 sm:gap-6 overflow-x-auto pb-6 scrollbar-none scroll-smooth snap-x snap-mandatory"
         >
           {displayItems.map((item) => (
             <Link
               key={item.slug}
               href={`/product/${item.slug}`}
-              className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer"
+              className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 overflow-hidden hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group cursor-pointer snap-start"
             >
               {/* Product Image Box */}
               <div className="relative aspect-square w-full bg-stone-50 overflow-hidden">

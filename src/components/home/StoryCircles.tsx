@@ -137,12 +137,12 @@ export default function StoryCircles() {
     <>
       <section className="bg-white py-5 sm:py-6 border-b border-stone-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-          <div className="flex items-center justify-start sm:justify-center gap-4 sm:gap-8 overflow-x-auto pb-2 scrollbar-none px-2">
+          <div className="flex items-center justify-start sm:justify-center gap-4 sm:gap-8 overflow-x-auto pb-2 scrollbar-none px-2 snap-x snap-mandatory scroll-smooth">
             {STORIES.map((story, idx) => (
               <button
                 key={story.id}
                 onClick={(e) => openStory(idx, e)}
-                className="flex flex-col items-center group flex-shrink-0 cursor-pointer text-center focus:outline-hidden"
+                className="flex flex-col items-center group flex-shrink-0 cursor-pointer text-center focus:outline-hidden snap-start"
               >
                 {/* Clean Giftify Yellow Story Circle matching frame 001 */}
                 <div className="relative w-[76px] h-[76px] sm:w-[90px] sm:h-[90px] rounded-full overflow-hidden shadow-xs group-hover:shadow-lg group-hover:scale-105 active:scale-95 transition-all duration-300 bg-white">

@@ -91,43 +91,47 @@ export default function PhotoReviewsSection() {
 
           <div
             ref={scrollRef}
-            className="flex gap-5 sm:gap-6 overflow-x-auto pb-4 px-2 scrollbar-none scroll-smooth"
+            className="flex gap-5 sm:gap-6 overflow-x-auto pb-4 px-2 scrollbar-none scroll-smooth snap-x snap-mandatory"
           >
             {REVIEWS.map((rev) => (
               <div
                 key={rev.id}
-                className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl border border-stone-200 overflow-hidden shadow-xs hover:shadow-md transition-shadow flex flex-col"
+                className="flex-shrink-0 w-64 sm:w-72 bg-white rounded-2xl sm:rounded-3xl border border-stone-200/90 overflow-hidden shadow-xs hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 flex flex-col group p-2.5 sm:p-3 snap-start"
               >
                 {/* Real Customer Photo */}
-                <div className="relative aspect-square w-full bg-stone-100 overflow-hidden">
+                <div className="relative aspect-square w-full rounded-xl sm:rounded-2xl bg-stone-100 overflow-hidden mb-3">
                   <Image
                     src={rev.image}
                     alt={rev.title}
                     fill
                     sizes="288px"
-                    className="object-cover"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
                     unoptimized
                   />
+                  <span className="absolute top-2.5 left-2.5 bg-emerald-600/90 backdrop-blur-xs text-white text-[10px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 shadow-xs">
+                    <span>✓</span>
+                    <span>Verified Buyer</span>
+                  </span>
                 </div>
 
                 {/* Review Text */}
-                <div className="p-4 flex flex-col items-center text-center flex-1 justify-between">
+                <div className="p-2 flex flex-col items-center text-center flex-1 justify-between">
                   <div>
-                    <h3 className="font-semibold text-stone-900 text-xs sm:text-sm mb-2">
-                      {rev.title}
+                    <h3 className="font-bold text-stone-900 text-xs sm:text-sm mb-1.5 line-clamp-2">
+                      &ldquo;{rev.title}&rdquo;
                     </h3>
                     <div className="flex items-center justify-center gap-1 mb-2">
                       {[...Array(rev.stars)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-[#F5C400] text-[#F5C400]" />
+                        <Star key={i} className="w-3.5 h-3.5 fill-[#F5C400] text-[#F5C400]" />
                       ))}
                     </div>
                   </div>
 
-                  <div>
-                    <span className="text-xs font-bold text-stone-900 block">
+                  <div className="pt-2 border-t border-stone-100 w-full">
+                    <span className="text-xs font-extrabold text-stone-900 block">
                       {rev.author}
                     </span>
-                    <span className="text-[11px] text-stone-500 mt-0.5 block">
+                    <span className="text-[11px] text-stone-500 mt-0.5 block truncate">
                       {rev.product}
                     </span>
                   </div>
