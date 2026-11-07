@@ -21,7 +21,7 @@ export async function GET(req: Request) {
     }
 
     const customerOrders = orders.filter(
-      (o) => o.customerEmail.toLowerCase() === email.toLowerCase()
+      (o) => o.customerEmail && o.customerEmail.toLowerCase() === email.toLowerCase()
     );
 
     return NextResponse.json(customerOrders);

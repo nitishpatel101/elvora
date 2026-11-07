@@ -51,7 +51,7 @@ export default function CheckoutPage() {
       return;
     }
 
-    if (!formData.fullName || !formData.email || !formData.phone || !formData.addressLine1 || !formData.city || !formData.pincode) {
+    if (!formData.fullName || !formData.phone || !formData.addressLine1 || !formData.city || !formData.pincode) {
       setError('Please fill in all mandatory delivery address fields.');
       return;
     }
@@ -162,15 +162,14 @@ export default function CheckoutPage() {
 
                   <div>
                     <label className="block text-xs uppercase tracking-wider text-[#181818] mb-1 font-medium">
-                      Email Address *
+                      Email Address (Optional)
                     </label>
                     <input
                       type="email"
                       name="email"
-                      required
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="ananya@example.com"
+                      placeholder="e.g. ananya@example.com (optional)"
                       className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     />
                   </div>

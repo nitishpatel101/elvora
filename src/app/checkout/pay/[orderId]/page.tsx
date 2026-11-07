@@ -4,20 +4,15 @@ import React, { useEffect, useState, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {
-  QrCode,
   ShieldCheck,
   Clock,
   CheckCircle2,
   XCircle,
   Upload,
   RefreshCw,
-  ExternalLink,
-  ArrowRight,
   AlertCircle,
   Camera,
   Check,
-  HelpCircle,
-  Smartphone,
 } from 'lucide-react';
 import { Order, StoreSettings } from '@/types';
 
@@ -184,7 +179,6 @@ export default function UPIPaymentScreen({
   const isConfirmed = order.status === 'PAID' || order.status === 'CONFIRMED';
   const isSubmitted = order.status === 'PAYMENT_SUBMITTED';
   const isRejected = order.status === 'PAYMENT_REJECTED';
-  const isPending = order.status === 'PAYMENT_PENDING';
 
   const qrImage = settings?.upiQrImage || '/images/qr/upi-qr.jpg';
 

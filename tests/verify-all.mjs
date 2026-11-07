@@ -560,6 +560,31 @@ async function runTests() {
     assert.strictEqual(saveRes.status, 200);
   });
 
+  // TEST 26: Email is optional during checkout
+  await test('26. Checkout succeeds without email (email is optional for customer convenience)', async () => {
+    const res = await fetch(`${BASE}/api/payment/create-order`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items: [{ productId: 'elv-prod-02', quantity: 1 }],
+        shippingAddress: {
+          fullName: 'Pooja Hegde',
+          // email omitted!
+          phone: '+91 98765 43210',
+          addressLine1: 'Bandra West, Hill Road',
+          city: 'Mumbai',
+          state: 'Maharashtra',
+          pincode: '400050',
+          country: 'India',
+        },
+      }),
+    });
+
+    assert.strictEqual(res.status, 200);
+    const data = await res.json();
+    assert(data.orderId.startsWith('ELV-'), 'Must generate order without requiring email');
+  });
+
   console.log(`\n--- TEST SUITE COMPLETE: ${passed} PASSED, ${failed} FAILED ---`);
   if (failed > 0) {
     process.exit(1);

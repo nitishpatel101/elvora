@@ -72,9 +72,11 @@ export async function POST(req: Request) {
     const storeSettings = await getStoreSettings();
 
     // Create Initial Order Record with PAYMENT_PENDING status (Manual UPI QR Payment)
+    const customerEmail = shippingAddress.email || (shippingAddress.phone ? `${shippingAddress.phone.replace(/[^0-9]/g, '')}@customer.elvora.com` : 'client@elvora.com');
+
     const initialOrder: Order = {
       id: uniqueOrderId,
-      customerEmail: shippingAddress.email,
+      customerEmail: customerEmail,
       customerName: shippingAddress.fullName,
       customerPhone: shippingAddress.phone,
       shippingAddress,

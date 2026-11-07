@@ -73,7 +73,7 @@ export interface WishlistItem {
 
 export interface ShippingAddress {
   fullName: string;
-  email: string;
+  email?: string;
   phone: string;
   addressLine1: string;
   addressLine2?: string;
@@ -108,7 +108,7 @@ export interface OrderItem {
 export interface Order {
   id: string; // e.g. ELV-89421
   customerId?: string;
-  customerEmail: string;
+  customerEmail?: string;
   customerName: string;
   customerPhone: string;
   shippingAddress: ShippingAddress;

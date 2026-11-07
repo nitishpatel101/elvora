@@ -273,7 +273,7 @@ export default function AdminDashboardPage() {
     return (
       o.id.toLowerCase().includes(q) ||
       o.customerName.toLowerCase().includes(q) ||
-      o.customerEmail.toLowerCase().includes(q) ||
+      (o.customerEmail && o.customerEmail.toLowerCase().includes(q)) ||
       (o.upiUtr && o.upiUtr.toLowerCase().includes(q))
     );
   });
@@ -501,7 +501,7 @@ export default function AdminDashboardPage() {
                             {/* Customer Details */}
                             <td className="py-3.5 px-4">
                               <div className="font-medium text-[#181818]">{ord.customerName}</div>
-                              <div className="text-[10px] text-[#77736D]">{ord.customerEmail}</div>
+                              <div className="text-[10px] text-[#77736D]">{ord.customerEmail || '—'}</div>
                               <div className="text-[10px] text-[#77736D]">{ord.customerPhone}</div>
                             </td>
 
@@ -810,7 +810,7 @@ export default function AdminDashboardPage() {
                         </td>
                         <td className="py-3 px-4">
                           <div className="font-medium text-[#181818]">{ord.customerName}</div>
-                          <div className="text-[10px] text-[#77736D]">{ord.customerEmail}</div>
+                          <div className="text-[10px] text-[#77736D]">{ord.customerEmail || '—'}</div>
                         </td>
                         <td className="py-3 px-4">{ord.items.length} item(s)</td>
                         <td className="py-3 px-4 font-semibold text-[#181818]">
