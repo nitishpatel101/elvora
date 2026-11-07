@@ -17,11 +17,14 @@
     "isNewArrival": false,
     "isPublished": true,
     "images": [
-      "/images/giftify/products/touch-vibration-bracelet.jpg",
-      "/images/giftify/products/touch-thumb-1.jpg",
-      "/images/giftify/products/touch-thumb-2.jpg",
-      "/images/giftify/products/touch-thumb-3.jpg",
-      "/images/giftify/products/touch-thumb-4.jpg"
+      "/images/products/touch-distance-couple-bracelet/product-1.jpg",
+      "/images/products/touch-distance-couple-bracelet/product-2.jpg",
+      "/images/products/touch-distance-couple-bracelet/product-3.jpg",
+      "/images/products/touch-distance-couple-bracelet/product-4.jpg",
+      "/images/products/touch-distance-couple-bracelet/product-5.jpg",
+      "/images/products/touch-distance-couple-bracelet/product-6.jpg",
+      "/images/products/touch-distance-couple-bracelet/product-7.jpg",
+      "/images/products/touch-distance-couple-bracelet/product-8.jpg"
     ],
     "variants": [
       { "id": "v-rope", "name": "Rope model", "inStock": true, "stock": 25 },

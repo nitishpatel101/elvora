@@ -19,7 +19,7 @@ const BEST_SELLERS = [
     rating: '4.9',
     reviews: '44',
     badge: 'Couples Favorite',
-    image: '/images/giftify/products/touch-vibration-bracelet.jpg',
+    image: '/images/products/touch-distance-couple-bracelet/product-1.jpg',
   },
   {
     slug: 'heat-activated-magic-photo-necklace',

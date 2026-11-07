@@ -7,7 +7,7 @@ import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
 const REVIEWS = [
   {
     id: 'r-1',
-    image: '/images/giftify/reviews/panda-lamp.jpg',
+    image: '/images/reviews/rating-1.jpg',
     title: 'Wonderful and beautifful',
     stars: 5,
     author: 'Sangram Ambrale',
@@ -15,7 +15,7 @@ const REVIEWS = [
   },
   {
     id: 'r-2',
-    image: '/images/giftify/reviews/family-merge-art.jpg',
+    image: '/images/reviews/rating-2.jpg',
     title: 'The edit is fantastic',
     stars: 5,
     author: 'Sindhuja',
@@ -23,7 +23,7 @@ const REVIEWS = [
   },
   {
     id: 'r-3',
-    image: '/images/giftify/reviews/birthday-currency-note.jpg',
+    image: '/images/reviews/rating-3.jpg',
     title: 'Absolutely beautiful original note.',
     stars: 5,
     author: 'Prakash',
@@ -31,11 +31,51 @@ const REVIEWS = [
   },
   {
     id: 'r-4',
-    image: '/images/giftify/reviews/projection-bracelet.jpg',
+    image: '/images/reviews/rating-4.jpg',
     title: 'Worth it!',
     stars: 5,
     author: 'Ritu Sharma',
     product: 'Photo Projection Bracelet...',
+  },
+  {
+    id: 'r-5',
+    image: '/images/reviews/rating-5.jpg',
+    title: 'Superb packaging & quality',
+    stars: 5,
+    author: 'Aakash Verma',
+    product: 'Touch Couple Bracelet',
+  },
+  {
+    id: 'r-6',
+    image: '/images/reviews/rating-6.jpg',
+    title: 'Loved the finish & shine',
+    stars: 5,
+    author: 'Pooja Hegde',
+    product: 'Couple Locket Set',
+  },
+  {
+    id: 'r-7',
+    image: '/images/reviews/rating-7.jpg',
+    title: 'Best gift for long distance',
+    stars: 5,
+    author: 'Nikhil & Simran',
+    product: 'Touch Vibration Bracelet',
+  },
+  {
+    id: 'r-8',
+    image: '/images/reviews/rating-8.jpg',
+    title: '100% genuine and authentic',
+    stars: 5,
+    author: 'Divya Rao',
+    product: 'Couple Bracelet Set',
+  },
+  {
+    id: 'r-9',
+    image: '/images/reviews/rating-9.jpg',
+    title: 'Pure magic when it vibrates!',
+    stars: 5,
+    author: 'Rohan Mehta',
+    product: 'Touch Distance Bracelet',
   },
 ];
 

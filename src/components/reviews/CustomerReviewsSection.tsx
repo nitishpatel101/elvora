@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Star, CheckCircle, ThumbsUp, Edit3, X, MessageSquare, ShieldCheck, Sparkles } from 'lucide-react';
 import { Review } from '@/types';
 
@@ -228,6 +229,17 @@ export default function CustomerReviewsSection({
                   <p className="text-xs text-[#5C5852] leading-relaxed font-light mb-4 whitespace-pre-line">
                     {rev.content}
                   </p>
+
+                  {/* Customer Photo Attachments */}
+                  {rev.images && rev.images.length > 0 && (
+                    <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
+                      {rev.images.map((img, i) => (
+                        <div key={i} className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-[#EAE5DE] shrink-0 bg-stone-100 shadow-2xs">
+                          <Image src={img} alt="Customer review photo" fill className="object-cover" unoptimized />
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
 
                 {/* Footer: Author Info & Helpful */}
