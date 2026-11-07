@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
 import { Search, User, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
@@ -37,16 +38,23 @@ export default function Navbar() {
               <Menu className="w-6 h-6" />
             </button>
 
-            {/* Giftify-Style Smile Gift Logo */}
-            <Link href="/" className="flex items-center gap-2 group">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-[#F5C400] text-black flex items-center justify-center font-bold text-xl shadow-md group-hover:scale-105 transition-transform">
-                <span>🎁</span>
+            {/* Luxury Monogram Logo */}
+            <Link href="/" className="flex items-center gap-2.5 group">
+              <div className="relative w-10 h-10 sm:w-11 sm:h-11 rounded-full overflow-hidden ring-1 ring-[#D79648]/40 shadow-md group-hover:scale-105 group-hover:ring-[#FBE8C0] transition-all bg-black flex-shrink-0">
+                <Image
+                  src="/images/logo-circle.png"
+                  alt="ELVORA"
+                  fill
+                  className="object-cover"
+                  priority
+                  unoptimized
+                />
               </div>
               <div className="flex flex-col">
-                <span className="font-extrabold text-xl sm:text-2xl tracking-wider text-[#F5C400] leading-none font-sans">
+                <span className="font-extrabold text-xl sm:text-2xl tracking-wider bg-gradient-to-r from-[#D79648] via-[#FBE8C0] to-[#EBB05D] bg-clip-text text-transparent leading-none font-serif">
                   ELVORA
                 </span>
-                <span className="text-[8px] uppercase tracking-[0.2em] text-stone-400 font-medium mt-0.5">
+                <span className="text-[8px] uppercase tracking-[0.22em] text-[#D79648]/80 font-medium mt-0.5">
                   GIFT WITH SMILE
                 </span>
               </div>
@@ -59,7 +67,7 @@ export default function Navbar() {
               <Link
                 key={item.label}
                 href={item.href}
-                className="flex items-center gap-1.5 py-2 px-1 hover:text-[#F5C400] transition-colors"
+                className="flex items-center gap-1.5 py-2 px-1 hover:text-[#EBB05D] transition-colors"
               >
                 <span>{item.emoji}</span>
                 <span>{item.label}</span>
@@ -74,7 +82,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3 sm:gap-4">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 text-stone-300 hover:text-[#F5C400] transition-colors"
+              className="p-2 text-stone-300 hover:text-[#EBB05D] transition-colors"
               aria-label="Search products"
             >
               <Search className="w-5 h-5" />
@@ -82,7 +90,7 @@ export default function Navbar() {
 
             <Link
               href={isCustomerLoggedIn ? '/account' : '/auth/login'}
-              className="p-2 text-stone-300 hover:text-[#F5C400] transition-colors"
+              className="p-2 text-stone-300 hover:text-[#EBB05D] transition-colors"
               aria-label="Account"
             >
               <User className="w-5 h-5" />
@@ -90,12 +98,12 @@ export default function Navbar() {
 
             <button
               onClick={() => setIsCartDrawerOpen(true)}
-              className="relative p-2 text-stone-300 hover:text-[#F5C400] transition-colors"
+              className="relative p-2 text-stone-300 hover:text-[#EBB05D] transition-colors"
               aria-label="Cart"
             >
               <ShoppingBag className="w-5 h-5" />
               {totalItems > 0 && (
-                <span className="absolute -top-1 -right-1 w-5 h-5 bg-[#F5C400] text-black text-[10px] font-bold rounded-full flex items-center justify-center shadow">
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-[#D79648] to-[#EBB05D] text-black text-[10px] font-bold rounded-full flex items-center justify-center shadow">
                   {totalItems}
                 </span>
               )}
@@ -151,9 +159,19 @@ export default function Navbar() {
           />
           <div className="relative w-full max-w-xs bg-[#111111] text-white h-full shadow-2xl flex flex-col z-10 p-5">
             <div className="flex items-center justify-between pb-4 border-b border-stone-800 mb-4">
-              <div className="flex items-center gap-2">
-                <span className="text-xl">🎁</span>
-                <span className="font-extrabold text-xl text-[#F5C400] tracking-wider">ELVORA</span>
+              <div className="flex items-center gap-2.5">
+                <div className="relative w-8 h-8 rounded-full overflow-hidden ring-1 ring-[#D79648]/40 shadow-sm flex-shrink-0 bg-black">
+                  <Image
+                    src="/images/logo-circle.png"
+                    alt="ELVORA"
+                    fill
+                    className="object-cover"
+                    unoptimized
+                  />
+                </div>
+                <span className="font-extrabold text-xl tracking-wider bg-gradient-to-r from-[#D79648] via-[#FBE8C0] to-[#EBB05D] bg-clip-text text-transparent font-serif">
+                  ELVORA
+                </span>
               </div>
               <button onClick={() => setMobileMenuOpen(false)} className="text-stone-400 hover:text-white p-1">
                 <X className="w-5 h-5" />
@@ -166,7 +184,7 @@ export default function Navbar() {
                   key={item.label}
                   href={item.href}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-3 py-2.5 px-3 rounded-lg hover:bg-stone-800 text-stone-200 hover:text-[#F5C400] transition-colors"
+                  className="flex items-center gap-3 py-2.5 px-3 rounded-lg hover:bg-stone-800 text-stone-200 hover:text-[#EBB05D] transition-colors"
                 >
                   <span className="text-lg">{item.emoji}</span>
                   <span>{item.label}</span>

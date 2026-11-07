@@ -677,8 +677,14 @@ export default function AdminDashboardPage() {
         {/* Top Header Ribbon */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-6 border-b border-[#E7E1D8] gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#171717] flex items-center justify-center text-[#B89A69]">
-              <ShieldCheck className="w-5 h-5" />
+            <div className="relative w-10 h-10 rounded-full overflow-hidden ring-1 ring-[#D79648]/40 shadow-sm flex-shrink-0 bg-black">
+              <Image
+                src="/images/logo-circle.png"
+                alt="ELVORA"
+                fill
+                className="object-cover"
+                unoptimized
+              />
             </div>
             <div>
               <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">

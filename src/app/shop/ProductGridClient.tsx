@@ -137,11 +137,10 @@ export default function ProductGridClient({
         <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#EAE5DE]">
           <button
             onClick={() => setSelectedCategory('all')}
-            className={`text-xs uppercase tracking-[0.16em] px-4 py-2 border transition-colors ${
-              selectedCategory === 'all'
-                ? 'bg-[#24332C] text-[#FFFFFF] border-[#24332C]'
-                : 'bg-[#FAF8F5] text-[#181818] border-[#EAE5DE] hover:border-[#24332C]'
-            }`}
+            className={`text-xs uppercase tracking-[0.16em] px-4 py-2 border transition-colors ${selectedCategory === 'all'
+              ? 'bg-[#24332C] text-[#FFFFFF] border-[#24332C]'
+              : 'bg-[#FAF8F5] text-[#181818] border-[#EAE5DE] hover:border-[#24332C]'
+              }`}
           >
             All Pieces ({initialProducts.length})
           </button>
@@ -152,11 +151,10 @@ export default function ProductGridClient({
               <button
                 key={cat.id}
                 onClick={() => setSelectedCategory(cat.slug)}
-                className={`text-xs uppercase tracking-[0.16em] px-4 py-2 border transition-colors ${
-                  selectedCategory === cat.slug
-                    ? 'bg-[#24332C] text-[#FFFFFF] border-[#24332C]'
-                    : 'bg-[#FAF8F5] text-[#181818] border-[#EAE5DE] hover:border-[#24332C]'
-                }`}
+                className={`text-xs uppercase tracking-[0.16em] px-4 py-2 border transition-colors ${selectedCategory === cat.slug
+                  ? 'bg-[#24332C] text-[#FFFFFF] border-[#24332C]'
+                  : 'bg-[#FAF8F5] text-[#181818] border-[#EAE5DE] hover:border-[#24332C]'
+                  }`}
               >
                 {cat.name} ({count})
               </button>

@@ -67,6 +67,11 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: '/images/logo-circle.png',
+    shortcut: '/favicon.ico',
+    apple: '/images/favicon.png',
+  },
 };
 
 const orgSchema = {
@@ -77,7 +82,7 @@ const orgSchema = {
       '@id': 'https://elvora.com/#organization',
       name: 'ELVORA',
       url: 'https://elvora.com',
-      logo: 'https://elvora.com/images/products/touch-distance-bracelet/hero.jpg',
+      logo: 'https://elvora.com/images/logo-circle.png',
       description: 'Premium fine jewellery and illuminated couple touch bracelets.',
       contactPoint: {
         '@type': 'ContactPoint',

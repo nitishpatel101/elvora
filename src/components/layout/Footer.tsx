@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const InstagramIcon = ({ className }: { className?: string }) => (
   <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
@@ -74,7 +75,7 @@ export default function Footer() {
             <div className="space-y-3 text-xs text-stone-400">
               <p>
                 <span className="text-stone-300 font-medium block">Email:</span>
-                <a href="mailto:concierge@elvora.com" className="text-white hover:text-[#F5C400] transition-colors font-mono">
+                <a href="mailto:concierge@elvora.com" className="text-white hover:text-[#EBB05D] transition-colors font-mono">
                   concierge@elvora.com
                 </a>
               </p>
@@ -92,9 +93,17 @@ export default function Footer() {
 
           {/* Column 4: Brand About & Social */}
           <div className="space-y-4">
-            <div className="flex items-center gap-2">
-              <span className="text-2xl">🎁</span>
-              <span className="font-extrabold text-2xl text-[#F5C400] tracking-wider">
+            <div className="flex items-center gap-3">
+              <div className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-full overflow-hidden ring-1 ring-[#D79648]/40 shadow-md flex-shrink-0 bg-black">
+                <Image
+                  src="/images/logo-circle.png"
+                  alt="ELVORA"
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+              <span className="font-extrabold text-2xl tracking-wider bg-gradient-to-r from-[#D79648] via-[#FBE8C0] to-[#EBB05D] bg-clip-text text-transparent font-serif">
                 ELVORA
               </span>
             </div>
@@ -102,13 +111,13 @@ export default function Footer() {
               ELVORA is your one-stop gifting and keepsake shop. Our sole aim is to make people happy with our beautiful customized gifts. ELVORA has all kinds of gifts that can be gifted on all occasions like Valentine&apos;s Day, Birthday, Anniversary, and Weddings.
             </p>
             <div className="flex items-center gap-4 text-stone-300 pt-2">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-[#F5C400] transition-colors">
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-[#EBB05D] transition-colors">
                 <FacebookIcon className="w-5 h-5" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#F5C400] transition-colors">
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" aria-label="Instagram" className="hover:text-[#EBB05D] transition-colors">
                 <InstagramIcon className="w-5 h-5" />
               </a>
-              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-[#F5C400] transition-colors">
+              <a href="https://youtube.com" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="hover:text-[#EBB05D] transition-colors">
                 <YoutubeIcon className="w-5 h-5" />
               </a>
             </div>

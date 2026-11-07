@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 import { ShieldCheck, AlertCircle, ArrowRight, ArrowLeft } from 'lucide-react';
 
@@ -33,8 +34,14 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-[#FAF8F5] text-[#181818] flex items-center justify-center p-4 sm:p-6">
       <div className="max-w-md w-full bg-white border border-[#EAE5DE] p-8 sm:p-10 space-y-6 shadow-sm">
         <div className="text-center space-y-2 pb-5 border-b border-[#EAE5DE]">
-          <div className="w-12 h-12 rounded-full bg-[#EEF3F0] border border-[#24332C]/15 flex items-center justify-center mx-auto text-[#24332C]">
-            <ShieldCheck className="w-6 h-6" />
+          <div className="relative w-16 h-16 rounded-full overflow-hidden ring-2 ring-[#D79648]/40 shadow-md mx-auto bg-black">
+            <Image
+              src="/images/logo-circle.png"
+              alt="ELVORA"
+              fill
+              className="object-cover"
+              unoptimized
+            />
           </div>
           <span className="text-[10px] uppercase tracking-[0.25em] text-[#708579] font-medium block">
             Executive Portal
