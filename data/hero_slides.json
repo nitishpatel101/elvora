@@ -1,6 +1,33 @@
 [
   {
-    "id": "test-slide",
-    "title": "Test Branch Slide"
+    "id": "slide-1",
+    "title": "Memories That Glow Forever",
+    "subtitle": "Turn your favorite photo, baby scan, or cherished moment into a beautifully illuminated crystal keepsake.",
+    "cta": "Get Now",
+    "link": "/product/3d-crystal-photo-cube",
+    "image": "/images/giftify/hero-banner.jpg",
+    "tag": "✨ Trending Personalized Gift",
+    "highlight": "Over 8,500+ Illuminated Across India"
+  },
+  {
+    "id": "slide-2",
+    "title": "Touch Vibration Couple Bracelets",
+    "subtitle": "No matter the distance, tap your bracelet and your partner’s bracelet flashes and vibrates in real-time.",
+    "cta": "Explore Couple Set",
+    "link": "/product/touch-distance-couple-bracelet",
+    "image": "/images/products/touch-distance-couple-bracelet/product-1.jpg",
+    "tag": "❤️ Long Distance Love",
+    "highlight": "Feel Connected Anywhere In The World"
+  },
+  {
+    "id": "slide-3",
+    "title": "Heat Activated Magic Photo Lockets",
+    "subtitle": "A discreet elegant pendant that reveals your secret love photo only when touched by body heat.",
+    "cta": "Order Custom Locket",
+    "link": "/product/heat-activated-magic-photo-necklace",
+    "image": "/images/giftify/products/heat-activated-necklace.jpg",
+    "tag": "🔥 Secret Surprise",
+    "highlight": "100% Water Resistant & Anti-Tarnish"
   }
 ]
+
