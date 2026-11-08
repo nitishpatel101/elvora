@@ -12,6 +12,8 @@ interface FeatureItem {
   tagline: string;
   description: string;
   image: string;
+  fit: 'cover' | 'contain';
+  bg: string;
   counter: string;
   link: string;
 }
@@ -24,7 +26,9 @@ const FEATURES: FeatureItem[] = [
     tagline: 'Feel their touch in real-time across any distance',
     description:
       'The signature connection. Tap your piece, and your partner’s bracelet flashes and vibrates in real-time — letting them know you are thinking of them, anywhere in the world.',
-    image: '/images/totwoo/feature-synced-touch.jpg',
+    image: '/images/totwoo/feature-synced-touch-demo.jpg',
+    fit: 'contain',
+    bg: 'bg-[#FAF7F2]',
     counter: '01 / 5',
     link: '/shop/couple-bracelets',
   },
@@ -36,6 +40,8 @@ const FEATURES: FeatureItem[] = [
     description:
       'Personalize the glow color and vibration rhythms in the app. Create unique codes and secret signals only the two of you understand.',
     image: '/images/totwoo/showcase-soulmate.jpg',
+    fit: 'contain',
+    bg: 'bg-[#FAF7F2]',
     counter: '02 / 5',
     link: '/product/touch-distance-couple-bracelet',
   },
@@ -47,6 +53,8 @@ const FEATURES: FeatureItem[] = [
     description:
       'Never miss important calls. Link up to your special contacts in the app so your smart jewelry gently flashes and buzzes when they call, even if your phone is on silent.',
     image: '/images/totwoo/feature-call-alert.jpg',
+    fit: 'cover',
+    bg: 'bg-stone-950',
     counter: '03 / 5',
     link: '/product/touch-distance-couple-bracelet',
   },
@@ -57,7 +65,9 @@ const FEATURES: FeatureItem[] = [
     tagline: 'Never miss a cherished milestone together',
     description:
       'Set your special dates and milestones. Your smart jewelry will illuminate with your chosen color and vibration pattern so every celebration feels magical.',
-    image: '/images/totwoo/feature-connected-paris.jpg',
+    image: '/images/totwoo/feature-india-paris-stacked.jpg',
+    fit: 'cover',
+    bg: 'bg-stone-950',
     counter: '04 / 5',
     link: '/shop',
   },
@@ -69,6 +79,8 @@ const FEATURES: FeatureItem[] = [
     description:
       'Leave hidden digital love letters, photos, voice notes, or videos. When your partner connects or taps their jewelry, they unlock your hidden message.',
     image: '/images/totwoo/showcase-locket.jpg',
+    fit: 'contain',
+    bg: 'bg-[#FAF7F2]',
     counter: '05 / 5',
     link: '/product/heat-activated-magic-photo-necklace',
   },
@@ -194,11 +206,11 @@ export default function TotwooShowcaseSection() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
           {/* Left Media Stage */}
           <div className="lg:col-span-6 relative">
-            <div className="relative w-full aspect-[4/5] sm:aspect-[1/1] lg:aspect-[4/5] max-h-[640px] rounded-2xl overflow-hidden bg-stone-900 shadow-xl border border-stone-200/50">
+            <div className="relative w-full aspect-[4/3] sm:aspect-[1/1] lg:aspect-[4/5] max-h-[640px] rounded-2xl overflow-hidden bg-[#FAF7F2] shadow-xl border border-stone-200/50">
               {FEATURES.map((feat, idx) => (
                 <div
                   key={feat.id}
-                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${feat.bg} ${
                     idx === activeFeatureIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                   }`}
                 >
@@ -208,26 +220,45 @@ export default function TotwooShowcaseSection() {
                     fill
                     priority={idx === 2}
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    className="object-cover object-center scale-100 hover:scale-105 transition-transform duration-1000"
+                    className={`${
+                      feat.fit === 'contain' ? 'object-contain p-6 sm:p-10' : 'object-cover object-center'
+                    } scale-100 hover:scale-105 transition-transform duration-700`}
                   />
-                  {/* Subtle Vignette Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+
+                  {/* Gradient for photo cover slides */}
+                  {feat.fit === 'cover' && (
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+                  )}
+
+                  {/* Location Badges on India-Paris Anniversary slide */}
+                  {feat.id === 'anniversary-reminders' && (
+                    <>
+                      <div className="absolute top-4 left-4 z-20 bg-black/70 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1.5 border border-white/20 shadow-md">
+                        <span className="text-[#E5B54F]">📍</span>
+                        <span>India</span>
+                      </div>
+                      <div className="absolute top-[51%] left-4 z-20 bg-black/70 backdrop-blur-md text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full flex items-center gap-1.5 border border-white/20 shadow-md">
+                        <span className="text-[#E5B54F]">📍</span>
+                        <span>Paris, France</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               ))}
 
               {/* Bottom Left Counter Overlay */}
-              <div className="absolute bottom-6 left-6 z-20 flex items-center gap-3">
-                <span className="font-serif italic text-white/90 text-sm tracking-widest drop-shadow-md">
+              <div className="absolute bottom-5 left-5 z-20 flex items-center gap-2 bg-black/75 backdrop-blur-md px-3.5 py-1.5 rounded-full border border-white/20 shadow-lg">
+                <span className="font-serif italic text-white text-xs tracking-wider">
                   {activeFeature.counter}
                 </span>
-                <span className="h-2 w-2 rounded-full bg-[#E5B54F] animate-pulse" />
+                <span className="h-1.5 w-1.5 rounded-full bg-[#E5B54F] animate-pulse" />
               </div>
 
               {/* Bottom Right Quick CTA */}
-              <div className="absolute bottom-6 right-6 z-20">
+              <div className="absolute bottom-5 right-5 z-20">
                 <Link
                   href={activeFeature.link}
-                  className="inline-flex items-center gap-2 bg-white/95 hover:bg-white text-stone-900 text-xs font-semibold px-4 py-2.5 rounded-full shadow-lg backdrop-blur transition-all hover:scale-105"
+                  className="inline-flex items-center gap-1.5 bg-black/85 hover:bg-black text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg backdrop-blur-md transition-all hover:scale-105 border border-white/20"
                 >
                   <span>Explore Design</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#E5B54F]" />
