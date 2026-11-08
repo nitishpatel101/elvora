@@ -104,11 +104,11 @@
   {
     "id": "elv-tot-03",
     "slug": "always-1-0-black-red-bracelets-2-items",
-    "name": "Totwoo Sun & Moon Touch Bracelets Set",
+    "name": "ELVORA Sun & Moon Touch Bracelets Set",
     "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
     "price": 1999,
     "originalPrice": 3499,
-    "description": "Totwoo Sun & Moon Touch Bracelets Set. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "description": "ELVORA Sun & Moon Touch Bracelets Set. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
     "category": "Couple Bracelets",
     "categorySlug": "couple-bracelets",
     "colours": [
@@ -443,108 +443,6 @@
     "updatedAt": "2026-11-08T12:00:00.000Z"
   },
   {
-    "id": "elv-tot-10",
-    "slug": "sun-moon-touch-necklace-with-agateblack-sun-rose-gold-moon",
-    "name": "Sun & Moon Touch Necklaces (Black + Rose Gold)",
-    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
-    "price": 2499,
-    "originalPrice": 3999,
-    "description": "Sun & Moon Touch Necklaces (Black + Rose Gold). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
-    "category": "Necklaces",
-    "categorySlug": "necklaces",
-    "colours": [
-      "Black",
-      "Rose Gold"
-    ],
-    "inStock": true,
-    "stock": 45,
-    "isFeatured": false,
-    "isBestSeller": true,
-    "isNewArrival": true,
-    "isPublished": true,
-    "images": [
-      "https://totwoo.com/cdn/shop/files/Sun_Moon_Touch_Necklaces_Black_Rose_Gold.jpg?v=1&width=1200",
-      "https://totwoo.com/cdn/shop/files/totwoo.jpg?v=1&width=1200"
-    ],
-    "variants": [
-      {
-        "id": "v-sun-moon-touch-necklace-with-agateblack-sun-rose-gold-moon-1",
-        "name": "Matching Set (Black + Rose Gold)",
-        "inStock": true,
-        "stock": 35,
-        "price": 2499
-      },
-      {
-        "id": "v-sun-moon-touch-necklace-with-agateblack-sun-rose-gold-moon-2",
-        "name": "Dual Black Set",
-        "inStock": true,
-        "stock": 25,
-        "price": 2499
-      }
-    ],
-    "details": {
-      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
-      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
-      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
-      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
-      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
-      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
-    },
-    "createdAt": "2026-11-08T12:00:00.000Z",
-    "updatedAt": "2026-11-08T12:00:00.000Z"
-  },
-  {
-    "id": "elv-tot-11",
-    "slug": "sun-moon-smart-vibration-necklace-set-for-two",
-    "name": "Sun & Moon Touch Necklaces",
-    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
-    "price": 2499,
-    "originalPrice": 3999,
-    "description": "Sun & Moon Touch Necklaces. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
-    "category": "Necklaces",
-    "categorySlug": "necklaces",
-    "colours": [
-      "Black",
-      "Rose Gold"
-    ],
-    "inStock": true,
-    "stock": 45,
-    "isFeatured": false,
-    "isBestSeller": false,
-    "isNewArrival": false,
-    "isPublished": true,
-    "images": [
-      "https://totwoo.com/cdn/shop/files/totwoo_necklaces.png?v=1&width=1200",
-      "https://totwoo.com/cdn/shop/files/totwoo_necklace_81baf88d-fa78-4d34-9873-4c545670a546.png?v=1&width=1200"
-    ],
-    "variants": [
-      {
-        "id": "v-sun-moon-smart-vibration-necklace-set-for-two-1",
-        "name": "Matching Set (Black + Rose Gold)",
-        "inStock": true,
-        "stock": 35,
-        "price": 2499
-      },
-      {
-        "id": "v-sun-moon-smart-vibration-necklace-set-for-two-2",
-        "name": "Dual Black Set",
-        "inStock": true,
-        "stock": 25,
-        "price": 2499
-      }
-    ],
-    "details": {
-      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
-      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
-      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
-      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
-      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
-      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
-    },
-    "createdAt": "2026-11-08T12:00:00.000Z",
-    "updatedAt": "2026-11-08T12:00:00.000Z"
-  },
-  {
     "id": "elv-tot-12",
     "slug": "sun-moon-touch-bracelets-with-figaro-chain-black-gold-1",
     "name": "Sun & Moon Touch Bracelets with Figaro Chain (Black+Gold）",
@@ -802,11 +700,11 @@
   {
     "id": "elv-tot-17",
     "slug": "totwoo-signal-gift-box-sun-moon-touch-bracelets-with-milan-rope-black-brown",
-    "name": "[Totwoo Signal Gift Box] Sun & Moon Touch Bracelets with Milan Rope",
+    "name": "[ELVORA Signal Gift Box] Sun & Moon Touch Bracelets with Milan Rope",
     "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
     "price": 2999,
     "originalPrice": 4999,
-    "description": "[Totwoo Signal Gift Box] Sun & Moon Touch Bracelets with Milan Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "description": "[ELVORA Signal Gift Box] Sun & Moon Touch Bracelets with Milan Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
     "category": "Couple Bracelets",
     "categorySlug": "couple-bracelets",
     "colours": [
@@ -998,11 +896,11 @@
   {
     "id": "elv-tot-21",
     "slug": "totwoo-signal-gift-box-sun-moon-touch-bracelets-with-black-milan-rope",
-    "name": "[Totwoo Signal Gift Box] Sun & Moon Bracelets with Black Milan Rope",
+    "name": "[ELVORA Signal Gift Box] Sun & Moon Bracelets with Black Milan Rope",
     "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
     "price": 2999,
     "originalPrice": 4999,
-    "description": "[Totwoo Signal Gift Box] Sun & Moon Bracelets with Black Milan Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "description": "[ELVORA Signal Gift Box] Sun & Moon Bracelets with Black Milan Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
     "category": "Couple Bracelets",
     "categorySlug": "couple-bracelets",
     "colours": [
@@ -1339,11 +1237,11 @@
   {
     "id": "elv-tot-28",
     "slug": "totwoo-signal-gift-box-sun-moon-snake-chain-touch-bracelets",
-    "name": "[Totwoo Signal Gift Box] Sun & Moon Snake Chain Touch Bracelets",
+    "name": "[ELVORA Signal Gift Box] Sun & Moon Snake Chain Touch Bracelets",
     "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
     "price": 2999,
     "originalPrice": 4999,
-    "description": "[Totwoo Signal Gift Box] Sun & Moon Snake Chain Touch Bracelets. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "description": "[ELVORA Signal Gift Box] Sun & Moon Snake Chain Touch Bracelets. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
     "category": "Couple Bracelets",
     "categorySlug": "couple-bracelets",
     "colours": [
@@ -1374,57 +1272,6 @@
         "inStock": true,
         "stock": 25,
         "price": 2999
-      }
-    ],
-    "details": {
-      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
-      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
-      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
-      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
-      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
-      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
-    },
-    "createdAt": "2026-11-08T12:00:00.000Z",
-    "updatedAt": "2026-11-08T12:00:00.000Z"
-  },
-  {
-    "id": "elv-tot-29",
-    "slug": "sun-touch-necklace-with-natural-agate",
-    "name": "Sun Touch Necklace with Natural Agate",
-    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
-    "price": 1999,
-    "originalPrice": 3499,
-    "description": "Sun Touch Necklace with Natural Agate. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
-    "category": "Necklaces",
-    "categorySlug": "necklaces",
-    "colours": [
-      "Black",
-      "Rose Gold"
-    ],
-    "inStock": true,
-    "stock": 45,
-    "isFeatured": true,
-    "isBestSeller": true,
-    "isNewArrival": false,
-    "isPublished": true,
-    "images": [
-      "https://totwoo.com/cdn/shop/files/Sun_Touch_Necklace_with_Natural_Agate.jpg?v=1&width=1200",
-      "https://totwoo.com/cdn/shop/files/Sun_Touch_Necklace_with_Natural_Agate_For_Long_Distance_Couple.jpg?v=1&width=1200"
-    ],
-    "variants": [
-      {
-        "id": "v-sun-touch-necklace-with-natural-agate-1",
-        "name": "Matching Set (Black + Rose Gold)",
-        "inStock": true,
-        "stock": 35,
-        "price": 1999
-      },
-      {
-        "id": "v-sun-touch-necklace-with-natural-agate-2",
-        "name": "Dual Black Set",
-        "inStock": true,
-        "stock": 25,
-        "price": 1999
       }
     ],
     "details": {
@@ -1976,49 +1823,6 @@
     "updatedAt": "2026-11-08T12:00:00.000Z"
   },
   {
-    "id": "elv-tot-41",
-    "slug": "personalized-925-silver-sunflower-projection-photo-necklace",
-    "name": "Personalized 925 Silver Sunflower Projection Photo Necklace",
-    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
-    "price": 1999,
-    "originalPrice": 3499,
-    "description": "Personalized 925 Silver Sunflower Projection Photo Necklace. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
-    "category": "Necklaces",
-    "categorySlug": "necklaces",
-    "colours": [
-      "Silver"
-    ],
-    "inStock": true,
-    "stock": 45,
-    "isFeatured": false,
-    "isBestSeller": true,
-    "isNewArrival": false,
-    "isPublished": true,
-    "images": [
-      "https://totwoo.com/cdn/shop/files/Photo_Necklace_For_Mother.png?v=1&width=1200",
-      "https://totwoo.com/cdn/shop/files/Personalized925SilverSunflowerPhotoNecklaceForGift.webp?v=1&width=1200"
-    ],
-    "variants": [
-      {
-        "id": "v-personalized-925-silver-sunflower-projection-photo-necklace-standard",
-        "name": "Standard Set (Personalized 925 Silver Sunflower Projection Photo Necklace)",
-        "inStock": true,
-        "stock": 40,
-        "price": 1999
-      }
-    ],
-    "details": {
-      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
-      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
-      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
-      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
-      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
-      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
-    },
-    "createdAt": "2026-11-08T12:00:00.000Z",
-    "updatedAt": "2026-11-08T12:00:00.000Z"
-  },
-  {
     "id": "elv-tot-42",
     "slug": "sun-touch-bracelets-with-braided-leather-rope",
     "name": "Sun Touch Bracelets with Braided Leather Rope",
@@ -2225,13 +2029,13 @@
   {
     "id": "elv-prod-01",
     "slug": "touch-distance-couple-bracelet",
-    "name": "Long Distance Touch Vibration Bracelet for Couples - Totwoo bracelet",
+    "name": "Long Distance Touch Vibration Bracelet for Couples - ELVORA bracelet",
     "tagline": "Tap to vibrate and glow your partner's bracelet anywhere in the world",
     "price": 2999,
     "originalPrice": 12999,
     "description": "Engraved with Jane Austen's quote 'My heart is, and always will be yours'. When you tap your bracelet, your loved one's bracelet lights up and vibrates instantly, no matter the distance.",
-    "category": "Couple Gifts",
-    "categorySlug": "couple-gifts",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
     "colours": [
       "Sun & Moon Rose Gold",
       "Obsidian Black"
@@ -2289,95 +2093,15 @@
     "updatedAt": "2026-11-07T12:00:00.000Z"
   },
   {
-    "id": "elv-prod-02",
-    "slug": "heat-activated-magic-photo-necklace",
-    "name": "Heat Activated Necklace - Magic Photo Necklace",
-    "tagline": "Black stone transforms into your secret photo when warmed by touch",
-    "price": 1499,
-    "originalPrice": 1499,
-    "description": "Under 30°C it appears as a sleek black pendant. When warmed by body heat or touch (>30°C), the stone reveals your custom hidden photo magically.",
-    "category": "Personalized Gifts",
-    "categorySlug": "personalized-gifts",
-    "colours": [
-      "Gold",
-      "Silver"
-    ],
-    "inStock": true,
-    "stock": 65,
-    "isFeatured": true,
-    "isBestSeller": true,
-    "isNewArrival": true,
-    "isPublished": true,
-    "images": [
-      "/images/giftify/products/heat-activated-necklace.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-gold",
-        "name": "18K Gold Plated",
-        "inStock": true,
-        "stock": 35
-      },
-      {
-        "id": "v-silver",
-        "name": "Pure Silver Finish",
-        "inStock": true,
-        "stock": 30
-      }
-    ],
-    "details": {
-      "material": "High Grade Stainless Steel with Thermo-Chromic Crystal",
-      "chainLength": "45cm + 5cm adjustable extension"
-    },
-    "createdAt": "2026-11-02T10:00:00.000Z",
-    "updatedAt": "2026-11-07T12:00:00.000Z"
-  },
-  {
-    "id": "elv-prod-03",
-    "slug": "love-pearl-oyster-necklace",
-    "name": "Love Pearl Oyster Necklace",
-    "tagline": "Open your real genuine oyster to reveal your natural genuine freshwater pearl",
-    "price": 1499,
-    "originalPrice": 2499,
-    "description": "An unforgettable experience. Open the sealed tin can with a real oyster, discover your genuine pearl, and place it into the heart pendant.",
-    "category": "Anniversary Gifts",
-    "categorySlug": "anniversary-gifts",
-    "colours": [
-      "Silver"
-    ],
-    "inStock": true,
-    "stock": 90,
-    "isFeatured": true,
-    "isBestSeller": true,
-    "isNewArrival": false,
-    "isPublished": true,
-    "images": [
-      "/images/giftify/products/love-pearl-necklace.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-box",
-        "name": "Gift Box Complete Set",
-        "inStock": true,
-        "stock": 90
-      }
-    ],
-    "details": {
-      "material": "Natural Cultured Pearl & Rhodium Plated Heart Locket"
-    },
-    "createdAt": "2026-11-03T10:00:00.000Z",
-    "updatedAt": "2026-11-07T12:00:00.000Z"
-  },
-  {
     "id": "elv-prod-04",
     "slug": "hug-bracelet",
     "name": "Hug Bracelet - Love Embracing Arms",
     "tagline": "A daily wearable hug when you can't be there in person",
     "price": 1499,
-    "originalPrice": 1499,
+    "originalPrice": 2499,
     "description": "Crafted as two loving hands wrapping gently around your wrist. A heartwarming reminder of your warmth and embrace.",
-    "category": "Couple Gifts",
-    "categorySlug": "couple-gifts",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
     "colours": [
       "Sterling Silver",
       "Rose Gold"
@@ -2409,228 +2133,6 @@
       "material": "925 Sterling Silver Plated with anti-tarnish coating"
     },
     "createdAt": "2026-11-04T10:00:00.000Z",
-    "updatedAt": "2026-11-07T12:00:00.000Z"
-  },
-  {
-    "id": "elv-prod-05",
-    "slug": "light-sculpted-couple-ring",
-    "name": "Light Sculpted 'I Love You' Couple Ring",
-    "tagline": "Projection ring revealing I Love You in 100 languages with light",
-    "price": 1499,
-    "originalPrice": 2499,
-    "description": "Geometric facets with secret nanotech projection lens. Shine your phone flashlight through the center stone to project I Love You in 100 languages.",
-    "category": "Couple Gifts",
-    "categorySlug": "couple-gifts",
-    "colours": [
-      "Silver"
-    ],
-    "inStock": true,
-    "stock": 30,
-    "isFeatured": true,
-    "isBestSeller": true,
-    "isNewArrival": false,
-    "isPublished": true,
-    "images": [
-      "/images/giftify/products/couple-ring.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-pair",
-        "name": "Matching Pair (His & Hers Adjustable)",
-        "inStock": true,
-        "stock": 30
-      }
-    ],
-    "details": {
-      "material": "Titanium Steel with Nano Optical Projection Crystal"
-    },
-    "createdAt": "2026-11-05T10:00:00.000Z",
-    "updatedAt": "2026-11-07T12:00:00.000Z"
-  },
-  {
-    "id": "elv-prod-06",
-    "slug": "3d-crystal-photo-cube",
-    "name": "3D Crystal Photo Cube with LED Base",
-    "tagline": "Sub-surface laser engraving creating a 3D hologram of your photo",
-    "price": 1499,
-    "originalPrice": 2499,
-    "description": "High purity K9 optical crystal engraved with cutting-edge 3D laser technology. Includes color changing multi-LED wooden light stand.",
-    "category": "Personalized Gifts",
-    "categorySlug": "personalized-gifts",
-    "colours": [
-      "Clear K9 Crystal"
-    ],
-    "inStock": true,
-    "stock": 50,
-    "isFeatured": true,
-    "isBestSeller": true,
-    "isNewArrival": true,
-    "isPublished": true,
-    "images": [
-      "/images/giftify/products/3d-crystal-photo-cube.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-cube",
-        "name": "Cube + LED Base",
-        "inStock": true,
-        "stock": 50
-      }
-    ],
-    "details": {
-      "material": "K9 Optical Crystal & Natural Pine Wood Base"
-    },
-    "createdAt": "2026-11-06T10:00:00.000Z",
-    "updatedAt": "2026-11-07T12:00:00.000Z"
-  },
-  {
-    "id": "elv-prod-07",
-    "slug": "birthday-currency-note",
-    "name": "Birthday Currency Note Keepsake",
-    "tagline": "Original currency note matching your birthday serial date",
-    "price": 1499,
-    "originalPrice": 2499,
-    "description": "Framed genuine currency note featuring serial digits matching your or your loved one's special birthday date in a luxury presentation stand.",
-    "category": "Birthday Gifts",
-    "categorySlug": "birthday-gifts",
-    "colours": [
-      "Gold / Clear Frame"
-    ],
-    "inStock": true,
-    "stock": 75,
-    "isFeatured": false,
-    "isBestSeller": false,
-    "isNewArrival": true,
-    "isPublished": true,
-    "images": [
-      "/images/giftify/products/birthday-currency-note.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-acrylic",
-        "name": "Deluxe Acrylic Stand",
-        "inStock": true,
-        "stock": 75
-      }
-    ],
-    "details": {
-      "material": "Genuine Currency Note in UV Protected Acrylic Case"
-    },
-    "createdAt": "2026-11-06T11:00:00.000Z",
-    "updatedAt": "2026-11-07T12:00:00.000Z"
-  },
-  {
-    "id": "elv-prod-08",
-    "slug": "feather-painting",
-    "name": "Handmade Real Feather Portrait Painting",
-    "tagline": "Your portrait painted with micro-precision on an authentic natural feather",
-    "price": 2500,
-    "originalPrice": 3499,
-    "description": "A rare artistic masterpiece. Hand-painted micro portrait on an authentic white natural feather, preserving timeless memories forever.",
-    "category": "Personalized Gifts",
-    "categorySlug": "personalized-gifts",
-    "colours": [
-      "Natural White"
-    ],
-    "inStock": true,
-    "stock": 20,
-    "isFeatured": false,
-    "isBestSeller": false,
-    "isNewArrival": true,
-    "isPublished": true,
-    "images": [
-      "/images/giftify/products/feather-painting.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-frame",
-        "name": "Feather with Glass Deep Shadow Box",
-        "inStock": true,
-        "stock": 20
-      }
-    ],
-    "details": {
-      "material": "Authentic Treated Feather with Acrylic Fine-liner Art"
-    },
-    "createdAt": "2026-11-06T12:00:00.000Z",
-    "updatedAt": "2026-11-07T12:00:00.000Z"
-  },
-  {
-    "id": "elv-prod-09",
-    "slug": "personalized-wooden-engraving-gift",
-    "name": "Personalized Wooden Engraving Plaque Gift",
-    "tagline": "Laser engraved on natural steamed beech wood with heartfelt anniversary message",
-    "price": 1499,
-    "originalPrice": 2499,
-    "description": "Warm wooden plaque laser-engraved with your photo, names, and anniversary date. Ideal for table desks and bedside stands.",
-    "category": "Anniversary Gifts",
-    "categorySlug": "anniversary-gifts",
-    "colours": [
-      "Natural Beech Wood"
-    ],
-    "inStock": true,
-    "stock": 85,
-    "isFeatured": false,
-    "isBestSeller": false,
-    "isNewArrival": true,
-    "isPublished": true,
-    "images": [
-      "/images/giftify/products/wooden-engraving-gift.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-small",
-        "name": "Standard (6x4 inch)",
-        "inStock": true,
-        "stock": 50
-      },
-      {
-        "id": "v-large",
-        "name": "Large (8x6 inch)",
-        "inStock": true,
-        "stock": 35
-      }
-    ],
-    "details": {
-      "material": "100% Solid Natural Beech Wood"
-    },
-    "createdAt": "2026-11-06T13:00:00.000Z",
-    "updatedAt": "2026-11-07T12:00:00.000Z"
-  },
-  {
-    "id": "elv-prod-10",
-    "slug": "3d-miniature",
-    "name": "Custom 3D Couple Miniature Figurine",
-    "tagline": "Handmade 3D replicas sculpted from your real photos",
-    "price": 2999,
-    "originalPrice": 4999,
-    "description": "Ultra detailed handmade miniature dolls sculpted from your real photos. Captures your outfits, poses, and expressions with incredible likeness.",
-    "category": "Anniversary Gifts",
-    "categorySlug": "anniversary-gifts",
-    "colours": [
-      "Custom Hand Painted"
-    ],
-    "inStock": true,
-    "stock": 15,
-    "isFeatured": true,
-    "isBestSeller": false,
-    "isNewArrival": true,
-    "isPublished": true,
-    "images": [
-      "/images/giftify/products/3d-miniature.jpg"
-    ],
-    "variants": [
-      {
-        "id": "v-couple",
-        "name": "Couple Figurine (6 inch)",
-        "inStock": true,
-        "stock": 15
-      }
-    ],
-    "details": {
-      "material": "Poly-resin and polymer clay with UV protective matte glaze"
-    },
-    "createdAt": "2026-11-06T14:00:00.000Z",
     "updatedAt": "2026-11-07T12:00:00.000Z"
   }
 ]

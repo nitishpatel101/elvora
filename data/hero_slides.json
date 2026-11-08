@@ -1,46 +1,35 @@
 [
   {
-    "id": "slide-totwoo-video",
-    "title": "A Gift That Brings Photos to Life",
-    "subtitle": "Open your heart and reveal glowing memories. Tap into the world of smart connected jewelry.",
-    "cta": "Shop Smart Locket",
-    "link": "/product/heat-activated-magic-photo-necklace",
-    "image": "/videos/totwoo-banner.mp4",
-    "mediaType": "video",
-    "tag": "🎥 Video Feature",
-    "highlight": "Buy More, Save More · 2 Items 15% Off"
-  },
-  {
-    "id": "slide-1",
-    "title": "Memories That Glow Forever",
-    "subtitle": "Turn your favorite photo, baby scan, or cherished moment into a beautifully illuminated crystal keepsake.",
-    "cta": "Get Now",
-    "link": "/product/3d-crystal-photo-cube",
-    "image": "/images/giftify/hero-banner.jpg",
+    "id": "slide-feel-love-close",
+    "title": "Feel Love Close To You",
+    "subtitle": "ELVORA’s bond bracelets for couples turn every touch, tap, flash, or buzz into a message from the heart. Crafted for emotional connection and long-distance love.",
+    "cta": "Explore Couple Sets",
+    "link": "/shop/couple-bracelets",
+    "image": "/images/totwoo_collection_banner.gif",
     "mediaType": "image",
-    "tag": "✨ Trending Personalized Gift",
-    "highlight": "Over 8,500+ Illuminated Across India"
+    "tag": "✨ Long Distance Love",
+    "highlight": "Real-Time Touch Vibration & Flashing Alerts Anywhere In The World"
   },
   {
-    "id": "slide-2",
+    "id": "slide-sun-moon-touch",
     "title": "Touch Vibration Couple Bracelets",
-    "subtitle": "No matter the distance, tap your bracelet and your partner’s bracelet flashes and vibrates in real-time.",
-    "cta": "Explore Couple Set",
-    "link": "/product/touch-distance-couple-bracelet",
-    "image": "/images/products/touch-distance-couple-bracelet/product-1.jpg",
+    "subtitle": "No matter the distance, tap your bracelet and your partner’s piece flashes and vibrates in real-time.",
+    "cta": "Shop Touch Bracelets",
+    "link": "/product/sun-moon-smart-vibration-bracelets-with-snake-chain-black-rose-gold",
+    "image": "/images/totwoo/col-morse-love.jpg",
     "mediaType": "image",
-    "tag": "❤️ Long Distance Love",
-    "highlight": "Feel Connected Anywhere In The World"
+    "tag": "❤️ The Morse Love",
+    "highlight": "Dots & Dashes · Real-Time Vibration Signals"
   },
   {
-    "id": "slide-3",
-    "title": "Heat Activated Magic Photo Lockets",
-    "subtitle": "A discreet elegant pendant that reveals your secret love photo only when touched by body heat.",
-    "cta": "Order Custom Locket",
-    "link": "/product/heat-activated-magic-photo-necklace",
-    "image": "/images/giftify/products/heat-activated-necklace.jpg",
+    "id": "slide-beaded-bond",
+    "title": "Celestial Bond Beaded Bracelets",
+    "subtitle": "Natural stone beads paired with celestial sun & moon touch bezels. Synchronized light and touch signals.",
+    "cta": "Explore Beaded Sets",
+    "link": "/shop/couple-bracelets",
+    "image": "/images/totwoo/col-beaded-bracelets.webp",
     "mediaType": "image",
-    "tag": "🔥 Secret Surprise",
-    "highlight": "100% Water Resistant & Anti-Tarnish"
+    "tag": "🌙 Natural Stones",
+    "highlight": "100% Water Resistant & Rechargeable"
   }
 ]

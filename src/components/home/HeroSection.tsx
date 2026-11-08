@@ -113,8 +113,16 @@ export default function HeroSection({ initialSlides }: HeroSectionProps) {
         {/* Slide Text Content */}
         <div className="relative z-20 h-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 flex flex-col justify-center text-white">
           <div className="max-w-xl">
-            {/* Pill Tag */}
-            <div className="animate-float mb-2 sm:mb-3">
+            {/* Brand Logo & Pill Tag */}
+            <div className="flex items-center gap-2.5 mb-2.5 sm:mb-3.5">
+              <div className="relative w-8 h-8 sm:w-10 sm:h-10 rounded-full overflow-hidden shadow-lg border border-[#E5B54F]/60 bg-black/70 backdrop-blur-md flex-none">
+                <Image
+                  src="/images/logo-transparent.png"
+                  alt="ELVORA"
+                  fill
+                  className="object-contain p-1"
+                />
+              </div>
               <span className="inline-flex items-center gap-1.5 bg-[#F5C400] text-black text-[10px] sm:text-xs font-black uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
                 <Sparkles className="w-3 h-3 fill-black" />
                 {slide.tag}
