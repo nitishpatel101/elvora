@@ -114,7 +114,7 @@ const COLLECTIONS: CollectionCard[] = [
     total: '05',
     tagline: "FOR THE FRIEND WHO'S ALWAYS THERE",
     title: 'Gift for Best friends',
-    image: '/images/totwoo/col-best-friends.jpg',
+    image: '/images/totwoo/col-best-friends.webp',
     link: '/shop',
   },
   {
@@ -132,16 +132,16 @@ const COLLECTIONS: CollectionCard[] = [
     total: '05',
     tagline: 'TWO BRACELETS. ONE UNBREAKABLE BOND.',
     title: 'Gift for Mother & Daughter',
-    image: '/images/totwoo/col-mother-daughter.jpg',
+    image: '/images/totwoo/col-mother-daughter.webp',
     link: '/shop',
   },
   {
-    id: 'soulmate-series',
+    id: 'beaded-bracelets',
     num: '05',
     total: '05',
-    tagline: 'THE ICONIC PROMISE FOR TWO.',
-    title: 'Soulmate Series',
-    image: '/images/totwoo/col-soulmate.jpg',
+    tagline: 'MATCH YOUR MOOD. SHARE YOUR TOUCH.',
+    title: 'Beaded Bracelets',
+    image: '/images/totwoo/col-beaded-bracelets.webp',
     link: '/shop/couple-bracelets',
   },
 ];
@@ -275,9 +275,8 @@ export default function TotwooShowcaseSection() {
                 return (
                   <div
                     key={item.id}
-                    className={`transition-colors duration-300 cursor-pointer py-5 sm:py-6 ${
-                      isOpen ? 'bg-stone-50/50' : 'hover:bg-stone-100/40'
-                    }`}
+                    className={`transition-colors duration-300 cursor-pointer py-5 sm:py-6 ${isOpen ? 'bg-stone-50/50' : 'hover:bg-stone-100/40'
+                      }`}
                     onClick={() => {
                       setActiveFeatureIndex(idx);
                       setIsPaused(true);
@@ -307,9 +306,8 @@ export default function TotwooShowcaseSection() {
 
                     {/* Smooth Expandable Description */}
                     <div
-                      className={`grid transition-all duration-300 ease-in-out ${
-                        isOpen ? 'grid-rows-[1fr] opacity-100 mt-3 sm:mt-4' : 'grid-rows-[0fr] opacity-0'
-                      }`}
+                      className={`grid transition-all duration-300 ease-in-out ${isOpen ? 'grid-rows-[1fr] opacity-100 mt-3 sm:mt-4' : 'grid-rows-[0fr] opacity-0'
+                        }`}
                     >
                       <div className="overflow-hidden pl-7 sm:pl-10 pr-4">
                         <p className="text-xs sm:text-sm text-stone-600 font-light leading-relaxed">
@@ -490,19 +488,21 @@ export default function TotwooShowcaseSection() {
                   className="object-cover object-center scale-100 group-hover:scale-105 transition-transform duration-700"
                 />
 
-                {/* Dark Gradient Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-black/20" />
+                {/* Subtle bottom gradient only behind text so 70% of photo is crystal clear and bright */}
+                <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/85 via-black/30 to-transparent pointer-events-none" />
 
                 {/* Card Top Details */}
                 <div className="absolute top-5 left-5 right-5 flex items-center justify-between z-10">
                   {col.badge ? (
-                    <span className="bg-[#996515] text-white text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full shadow-sm">
+                    <span className="bg-[#B35446] text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-md">
                       {col.badge}
                     </span>
                   ) : (
-                    <span />
+                    <span className="font-serif italic text-white/90 text-2xl font-light drop-shadow">
+                      {col.num}
+                    </span>
                   )}
-                  <span className="font-serif italic text-white/80 text-xs tracking-wider">
+                  <span className="font-serif italic text-white/90 text-xs tracking-wider drop-shadow">
                     {col.num} / {col.total}
                   </span>
                 </div>
