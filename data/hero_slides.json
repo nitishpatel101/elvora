@@ -1,11 +1,23 @@
 [
   {
+    "id": "slide-totwoo-video",
+    "title": "A Gift That Brings Photos to Life",
+    "subtitle": "Open your heart and reveal glowing memories. Tap into the world of smart connected jewelry.",
+    "cta": "Shop Smart Locket",
+    "link": "/product/heat-activated-magic-photo-necklace",
+    "image": "/videos/totwoo-banner.mp4",
+    "mediaType": "video",
+    "tag": "🎥 Video Feature",
+    "highlight": "Buy More, Save More · 2 Items 15% Off"
+  },
+  {
     "id": "slide-1",
     "title": "Memories That Glow Forever",
     "subtitle": "Turn your favorite photo, baby scan, or cherished moment into a beautifully illuminated crystal keepsake.",
     "cta": "Get Now",
     "link": "/product/3d-crystal-photo-cube",
     "image": "/images/giftify/hero-banner.jpg",
+    "mediaType": "image",
     "tag": "✨ Trending Personalized Gift",
     "highlight": "Over 8,500+ Illuminated Across India"
   },
@@ -16,6 +28,7 @@
     "cta": "Explore Couple Set",
     "link": "/product/touch-distance-couple-bracelet",
     "image": "/images/products/touch-distance-couple-bracelet/product-1.jpg",
+    "mediaType": "image",
     "tag": "❤️ Long Distance Love",
     "highlight": "Feel Connected Anywhere In The World"
   },
@@ -26,8 +39,8 @@
     "cta": "Order Custom Locket",
     "link": "/product/heat-activated-magic-photo-necklace",
     "image": "/images/giftify/products/heat-activated-necklace.jpg",
+    "mediaType": "image",
     "tag": "🔥 Secret Surprise",
     "highlight": "100% Water Resistant & Anti-Tarnish"
   }
 ]
-

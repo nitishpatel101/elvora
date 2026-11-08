@@ -14,7 +14,7 @@ interface HeroSlide {
   cta: string;
   link: string;
   image: string;
-  mediaType?: 'image' | 'video';
+  mediaType?: 'image' | 'video' | string;
   tag: string;
   highlight: string;
 }
@@ -25,7 +25,7 @@ interface HeroSectionProps {
 
 export default function HeroSection({ initialSlides }: HeroSectionProps) {
   const [slides, setSlides] = useState<HeroSlide[]>(
-    initialSlides && initialSlides.length > 0 ? initialSlides : defaultSlides
+    initialSlides && initialSlides.length > 0 ? initialSlides : (defaultSlides as unknown as HeroSlide[])
   );
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -40,7 +40,7 @@ export default function HeroSection({ initialSlides }: HeroSectionProps) {
           setSlides(parsed);
         }
       }
-    } catch {}
+    } catch { }
 
     // 2. Fresh fetch from server API
     fetch(`/api/hero-slides?t=${Date.now()}`, { cache: 'no-store' })
@@ -50,10 +50,10 @@ export default function HeroSection({ initialSlides }: HeroSectionProps) {
           setSlides(data);
           try {
             localStorage.setItem('elvora_hero_slides', JSON.stringify(data));
-          } catch {}
+          } catch { }
         }
       })
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   // Auto-slide every 5.5 seconds
@@ -180,11 +180,10 @@ export default function HeroSection({ initialSlides }: HeroSectionProps) {
               <button
                 key={i}
                 onClick={() => setCurrentSlide(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${
-                  i === activeIndex
-                    ? 'w-7 sm:w-9 bg-[#F5C400] shadow-md'
-                    : 'w-2 sm:w-2.5 bg-white/40 hover:bg-white/70'
-                }`}
+                className={`h-2 rounded-full transition-all duration-300 ${i === activeIndex
+                  ? 'w-7 sm:w-9 bg-[#F5C400] shadow-md'
+                  : 'w-2 sm:w-2.5 bg-white/40 hover:bg-white/70'
+                  }`}
                 aria-label={`Go to slide ${i + 1}`}
               />
             ))}

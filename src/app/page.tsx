@@ -1,6 +1,7 @@
 import { getAllProducts, getHeroSlides } from '@/lib/db';
 import StoryCircles from '@/components/home/StoryCircles';
 import HeroSection from '@/components/home/HeroSection';
+import TotwooShowcaseSection from '@/components/home/TotwooShowcaseSection';
 import BestSellersSection from '@/components/home/BestSellersSection';
 import PhotoReviewsSection from '@/components/home/PhotoReviewsSection';
 import OccasionTrendingSection from '@/components/home/OccasionTrendingSection';
@@ -17,10 +18,13 @@ export default async function HomePage() {
       {/* 1. Instagram Story-Style Category Circles */}
       <StoryCircles />
 
-      {/* 2. Hero Section: Memories That Glow Forever */}
+      {/* 2. Hero Section: Memories That Glow Forever & Video Banners */}
       <HeroSection initialSlides={heroSlides} />
 
-      {/* 3. Best Sellers Carousel */}
+      {/* 3. Totwoo Reference Interactive Showcase (Connected Features, Collections Slider, Spotlights) */}
+      <TotwooShowcaseSection />
+
+      {/* 4. Best Sellers Carousel */}
       <BestSellersSection initialProducts={products} />
 
       {/* 4. Real Photo Customer Reviews (★★★★★ 4.88) */}
