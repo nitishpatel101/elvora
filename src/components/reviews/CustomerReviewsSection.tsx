@@ -18,6 +18,7 @@ export default function CustomerReviewsSection({
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [filterRating, setFilterRating] = useState<number | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [helpfulCounts, setHelpfulCounts] = useState<{ [id: string]: number }>({});
   const [userVoted, setUserVoted] = useState<{ [id: string]: boolean }>({});
 
@@ -234,9 +235,18 @@ export default function CustomerReviewsSection({
                   {rev.images && rev.images.length > 0 && (
                     <div className="flex gap-2 mb-4 overflow-x-auto pb-1">
                       {rev.images.map((img, i) => (
-                        <div key={i} className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-[#EAE5DE] shrink-0 bg-stone-100 shadow-2xs">
+                        <button
+                          key={i}
+                          type="button"
+                          onClick={() => setSelectedImage(img)}
+                          aria-label="View enlarged review photo"
+                          className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden border border-[#EAE5DE] shrink-0 bg-stone-100 shadow-2xs hover:opacity-90 hover:scale-105 transition-all cursor-pointer group"
+                        >
                           <Image src={img} alt="Customer review photo" fill className="object-cover" unoptimized />
-                        </div>
+                          <div className="absolute inset-0 bg-black/25 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                            <Sparkles className="w-4 h-4 text-white" />
+                          </div>
+                        </button>
                       ))}
                     </div>
                   )}
@@ -448,6 +458,36 @@ export default function CustomerReviewsSection({
                 </div>
               </form>
             )}
+          </div>
+        </div>
+      )}
+      {/* Enlarged Review Photo Lightbox Modal */}
+      {selectedImage && (
+        <div
+          className="fixed inset-0 z-[9999] bg-black/90 backdrop-blur-md flex items-center justify-center p-4"
+          onClick={() => setSelectedImage(null)}
+        >
+          <button
+            onClick={() => setSelectedImage(null)}
+            aria-label="Close enlarged photo"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-colors z-20 cursor-pointer border border-white/20"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          <div
+            className="relative w-full max-w-3xl aspect-square max-h-[85vh] bg-stone-950 rounded-2xl overflow-hidden shadow-2xl border border-white/20"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Image
+              src={selectedImage}
+              alt="Enlarged customer photo"
+              fill
+              priority
+              sizes="(max-width: 1024px) 95vw, 900px"
+              className="object-contain"
+              unoptimized
+            />
           </div>
         </div>
       )}

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { ChevronLeft, ChevronRight, Maximize2, X } from 'lucide-react';
 
@@ -49,6 +49,30 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
     }
     setTouchStartX(null);
   };
+
+  // Keyboard navigation & body scroll lock for lightbox
+  useEffect(() => {
+    if (!lightboxOpen) return;
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setLightboxOpen(false);
+      } else if (e.key === 'ArrowLeft') {
+        handlePrev();
+      } else if (e.key === 'ArrowRight') {
+        handleNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = originalOverflow;
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [lightboxOpen, images.length]);
 
   return (
     <div className="flex flex-col-reverse lg:flex-row gap-3 sm:gap-4">
@@ -149,19 +173,47 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
       {/* Lightbox Fullscreen Modal */}
       {lightboxOpen && (
         <div
-          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex items-center justify-center p-4"
+          className="fixed inset-0 z-[9999] bg-black/95 backdrop-blur-md flex items-center justify-center p-3 sm:p-6"
           onClick={() => setLightboxOpen(false)}
         >
+          {/* Close Button */}
           <button
             onClick={() => setLightboxOpen(false)}
             aria-label="Close enlarged view"
-            className="absolute top-4 right-4 text-white hover:text-stone-300 p-2 z-10"
+            className="absolute top-4 right-4 sm:top-6 sm:right-6 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-colors z-20 cursor-pointer border border-white/20"
           >
             <X className="w-6 h-6" />
           </button>
 
+          {/* Navigation Arrows inside Lightbox */}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handlePrev();
+                }}
+                aria-label="Previous image"
+                className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-colors z-20 cursor-pointer border border-white/20"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNext();
+                }}
+                aria-label="Next image"
+                className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/25 text-white flex items-center justify-center transition-colors z-20 cursor-pointer border border-white/20"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </>
+          )}
+
+          {/* Image & Counter Container */}
           <div
-            className="relative w-full max-w-4xl aspect-square max-h-[85vh]"
+            className="relative w-full max-w-4xl aspect-square max-h-[85vh] flex items-center justify-center"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -172,6 +224,11 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
               className="object-contain"
               unoptimized
             />
+            {images.length > 1 && (
+              <div className="absolute bottom-3 left-1/2 -translate-x-1/2 bg-black/75 backdrop-blur-xs text-white text-xs font-medium px-3.5 py-1.5 rounded-full border border-white/20">
+                {selectedIndex + 1} / {images.length}
+              </div>
+            )}
           </div>
         </div>
       )}
