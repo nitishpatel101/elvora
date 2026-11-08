@@ -1,10 +1,2233 @@
 [
   {
+    "id": "elv-tot-01",
+    "slug": "sun-moon-smart-vibration-bracelets-with-snake-chain-black-rose-gold",
+    "name": "Sun & Moon Touch Bracelets with Snake Chain",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Sun & Moon Touch Bracelets with Snake Chain. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/products/800_4_b6ab0a19-2d54-4c77-b3a3-5b018ce40239.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/1f97a5288b0de816636661ea120fb0e8_7d0b6b10-beff-4e9a-991e-8e337df5d307.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-snake-chain-black-rose-gold-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-snake-chain-black-rose-gold-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-02",
+    "slug": "sun-moon-smart-vibration-bracelets-with-milan-rope-1",
+    "name": "Sun & Moon Touch Bracelets with Milan Rope (Black+Brown)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Sun & Moon Touch Bracelets with Milan Rope (Black+Brown). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Brown"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": true,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Touch_Bracelets_with_Milan_Rope_Black_Brown.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/7bb16ceac9b16801ac0a008e3e2784f5_296a1025-f829-4721-ad8b-d2917b7ceb2e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-milan-rope-1-1",
+        "name": "Matching Set (Black + Brown)",
+        "inStock": true,
+        "stock": 35,
+        "price": 1999
+      },
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-milan-rope-1-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-03",
+    "slug": "always-1-0-black-red-bracelets-2-items",
+    "name": "Totwoo Sun & Moon Touch Bracelets Set",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Totwoo Sun & Moon Touch Bracelets Set. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": true,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/products/800_32.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/3314889f1c07e8e01a6e0529d3096d57_36fd3f0e-43af-4d59-8f6c-e905d647863e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-always-1-0-black-red-bracelets-2-items-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 1999
+      },
+      {
+        "id": "v-always-1-0-black-red-bracelets-2-items-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-04",
+    "slug": "sun-moon-smart-vibration-bracelets-with-milan-ropesilver-silver",
+    "name": "Sun & Moon Touch Bracelets with Milan Rope (Black+Black)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Sun & Moon Touch Bracelets with Milan Rope (Black+Black). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Touch_Bracelets_with_Milan_Rope_004ef598-9421-48fb-98f7-25a9ebd41007.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/3314889f1c07e8e01a6e0529d3096d57_8776beb0-4000-4ca3-a5fc-290f1f9ce39e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-milan-ropesilver-silver-standard",
+        "name": "Standard Set (Sun & Moon Touch Bracelets with Milan Rope (Black+Black))",
+        "inStock": true,
+        "stock": 40,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-05",
+    "slug": "sun-moon-smart-vibration-bracelets-with-figaro-chainblack-silver",
+    "name": "Sun & Moon Touch Bracelets with Figaro Chain (Black+Silver)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun & Moon Touch Bracelets with Figaro Chain (Black+Silver). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Silver"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/totwoo_Figaro_braclet.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/6532985a088c04d749a6dce2afabcb82.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-figaro-chainblack-silver-1",
+        "name": "Matching Set (Black + Silver)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-figaro-chainblack-silver-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-06",
+    "slug": "sun-moon-touch-bracelets-with-phantasmal-beads-black-rose-gold",
+    "name": "Sun & Moon Touch Bracelets with Phantasmal Beads (Black+Rose Gold)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Sun & Moon Touch Bracelets with Phantasmal Beads (Black+Rose Gold). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/totwoo_ff2bd2be-156a-470c-9d70-31da84da2ef5.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/totwoo_couple_bracelets.png?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-touch-bracelets-with-phantasmal-beads-black-rose-gold-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-sun-moon-touch-bracelets-with-phantasmal-beads-black-rose-gold-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-07",
+    "slug": "sun-moon-smart-vibration-bracelets-with-braided-leather-ropeblack-black",
+    "name": "Sun & Moon Touch Bracelets with Braided Leather Rope (Black+Black)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun & Moon Touch Bracelets with Braided Leather Rope (Black+Black). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/products/800_8.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/f4dd2a9180d88c948182768eaa300c5b.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-braided-leather-ropeblack-black-standard",
+        "name": "Standard Set (Sun & Moon Touch Bracelets with Braided Leather Rope (Black+Black))",
+        "inStock": true,
+        "stock": 40,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-08",
+    "slug": "sun-moon-smart-vibration-bracelets-with-figaro-chain-black-rose-gold",
+    "name": "Sun & Moon Touch Bracelets with Figaro Chain (Black+Rose Gold)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun & Moon Touch Bracelets with Figaro Chain (Black+Rose Gold). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/totwoo_bracelets_8f8fc9b8-99cd-49e1-97cc-ec05357a6246.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/c700381b3aa99708085c0cdf630f16dc_6119edc7-935d-4031-9873-f4df2f388108.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-figaro-chain-black-rose-gold-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-with-figaro-chain-black-rose-gold-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-09",
+    "slug": "always-3-0-exclusive-golden-black-bracelets-2-items",
+    "name": "Sun & Moon Touch Bracelets with Snake Chain (Black+Silver)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Sun & Moon Touch Bracelets with Snake Chain (Black+Silver). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Silver"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Touch_Bracelets_with_Snake_Chain_c58557df-5094-4533-9e9a-c2cd106ec583.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/af9a6414e9629824dd322859a1feb5a2.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-always-3-0-exclusive-golden-black-bracelets-2-items-1",
+        "name": "Matching Set (Black + Silver)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-always-3-0-exclusive-golden-black-bracelets-2-items-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-10",
+    "slug": "sun-moon-touch-necklace-with-agateblack-sun-rose-gold-moon",
+    "name": "Sun & Moon Touch Necklaces (Black + Rose Gold)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun & Moon Touch Necklaces (Black + Rose Gold). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Necklaces",
+    "categorySlug": "necklaces",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Touch_Necklaces_Black_Rose_Gold.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/totwoo.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-touch-necklace-with-agateblack-sun-rose-gold-moon-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-moon-touch-necklace-with-agateblack-sun-rose-gold-moon-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-11",
+    "slug": "sun-moon-smart-vibration-necklace-set-for-two",
+    "name": "Sun & Moon Touch Necklaces",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun & Moon Touch Necklaces. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Necklaces",
+    "categorySlug": "necklaces",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/totwoo_necklaces.png?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/totwoo_necklace_81baf88d-fa78-4d34-9873-4c545670a546.png?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-smart-vibration-necklace-set-for-two-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-moon-smart-vibration-necklace-set-for-two-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-12",
+    "slug": "sun-moon-touch-bracelets-with-figaro-chain-black-gold-1",
+    "name": "Sun & Moon Touch Bracelets with Figaro Chain (Black+Gold）",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun & Moon Touch Bracelets with Figaro Chain (Black+Gold）. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/totwoo_bracelet_e1dfe001-c5b7-4ad7-bb29-851cddfdab4b.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/5a3ae0aac646a32c372e04b4324b2bc3_77602456-5927-4a75-8b9e-80e7995e7869.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-touch-bracelets-with-figaro-chain-black-gold-1-1",
+        "name": "Matching Set (Black + Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-moon-touch-bracelets-with-figaro-chain-black-gold-1-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-13",
+    "slug": "sun-moon-smart-vibration-bracelets",
+    "name": "Sun & Moon Touch Bracelets with Matching Beads",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun & Moon Touch Bracelets with Matching Beads. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Touch_Bracelets_with_Matching_Beads.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/totwoo_bracelets_ff2aa7f8-daa5-4048-ae8d-5c99a629cd8d.png?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-14",
+    "slug": "sun-moon-smart-vibration-bracelets-braided-sun-snake-moon",
+    "name": "Sun & Moon Touch Bracelets (Braided Sun+Snake Chain Moon)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Sun & Moon Touch Bracelets (Braided Sun+Snake Chain Moon). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/products/sku2.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/b79f1f098882cced844499a38696374a.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-braided-sun-snake-moon-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-sun-moon-smart-vibration-bracelets-braided-sun-snake-moon-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-15",
+    "slug": "sun-smart-vibration-bracelets-with-milan-rope-single",
+    "name": "Sun Touch Bracelet with Milan Rope Single",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1499,
+    "originalPrice": 2499,
+    "description": "Sun Touch Bracelet with Milan Rope Single. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/sku_cb258fa0-f9d4-4aac-90ab-d2687d4e2b8c.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/Sun_Touch_Bracelet_with_Milan_Rope_Single.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-smart-vibration-bracelets-with-milan-rope-single-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 1499
+      },
+      {
+        "id": "v-sun-smart-vibration-bracelets-with-milan-rope-single-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 1499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-16",
+    "slug": "sun-moon-touch-bracelets-snake-chain-braided-cord",
+    "name": "Sun & Moon Touch Bracelets (Snake Chain + Braided Cord)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Sun & Moon Touch Bracelets (Snake Chain + Braided Cord). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/sku_1.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Touch_Bracelets_for_couple.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-touch-bracelets-snake-chain-braided-cord-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-sun-moon-touch-bracelets-snake-chain-braided-cord-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-17",
+    "slug": "totwoo-signal-gift-box-sun-moon-touch-bracelets-with-milan-rope-black-brown",
+    "name": "[Totwoo Signal Gift Box] Sun & Moon Touch Bracelets with Milan Rope",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[Totwoo Signal Gift Box] Sun & Moon Touch Bracelets with Milan Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/1.webp?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/7bb16ceac9b16801ac0a008e3e2784f5_296a1025-f829-4721-ad8b-d2917b7ceb2e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-totwoo-signal-gift-box-sun-moon-touch-bracelets-with-milan-rope-black-brown-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-totwoo-signal-gift-box-sun-moon-touch-bracelets-with-milan-rope-black-brown-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-18",
+    "slug": "sun-sun-smart-vibration-bracelets-with-milan-ropeblack-black",
+    "name": "Sun&Sun Touch Bracelets with Milan Rope(Black+Black)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Sun&Sun Touch Bracelets with Milan Rope(Black+Black). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/products/800_29_fa6609ca-6abb-460c-8ffb-7cdec9d5b1a8.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/c1e6f7c1cc0b92c547018c50c4a2f51e_f2685e12-d9c5-4301-897a-90c233da2352.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-sun-smart-vibration-bracelets-with-milan-ropeblack-black-standard",
+        "name": "Standard Set (Sun&Sun Touch Bracelets with Milan Rope(Black+Black))",
+        "inStock": true,
+        "stock": 40,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-19",
+    "slug": "sun-moon-touch-bracelets-with-solar-system-guardian-beads",
+    "name": "Sun & Moon Touch Bracelets with Solar System Guardian Beads",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Sun & Moon Touch Bracelets with Solar System Guardian Beads. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Totwoo_Sun_and_Moon_Touch_Bracelet_with_Energy_Beads.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/1_3fcd0863-bc48-40a9-a2b6-f29f4ea7ae39.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-touch-bracelets-with-solar-system-guardian-beads-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-sun-moon-touch-bracelets-with-solar-system-guardian-beads-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-20",
+    "slug": "sun-single-touch-bracelets-with-figaro-chain",
+    "name": "Sun Single Touch Bracelets with Figaro Chain",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun Single Touch Bracelets with Figaro Chain. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Single_Touch_Bracelets_with_Figaro_Chain.png?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/c700381b3aa99708085c0cdf630f16dc_6119edc7-935d-4031-9873-f4df2f388108.webp?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-single-touch-bracelets-with-figaro-chain-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-single-touch-bracelets-with-figaro-chain-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-21",
+    "slug": "totwoo-signal-gift-box-sun-moon-touch-bracelets-with-black-milan-rope",
+    "name": "[Totwoo Signal Gift Box] Sun & Moon Bracelets with Black Milan Rope",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[Totwoo Signal Gift Box] Sun & Moon Bracelets with Black Milan Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/2_9228e82e-4c7a-4013-94b5-45e1e0890032.webp?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/3314889f1c07e8e01a6e0529d3096d57_8776beb0-4000-4ca3-a5fc-290f1f9ce39e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-totwoo-signal-gift-box-sun-moon-touch-bracelets-with-black-milan-rope-standard",
+        "name": "Standard Set ([Totwoo Signal Gift Box] Sun & Moon Bracelets with Black Milan Rope)",
+        "inStock": true,
+        "stock": 40,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-22",
+    "slug": "sun-moon-touch-bracelets-with-14-natural-beads",
+    "name": "Sun & Moon Celestial Touch Bracelets with 13 Natural Stone Beads",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Sun & Moon Celestial Touch Bracelets with 13 Natural Stone Beads. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_MoonTouchBraceletswith14NaturalBeads.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/Image-22.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-touch-bracelets-with-14-natural-beads-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-sun-moon-touch-bracelets-with-14-natural-beads-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-23",
+    "slug": "sun-touch-bracelets-with-snake-chain-single",
+    "name": "Sun Touch Bracelet with Snake Chain Single",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Sun Touch Bracelet with Snake Chain Single. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/totwoo_snake_chain_single.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/1f97a5288b0de816636661ea120fb0e8_7d0b6b10-beff-4e9a-991e-8e337df5d307.webp?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-touch-bracelets-with-snake-chain-single-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-sun-touch-bracelets-with-snake-chain-single-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-24",
+    "slug": "sun-moon-touch-bracelets-with-phantasmal-beads-silver-silver",
+    "name": "Sun & Moon Touch Bracelets with Phantasmal Beads (Silver+Silver)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "Sun & Moon Touch Bracelets with Phantasmal Beads (Silver+Silver). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Silver"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/totwoo_s_smart_bracelets.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/totwoo_smart_jewelry_1f4ab05d-5778-4d79-94d4-828943476047.png?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-touch-bracelets-with-phantasmal-beads-silver-silver-standard",
+        "name": "Standard Set (Sun & Moon Touch Bracelets with Phantasmal Beads (Silver+Silver))",
+        "inStock": true,
+        "stock": 40,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-25",
+    "slug": "sun-moon-touch-bracelets-with-matching-beads-single",
+    "name": "Sun & Moon Touch Bracelets with Matching Beads Single",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun & Moon Touch Bracelets with Matching Beads Single. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/55adee9355f4e91e088dc819e5a3b687.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/800x800_65ffa8a9-3b03-4f25-a701-c063875ea040.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-touch-bracelets-with-matching-beads-single-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-moon-touch-bracelets-with-matching-beads-single-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-26",
+    "slug": "always-1-0-light-brown-bracelets-2-items",
+    "name": "Sun & Moon Touch Bracelets with Milan Rope Set",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Sun & Moon Touch Bracelets with Milan Rope Set. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/products/800_2_0b38dcaa-95f9-4a76-a402-0fe185ebd74b.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/7bb16ceac9b16801ac0a008e3e2784f5.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-always-1-0-light-brown-bracelets-2-items-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 1999
+      },
+      {
+        "id": "v-always-1-0-light-brown-bracelets-2-items-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-27",
+    "slug": "sun-and-moon-touch-bracelets-with-milan-rope-black-brown",
+    "name": "Sun and Moon Touch Bracelets with Milan Rope (Black+Brown)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Sun and Moon Touch Bracelets with Milan Rope (Black+Brown). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Brown"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Touch_Bracelets_with_Milan_Rope_Black_Brown.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/7bb16ceac9b16801ac0a008e3e2784f5_296a1025-f829-4721-ad8b-d2917b7ceb2e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-and-moon-touch-bracelets-with-milan-rope-black-brown-1",
+        "name": "Matching Set (Black + Brown)",
+        "inStock": true,
+        "stock": 35,
+        "price": 1999
+      },
+      {
+        "id": "v-sun-and-moon-touch-bracelets-with-milan-rope-black-brown-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-28",
+    "slug": "totwoo-signal-gift-box-sun-moon-snake-chain-touch-bracelets",
+    "name": "[Totwoo Signal Gift Box] Sun & Moon Snake Chain Touch Bracelets",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[Totwoo Signal Gift Box] Sun & Moon Snake Chain Touch Bracelets. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/3.webp?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/1f97a5288b0de816636661ea120fb0e8_7d0b6b10-beff-4e9a-991e-8e337df5d307.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-totwoo-signal-gift-box-sun-moon-snake-chain-touch-bracelets-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-totwoo-signal-gift-box-sun-moon-snake-chain-touch-bracelets-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-29",
+    "slug": "sun-touch-necklace-with-natural-agate",
+    "name": "Sun Touch Necklace with Natural Agate",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Sun Touch Necklace with Natural Agate. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Necklaces",
+    "categorySlug": "necklaces",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Touch_Necklace_with_Natural_Agate.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/Sun_Touch_Necklace_with_Natural_Agate_For_Long_Distance_Couple.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-touch-necklace-with-natural-agate-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 1999
+      },
+      {
+        "id": "v-sun-touch-necklace-with-natural-agate-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-30",
+    "slug": "sun-touch-bracelets-with-phantasmal-beads",
+    "name": "Sun Touch Bracelet with Phantasmal Beads",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun Touch Bracelet with Phantasmal Beads. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": true,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Touch_Bracelets_with_Phantasmal_Beads_8a303667-d4e6-4f6d-bc7e-c5757f1a2831.png?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/totwoo_couple_bracelets.png?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-touch-bracelets-with-phantasmal-beads-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-touch-bracelets-with-phantasmal-beads-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-31",
+    "slug": "totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-milan-rope-black-brown",
+    "name": "[Holiday Gift Edition] Sun & Moon Touch Bracelets with Milan Rope",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[Holiday Gift Edition] Sun & Moon Touch Bracelets with Milan Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": true,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/800_7.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/7bb16ceac9b16801ac0a008e3e2784f5_296a1025-f829-4721-ad8b-d2917b7ceb2e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-milan-rope-black-brown-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-milan-rope-black-brown-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-32",
+    "slug": "totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-milan-rope-black-black",
+    "name": "[Holiday Gift Edition] Sun & Moon Touch Bracelets with Milan Rope",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "[Holiday Gift Edition] Sun & Moon Touch Bracelets with Milan Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": true,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/800_6_3381e84f-6ca3-4dac-ad67-e8a01442bc4f.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/3314889f1c07e8e01a6e0529d3096d57_8776beb0-4000-4ca3-a5fc-290f1f9ce39e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-milan-rope-black-black-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-milan-rope-black-black-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-33",
+    "slug": "sun-touch-bracelet-with-energy-beads",
+    "name": "Sun Touch Bracelet with Energy Beads",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "Sun Touch Bracelet with Energy Beads. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Touch_Bracelet_with_Energy_Beads.png?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/5a3ae0aac646a32c372e04b4324b2bc3_04678e72-f33b-4200-bbde-50324346b5fc.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-touch-bracelet-with-energy-beads-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2499
+      },
+      {
+        "id": "v-sun-touch-bracelet-with-energy-beads-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-34",
+    "slug": "totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-snake-chain-black-silver",
+    "name": "[Holiday Gift Edition] Sun & Moon Touch Bracelets with Snake Chain",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[Holiday Gift Edition] Sun & Moon Touch Bracelets with Snake Chain. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/800_5_4a2db8f6-2291-48b1-83eb-725b2a48d3fe.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/af9a6414e9629824dd322859a1feb5a2.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-snake-chain-black-silver-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-snake-chain-black-silver-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-35",
+    "slug": "totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-snake-chain",
+    "name": "[Holiday Gift Edition] Sun & Moon Touch Bracelets with Snake Chain",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[Holiday Gift Edition] Sun & Moon Touch Bracelets with Snake Chain. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/800_10.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/1f97a5288b0de816636661ea120fb0e8_7d0b6b10-beff-4e9a-991e-8e337df5d307.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-snake-chain-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-totwoo-holiday-gift-edition-sun-moon-touch-bracelets-with-snake-chain-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-36",
+    "slug": "sun-touch-bracelet-with-milan-rope-single-silver",
+    "name": "Sun Touch Bracelet with Milan Rope Single-Silver",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1499,
+    "originalPrice": 2499,
+    "description": "Sun Touch Bracelet with Milan Rope Single-Silver. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Silver"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/sku_7c2f993c-ee8c-42e7-a1c9-2a0935cd176f.webp?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/Sun_Touch_Bracelet_with_Milan_Rope_Single.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-touch-bracelet-with-milan-rope-single-silver-standard",
+        "name": "Standard Set (Sun Touch Bracelet with Milan Rope Single-Silver)",
+        "inStock": true,
+        "stock": 40,
+        "price": 1499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-37",
+    "slug": "sun-moon-beaded-bracelets-in-purple-and-black",
+    "name": "Sun & Moon Beaded Bracelets in Purple and Black",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Sun & Moon Beaded Bracelets in Purple and Black. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_MoonBeadedBraceletsinPurpleandBlack.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/Sun_MoonBeadedBraceletsinPurpleandBlackForCouple.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-beaded-bracelets-in-purple-and-black-standard",
+        "name": "Standard Set (Sun & Moon Beaded Bracelets in Purple and Black)",
+        "inStock": true,
+        "stock": 40,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-38",
+    "slug": "gifted-package-sun-moon-touch-bracelets-with-milan-rope-black-brown",
+    "name": "[ Red Gift Packaging] Sun & Moon Touch Bracelets with Milan Rope (Black+Brown)",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[ Red Gift Packaging] Sun & Moon Touch Bracelets with Milan Rope (Black+Brown). Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Brown"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/GIFTED_PACKAGE_Sun_and_Moon_Touch_Bracelets_with_Rope_9344ca40-c57d-4172-816e-55a0ce984668.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/totwoo_sun_moon_milan_bracelets.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-gifted-package-sun-moon-touch-bracelets-with-milan-rope-black-brown-1",
+        "name": "Matching Set (Black + Brown)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-gifted-package-sun-moon-touch-bracelets-with-milan-rope-black-brown-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-39",
+    "slug": "sun-moon-vow-gift-packaging-sun-moon-touch-bracelets-with-snake-chain",
+    "name": "[Special Gift Packaging] Sun & Moon Snake Chain Touch Bracelets",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[Special Gift Packaging] Sun & Moon Snake Chain Touch Bracelets. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Vow_Gift_Packaging_Sun_Moon_Touch_Bracelets_with_Snake_Chain.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/1f97a5288b0de816636661ea120fb0e8_7d0b6b10-beff-4e9a-991e-8e337df5d307.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-vow-gift-packaging-sun-moon-touch-bracelets-with-snake-chain-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-sun-moon-vow-gift-packaging-sun-moon-touch-bracelets-with-snake-chain-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-40",
+    "slug": "sun-moon-vow-gift-packaging-sun-moon-touch-bracelets-with-milan-ropeblack-black",
+    "name": "[Special Gift Packaging] Sun & Moon Touch Bracelets with Black Milan Rope",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2499,
+    "originalPrice": 3999,
+    "description": "[Special Gift Packaging] Sun & Moon Touch Bracelets with Black Milan Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Vow_Gift_Packaging_Sun_Moon_Touch_Bracelets_with_Milan_Rope_Black_Black.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/3314889f1c07e8e01a6e0529d3096d57_8776beb0-4000-4ca3-a5fc-290f1f9ce39e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-vow-gift-packaging-sun-moon-touch-bracelets-with-milan-ropeblack-black-standard",
+        "name": "Standard Set ([Special Gift Packaging] Sun & Moon Touch Bracelets with Black Milan Rope)",
+        "inStock": true,
+        "stock": 40,
+        "price": 2499
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-41",
+    "slug": "personalized-925-silver-sunflower-projection-photo-necklace",
+    "name": "Personalized 925 Silver Sunflower Projection Photo Necklace",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Personalized 925 Silver Sunflower Projection Photo Necklace. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Necklaces",
+    "categorySlug": "necklaces",
+    "colours": [
+      "Silver"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Photo_Necklace_For_Mother.png?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/Personalized925SilverSunflowerPhotoNecklaceForGift.webp?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-personalized-925-silver-sunflower-projection-photo-necklace-standard",
+        "name": "Standard Set (Personalized 925 Silver Sunflower Projection Photo Necklace)",
+        "inStock": true,
+        "stock": 40,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-42",
+    "slug": "sun-touch-bracelets-with-braided-leather-rope",
+    "name": "Sun Touch Bracelets with Braided Leather Rope",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Sun Touch Bracelets with Braided Leather Rope. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/sun_bracelet_main.png?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/f4dd2a9180d88c948182768eaa300c5b.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-touch-bracelets-with-braided-leather-rope-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 1999
+      },
+      {
+        "id": "v-sun-touch-bracelets-with-braided-leather-rope-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-43",
+    "slug": "valentines-day-white-gift-packagingsun-moon-touch-bracelets-with-snake-chain",
+    "name": "[White Heart Gift Packaging] Sun&Moon Touch Bracelets with Snake Chain",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[White Heart Gift Packaging] Sun&Moon Touch Bracelets with Snake Chain. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Special_Gift_Packaging_Sun_Moon_Touch_Bracelets_with_Snake_Chain.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/1f97a5288b0de816636661ea120fb0e8_7d0b6b10-beff-4e9a-991e-8e337df5d307.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-valentines-day-white-gift-packagingsun-moon-touch-bracelets-with-snake-chain-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-valentines-day-white-gift-packagingsun-moon-touch-bracelets-with-snake-chain-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-44",
+    "slug": "sun-moon-celestial-bond-bracelets",
+    "name": "Sun & Moon Celestial Bond Beaded Bracelets",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 1999,
+    "originalPrice": 3499,
+    "description": "Sun & Moon Celestial Bond Beaded Bracelets. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": true,
+    "isNewArrival": true,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Celestial_Bond_Bracelets.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Celestial_Bond_Bracelets_For_Gift.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-celestial-bond-bracelets-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 1999
+      },
+      {
+        "id": "v-sun-moon-celestial-bond-bracelets-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 1999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
+    "id": "elv-tot-45",
+    "slug": "sun-moon-vow-gift-packaging-sun-moon-touch-bracelets-with-milan-rope-black-brown",
+    "name": "[Special Gift Packaging] Sun & Moon Milan Rope Touch Bracelets",
+    "tagline": "Send real-time touch, flash, and vibration signals anywhere in the world.",
+    "price": 2999,
+    "originalPrice": 4999,
+    "description": "[Special Gift Packaging] Sun & Moon Milan Rope Touch Bracelets. Touch your piece, and your partner's jewelry flashes and vibrates in real time, no matter the distance across the globe. Built with high-precision touch sensors, patented nb16 smart chip, customizable RGB glow colors, and water-resistant casing. Includes twin magnetic chargers and luxury gift packaging.",
+    "category": "Couple Bracelets",
+    "categorySlug": "couple-bracelets",
+    "colours": [
+      "Black",
+      "Rose Gold"
+    ],
+    "inStock": true,
+    "stock": 45,
+    "isFeatured": false,
+    "isBestSeller": false,
+    "isNewArrival": false,
+    "isPublished": true,
+    "images": [
+      "https://totwoo.com/cdn/shop/files/Sun_Moon_Vow_Gift_Packaging_Sun_Moon_Touch_Bracelets_with_Milan_Rope_Black_Brown.jpg?v=1&width=1200",
+      "https://totwoo.com/cdn/shop/products/7bb16ceac9b16801ac0a008e3e2784f5_296a1025-f829-4721-ad8b-d2917b7ceb2e.jpg?v=1&width=1200"
+    ],
+    "variants": [
+      {
+        "id": "v-sun-moon-vow-gift-packaging-sun-moon-touch-bracelets-with-milan-rope-black-brown-1",
+        "name": "Matching Set (Black + Rose Gold)",
+        "inStock": true,
+        "stock": 35,
+        "price": 2999
+      },
+      {
+        "id": "v-sun-moon-vow-gift-packaging-sun-moon-touch-bracelets-with-milan-rope-black-brown-2",
+        "name": "Dual Black Set",
+        "inStock": true,
+        "stock": 25,
+        "price": 2999
+      }
+    ],
+    "details": {
+      "material": "Surgical Grade 316L Stainless Steel with Optical Bezel",
+      "finish": "High-Polish 18K PVD Gold & Obsidian Ion Plating",
+      "waterResistance": "IPX5 / IP67 Water Resistant for Everyday Wear",
+      "battery": "Up to 3-7 Days Battery Life per 60-min Magnetic Fast Charge",
+      "packaging": "Signature ELVORA Velvet Presentation Box & Magnetic Chargers",
+      "care": "Wipe with a soft cloth; avoid prolonged exposure to harsh detergents"
+    },
+    "createdAt": "2026-11-08T12:00:00.000Z",
+    "updatedAt": "2026-11-08T12:00:00.000Z"
+  },
+  {
     "id": "elv-prod-01",
     "slug": "touch-distance-couple-bracelet",
     "name": "Long Distance Touch Vibration Bracelet for Couples - Totwoo bracelet",
     "tagline": "Tap to vibrate and glow your partner's bracelet anywhere in the world",
-    "price": 7499,
+    "price": 2999,
     "originalPrice": 12999,
     "description": "Engraved with Jane Austen's quote 'My heart is, and always will be yours'. When you tap your bracelet, your loved one's bracelet lights up and vibrates instantly, no matter the distance.",
     "category": "Couple Gifts",
@@ -70,9 +2293,9 @@
     "slug": "heat-activated-magic-photo-necklace",
     "name": "Heat Activated Necklace - Magic Photo Necklace",
     "tagline": "Black stone transforms into your secret photo when warmed by touch",
-    "price": 999,
+    "price": 1499,
     "originalPrice": 1499,
-    "description": "Under 30\u00b0C it appears as a sleek black pendant. When warmed by body heat or touch (>30\u00b0C), the stone reveals your custom hidden photo magically.",
+    "description": "Under 30°C it appears as a sleek black pendant. When warmed by body heat or touch (>30°C), the stone reveals your custom hidden photo magically.",
     "category": "Personalized Gifts",
     "categorySlug": "personalized-gifts",
     "colours": [
@@ -114,8 +2337,8 @@
     "slug": "love-pearl-oyster-necklace",
     "name": "Love Pearl Oyster Necklace",
     "tagline": "Open your real genuine oyster to reveal your natural genuine freshwater pearl",
-    "price": 349,
-    "originalPrice": 599,
+    "price": 1499,
+    "originalPrice": 2499,
     "description": "An unforgettable experience. Open the sealed tin can with a real oyster, discover your genuine pearl, and place it into the heart pendant.",
     "category": "Anniversary Gifts",
     "categorySlug": "anniversary-gifts",
@@ -150,7 +2373,7 @@
     "slug": "hug-bracelet",
     "name": "Hug Bracelet - Love Embracing Arms",
     "tagline": "A daily wearable hug when you can't be there in person",
-    "price": 999,
+    "price": 1499,
     "originalPrice": 1499,
     "description": "Crafted as two loving hands wrapping gently around your wrist. A heartwarming reminder of your warmth and embrace.",
     "category": "Couple Gifts",
@@ -229,8 +2452,8 @@
     "slug": "3d-crystal-photo-cube",
     "name": "3D Crystal Photo Cube with LED Base",
     "tagline": "Sub-surface laser engraving creating a 3D hologram of your photo",
-    "price": 899,
-    "originalPrice": 1249,
+    "price": 1499,
+    "originalPrice": 2499,
     "description": "High purity K9 optical crystal engraved with cutting-edge 3D laser technology. Includes color changing multi-LED wooden light stand.",
     "category": "Personalized Gifts",
     "categorySlug": "personalized-gifts",
@@ -265,8 +2488,8 @@
     "slug": "birthday-currency-note",
     "name": "Birthday Currency Note Keepsake",
     "tagline": "Original currency note matching your birthday serial date",
-    "price": 650,
-    "originalPrice": 999,
+    "price": 1499,
+    "originalPrice": 2499,
     "description": "Framed genuine currency note featuring serial digits matching your or your loved one's special birthday date in a luxury presentation stand.",
     "category": "Birthday Gifts",
     "categorySlug": "birthday-gifts",
@@ -337,8 +2560,8 @@
     "slug": "personalized-wooden-engraving-gift",
     "name": "Personalized Wooden Engraving Plaque Gift",
     "tagline": "Laser engraved on natural steamed beech wood with heartfelt anniversary message",
-    "price": 399,
-    "originalPrice": 699,
+    "price": 1499,
+    "originalPrice": 2499,
     "description": "Warm wooden plaque laser-engraved with your photo, names, and anniversary date. Ideal for table desks and bedside stands.",
     "category": "Anniversary Gifts",
     "categorySlug": "anniversary-gifts",
