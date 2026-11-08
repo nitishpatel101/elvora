@@ -2,6 +2,7 @@ import { createClient } from '@supabase/supabase-js';
 import fs from 'fs/promises';
 import path from 'path';
 import { Product, Order, Category, StoreSettings, Review } from '@/types';
+import { readCloudData, writeCloudData } from '@/lib/cloudStore';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
@@ -27,45 +28,14 @@ const HERO_SLIDES_FILE = path.join(DATA_DIR, 'hero_slides.json');
 const STORIES_FILE = path.join(DATA_DIR, 'stories.json');
 const OCCASIONS_FILE = path.join(DATA_DIR, 'occasions.json');
 
-// Memory cache fallback for serverless deployments
-const inMemoryStore = new Map<string, string>();
-
 export async function safeReadFile(primaryPath: string): Promise<string> {
   const filename = path.basename(primaryPath);
-
-  // Always check /tmp directory first (serverless runtime persistence across calls)
-  try {
-    const tmpPath = path.join('/tmp', filename);
-    const data = await fs.readFile(tmpPath, 'utf-8');
-    if (data && data.trim().length > 0) {
-      inMemoryStore.set(filename, data);
-      return data;
-    }
-  } catch { }
-
-  if (inMemoryStore.has(filename)) {
-    return inMemoryStore.get(filename)!;
-  }
-
-  const raw = await fs.readFile(primaryPath, 'utf-8');
-  inMemoryStore.set(filename, raw);
-  return raw;
+  return readCloudData(filename, primaryPath);
 }
 
 export async function safeWriteFile(primaryPath: string, content: string): Promise<void> {
   const filename = path.basename(primaryPath);
-  inMemoryStore.set(filename, content);
-
-  // Always write to /tmp for serverless runtime persistence
-  try {
-    const tmpPath = path.join('/tmp', filename);
-    await fs.writeFile(tmpPath, content, 'utf-8');
-  } catch {}
-
-  // Also write to primary path if filesystem is writable (local development)
-  try {
-    await fs.writeFile(primaryPath, content, 'utf-8');
-  } catch {}
+  return writeCloudData(filename, content, primaryPath);
 }
 
 // --- PRODUCT REPOSITORY ---

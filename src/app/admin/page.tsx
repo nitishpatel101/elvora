@@ -7,7 +7,7 @@ import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
 import { useCurrency } from '@/context/CurrencyContext';
 import { Product, Order, StoreSettings, OrderStatus } from '@/types';
-import { compressImage } from '@/lib/imageCompression';
+import { compressImage, isVideoFileOrUrl } from '@/lib/imageCompression';
 import {
   Plus,
   Edit,
@@ -27,6 +27,7 @@ import {
   RefreshCw,
   Megaphone,
   Image as ImageIcon,
+  Video,
   Truck,
   TrendingUp,
   Sparkles,
@@ -219,17 +220,20 @@ export default function AdminDashboardPage() {
   const handleSlideImageUpload = async (slideId: string, file: File) => {
     setUploadingSlideId(slideId);
     try {
-      // Compress large smartphone/laptop images client-side before upload to prevent payload size errors
-      const compressed = await compressImage(file, 1920, 1080, 0.82);
+      const isVid = file.type.startsWith('video/') || /\.(mp4|webm|mov|ogg|m4v)$/i.test(file.name);
+      // Compress large smartphone/laptop images client-side before upload to prevent payload size errors. Videos pass through untouched.
+      const processed = await compressImage(file, 1920, 1080, 0.82);
       const formData = new FormData();
-      formData.append('file', compressed);
+      formData.append('file', processed);
       const res = await fetch('/api/upload', {
         method: 'POST',
         body: formData,
       });
       const data = await res.json();
       if (res.ok && data.url) {
-        const updated = heroSlides.map((s) => (s.id === slideId ? { ...s, image: data.url } : s));
+        const updated = heroSlides.map((s) =>
+          s.id === slideId ? { ...s, image: data.url, mediaType: isVid ? 'video' : 'image' } : s
+        );
         setHeroSlides(updated);
         try {
           localStorage.setItem('elvora_hero_slides', JSON.stringify(updated));
@@ -237,7 +241,7 @@ export default function AdminDashboardPage() {
         // Immediately persist to server
         await handleSaveHeroSlides(updated);
       } else {
-        alert(data.error || 'Failed to upload photo');
+        alert(data.error || 'Failed to upload media');
       }
     } catch (err: any) {
       alert(`Upload error: ${err.message || 'Upload failed'}`);
@@ -254,6 +258,7 @@ export default function AdminDashboardPage() {
       cta: 'Shop Now',
       link: '/shop',
       image: '/images/giftify/hero-banner.jpg',
+      mediaType: 'image',
       tag: '✨ Special Edition',
       highlight: 'Limited Time Exclusive',
     };
@@ -270,12 +275,18 @@ export default function AdminDashboardPage() {
       alert('You must have at least one hero banner slide.');
       return;
     }
+    if (!confirm('Are you sure you want to permanently delete this slide from the website?')) {
+      return;
+    }
     const updated = heroSlides.filter((s) => s.id !== slideId);
     setHeroSlides(updated);
     try {
       localStorage.setItem('elvora_hero_slides', JSON.stringify(updated));
     } catch {}
-    await handleSaveHeroSlides(updated);
+    const ok = await handleSaveHeroSlides(updated);
+    if (ok) {
+      alert('Slide deleted successfully and removed live from website!');
+    }
   };
 
   // Occasions State & Management (3D Character Cards)
@@ -1523,15 +1534,39 @@ export default function AdminDashboardPage() {
                           Slide Preview:
                         </span>
                         <div className="relative w-full aspect-[2/1] rounded-xl overflow-hidden bg-stone-950 border border-stone-800 shadow-sm">
-                          <Image
-                            src={slide.image || '/images/giftify/hero-banner.jpg'}
-                            alt={slide.title || 'Slide'}
-                            fill
-                            className="object-cover"
-                            unoptimized
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-                          <div className="absolute inset-0 p-4 flex flex-col justify-center text-white">
+                          {isVideoFileOrUrl(slide.image, slide.mediaType) ? (
+                            <video
+                              src={slide.image}
+                              autoPlay
+                              loop
+                              muted
+                              playsInline
+                              className="w-full h-full object-cover"
+                            />
+                          ) : (
+                            <Image
+                              src={slide.image || '/images/giftify/hero-banner.jpg'}
+                              alt={slide.title || 'Slide'}
+                              fill
+                              className="object-cover"
+                              unoptimized
+                            />
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
+                          <div className="absolute top-2 right-2 z-10">
+                            <span className="bg-black/70 backdrop-blur text-white text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border border-white/20">
+                              {isVideoFileOrUrl(slide.image, slide.mediaType) ? (
+                                <>
+                                  <Video className="w-2.5 h-2.5 text-[#F5C400]" /> Video Banner
+                                </>
+                              ) : (
+                                <>
+                                  <ImageIcon className="w-2.5 h-2.5 text-stone-300" /> Photo Banner
+                                </>
+                              )}
+                            </span>
+                          </div>
+                          <div className="absolute inset-0 p-4 flex flex-col justify-center text-white pointer-events-none">
                             <span className="bg-[#F5C400] text-black text-[9px] font-extrabold px-2 py-0.5 rounded-full w-max mb-1">
                               {slide.tag || 'Trending'}
                             </span>
@@ -1547,36 +1582,70 @@ export default function AdminDashboardPage() {
                           </div>
                           {uploadingSlideId === slide.id && (
                             <div className="absolute inset-0 bg-black/70 flex items-center justify-center text-white text-xs font-bold">
-                              Uploading New Image...
+                              Uploading Media...
                             </div>
                           )}
                         </div>
 
-                        {/* Replace Image Button */}
-                        <div className="flex items-center gap-3">
+                        {/* Replace Image / Video Button */}
+                        <div className="flex flex-wrap items-center gap-3">
                           <label className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#24332C] hover:bg-[#19241F] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors shadow-xs">
                             <Upload className="w-3.5 h-3.5" />
-                            <span>{uploadingSlideId === slide.id ? 'Uploading...' : 'Upload Slide Photo'}</span>
+                            <span>{uploadingSlideId === slide.id ? 'Uploading...' : 'Upload Photo / Video (MP4)'}</span>
                             <input
                               type="file"
-                              accept="image/*"
+                              accept="image/*,video/mp4,video/webm,video/quicktime,video/*"
                               className="hidden"
                               onChange={(e) => e.target.files?.[0] && handleSlideImageUpload(slide.id, e.target.files[0])}
                             />
                           </label>
-                          <span className="text-[11px] text-[#708579]">Or enter direct URL below</span>
+                          <span className="text-[11px] text-[#708579]">Photo or MP4/WebM video</span>
                         </div>
 
-                        <div>
+                        {/* Media type toggle and URL input */}
+                        <div className="space-y-1.5">
+                          <div className="flex items-center gap-4 text-xs font-medium text-stone-600">
+                            <span className="text-[10px] uppercase font-bold text-stone-500">Media Type:</span>
+                            <label className="inline-flex items-center gap-1 cursor-pointer">
+                              <input
+                                type="radio"
+                                name={`media-type-${slide.id}`}
+                                checked={slide.mediaType !== 'video' && !isVideoFileOrUrl(slide.image, slide.mediaType)}
+                                onChange={() => {
+                                  const updated = heroSlides.map((s) => (s.id === slide.id ? { ...s, mediaType: 'image' } : s));
+                                  setHeroSlides(updated);
+                                  try { localStorage.setItem('elvora_hero_slides', JSON.stringify(updated)); } catch {}
+                                }}
+                              />
+                              <span>🖼️ Photo</span>
+                            </label>
+                            <label className="inline-flex items-center gap-1 cursor-pointer">
+                              <input
+                                type="radio"
+                                name={`media-type-${slide.id}`}
+                                checked={slide.mediaType === 'video' || isVideoFileOrUrl(slide.image, slide.mediaType)}
+                                onChange={() => {
+                                  const updated = heroSlides.map((s) => (s.id === slide.id ? { ...s, mediaType: 'video' } : s));
+                                  setHeroSlides(updated);
+                                  try { localStorage.setItem('elvora_hero_slides', JSON.stringify(updated)); } catch {}
+                                }}
+                              />
+                              <span>🎥 Video</span>
+                            </label>
+                          </div>
                           <input
                             type="text"
                             value={slide.image || ''}
                             onChange={(e) => {
-                              const updated = heroSlides.map((s) => (s.id === slide.id ? { ...s, image: e.target.value } : s));
+                              const val = e.target.value;
+                              const isVid = isVideoFileOrUrl(val);
+                              const updated = heroSlides.map((s) =>
+                                s.id === slide.id ? { ...s, image: val, mediaType: isVid ? 'video' : s.mediaType || 'image' } : s
+                              );
                               setHeroSlides(updated);
                               try { localStorage.setItem('elvora_hero_slides', JSON.stringify(updated)); } catch {}
                             }}
-                            placeholder="Image URL (e.g. /images/...)"
+                            placeholder="Media URL (Image or MP4 Video, e.g. /images/... or https://...)"
                             className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm font-mono text-[11px]"
                           />
                         </div>

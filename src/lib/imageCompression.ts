@@ -1,8 +1,26 @@
 /**
+ * Checks if a given URL, filename, or data URI represents a playable video.
+ */
+export function isVideoFileOrUrl(urlOrName?: string, mediaType?: string): boolean {
+  if (mediaType === 'video') return true;
+  if (!urlOrName) return false;
+  const clean = urlOrName.split('?')[0].toLowerCase();
+  return (
+    clean.endsWith('.mp4') ||
+    clean.endsWith('.webm') ||
+    clean.endsWith('.mov') ||
+    clean.endsWith('.ogg') ||
+    clean.endsWith('.m4v') ||
+    clean.startsWith('data:video/')
+  );
+}
+
+/**
  * Client-side high performance image compression utility.
  * Resizes large smartphone & camera photos down to web dimensions (max 1920px)
  * and compresses them to high-efficiency JPEG (100-250KB) before uploading.
  * This guarantees uploads never exceed Vercel/serverless payload limits (4.5MB).
+ * Videos, SVGs, and GIFs are safely passed through without modification.
  */
 export async function compressImage(
   file: File,
@@ -10,9 +28,11 @@ export async function compressImage(
   maxHeight = 1080,
   quality = 0.82
 ): Promise<File> {
-  // Only compress raster images; pass through SVGs, GIFs, and non-images
+  // Only compress raster images; pass through videos, SVGs, GIFs, and non-images
   if (
     typeof window === 'undefined' ||
+    file.type.startsWith('video/') ||
+    /\.(mp4|webm|mov|ogg|m4v)$/i.test(file.name) ||
     !file.type.startsWith('image/') ||
     file.type === 'image/svg+xml' ||
     file.type === 'image/gif'

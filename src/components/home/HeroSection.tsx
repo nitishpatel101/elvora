@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Sparkles, ChevronRight, ChevronLeft } from 'lucide-react';
+import { isVideoFileOrUrl } from '@/lib/imageCompression';
 import defaultSlides from '../../../data/hero_slides.json';
 
 interface HeroSlide {
@@ -13,6 +14,7 @@ interface HeroSlide {
   cta: string;
   link: string;
   image: string;
+  mediaType?: 'image' | 'video';
   tag: string;
   highlight: string;
 }
@@ -71,27 +73,42 @@ export default function HeroSection({ initialSlides }: HeroSectionProps) {
   return (
     <section className="w-full relative overflow-hidden bg-stone-950">
       <div className="relative w-full aspect-[16/9] sm:aspect-[2.2/1] md:aspect-[2.8/1] lg:aspect-[3.2/1] min-h-[280px] sm:min-h-[380px] md:min-h-[460px] lg:min-h-[520px] overflow-hidden group bg-stone-900">
-        {/* Slides Images with Smooth Crossfade */}
-        {slides.map((s, idx) => (
-          <div
-            key={s.id || idx}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-            }`}
-          >
-            <Image
-              src={s.image}
-              alt={s.title}
-              fill
-              priority={idx === 0}
-              sizes="100vw"
-              className="object-cover object-center scale-100 group-hover:scale-[1.02] transition-transform duration-1000"
-              unoptimized
-            />
-            {/* Vignette Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent sm:from-black/75 sm:via-black/25" />
-          </div>
-        ))}
+        {/* Slides Images or Videos with Smooth Crossfade */}
+        {slides.map((s, idx) => {
+          const isVid = isVideoFileOrUrl(s.image, s.mediaType);
+          return (
+            <div
+              key={s.id || idx}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+                idx === activeIndex ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+              }`}
+            >
+              {isVid ? (
+                <video
+                  src={s.image}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="auto"
+                  className="w-full h-full object-cover object-center scale-100 group-hover:scale-[1.02] transition-transform duration-1000"
+                />
+              ) : (
+                <Image
+                  src={s.image || '/images/giftify/hero-banner.jpg'}
+                  alt={s.title}
+                  fill
+                  priority={idx === 0}
+                  sizes="100vw"
+                  className="object-cover object-center scale-100 group-hover:scale-[1.02] transition-transform duration-1000"
+                  unoptimized
+                />
+              )}
+              {/* Vignette Overlay */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/45 to-transparent sm:from-black/75 sm:via-black/25 pointer-events-none" />
+            </div>
+          );
+        })}
 
         {/* Slide Text Content */}
         <div className="relative z-20 h-full max-w-7xl mx-auto px-6 sm:px-12 md:px-16 flex flex-col justify-center text-white">
