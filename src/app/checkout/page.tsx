@@ -303,6 +303,7 @@ export default function CheckoutPage() {
                         src={item.product.images[0] || '/images/products/touch-distance-bracelet/hero.jpg'}
                         alt={item.product.name}
                         fill
+                        unoptimized
                         className="object-cover"
                       />
                     </div>

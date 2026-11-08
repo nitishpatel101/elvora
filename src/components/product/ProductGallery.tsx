@@ -70,6 +70,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
               fill
               sizes="80px"
               className="object-cover"
+              unoptimized
             />
           </button>
         ))}
@@ -97,6 +98,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
             className={`object-cover transition-transform duration-200 ${
               isZooming ? 'scale-150' : 'scale-100'
             }`}
+            unoptimized
             style={
               isZooming
                 ? {
@@ -168,6 +170,7 @@ export default function ProductGallery({ images, productName }: ProductGalleryPr
               fill
               sizes="(max-width: 1200px) 95vw, 1200px"
               className="object-contain"
+              unoptimized
             />
           </div>
         </div>
