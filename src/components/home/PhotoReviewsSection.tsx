@@ -159,7 +159,7 @@ export default function PhotoReviewsSection() {
   const activeReview = activeReviewIndex !== null ? REVIEWS[activeReviewIndex] : null;
 
   return (
-    <section className="bg-white py-14 border-b border-stone-200">
+    <section id="reviews" className="bg-white py-14 border-b border-stone-200 scroll-mt-20">
       <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title & Star Rating */}
         <div className="text-center mb-8">

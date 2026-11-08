@@ -98,7 +98,7 @@ export default function BestSellersSection({ initialProducts }: BestSellersSecti
   };
 
   return (
-    <section className="bg-white py-12 sm:py-16 border-b border-stone-200">
+    <section id="bestsellers" className="bg-white py-12 sm:py-16 border-b border-stone-200 scroll-mt-20">
       <div className="max-w-[1780px] mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header with Title and Circle Arrows */}
         <div className="flex items-center justify-between mb-8">

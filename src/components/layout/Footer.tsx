@@ -32,20 +32,16 @@ export default function Footer() {
           {/* Column 1: Collections */}
           <div className="space-y-3">
             <h4 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
-              Categories
+              Touch Collections
             </h4>
             <ul className="space-y-2 text-xs text-stone-400">
-              <li><Link href="/shop" className="hover:text-[#F5C400] transition-colors">Best Seller</Link></li>
-              <li><Link href="/shop?category=anniversary-gifts" className="hover:text-[#F5C400] transition-colors">Anniversary Gift</Link></li>
-              <li><Link href="/shop?category=birthday-gifts" className="hover:text-[#F5C400] transition-colors">Birthday Gifts</Link></li>
-              <li><Link href="/shop?category=couple-gifts" className="hover:text-[#F5C400] transition-colors">Couple gifts</Link></li>
-              <li><Link href="/shop?category=anniversary-gifts" className="hover:text-[#F5C400] transition-colors">Gift for Her</Link></li>
-              <li><Link href="/shop?category=couple-gifts" className="hover:text-[#F5C400] transition-colors">Valentine day Gift</Link></li>
-              <li><Link href="/shop?category=couple-gifts" className="hover:text-[#F5C400] transition-colors">Gift For Him</Link></li>
-              <li><Link href="/shop?category=personalized-gifts" className="hover:text-[#F5C400] transition-colors">3D Gifts</Link></li>
-              <li><Link href="/shop?category=personalized-gifts" className="hover:text-[#F5C400] transition-colors">Handmade Gifts</Link></li>
-              <li><Link href="/shop?category=personalized-gifts" className="hover:text-[#F5C400] transition-colors">Photo Frames</Link></li>
-              <li><Link href="/shop?category=couple-gifts" className="hover:text-[#F5C400] transition-colors">Photo Projection Gifts</Link></li>
+              <li><Link href="/shop" className="hover:text-[#F5C400] transition-colors">Smart Touch Bracelets</Link></li>
+              <li><Link href="/shop/couple-bracelets" className="hover:text-[#F5C400] transition-colors">Couple Bracelets Set</Link></li>
+              <li><Link href="/shop" className="hover:text-[#F5C400] transition-colors">Sun &amp; Moon Series</Link></li>
+              <li><Link href="/shop" className="hover:text-[#F5C400] transition-colors">Snake Chain Luxury Editions</Link></li>
+              <li><Link href="/shop" className="hover:text-[#F5C400] transition-colors">Milanese Mesh Editions</Link></li>
+              <li><Link href="/#bestsellers" className="hover:text-[#F5C400] transition-colors">Best Sellers</Link></li>
+              <li><Link href="/#reviews" className="hover:text-[#F5C400] transition-colors">Verified Customer Reviews</Link></li>
             </ul>
           </div>
 
@@ -108,7 +104,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-xs text-stone-400 leading-relaxed font-light">
-              ELVORA is your one-stop gifting and keepsake shop. Our sole aim is to make people happy with our beautiful customized gifts. ELVORA has all kinds of gifts that can be gifted on all occasions like Valentine&apos;s Day, Birthday, Anniversary, and Weddings.
+              ELVORA is India&apos;s luxury destination for smart touch distance bracelets and connected couple jewelry. Feel your partner&apos;s gentle touch, light and vibration in real-time across any distance.
             </p>
             <div className="flex items-center gap-4 text-stone-300 pt-2">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook" className="hover:text-[#EBB05D] transition-colors">

@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/context/CartContext';
 import { useAuth } from '@/context/AuthContext';
-import { Search, User, ShoppingBag, Menu, X, ChevronDown } from 'lucide-react';
+import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
   const { totalItems, setIsCartDrawerOpen } = useCart();
@@ -15,13 +15,11 @@ export default function Navbar() {
   const [searchQuery, setSearchQuery] = useState('');
 
   const navItems = [
-    { label: 'Anniversary Gifts', emoji: '💍', href: '/shop?category=anniversary-gifts' },
-    { label: 'Birthday Gifts', emoji: '🎂', href: '/shop?category=birthday-gifts' },
-    { label: 'Gifts by Occasion', emoji: '🎉', href: '/shop' },
-    { label: 'Gifts by Relationship', emoji: '💛', href: '/shop?category=couple-gifts' },
-    { label: 'Gifts by Type', emoji: '🎁', href: '/shop' },
-    { label: 'All Products', emoji: '📦', href: '/shop' },
-    { label: 'Trending', emoji: '🔥', href: '/shop?filter=trending' },
+    { label: 'Touch Bracelets', emoji: '✨', href: '/shop' },
+    { label: 'Best Sellers', emoji: '🔥', href: '/#bestsellers' },
+    { label: 'Customer Reviews', emoji: '⭐', href: '/#reviews' },
+    { label: 'Track Order', emoji: '📦', href: '/track-order' },
+    { label: 'Contact Us', emoji: '💬', href: '/contact' },
   ];
 
   return (
@@ -71,9 +69,6 @@ export default function Navbar() {
               >
                 <span>{item.emoji}</span>
                 <span>{item.label}</span>
-                {item.label.includes('Gifts') && (
-                  <ChevronDown className="w-3 h-3 text-stone-400" />
-                )}
               </Link>
             ))}
           </nav>
@@ -128,7 +123,7 @@ export default function Navbar() {
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search gifts, couple bracelets, crystal cube, necklace..."
+                placeholder="Search touch bracelets, couple gifts, smart jewelry..."
                 autoFocus
                 className="flex-1 bg-transparent text-xs text-white placeholder-stone-500 focus:outline-none"
               />
