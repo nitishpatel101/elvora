@@ -1,50 +1,34 @@
 [
   {
-    "id": "cat-couple-bracelets",
-    "slug": "couple-bracelets",
-    "name": "Couple Sets & Touch Bracelets",
-    "description": "Illuminated long-distance touch vibration bracelets, Milanese rope bands, and matching couple sets.",
-    "image": "/images/giftify/products/touch-vibration-bracelet.jpg",
-    "itemCount": 43
-  },
-  {
-    "id": "cat-necklaces",
-    "slug": "necklaces",
-    "name": "Touch Necklaces & Smart Lockets",
-    "description": "Connected smart necklaces, secret photo lockets, and sensory glowing pendants.",
-    "image": "/images/totwoo/col-touch-necklaces.jpg",
-    "itemCount": 5
-  },
-  {
     "id": "cat-01",
     "slug": "couple-gifts",
     "name": "Couple Gifts",
     "description": "Matching long-distance bracelets, couple bands, and romantic keepsakes for partners.",
     "image": "/images/giftify/products/touch-vibration-bracelet.jpg",
-    "itemCount": 43
+    "itemCount": 4
   },
   {
     "id": "cat-02",
     "slug": "anniversary-gifts",
     "name": "Anniversary Gifts",
-    "description": "Cherished personalized gifts and smart jewelry designed to celebrate love milestones.",
+    "description": "Cherished personalized gifts and oysters designed to celebrate wedding & dating milestones.",
     "image": "/images/giftify/products/love-pearl-necklace.jpg",
-    "itemCount": 10
+    "itemCount": 3
   },
   {
     "id": "cat-03",
     "slug": "personalized-gifts",
     "name": "Personalized Gifts",
-    "description": "Customized memory lockets, smart keepsakes, and engraved gifts.",
+    "description": "Customized crystal cubes, magic heat necklaces, and custom art engraved with your photos.",
     "image": "/images/giftify/products/heat-activated-necklace.jpg",
-    "itemCount": 10
+    "itemCount": 4
   },
   {
     "id": "cat-04",
     "slug": "birthday-gifts",
     "name": "Birthday Gifts",
-    "description": "Special birthday keepsakes and unforgettable couple surprises.",
+    "description": "Special birthday currency note keepsakes, lamps, and unforgettable birthday surprises.",
     "image": "/images/giftify/products/birthday-currency-note.jpg",
-    "itemCount": 5
+    "itemCount": 2
   }
 ]
