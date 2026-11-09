@@ -9,7 +9,6 @@ import AnnouncementBar from '@/components/layout/AnnouncementBar';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import RecentSalesPopup from '@/components/social/RecentSalesPopup';
-import FloatingWhatsAppPill from '@/components/common/FloatingWhatsAppPill';
 import CouponOfferPopup from '@/components/common/CouponOfferPopup';
 
 export const viewport: Viewport = {
@@ -123,7 +122,6 @@ export default function RootLayout({
                 <Navbar />
                 <main className="flex-grow">{children}</main>
                 <Footer />
-                <FloatingWhatsAppPill />
                 <CouponOfferPopup />
                 <RecentSalesPopup />
               </WishlistProvider>
