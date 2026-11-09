@@ -11,7 +11,6 @@ import {
   Copy,
   Check,
   Sparkles,
-  Smartphone,
   QrCode,
   Lock,
   ChevronRight,
@@ -273,8 +272,12 @@ export default function UPIPaymentScreen({
                 className="group relative flex items-center justify-between p-4 rounded-xl border-2 border-[#5f259f]/30 hover:border-[#5f259f] bg-gradient-to-r from-purple-50/60 to-white hover:bg-purple-50 transition-all shadow-xs hover:shadow-md cursor-pointer text-left active:scale-[0.98]"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#5f259f] flex items-center justify-center text-white font-bold text-sm shadow-sm flex-none">
-                    पे
+                  <div className="w-11 h-11 rounded-xl bg-[#5f259f] flex items-center justify-center p-1.5 shadow-sm flex-none">
+                    <img
+                      src="/images/payments/phonepe.svg"
+                      alt="PhonePe"
+                      className="w-8 h-8 object-contain"
+                    />
                   </div>
                   <div>
                     <span className="font-bold text-stone-900 text-sm block">PhonePe</span>
@@ -291,8 +294,12 @@ export default function UPIPaymentScreen({
                 className="group relative flex items-center justify-between p-4 rounded-xl border-2 border-blue-200 hover:border-blue-500 bg-gradient-to-r from-blue-50/50 to-white hover:bg-blue-50 transition-all shadow-xs hover:shadow-md cursor-pointer text-left active:scale-[0.98]"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center font-bold text-sm shadow-sm flex-none">
-                    <span className="text-[#4285F4] font-black text-base">G</span>
+                  <div className="w-11 h-11 rounded-xl bg-white border border-stone-200 flex items-center justify-center p-1.5 shadow-xs flex-none">
+                    <img
+                      src="/images/payments/gpay.svg"
+                      alt="Google Pay"
+                      className="w-7 h-7 object-contain"
+                    />
                   </div>
                   <div>
                     <span className="font-bold text-stone-900 text-sm block">Google Pay</span>
@@ -309,8 +316,12 @@ export default function UPIPaymentScreen({
                 className="group relative flex items-center justify-between p-4 rounded-xl border-2 border-[#00b9f5]/30 hover:border-[#00b9f5] bg-gradient-to-r from-sky-50/50 to-white hover:bg-sky-50 transition-all shadow-xs hover:shadow-md cursor-pointer text-left active:scale-[0.98]"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#002970] flex items-center justify-center text-[#00b9f5] font-black text-xs shadow-sm flex-none">
-                    Paytm
+                  <div className="w-11 h-11 rounded-xl bg-white border border-stone-200 flex items-center justify-center p-1.5 shadow-xs flex-none">
+                    <img
+                      src="/images/payments/paytm.svg"
+                      alt="Paytm"
+                      className="w-9 h-9 object-contain"
+                    />
                   </div>
                   <div>
                     <span className="font-bold text-stone-900 text-sm block">Paytm UPI</span>
@@ -327,8 +338,12 @@ export default function UPIPaymentScreen({
                 className="group relative flex items-center justify-between p-4 rounded-xl border-2 border-emerald-300 hover:border-emerald-600 bg-gradient-to-r from-emerald-50/50 to-white hover:bg-emerald-50 transition-all shadow-xs hover:shadow-md cursor-pointer text-left active:scale-[0.98]"
               >
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#24332C] flex items-center justify-center text-[#F5C400] font-bold text-sm shadow-sm flex-none">
-                    <Smartphone className="w-5 h-5" />
+                  <div className="w-11 h-11 rounded-xl bg-white border border-stone-200 flex items-center justify-center p-1.5 shadow-xs flex-none">
+                    <img
+                      src="/images/payments/upi.svg"
+                      alt="BHIM UPI"
+                      className="w-8 h-8 object-contain"
+                    />
                   </div>
                   <div>
                     <span className="font-bold text-stone-900 text-sm block">Any UPI App / BHIM</span>
