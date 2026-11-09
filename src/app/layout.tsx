@@ -8,7 +8,6 @@ import { AuthProvider } from '@/context/AuthContext';
 import AnnouncementBar from '@/components/layout/AnnouncementBar';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-import FloatingChatBubble from '@/components/common/FloatingChatBubble';
 import RecentSalesPopup from '@/components/social/RecentSalesPopup';
 import FloatingWhatsAppPill from '@/components/common/FloatingWhatsAppPill';
 
@@ -123,7 +122,6 @@ export default function RootLayout({
                 <Navbar />
                 <main className="flex-grow">{children}</main>
                 <Footer />
-                <FloatingChatBubble />
                 <FloatingWhatsAppPill />
                 <RecentSalesPopup />
               </WishlistProvider>

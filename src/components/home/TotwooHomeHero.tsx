@@ -19,10 +19,10 @@ export default function TotwooHomeHero() {
   useEffect(() => {
     // Attempt autoplay
     if (videoDesktopRef.current) {
-      videoDesktopRef.current.play().catch(() => {});
+      videoDesktopRef.current.play().catch(() => { });
     }
     if (videoMobileRef.current) {
-      videoMobileRef.current.play().catch(() => {});
+      videoMobileRef.current.play().catch(() => { });
     }
   }, []);
 
@@ -41,7 +41,6 @@ export default function TotwooHomeHero() {
           muted={isMuted}
           playsInline
           preload="auto"
-          onLoadedData={() => setIsVideoLoaded(true)}
           poster="https://cdn.shopify.com/s/files/1/0415/3855/1967/files/Totwoo_love_connect-new-ver-fallback-pc.webp?v=1775198420"
         >
           <source
@@ -59,7 +58,6 @@ export default function TotwooHomeHero() {
           muted={isMuted}
           playsInline
           preload="auto"
-          onLoadedData={() => setIsVideoLoaded(true)}
           poster="https://cdn.shopify.com/s/files/1/0415/3855/1967/files/Totwoo_love_connect-new-ver-fallback-mobile.webp?v=1775213080"
         >
           <source

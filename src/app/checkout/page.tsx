@@ -15,7 +15,7 @@ import {
 
 export default function CheckoutPage() {
   const router = useRouter();
-  const { items, subtotalInr, clearCart } = useCart();
+  const { items, subtotalInr, clearCart, isLoaded } = useCart();
   const { currency, format } = useCurrency();
   const { customer } = useAuth();
 
@@ -39,9 +39,34 @@ export default function CheckoutPage() {
   const shippingInr = isDomestic ? 0 : 1299;
   const grandTotalInr = subtotalInr + shippingInr;
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
     setError(null);
+
+    if (name === 'pincode') {
+      const pin = value.replace(/\D/g, '').slice(0, 6);
+      setFormData((prev) => ({ ...prev, pincode: pin }));
+
+      if (pin.length === 6) {
+        try {
+          const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+          const data = await res.json();
+          if (Array.isArray(data) && data[0]?.Status === 'Success' && data[0]?.PostOffice?.length > 0) {
+            const po = data[0].PostOffice[0];
+            setFormData((prev) => ({
+              ...prev,
+              city: po.District || po.Block || prev.city,
+              state: po.State || prev.state,
+            }));
+          }
+        } catch {
+          // Fallback to manual entry
+        }
+      }
+      return;
+    }
+
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleCheckoutSubmit = async (e: React.FormEvent) => {
@@ -93,6 +118,15 @@ export default function CheckoutPage() {
       setLoading(false);
     }
   };
+
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-[#FAF8F5] py-20 flex flex-col items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-[#24332C]" />
+        <p className="text-xs text-stone-500 mt-3 font-medium">Loading checkout details...</p>
+      </div>
+    );
+  }
 
   if (items.length === 0) {
     return (

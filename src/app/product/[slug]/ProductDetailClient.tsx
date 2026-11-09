@@ -17,6 +17,11 @@ import {
   ChevronDown,
   Star,
   Heart,
+  X,
+  Lock,
+  Loader2,
+  AlertCircle,
+  ShieldCheck,
 } from 'lucide-react';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -45,6 +50,24 @@ export default function ProductDetailClient({
   const [openAccordion, setOpenAccordion] = useState<string>('details');
   const [showIncentive, setShowIncentive] = useState(true);
 
+  // Direct Address & Express Checkout Modal State (No Cart)
+  const [isAddressModalOpen, setIsAddressModalOpen] = useState(false);
+  const [addressLoading, setAddressLoading] = useState(false);
+  const [addressError, setAddressError] = useState<string | null>(null);
+  const [isLookingUpPin, setIsLookingUpPin] = useState(false);
+
+  const [addressData, setAddressData] = useState({
+    fullName: '',
+    phone: '',
+    email: '',
+    addressLine1: '',
+    addressLine2: '',
+    city: '',
+    state: '',
+    pincode: '',
+    country: 'India',
+  });
+
   const inWish = isInWishlist(product.id);
 
   const savingsAmount =
@@ -58,8 +81,111 @@ export default function ProductDetailClient({
   };
 
   const handleBuyNow = () => {
-    addToCart(product, 1, selectedVariant);
-    router.push('/checkout');
+    setAddressError(null);
+    if (whatsappPhone && !addressData.phone) {
+      setAddressData((prev) => ({ ...prev, phone: whatsappPhone }));
+    }
+    setIsAddressModalOpen(true);
+  };
+
+  const handlePincodeChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const pin = e.target.value.replace(/\D/g, '').slice(0, 6);
+    setAddressData((prev) => ({ ...prev, pincode: pin }));
+
+    if (pin.length === 6) {
+      setIsLookingUpPin(true);
+      try {
+        const res = await fetch(`https://api.postalpincode.in/pincode/${pin}`);
+        const data = await res.json();
+        if (Array.isArray(data) && data[0]?.Status === 'Success' && data[0]?.PostOffice?.length > 0) {
+          const po = data[0].PostOffice[0];
+          setAddressData((prev) => ({
+            ...prev,
+            city: po.District || po.Block || prev.city,
+            state: po.State || prev.state,
+          }));
+        }
+      } catch {
+        // Fallback to manual entry
+      } finally {
+        setIsLookingUpPin(false);
+      }
+    }
+  };
+
+  const handleDirectAddressSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setAddressError(null);
+
+    const cleanPhone = addressData.phone.replace(/\D/g, '');
+    if (!addressData.fullName.trim()) {
+      setAddressError('Please enter your full name.');
+      return;
+    }
+    if (cleanPhone.length < 10) {
+      setAddressError('Please enter a valid 10-digit mobile number.');
+      return;
+    }
+    if (!addressData.addressLine1.trim()) {
+      setAddressError('Please enter your street/house/flat address.');
+      return;
+    }
+    if (!addressData.pincode.trim() || addressData.pincode.length < 6) {
+      setAddressError('Please enter a valid 6-digit delivery PIN code.');
+      return;
+    }
+    if (!addressData.city.trim()) {
+      setAddressError('Please enter your city.');
+      return;
+    }
+    if (!addressData.state.trim()) {
+      setAddressError('Please enter your state.');
+      return;
+    }
+
+    setAddressLoading(true);
+
+    try {
+      const res = await fetch('/api/payment/create-order', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: [
+            {
+              productId: product.id,
+              quantity: 1,
+              selectedVariant: selectedVariant,
+              selectedColour: product.colours?.[0] || 'Default',
+            },
+          ],
+          shippingAddress: {
+            fullName: addressData.fullName.trim(),
+            phone: cleanPhone,
+            email: addressData.email.trim() || `${cleanPhone}@customer.elvora.com`,
+            addressLine1: addressData.addressLine1.trim(),
+            addressLine2: addressData.addressLine2.trim(),
+            city: addressData.city.trim(),
+            state: addressData.state.trim(),
+            pincode: addressData.pincode.trim(),
+            country: 'India',
+          },
+          currency: 'INR',
+          paymentMethod: 'UPI_QR',
+          paymentGateway: 'MANUAL_UPI',
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok || !data.orderId) {
+        throw new Error(data.error || 'Failed to initialize order');
+      }
+
+      // Navigate directly to the dedicated UPI QR payment screen
+      router.push(`/checkout/pay/${data.orderId}`);
+    } catch (err) {
+      setAddressError(err instanceof Error ? err.message : 'Error creating order. Please try again.');
+      setAddressLoading(false);
+    }
   };
 
   const whatsappOrderUrl = `https://wa.me/916386645203?text=Hi%20ELVORA,%20I%20want%20to%20order%20*${encodeURIComponent(
@@ -235,7 +361,7 @@ export default function ProductDetailClient({
                   href={whatsappOrderUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#25D366] hover:bg-[#20BD5A] text-white py-3 px-4 rounded-xl text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center"
+                  className="bg-[#25D366] hover:bg-[#20BD5A] text-white py-3 px-4 rounded-full text-xs font-bold uppercase tracking-wider flex items-center justify-center gap-1.5 transition-colors shadow-sm text-center"
                 >
                   <WhatsAppIcon className="w-4 h-4 shrink-0" />
                   <span className="truncate">Order on WhatsApp</span>
@@ -357,6 +483,242 @@ export default function ProductDetailClient({
           <span>Buy Now</span>
         </button>
       </div>
+
+      {/* Direct Express Order & Delivery Address Modal (Instant Checkout, No Cart) */}
+      {isAddressModalOpen && (
+        <div className="fixed inset-0 z-50 overflow-y-auto bg-black/75 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4">
+          {/* Backdrop Click Dismiss */}
+          <div
+            className="fixed inset-0 -z-10"
+            onClick={() => !addressLoading && setIsAddressModalOpen(false)}
+          />
+
+          <div className="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden border border-stone-200 my-auto animate-in fade-in zoom-in-95 duration-200">
+            {/* Header */}
+            <div className="bg-[#111111] text-white px-5 py-4 flex items-center justify-between">
+              <div className="flex items-center gap-2.5">
+                <div className="w-8 h-8 rounded-full bg-[#F5C400]/20 flex items-center justify-center text-[#F5C400]">
+                  <Zap className="w-4 h-4 fill-current" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-extrabold tracking-wide uppercase">
+                    Delivery Address
+                  </h3>
+                  <p className="text-[11px] text-stone-300">
+                    Instant Checkout &bull; Free Express Delivery across India
+                  </p>
+                </div>
+              </div>
+
+              <button
+                onClick={() => !addressLoading && setIsAddressModalOpen(false)}
+                className="p-1.5 rounded-full text-stone-400 hover:text-white hover:bg-white/10 transition-colors"
+                aria-label="Close"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Product Summary Mini Card */}
+            <div className="p-4 bg-stone-50 border-b border-stone-200 flex items-center gap-3">
+              <div className="relative w-14 h-14 rounded-xl overflow-hidden bg-white border border-stone-200 shrink-0">
+                <Image
+                  src={product.images[0] || '/images/giftify/products/touch-vibration-bracelet.jpg'}
+                  alt={product.name}
+                  fill
+                  className="object-cover"
+                  unoptimized
+                />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h4 className="text-xs font-bold text-stone-900 truncate">
+                  {product.name}
+                </h4>
+                <div className="flex items-center gap-2 mt-0.5">
+                  <span className="text-[11px] font-semibold text-stone-600 bg-stone-200/80 px-2 py-0.5 rounded-md truncate">
+                    {selectedVariant}
+                  </span>
+                  <span className="text-xs font-extrabold text-stone-900">
+                    ₹{product.price.toLocaleString('en-IN')}.00
+                  </span>
+                </div>
+                <p className="text-[10px] text-emerald-700 font-bold flex items-center gap-1 mt-0.5">
+                  <span>✓</span> Free Express Delivery Across India (3-5 Days)
+                </p>
+              </div>
+            </div>
+
+            {/* Address Form */}
+            <form onSubmit={handleDirectAddressSubmit} className="p-5 space-y-3.5 max-h-[68vh] overflow-y-auto">
+              {addressError && (
+                <div className="p-3 bg-red-50 border border-red-200 rounded-xl text-red-700 text-xs font-medium flex items-center gap-2">
+                  <AlertCircle className="w-4 h-4 shrink-0" />
+                  <span>{addressError}</span>
+                </div>
+              )}
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-1">
+                  Full Name *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={addressData.fullName}
+                  onChange={(e) => setAddressData({ ...addressData, fullName: e.target.value })}
+                  placeholder="e.g. Rahul Sharma"
+                  className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-black focus:outline-none bg-stone-50/50"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-1">
+                    WhatsApp / Mobile Number *
+                  </label>
+                  <div className="flex items-center border border-stone-300 rounded-xl overflow-hidden focus-within:border-black bg-stone-50/50">
+                    <span className="px-3 text-xs text-stone-500 font-mono font-medium">+91</span>
+                    <input
+                      type="tel"
+                      required
+                      maxLength={10}
+                      value={addressData.phone}
+                      onChange={(e) => setAddressData({ ...addressData, phone: e.target.value.replace(/\D/g, '') })}
+                      placeholder="10-digit number"
+                      className="w-full text-xs py-2.5 pr-3 bg-transparent focus:outline-none"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-1">
+                    Email (Optional)
+                  </label>
+                  <input
+                    type="email"
+                    value={addressData.email}
+                    onChange={(e) => setAddressData({ ...addressData, email: e.target.value })}
+                    placeholder="For order receipt"
+                    className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-black focus:outline-none bg-stone-50/50"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-1">
+                  House / Flat No. & Street Address *
+                </label>
+                <input
+                  type="text"
+                  required
+                  value={addressData.addressLine1}
+                  onChange={(e) => setAddressData({ ...addressData, addressLine1: e.target.value })}
+                  placeholder="Flat 402, Building Name, MG Road"
+                  className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-black focus:outline-none bg-stone-50/50"
+                />
+              </div>
+
+              <div>
+                <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-1">
+                  Area / Landmark (Optional)
+                </label>
+                <input
+                  type="text"
+                  value={addressData.addressLine2}
+                  onChange={(e) => setAddressData({ ...addressData, addressLine2: e.target.value })}
+                  placeholder="Near City Mall, Sector 15"
+                  className="w-full text-xs px-3.5 py-2.5 rounded-xl border border-stone-300 focus:border-black focus:outline-none bg-stone-50/50"
+                />
+              </div>
+
+              <div className="grid grid-cols-3 gap-2.5">
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-1">
+                    PIN Code * {isLookingUpPin && <span className="text-[9px] text-[#F5C400]">⏳</span>}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    maxLength={6}
+                    value={addressData.pincode}
+                    onChange={handlePincodeChange}
+                    placeholder="PIN Code"
+                    className="w-full text-xs px-3 py-2.5 rounded-xl border border-stone-300 focus:border-black focus:outline-none bg-stone-50/50 font-mono"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-1">
+                    City *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={addressData.city}
+                    onChange={(e) => setAddressData({ ...addressData, city: e.target.value })}
+                    placeholder="City"
+                    className="w-full text-xs px-3 py-2.5 rounded-xl border border-stone-300 focus:border-black focus:outline-none bg-stone-50/50"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-[11px] font-bold uppercase tracking-wider text-stone-700 mb-1">
+                    State *
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={addressData.state}
+                    onChange={(e) => setAddressData({ ...addressData, state: e.target.value })}
+                    placeholder="State"
+                    className="w-full text-xs px-3 py-2.5 rounded-xl border border-stone-300 focus:border-black focus:outline-none bg-stone-50/50"
+                  />
+                </div>
+              </div>
+
+              {/* Payment Guarantee Notice */}
+              <div className="p-3 bg-emerald-50/70 border border-emerald-200/70 rounded-xl space-y-1">
+                <div className="flex items-center justify-between text-xs font-bold text-emerald-950">
+                  <span className="flex items-center gap-1.5">
+                    <ShieldCheck className="w-4 h-4 text-emerald-600" />
+                    Instant UPI QR Payment
+                  </span>
+                  <span className="text-emerald-700 text-[11px] uppercase tracking-wider font-extrabold">
+                    100% Verified
+                  </span>
+                </div>
+                <p className="text-[11px] text-stone-600 leading-tight">
+                  Google Pay, PhonePe, Paytm, BHIM, UPI ID & Cards supported with instant order confirmation.
+                </p>
+              </div>
+
+              {/* Submit CTA */}
+              <div className="pt-2">
+                <button
+                  type="submit"
+                  disabled={addressLoading}
+                  className="w-full bg-[#111111] hover:bg-black text-white py-3.5 px-6 rounded-xl text-xs sm:text-sm font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-all shadow-lg active:scale-98 disabled:opacity-60 cursor-pointer"
+                >
+                  {addressLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin text-[#F5C400]" />
+                      <span>Creating Order...</span>
+                    </>
+                  ) : (
+                    <>
+                      <Lock className="w-4 h-4 text-[#F5C400]" />
+                      <span>Proceed to Pay ₹{product.price.toLocaleString('en-IN')} (UPI / QR)</span>
+                    </>
+                  )}
+                </button>
+                <p className="text-[10px] text-stone-400 text-center mt-2">
+                  🔒 Encrypted connection &bull; Free express delivery &bull; No cart required
+                </p>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

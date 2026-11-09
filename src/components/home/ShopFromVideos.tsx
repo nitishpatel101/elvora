@@ -291,11 +291,10 @@ export default function ShopFromVideos() {
               >
                 <div className="w-10 h-10 rounded-full bg-black/50 backdrop-blur-md flex items-center justify-center group-hover:scale-110 transition-transform">
                   <Heart
-                    className={`w-5 h-5 ${
-                      likedReels[REELS[activeModalReelIndex].id]
-                        ? 'fill-rose-500 text-rose-500'
-                        : 'text-white'
-                    }`}
+                    className={`w-5 h-5 ${likedReels[REELS[activeModalReelIndex].id]
+                      ? 'fill-rose-500 text-rose-500'
+                      : 'text-white'
+                      }`}
                   />
                 </div>
                 <span className="text-[10px] font-semibold">
@@ -360,7 +359,7 @@ export default function ShopFromVideos() {
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-[#25D366] hover:bg-[#20ba59] text-white p-3 rounded-xl flex items-center justify-center shadow-lg transition-transform hover:scale-105"
+                  className="bg-[#25D366] hover:bg-[#20ba59] text-white p-3 rounded-full flex items-center justify-center shadow-lg transition-transform hover:scale-105"
                   aria-label="Order on WhatsApp"
                 >
                   <MessageCircle className="w-5 h-5 fill-white" />

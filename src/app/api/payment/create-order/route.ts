@@ -54,9 +54,9 @@ export async function POST(req: Request) {
       });
     }
 
-    // Paid Shipping Calculation (Strictly paid, free shipping is prohibited)
+    // Free Domestic Express Shipping for India
     const isDomestic = shippingAddress.country?.toLowerCase() === 'india' || !shippingAddress.country;
-    const shippingChargeInr = isDomestic ? 99 : 1299;
+    const shippingChargeInr = isDomestic ? 0 : 1299;
     const totalAmountInr = subtotalInr + shippingChargeInr;
 
     // Generate unique internal Order ID
