@@ -19,7 +19,7 @@ interface CartContextType {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-const DOMESTIC_SHIPPING_INR = 99; // Standard paid express shipping
+const DOMESTIC_SHIPPING_INR = 0; // 100% Free Express Delivery Across India
 
 export function CartProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<CartItem[]>([]);
@@ -83,7 +83,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       ];
     });
 
-    setIsCartDrawerOpen(true);
+    // Do NOT open side drawer - user requested dedicated full page order flow
   };
 
   const updateQuantity = (productId: string, quantity: number, selectedVariant?: string) => {

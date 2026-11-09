@@ -1,5 +1,5 @@
-import { getAllProducts, getHeroSlides } from '@/lib/db';
-import HeroSection from '@/components/home/HeroSection';
+import { getAllProducts } from '@/lib/db';
+import TotwooHomeHero from '@/components/home/TotwooHomeHero';
 import TotwooShowcaseSection from '@/components/home/TotwooShowcaseSection';
 import BestSellersSection from '@/components/home/BestSellersSection';
 import PhotoReviewsSection from '@/components/home/PhotoReviewsSection';
@@ -9,14 +9,13 @@ export const revalidate = 0; // Dynamic products from database
 
 export default async function HomePage() {
   const products = await getAllProducts(false);
-  const heroSlides = await getHeroSlides();
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      {/* 1. Hero Section: Feel Love Close To You & Video Banners */}
-      <HeroSection initialSlides={heroSlides} />
+      {/* 1. Official Totwoo Video Hero: Love Knows No Distance */}
+      <TotwooHomeHero />
 
-      {/* 2. Totwoo Reference Interactive Showcase (Connected Features, Collections Slider, Spotlights) */}
+      {/* 2. Totwoo Interactive Showcase (Synced Touch, Call Alert, Anniversary, Collections) */}
       <TotwooShowcaseSection />
 
       {/* 3. Best Sellers Carousel */}

@@ -8,7 +8,7 @@ import { useCurrency } from '@/context/CurrencyContext';
 import { Trash2, Plus, Minus, ArrowRight, ShieldCheck, Lock, ShoppingBag } from 'lucide-react';
 
 export default function CartPage() {
-  const { items, updateQuantity, removeFromCart, subtotalInr, shippingInr, grandTotalInr } =
+  const { items, updateQuantity, removeFromCart, subtotalInr, grandTotalInr } =
     useCart();
   const { format } = useCurrency();
 
@@ -137,10 +137,10 @@ export default function CartPage() {
 
                 <div className="flex justify-between text-[#5C5852]">
                   <div>
-                    <span>Standard Express Shipping</span>
-                    <span className="block text-[10px] text-[#8A857D]">Paid insured courier</span>
+                    <span>Shipping</span>
+                    <span className="block text-[10px] text-emerald-700 font-medium">Free Express Delivery Across India</span>
                   </div>
-                  <span className="text-[#181818] font-medium">{format(shippingInr)}</span>
+                  <span className="text-emerald-700 font-bold">FREE</span>
                 </div>
 
                 <div className="pt-3 border-t border-[#EAE5DE] flex justify-between items-baseline text-sm font-light text-[#181818]">

@@ -34,9 +34,9 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Paid shipping logic
+  // Free shipping logic for India
   const isDomestic = formData.country.toLowerCase() === 'india' || !formData.country;
-  const shippingInr = isDomestic ? 99 : 1299;
+  const shippingInr = isDomestic ? 0 : 1299;
   const grandTotalInr = subtotalInr + shippingInr;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
@@ -273,7 +273,7 @@ export default function CheckoutPage() {
                       onChange={handleChange}
                       className="w-full bg-[#FAF8F5] border border-[#EAE5DE] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
                     >
-                      <option value="India">India (₹99 Express Courier)</option>
+                      <option value="India">India (FREE Express Courier - ₹0)</option>
                       <option value="United States">United States ($15 DHL Express)</option>
                       <option value="United Kingdom">United Kingdom ($15 DHL Express)</option>
                       <option value="United Arab Emirates">United Arab Emirates ($15 DHL)</option>
@@ -331,12 +331,12 @@ export default function CheckoutPage() {
 
                 <div className="flex justify-between text-[#6B655D]">
                   <div>
-                    <span>Insured Paid Express Shipping</span>
-                    <span className="block text-[10px] text-[#8C867E]">
-                      {isDomestic ? 'Domestic Express Courier' : 'International DHL Air'}
+                    <span>Shipping</span>
+                    <span className="block text-[10px] text-emerald-700 font-medium">
+                      {isDomestic ? 'FREE Insured Express Delivery Across India' : 'International DHL Air'}
                     </span>
                   </div>
-                  <span className="text-[#111111] font-medium">{format(shippingInr)}</span>
+                  <span className="text-emerald-700 font-bold">{isDomestic ? 'FREE' : format(shippingInr)}</span>
                 </div>
 
                 {currency === 'USD' && (

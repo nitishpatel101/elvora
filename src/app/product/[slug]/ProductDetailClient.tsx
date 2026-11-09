@@ -54,6 +54,7 @@ export default function ProductDetailClient({
 
   const handleAddToCart = () => {
     addToCart(product, 1, selectedVariant);
+    router.push('/cart');
   };
 
   const handleBuyNow = () => {

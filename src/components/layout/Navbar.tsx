@@ -8,7 +8,7 @@ import { useAuth } from '@/context/AuthContext';
 import { Search, User, ShoppingBag, Menu, X } from 'lucide-react';
 
 export default function Navbar() {
-  const { totalItems, setIsCartDrawerOpen } = useCart();
+  const { totalItems } = useCart();
   const { isCustomerLoggedIn } = useAuth();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -91,8 +91,8 @@ export default function Navbar() {
               <User className="w-5 h-5" />
             </Link>
 
-            <button
-              onClick={() => setIsCartDrawerOpen(true)}
+            <Link
+              href="/cart"
               className="relative p-2 text-stone-300 hover:text-[#EBB05D] transition-colors"
               aria-label="Cart"
             >
@@ -102,7 +102,7 @@ export default function Navbar() {
                   {totalItems}
                 </span>
               )}
-            </button>
+            </Link>
           </div>
         </div>
 
