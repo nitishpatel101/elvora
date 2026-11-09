@@ -9,7 +9,6 @@ import AnnouncementBar from '@/components/layout/AnnouncementBar';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import RecentSalesPopup from '@/components/social/RecentSalesPopup';
-import CouponOfferPopup from '@/components/common/CouponOfferPopup';
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -122,7 +121,6 @@ export default function RootLayout({
                 <Navbar />
                 <main className="flex-grow">{children}</main>
                 <Footer />
-                <CouponOfferPopup />
                 <RecentSalesPopup />
               </WishlistProvider>
             </CartProvider>
