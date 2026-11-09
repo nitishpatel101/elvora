@@ -26,17 +26,17 @@ export default async function ShopPage({
             priority
             className="object-cover object-center"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/40 to-transparent flex items-center p-6 sm:p-10 lg:p-14">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/25 to-transparent sm:bg-gradient-to-r sm:from-black/85 sm:via-black/40 sm:to-transparent flex items-end sm:items-center p-4 sm:p-10 lg:p-14 pb-4 sm:pb-10">
             <div className="max-w-lg text-white">
-              <div className="flex items-center gap-2.5 mb-2.5">
-                <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-[#E5B54F]/70 bg-black/60 backdrop-blur-md flex-none shadow-md">
-                  <Image src="/images/logo-transparent.png" alt="ELVORA" fill className="object-contain p-1" />
+              <div className="flex items-center gap-2 sm:gap-2.5 mb-1 sm:mb-2.5">
+                <div className="relative w-6 h-6 sm:w-9 sm:h-9 rounded-full overflow-hidden border border-[#E5B54F]/70 bg-black/60 backdrop-blur-md flex-none shadow-md">
+                  <Image src="/images/logo-transparent.png" alt="ELVORA" fill className="object-contain p-0.5 sm:p-1" />
                 </div>
-                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[#E5B54F]">
+                <span className="text-[9px] sm:text-xs font-bold uppercase tracking-[0.22em] text-[#E5B54F]">
                   Long Distance Bracelets
                 </span>
               </div>
-              <h1 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-normal leading-tight mb-2 sm:mb-3">
+              <h1 className="font-serif text-lg sm:text-3xl lg:text-4xl font-normal leading-tight mb-1 sm:mb-3">
                 Feel Love Close To You
               </h1>
               <p className="text-xs sm:text-sm text-stone-200 font-light leading-relaxed hidden sm:block">

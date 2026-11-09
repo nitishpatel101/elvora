@@ -22,6 +22,8 @@ import {
   Loader2,
   AlertCircle,
   ShieldCheck,
+  Tag,
+  Check,
 } from 'lucide-react';
 
 const WhatsAppIcon = ({ className }: { className?: string }) => (
@@ -67,6 +69,36 @@ export default function ProductDetailClient({
     pincode: '',
     country: 'India',
   });
+
+  // Coupon Code State (LOVE300 = Flat ₹300 OFF)
+  const [couponCode, setCouponCode] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>('LOVE300'); // Auto-applied by default for user delight!
+  const [couponError, setCouponError] = useState<string | null>(null);
+
+  const couponDiscount = appliedCoupon ? 300 : 0;
+  const payablePrice = Math.max(0, product.price - couponDiscount);
+
+  const handleApplyCoupon = (codeToApply?: string) => {
+    const code = (codeToApply || couponCode).trim().toUpperCase();
+    if (!code) {
+      setCouponError('Please enter a coupon code.');
+      return;
+    }
+    const valid = ['LOVE300', 'ELVORA300', 'SAVE300'];
+    if (valid.includes(code)) {
+      setAppliedCoupon(code);
+      setCouponCode(code);
+      setCouponError(null);
+    } else {
+      setCouponError('Invalid code. Use "LOVE300" for Flat ₹300 OFF.');
+    }
+  };
+
+  const handleRemoveCoupon = () => {
+    setAppliedCoupon(null);
+    setCouponCode('');
+    setCouponError(null);
+  };
 
   const inWish = isInWishlist(product.id);
 
@@ -169,6 +201,8 @@ export default function ProductDetailClient({
             pincode: addressData.pincode.trim(),
             country: 'India',
           },
+          couponCode: appliedCoupon || undefined,
+          discount: couponDiscount,
           currency: 'INR',
           paymentMethod: 'UPI_QR',
           paymentGateway: 'MANUAL_UPI',
@@ -676,6 +710,102 @@ export default function ProductDetailClient({
                 </div>
               </div>
 
+              {/* Coupon Code Section: Flat ₹300 OFF */}
+              <div className="p-3 bg-stone-50 border border-stone-200 rounded-xl space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-stone-700 flex items-center gap-1.5">
+                    <Tag className="w-3.5 h-3.5 text-[#F5C400]" />
+                    Coupon Code (Flat ₹300 OFF)
+                  </span>
+                  {appliedCoupon && (
+                    <span className="text-[11px] font-extrabold text-emerald-700">
+                      -₹300.00 SAVED
+                    </span>
+                  )}
+                </div>
+
+                {appliedCoupon ? (
+                  <div className="flex items-center justify-between bg-emerald-50 border border-emerald-300 rounded-lg px-3 py-2 text-xs">
+                    <div className="flex items-center gap-2">
+                      <Check className="w-4 h-4 text-emerald-600 stroke-[3]" />
+                      <span className="font-mono font-bold text-emerald-800">
+                        {appliedCoupon}
+                      </span>
+                      <span className="text-emerald-700 font-medium">applied (-₹300)</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={handleRemoveCoupon}
+                      className="text-stone-400 hover:text-red-600 text-xs font-bold underline cursor-pointer"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={couponCode}
+                        onChange={(e) => {
+                          setCouponCode(e.target.value.toUpperCase());
+                          setCouponError(null);
+                        }}
+                        placeholder="Enter coupon code (e.g. LOVE300)"
+                        className="flex-1 text-xs px-3 py-2 rounded-lg border border-stone-300 focus:border-black focus:outline-none uppercase font-mono"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleApplyCoupon()}
+                        className="bg-black text-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-wider hover:bg-stone-800 active:scale-95 cursor-pointer"
+                      >
+                        Apply
+                      </button>
+                    </div>
+
+                    {/* Quick 1-Click Apply */}
+                    <button
+                      type="button"
+                      onClick={() => handleApplyCoupon('LOVE300')}
+                      className="mt-2 text-[11px] text-stone-700 bg-amber-50 hover:bg-amber-100 border border-amber-300/80 rounded-lg px-2.5 py-1 flex items-center gap-1.5 transition-colors text-left cursor-pointer"
+                    >
+                      <span>🏷️</span>
+                      <span>Tap to apply <strong className="text-stone-900 font-bold">LOVE300</strong> for Flat ₹300 OFF!</span>
+                    </button>
+
+                    {couponError && (
+                      <p className="text-[11px] text-red-600 font-medium mt-1">
+                        {couponError}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+
+              {/* Price Breakdown */}
+              <div className="p-3 bg-stone-100/70 rounded-xl space-y-1 text-xs">
+                <div className="flex justify-between text-stone-600">
+                  <span>Product Price:</span>
+                  <span>Rs. {product.price.toLocaleString('en-IN')}.00</span>
+                </div>
+                {appliedCoupon && (
+                  <div className="flex justify-between text-emerald-700 font-semibold">
+                    <span>Coupon Discount ({appliedCoupon}):</span>
+                    <span>- Rs. 300.00</span>
+                  </div>
+                )}
+                <div className="flex justify-between text-stone-600">
+                  <span>Express Delivery:</span>
+                  <span className="text-emerald-700 font-bold uppercase text-[11px]">Free</span>
+                </div>
+                <div className="flex justify-between text-sm font-extrabold text-stone-900 pt-1.5 border-t border-stone-200">
+                  <span>Total Payable:</span>
+                  <span className="text-base text-stone-950 font-black">
+                    Rs. {payablePrice.toLocaleString('en-IN')}.00
+                  </span>
+                </div>
+              </div>
+
               {/* Payment Guarantee Notice */}
               <div className="p-3 bg-emerald-50/70 border border-emerald-200/70 rounded-xl space-y-1">
                 <div className="flex items-center justify-between text-xs font-bold text-emerald-950">
@@ -707,7 +837,7 @@ export default function ProductDetailClient({
                   ) : (
                     <>
                       <Lock className="w-4 h-4 text-[#F5C400]" />
-                      <span>Proceed to Pay ₹{product.price.toLocaleString('en-IN')} (UPI / QR)</span>
+                      <span>Proceed to Pay ₹{payablePrice.toLocaleString('en-IN')} (UPI / QR)</span>
                     </>
                   )}
                 </button>

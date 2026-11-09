@@ -1,128 +1,194 @@
 [
   {
     "id": "rev-g-1",
-    "productId": "elv-prod-01",
+    "productId": "",
     "productName": "Long Distance Touch Vibration Bracelet for Couples",
     "authorName": "Ananya & Kabir",
     "city": "Mumbai",
     "rating": 5,
     "title": "Looks so classy on the wrist!",
     "content": "Bracelets look super premium and aesthetic. Vibrating touch feature works flawlessly without any lag across Mumbai and Delhi.",
-    "images": ["/images/reviews/rating-1.jpg"],
+    "images": [
+      "/images/reviews/rating-1.jpg"
+    ],
     "verified": true,
     "timeAgo": "1 day ago",
     "createdAt": "2026-11-06T18:00:00Z"
   },
   {
     "id": "rev-g-2",
-    "productId": "elv-prod-01",
+    "productId": "",
     "productName": "Long Distance Touch Vibration Bracelet for Couples",
     "authorName": "Priya Sharma",
     "city": "Bengaluru",
     "rating": 5,
     "title": "Unboxing was a pure luxury feeling",
     "content": "Velvet case packing is stunning! Gift presentation is 10/10. My partner loved the surprise completely.",
-    "images": ["/images/reviews/rating-2.jpg"],
+    "images": [
+      "/images/reviews/rating-2.jpg"
+    ],
     "verified": true,
     "timeAgo": "2 days ago",
     "createdAt": "2026-11-05T12:00:00Z"
   },
   {
     "id": "rev-g-3",
-    "productId": "elv-prod-01",
+    "productId": "",
     "productName": "Long Distance Touch Vibration Bracelet for Couples",
     "authorName": "Rohan Verma",
     "city": "Gurugram",
     "rating": 5,
     "title": "Glowing touch pendant is magical",
     "content": "Pendants are high quality and shine beautifully. App connectivity is smooth on iPhone and Android.",
-    "images": ["/images/reviews/rating-3.jpg"],
+    "images": [
+      "/images/reviews/rating-3.jpg"
+    ],
     "verified": true,
     "timeAgo": "3 days ago",
     "createdAt": "2026-11-04T15:30:00Z"
   },
   {
     "id": "rev-g-4",
-    "productId": "elv-prod-01",
+    "productId": "",
     "productName": "Long Distance Touch Vibration Bracelet for Couples",
     "authorName": "Sneha Patel",
     "city": "Ahmedabad",
     "rating": 5,
     "title": "Sun & Moon gold chain looks royal",
     "content": "18K gold finish chain and moon design looks very luxury. Battery life easily lasts 5-6 days.",
-    "images": ["/images/reviews/rating-4.jpg"],
+    "images": [
+      "/images/reviews/rating-4.jpg"
+    ],
     "verified": true,
     "timeAgo": "4 days ago",
     "createdAt": "2026-11-03T11:20:00Z"
   },
   {
     "id": "rev-g-5",
-    "productId": "elv-prod-01",
+    "productId": "",
     "productName": "Long Distance Touch Vibration Bracelet for Couples",
     "authorName": "Aakash & Tanya",
     "city": "Pune",
     "rating": 5,
     "title": "Superb packaging & quality",
     "content": "Packaging is 10/10! Premium dual Charge For Love boxes mili hain. Bluetooth pairing was super easy with the app. Both bracelets light up immediately.",
-    "images": ["/images/reviews/rating-5.jpg"],
+    "images": [
+      "/images/reviews/rating-5.jpg"
+    ],
     "verified": true,
     "timeAgo": "4 days ago",
     "createdAt": "2026-11-03T10:15:00Z"
   },
   {
     "id": "rev-g-6",
-    "productId": "elv-prod-01",
+    "productId": "",
     "productName": "Long Distance Touch Vibration Bracelet for Couples",
     "authorName": "Pooja Hegde",
     "city": "Chennai",
     "rating": 5,
     "title": "Loved the finish & shine",
     "content": "Chain quality is really solid and heavy. The glow looks so aesthetic at night. My partner was shocked and so emotional after receiving this surprise!",
-    "images": ["/images/reviews/rating-6.jpg"],
+    "images": [
+      "/images/reviews/rating-6.jpg"
+    ],
     "verified": true,
     "timeAgo": "5 days ago",
     "createdAt": "2026-11-02T16:40:00Z"
   },
   {
     "id": "rev-g-7",
-    "productId": "elv-prod-01",
+    "productId": "",
     "productName": "Long Distance Touch Vibration Bracelet for Couples",
     "authorName": "Nikhil & Simran",
     "city": "Chandigarh",
     "rating": 5,
     "title": "Best gift for long distance",
     "content": "Distance does not matter anymore! Hum dono daily use kar rahe hain. Battery bhi 5 din se zyada chalti hai. Highly recommended for couples in LDR.",
-    "images": ["/images/reviews/rating-7.jpg"],
+    "images": [
+      "/images/reviews/rating-7.jpg"
+    ],
     "verified": true,
     "timeAgo": "6 days ago",
     "createdAt": "2026-11-01T12:00:00Z"
   },
   {
     "id": "rev-g-8",
-    "productId": "elv-prod-01",
+    "productId": "",
     "productName": "Long Distance Touch Vibration Bracelet for Couples",
     "authorName": "Divya Rao",
     "city": "Jaipur",
     "rating": 5,
     "title": "100% genuine and authentic",
     "content": "Original Totwoo model mila hai exactly as shown. Finishing and materials are high quality. WhatsApp support helped me with setup very quickly.",
-    "images": ["/images/reviews/rating-8.jpg"],
+    "images": [
+      "/images/reviews/rating-8.jpg"
+    ],
     "verified": true,
     "timeAgo": "1 week ago",
     "createdAt": "2026-10-31T09:20:00Z"
   },
   {
     "id": "rev-g-9",
-    "productId": "elv-prod-01",
+    "productId": "",
     "productName": "Long Distance Touch Vibration Bracelet for Couples",
     "authorName": "Arjun Mehta",
     "city": "Kolkata",
     "rating": 5,
     "title": "Pure magic when it vibrates!",
     "content": "The subtle vibration and warm glow when touched from hundreds of km away is an unreal feeling. Box presentation is pure luxury. Best gift ever!",
-    "images": ["/images/reviews/rating-9.jpg"],
+    "images": [
+      "/images/reviews/rating-9.jpg"
+    ],
     "verified": true,
     "timeAgo": "1 week ago",
     "createdAt": "2026-10-30T15:00:00Z"
+  },
+  {
+    "id": "rev-g-10",
+    "productId": "",
+    "productName": "Long Distance Touch Vibration Bracelet for Couples",
+    "authorName": "Rohan & Simran",
+    "city": "Delhi NCR",
+    "rating": 5,
+    "title": "Best anniversary gift ever!",
+    "content": "We live in different cities due to work (Delhi & Bangalore). Whenever one of us touches the bracelet, the other feels the buzz and light. Pure magic!",
+    "images": [
+      "/images/reviews/rating-1.jpg"
+    ],
+    "verified": true,
+    "timeAgo": "1 day ago",
+    "createdAt": "2026-11-08T10:00:00Z"
+  },
+  {
+    "id": "rev-g-11",
+    "productId": "",
+    "productName": "Long Distance Touch Vibration Bracelet for Couples",
+    "authorName": "Aditya & Tanvi",
+    "city": "Pune",
+    "rating": 5,
+    "title": "Fast delivery & superb battery life",
+    "content": "Got it delivered in just 3 days with express delivery. Battery easily lasts 4-5 days on a single charge. Connecting to the app took less than 2 minutes.",
+    "images": [
+      "/images/reviews/rating-2.jpg"
+    ],
+    "verified": true,
+    "timeAgo": "2 days ago",
+    "createdAt": "2026-11-07T14:30:00Z"
+  },
+  {
+    "id": "rev-g-12",
+    "productId": "",
+    "productName": "Long Distance Touch Vibration Bracelet for Couples",
+    "authorName": "Karan & Meera",
+    "city": "Jaipur",
+    "rating": 5,
+    "title": "100% genuine touch vibration",
+    "content": "Both bracelets light up in flash and vibrate instantly. Premium packaging with luxury gift box. Totally worth the price!",
+    "images": [
+      "/images/reviews/rating-3.jpg"
+    ],
+    "verified": true,
+    "timeAgo": "3 days ago",
+    "createdAt": "2026-11-06T09:15:00Z"
   }
 ]

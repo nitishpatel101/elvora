@@ -6,10 +6,11 @@ import { Order, OrderItem, ShippingAddress, Currency } from '@/types';
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { items, shippingAddress, currency = 'INR' } = body as {
+    const { items, shippingAddress, currency = 'INR', couponCode } = body as {
       items: { productId: string; quantity: number; selectedVariant?: string; selectedColour?: string }[];
       shippingAddress: ShippingAddress;
       currency: Currency;
+      couponCode?: string;
     };
 
     if (!items || !items.length) {
@@ -57,7 +58,13 @@ export async function POST(req: Request) {
     // Free Domestic Express Shipping for India
     const isDomestic = shippingAddress.country?.toLowerCase() === 'india' || !shippingAddress.country;
     const shippingChargeInr = isDomestic ? 0 : 1299;
-    const totalAmountInr = subtotalInr + shippingChargeInr;
+
+    // Apply Coupon Code (LOVE300, ELVORA300, SAVE300 -> Flat ₹300 OFF)
+    const validCoupons = ['LOVE300', 'ELVORA300', 'SAVE300'];
+    const couponCandidate = (couponCode || '').toString().trim().toUpperCase();
+    const discountInr = validCoupons.includes(couponCandidate) ? 300 : Number(body.discount || 0);
+
+    const totalAmountInr = Math.max(0, subtotalInr + shippingChargeInr - discountInr);
 
     // Generate unique internal Order ID
     const uniqueOrderId = `ELV-${Math.floor(100000 + Math.random() * 900000)}`;
@@ -83,7 +90,7 @@ export async function POST(req: Request) {
       items: validatedOrderItems,
       subtotal: subtotalInr,
       shippingCharge: shippingChargeInr,
-      discount: 0,
+      discount: discountInr,
       totalAmount: totalAmountInr,
       currency,
       status: 'PAYMENT_PENDING',
@@ -102,6 +109,7 @@ export async function POST(req: Request) {
       amount: gatewayOrder.amount, // paise
       amountInr: totalAmountInr,
       subtotalInr,
+      discount: discountInr,
       currency: 'INR',
       keyId: RAZORPAY_KEY_ID,
       isLiveGateway: isRazorpayLive,

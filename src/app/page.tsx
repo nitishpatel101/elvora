@@ -12,7 +12,7 @@ export default async function HomePage() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white">
-      {/* 1. Official Totwoo Video Hero: Love Knows No Distance */}
+      {/* 1. Official Video Hero: Love Knows No Distance (Cleanly trimmed without Totwoo logo) */}
       <TotwooHomeHero />
 
       {/* 2. Totwoo Interactive Showcase (Synced Touch, Call Alert, Anniversary, Collections) */}

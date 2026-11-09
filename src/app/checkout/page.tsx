@@ -11,6 +11,8 @@ import {
   Lock,
   AlertCircle,
   Loader2,
+  Tag,
+  Check,
 } from 'lucide-react';
 
 export default function CheckoutPage() {
@@ -34,10 +36,17 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Coupon state (Flat ₹300 OFF)
+  const [couponInput, setCouponInput] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState<string | null>('LOVE300');
+  const [couponError, setCouponError] = useState<string | null>(null);
+
+  const discountInr = appliedCoupon ? 300 : 0;
+
   // Free shipping logic for India
   const isDomestic = formData.country.toLowerCase() === 'india' || !formData.country;
   const shippingInr = isDomestic ? 0 : 1299;
-  const grandTotalInr = subtotalInr + shippingInr;
+  const grandTotalInr = Math.max(0, subtotalInr + shippingInr - discountInr);
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -356,12 +365,82 @@ export default function CheckoutPage() {
                 ))}
               </div>
 
+              {/* Coupon Code Section */}
+              <div className="pt-4 border-t border-[#E8DCCD] space-y-2">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-[#6B655D] font-medium flex items-center gap-1.5">
+                    <Tag className="w-3.5 h-3.5 text-[#F5C400]" />
+                    Coupon Code
+                  </span>
+                  {appliedCoupon && (
+                    <span className="text-emerald-700 font-bold">
+                      -₹300.00 OFF
+                    </span>
+                  )}
+                </div>
+
+                {appliedCoupon ? (
+                  <div className="flex items-center justify-between bg-emerald-50 border border-emerald-200 p-2 rounded text-xs">
+                    <div className="flex items-center gap-1.5">
+                      <Check className="w-3.5 h-3.5 text-emerald-600 stroke-[3]" />
+                      <span className="font-mono font-bold text-emerald-800">{appliedCoupon}</span>
+                      <span className="text-emerald-700 text-[11px]">applied (-₹300)</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => setAppliedCoupon(null)}
+                      className="text-stone-400 hover:text-red-600 text-[11px] underline cursor-pointer"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ) : (
+                  <div>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        value={couponInput}
+                        onChange={(e) => {
+                          setCouponInput(e.target.value.toUpperCase());
+                          setCouponError(null);
+                        }}
+                        placeholder="e.g. LOVE300"
+                        className="flex-1 bg-[#FAF8F5] border border-[#EAE5DE] px-3 py-1.5 text-xs font-mono uppercase focus:outline-none focus:border-[#24332C]"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const code = couponInput.trim().toUpperCase();
+                          if (['LOVE300', 'ELVORA300', 'SAVE300'].includes(code)) {
+                            setAppliedCoupon(code);
+                            setCouponError(null);
+                          } else {
+                            setCouponError('Invalid coupon. Use LOVE300');
+                          }
+                        }}
+                        className="bg-[#24332C] text-white px-3 py-1.5 text-xs font-medium uppercase hover:bg-[#19241F] cursor-pointer"
+                      >
+                        Apply
+                      </button>
+                    </div>
+                    {couponError && <p className="text-[11px] text-red-600 mt-1">{couponError}</p>}
+                  </div>
+                )}
+              </div>
+
               {/* Price Breakdown */}
               <div className="pt-4 border-t border-[#E8DCCD] space-y-2.5 text-xs font-light">
                 <div className="flex justify-between text-[#6B655D]">
                   <span>Subtotal</span>
                   <span className="text-[#111111] font-medium">{format(subtotalInr)}</span>
                 </div>
+
+                {appliedCoupon && (
+                  <div className="flex justify-between text-emerald-700 font-medium">
+                    <span>Coupon Discount ({appliedCoupon})</span>
+                    <span>- {format(300)}</span>
+                  </div>
+                )}
 
                 <div className="flex justify-between text-[#6B655D]">
                   <div>
