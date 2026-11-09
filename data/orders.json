@@ -72,12 +72,14 @@
     "discount": 300,
     "totalAmount": 2699,
     "currency": "INR",
-    "status": "PAYMENT_PENDING",
+    "status": "PAYMENT_SUBMITTED",
     "paymentMethod": "UPI_QR",
     "paymentGateway": "MANUAL_UPI",
     "razorpayOrderId": "order_f1fja9noaf",
     "createdAt": "2026-11-09T07:43:34.055Z",
-    "updatedAt": "2026-11-09T07:43:34.055Z"
+    "updatedAt": "2026-11-09T07:52:35.190Z",
+    "upiUtr": "1-CLICK-UPI-PAID",
+    "paymentSubmittedAt": "2026-11-09T07:52:35.189Z"
   },
   {
     "id": "ELV-359114",
