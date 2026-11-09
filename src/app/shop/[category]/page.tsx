@@ -1,4 +1,3 @@
-import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import { getAllProducts, getCategories } from '@/lib/db';
 import ProductGridClient from '../ProductGridClient';
@@ -12,13 +11,18 @@ export default async function CategoryPage({
 }) {
   const { category: categorySlug } = await params;
   const categories = await getCategories();
-  const currentCategory = categories.find((c) => c.slug === categorySlug);
-
-  if (!currentCategory) {
-    notFound();
-  }
-
   const allProducts = await getAllProducts(false);
+  const currentCategory = categories.find((c) => c.slug === categorySlug) || {
+    id: `cat-${categorySlug}`,
+    slug: categorySlug,
+    name: categorySlug
+      .split('-')
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(' '),
+    description: 'Explore our illuminated touch distance bracelets and couple sets.',
+    image: '/images/totwoo_collection_banner.gif',
+    itemCount: allProducts.length,
+  };
 
   return (
     <div className="min-h-screen bg-[#FAF8F5] py-8 sm:py-12 lg:py-16">

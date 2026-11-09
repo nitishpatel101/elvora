@@ -93,10 +93,10 @@ export default function TotwooHomeHero() {
         </p>
 
         {/* Call-to-Action Buttons */}
-        <div className="flex flex-row items-center gap-2.5 sm:gap-4 w-auto pt-1 sm:pt-0">
+        <div className="relative z-20 flex flex-row items-center gap-2.5 sm:gap-4 w-auto pt-1 sm:pt-0">
           <Link
             href="/shop"
-            className="inline-flex items-center justify-center gap-1.5 sm:gap-2.5 bg-[#E5B54F] hover:bg-[#d4a33d] text-black text-[11px] sm:text-sm font-bold uppercase tracking-wider px-5 py-2.5 sm:px-8 sm:py-4 rounded-full shadow-2xl transition-all hover:scale-105 active:scale-95"
+            className="inline-flex items-center justify-center gap-1.5 sm:gap-2.5 bg-[#E5B54F] hover:bg-[#d4a33d] text-black text-[11px] sm:text-sm font-bold uppercase tracking-wider px-5 py-2.5 sm:px-8 sm:py-4 rounded-full shadow-2xl transition-all hover:scale-105 active:scale-95 cursor-pointer touch-manipulation"
           >
             <span>Send a Touch</span>
             <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-black" />
@@ -104,9 +104,9 @@ export default function TotwooHomeHero() {
 
           <Link
             href="/shop/couple-bracelets"
-            className="inline-flex items-center justify-center gap-1.5 bg-black/60 hover:bg-black/85 text-white text-[11px] sm:text-sm font-semibold px-4 py-2.5 sm:px-7 sm:py-4 rounded-full backdrop-blur-md border border-white/25 transition-all hover:border-white/50"
+            className="inline-flex items-center justify-center gap-1.5 bg-black/60 hover:bg-black/85 text-white text-[11px] sm:text-sm font-semibold px-4 py-2.5 sm:px-7 sm:py-4 rounded-full backdrop-blur-md border border-white/25 transition-all hover:border-white/50 cursor-pointer touch-manipulation"
           >
-            <span>Explore Sets</span>
+            <span>Explore Couple Sets</span>
           </Link>
         </div>
 

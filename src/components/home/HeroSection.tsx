@@ -151,7 +151,7 @@ export default function HeroSection({ initialSlides }: HeroSectionProps) {
             <div className="flex items-center gap-3 pt-1 sm:pt-0">
               <Link
                 href={slide.link || '/shop'}
-                className="inline-flex items-center gap-1.5 bg-[#F5C400] hover:bg-[#FFD747] text-black font-extrabold text-[11px] sm:text-sm px-4 py-2 sm:px-8 sm:py-3.5 rounded-lg sm:rounded-xl shadow-lg transition-transform hover:scale-105 active:scale-95"
+                className="inline-flex items-center gap-1.5 bg-[#F5C400] hover:bg-[#FFD747] text-black font-extrabold text-[11px] sm:text-sm px-4 py-2 sm:px-8 sm:py-3.5 rounded-lg sm:rounded-xl shadow-lg transition-transform hover:scale-105 active:scale-95 cursor-pointer touch-manipulation"
               >
                 <span>{slide.cta || 'Shop Now'}</span>
                 <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 stroke-[2.5]" />

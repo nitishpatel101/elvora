@@ -258,7 +258,7 @@ export default function TotwooShowcaseSection() {
               <div className="absolute bottom-5 right-5 z-20">
                 <Link
                   href={activeFeature.link}
-                  className="inline-flex items-center gap-1.5 bg-black/85 hover:bg-black text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg backdrop-blur-md transition-all hover:scale-105 border border-white/20"
+                  className="inline-flex items-center gap-1.5 bg-black/85 hover:bg-black text-white text-xs font-semibold px-4 py-2 rounded-full shadow-lg backdrop-blur-md transition-all hover:scale-105 active:scale-95 border border-white/20 cursor-pointer touch-manipulation"
                 >
                   <span>Explore Design</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#E5B54F]" />
@@ -414,7 +414,7 @@ export default function TotwooShowcaseSection() {
               <div>
                 <Link
                   href="/product/heat-activated-magic-photo-necklace"
-                  className="inline-flex items-center gap-3 bg-[#1C1917] hover:bg-black text-white text-xs uppercase tracking-widest font-semibold px-6 py-3.5 rounded-full shadow-md transition-all hover:scale-105"
+                  className="inline-flex items-center gap-3 bg-[#1C1917] hover:bg-black text-white text-xs uppercase tracking-widest font-semibold px-6 py-3.5 rounded-full shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer touch-manipulation"
                 >
                   <span>Order Custom Locket</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#E5B54F]" />
@@ -572,7 +572,7 @@ export default function TotwooShowcaseSection() {
               <div>
                 <Link
                   href="/shop"
-                  className="inline-flex items-center gap-3 bg-[#1C1917] hover:bg-black text-white text-xs uppercase tracking-widest font-semibold px-6 py-3.5 rounded-full shadow-md transition-all hover:scale-105"
+                  className="inline-flex items-center gap-3 bg-[#1C1917] hover:bg-black text-white text-xs uppercase tracking-widest font-semibold px-6 py-3.5 rounded-full shadow-md transition-all hover:scale-105 active:scale-95 cursor-pointer touch-manipulation"
                 >
                   <span>Explore Charms</span>
                   <ArrowRight className="w-3.5 h-3.5 text-[#E5B54F]" />

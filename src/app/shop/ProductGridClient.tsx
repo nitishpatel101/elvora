@@ -46,8 +46,14 @@ export default function ProductGridClient({
     return initialProducts
       .filter((product) => {
         // Category filter
-        if (selectedCategory !== 'all' && product.categorySlug !== selectedCategory) {
-          return false;
+        if (selectedCategory !== 'all') {
+          if (selectedCategory === 'couple-bracelets' || selectedCategory === 'couple-gifts') {
+            if (product.categorySlug !== 'couple-bracelets' && product.categorySlug !== 'couple-gifts') {
+              return false;
+            }
+          } else if (product.categorySlug !== selectedCategory) {
+            return false;
+          }
         }
 
         // Search filter
