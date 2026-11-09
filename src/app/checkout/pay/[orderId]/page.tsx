@@ -355,10 +355,10 @@ export default function UPIPaymentScreen({
             </div>
 
             {/* Instruction Callout */}
-            <div className="p-3 bg-stone-50 border border-stone-200/80 rounded-xl text-stone-600 text-xs flex items-center gap-2">
-              <Sparkles className="w-4 h-4 text-[#B89A69] flex-none" />
-              <span>
-                Tap any button above &rarr; Enter your UPI PIN &rarr; You will be <strong>automatically redirected</strong> to the Order Success page!
+            <div className="p-3.5 bg-gradient-to-r from-purple-50 via-blue-50 to-emerald-50 border border-stone-200 rounded-xl text-stone-700 text-xs flex items-center gap-2.5 shadow-2xs">
+              <Sparkles className="w-4 h-4 text-purple-600 flex-none" />
+              <span className="leading-relaxed">
+                <strong className="text-stone-900">Mobile Users:</strong> Upar diye gaye <strong className="text-purple-700">PhonePe / Google Pay</strong> button par seedha tap karein (Screenshot lene ki zaroorat nahi hai!).
               </span>
             </div>
 
@@ -370,10 +370,10 @@ export default function UPIPaymentScreen({
                 <div className="space-y-2 text-center sm:text-left">
                   <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs font-bold uppercase tracking-wider text-stone-800">
                     <QrCode className="w-4 h-4 text-[#24332C]" />
-                    <span>Or Scan with Any Phone Camera / UPI App</span>
+                    <span>Laptop/Desktop Users: Scan with Phone Camera</span>
                   </div>
                   <p className="text-xs text-stone-500 max-w-xs leading-relaxed">
-                    Scan using Google Pay, PhonePe, Paytm, or BHIM. Amount ₹{order.totalAmount} is pre-filled.
+                    Point your phone camera or PhonePe/GPay scanner at this screen. Amount ₹{order.totalAmount} is pre-filled.
                   </p>
                   <div className="flex items-center justify-center sm:justify-start gap-2 pt-1">
                     <span className="font-mono text-xs text-stone-700 bg-white px-2.5 py-1 rounded border border-stone-200 font-semibold">
