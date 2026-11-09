@@ -1,5 +1,44 @@
 [
   {
+    "id": "ELV-539739",
+    "customerEmail": "9794852980@customer.elvora.com",
+    "customerName": "Npatel kumar",
+    "customerPhone": "9794852980",
+    "shippingAddress": {
+      "fullName": "Npatel kumar",
+      "phone": "9794852980",
+      "email": "9794852980@customer.elvora.com",
+      "addressLine1": "Hettimpur road narkatiya bazar",
+      "addressLine2": "",
+      "city": "Deoria",
+      "state": "Uttar Pradesh",
+      "pincode": "274402",
+      "country": "India"
+    },
+    "items": [
+      {
+        "productId": "elv-tot-01",
+        "productName": "Sun & Moon Touch Bracelets with Snake Chain",
+        "productImage": "https://totwoo.com/cdn/shop/products/800_4_b6ab0a19-2d54-4c77-b3a3-5b018ce40239.jpg?v=1&width=1200",
+        "priceAtPurchase": 1499,
+        "quantity": 1,
+        "selectedVariant": "Matching Set (Black + Rose Gold)",
+        "selectedColour": "Black"
+      }
+    ],
+    "subtotal": 1499,
+    "shippingCharge": 0,
+    "discount": 300,
+    "totalAmount": 1199,
+    "currency": "INR",
+    "status": "PAYMENT_PENDING",
+    "paymentMethod": "UPI_QR",
+    "paymentGateway": "MANUAL_UPI",
+    "razorpayOrderId": "order_s6r2xty6x2",
+    "createdAt": "2026-11-09T11:26:24.511Z",
+    "updatedAt": "2026-11-09T11:26:24.511Z"
+  },
+  {
     "id": "ELV-388807",
     "customerEmail": "n70105453@gmail.com",
     "customerName": "Npatel kumar",
