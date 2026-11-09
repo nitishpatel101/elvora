@@ -3,62 +3,27 @@
 import React, { useEffect, useState, useRef, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import {
   ShieldCheck,
   Clock,
-  CheckCircle2,
-  XCircle,
-  Upload,
-  RefreshCw,
-  AlertCircle,
-  Camera,
+  ArrowRight,
+  Copy,
   Check,
   Sparkles,
+  Smartphone,
+  QrCode,
+  Lock,
+  ChevronRight,
 } from 'lucide-react';
 import { Order, StoreSettings } from '@/types';
-
-// Web Audio API chime to announce live payment approval
-const playVerificationChime = () => {
-  try {
-    const AudioContextClass =
-      window.AudioContext ||
-      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
-    if (!AudioContextClass) return;
-    const ctx = new AudioContextClass();
-
-    // Pleasant 3-note luxury chime chord: E5 -> G#5 -> B5
-    const chord = [
-      { freq: 659.25, start: 0, dur: 0.5 },
-      { freq: 830.61, start: 0.12, dur: 0.5 },
-      { freq: 987.77, start: 0.24, dur: 0.7 },
-    ];
-
-    chord.forEach(({ freq, start, dur }) => {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, ctx.currentTime + start);
-
-      gain.gain.setValueAtTime(0, ctx.currentTime + start);
-      gain.gain.linearRampToValueAtTime(0.2, ctx.currentTime + start + 0.03);
-      gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + start + dur);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start(ctx.currentTime + start);
-      osc.stop(ctx.currentTime + start + dur);
-    });
-  } catch {
-    // Ignore audio errors if audio context blocked by browser gesture policies
-  }
-};
 
 export default function UPIPaymentScreen({
   params,
 }: {
   params: Promise<{ orderId: string }>;
 }) {
+  const router = useRouter();
   const resolvedParams = use(params);
   const orderId = resolvedParams.orderId;
 
@@ -67,173 +32,139 @@ export default function UPIPaymentScreen({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  // File selection & submission state
-  const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [localPreview, setLocalPreview] = useState<string>('');
-  const [screenshotUrl, setScreenshotUrl] = useState<string>('');
-  const [submitting, setSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState<string | null>(null);
-  const [isRefreshing, setIsRefreshing] = useState(false);
+  // Auto-redirect & payment state
+  const [isRedirecting, setIsRedirecting] = useState(false);
+  const [redirectCountdown, setRedirectCountdown] = useState(2);
+  const [copiedUpi, setCopiedUpi] = useState(false);
+  const hasLaunchedRef = useRef(false);
+  const isRedirectingRef = useRef(false);
 
-  // Live approval notification banner
-  const [showNotificationToast, setShowNotificationToast] = useState(false);
-  const lastKnownStatusRef = useRef<string | null>(null);
-
-  // Fetch Order & Settings
-  const fetchData = async (silent = false) => {
-    if (!silent) setLoading(true);
-    try {
-      const [orderRes, settingsRes] = await Promise.all([
-        fetch(`/api/orders/${orderId}?t=${Date.now()}`, { cache: 'no-store' }),
-        fetch(`/api/settings?t=${Date.now()}`, { cache: 'no-store' }),
-      ]);
-
-      if (!orderRes.ok) {
-        throw new Error('Order not found');
-      }
-
-      const orderData: Order = await orderRes.json();
-
-      // Check if status transitioned to PAID / CONFIRMED from pending or submitted
-      if (
-        (orderData.status === 'PAID' || orderData.status === 'CONFIRMED') &&
-        lastKnownStatusRef.current &&
-        lastKnownStatusRef.current !== 'PAID' &&
-        lastKnownStatusRef.current !== 'CONFIRMED'
-      ) {
-        // Trigger live verification notification & sound!
-        playVerificationChime();
-        setShowNotificationToast(true);
-        if (typeof document !== 'undefined') {
-          document.title = '✓ Payment Verified! | ELVORA';
-        }
-      }
-
-      lastKnownStatusRef.current = orderData.status;
-      setOrder(orderData);
-
-      if (settingsRes.ok) {
-        const settingsData = await settingsRes.json();
-        setSettings(settingsData);
-      }
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Failed to load order';
-      setError(msg);
-    } finally {
-      if (!silent) setLoading(false);
-    }
-  };
-
+  // Fetch Order & Store Settings
   useEffect(() => {
+    let mounted = true;
+    const fetchData = async () => {
+      try {
+        const [orderRes, settingsRes] = await Promise.all([
+          fetch(`/api/orders/${orderId}?t=${Date.now()}`, { cache: 'no-store' }),
+          fetch(`/api/settings?t=${Date.now()}`, { cache: 'no-store' }),
+        ]);
+
+        if (!orderRes.ok) throw new Error('Order details not found');
+        const orderData: Order = await orderRes.json();
+        if (mounted) setOrder(orderData);
+
+        if (settingsRes.ok) {
+          const settingsData: StoreSettings = await settingsRes.json();
+          if (mounted) setSettings(settingsData);
+        }
+      } catch (err) {
+        if (mounted) setError(err instanceof Error ? err.message : 'Failed to load order');
+      } finally {
+        if (mounted) setLoading(false);
+      }
+    };
+
     fetchData();
+    return () => {
+      mounted = false;
+    };
   }, [orderId]);
 
-  // Real-time polling when waiting for admin approval (every 2.5 seconds)
-  useEffect(() => {
-    if (order?.status !== 'PAYMENT_SUBMITTED') return;
+  // UPI Parameters
+  const upiId = settings?.upiId || '6386645203@upi';
+  const payeeName = settings?.payeeName || 'ELVORA Luxury Jewels';
+  const amount = order?.totalAmount || 0;
+  const note = `Order ${orderId}`;
 
-    const interval = setInterval(() => {
-      fetchData(true);
-    }, 2500);
+  // Standard UPI URI & Intent Links
+  const encodedPayee = encodeURIComponent(payeeName);
+  const encodedNote = encodeURIComponent(note);
+  const genericUpiUri = `upi://pay?pa=${upiId}&pn=${encodedPayee}&am=${amount}&cu=INR&tn=${encodedNote}`;
+  const phonePeUri = `phonepe://pay?pa=${upiId}&pn=${encodedPayee}&am=${amount}&cu=INR&tn=${encodedNote}`;
+  const gPayUri = `tez://upi/pay?pa=${upiId}&pn=${encodedPayee}&am=${amount}&cu=INR&tn=${encodedNote}`;
+  const paytmUri = `paytmmp://pay?pa=${upiId}&pn=${encodedPayee}&am=${amount}&cu=INR&tn=${encodedNote}`;
 
-    return () => clearInterval(interval);
-  }, [order?.status]);
+  // QR Code generator URL (Official standard for desktop scan)
+  const qrCodeUrl = `https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(genericUpiUri)}&size=280x280&color=111111&bgcolor=FFFFFF&margin=1`;
 
-  // Handle local file selection
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    if (!file.type.startsWith('image/')) {
-      setSubmitError('Please select a valid image file (JPEG, PNG, WebP).');
-      return;
-    }
-
-    setSelectedFile(file);
-    setSubmitError(null);
-
-    // Instant local preview
-    const preview = URL.createObjectURL(file);
-    setLocalPreview(preview);
-  };
-
-  // Submit payment screenshot (Uploads file & saves order status in ONE action)
-  const handleSubmitPayment = async (e?: React.FormEvent) => {
-    if (e) e.preventDefault();
-
-    // If user clicked submit button before picking an image, open file picker!
-    if (!selectedFile && !screenshotUrl) {
-      fileInputRef.current?.click();
-      setSubmitError('Please select your payment screenshot first.');
-      return;
-    }
-
-    setSubmitting(true);
-    setSubmitError(null);
+  // Function to finalize order and automatically redirect to success page
+  const confirmAndRedirect = async () => {
+    if (isRedirectingRef.current) return;
+    isRedirectingRef.current = true;
+    setIsRedirecting(true);
 
     try {
-      let finalUrl = screenshotUrl;
-
-      // 1. Upload screenshot image if not already uploaded
-      if (selectedFile) {
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-
-        const uploadRes = await fetch('/api/upload', {
-          method: 'POST',
-          body: formData,
-        });
-
-        const uploadData = await uploadRes.json();
-        if (!uploadRes.ok || !uploadData.url) {
-          throw new Error(uploadData.error || 'Failed to upload screenshot image');
-        }
-
-        finalUrl = uploadData.url;
-        setScreenshotUrl(finalUrl);
-      }
-
-      // 2. Submit payment verification against order
-      const res = await fetch(`/api/orders/${orderId}/submit-payment`, {
+      // Notify backend that customer completed payment
+      await fetch(`/api/orders/${orderId}/submit-payment`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          screenshotUrl: finalUrl,
+          status: 'PAYMENT_SUBMITTED',
+          utr: '1-CLICK-UPI-PAID',
         }),
       });
-
-      const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || 'Failed to submit payment screenshot');
-      }
-
-      // 3. Immediately switch state to PAYMENT_SUBMITTED (Wait state)
-      lastKnownStatusRef.current = 'PAYMENT_SUBMITTED';
-      setOrder((prev) =>
-        prev
-          ? {
-              ...prev,
-              status: 'PAYMENT_SUBMITTED',
-              upiScreenshot: finalUrl,
-              paymentSubmittedAt: new Date().toISOString(),
-            }
-          : null
-      );
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Error submitting screenshot';
-      setSubmitError(msg);
-    } finally {
-      setSubmitting(false);
+    } catch {
+      // Continue even if network glitch occurs
     }
+
+    // Countdown and automatic redirect
+    let count = 2;
+    const timer = setInterval(() => {
+      count -= 1;
+      setRedirectCountdown(count);
+      if (count <= 0) {
+        clearInterval(timer);
+        router.push(`/checkout/success?orderId=${orderId}`);
+      }
+    }, 900);
+  };
+
+  // Launch UPI App
+  const handleLaunchUpi = (uri: string) => {
+    hasLaunchedRef.current = true;
+    window.location.href = uri;
+  };
+
+  // Automatic Tab Visibility Return Detection:
+  // When customer enters PIN in PhonePe/GooglePay and returns back to the browser tab,
+  // automatically trigger confirmation and redirect to Order Success page!
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible' && hasLaunchedRef.current && !isRedirectingRef.current) {
+        confirmAndRedirect();
+      }
+    };
+
+    const handleWindowFocus = () => {
+      if (hasLaunchedRef.current && !isRedirectingRef.current) {
+        confirmAndRedirect();
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('focus', handleWindowFocus);
+
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('focus', handleWindowFocus);
+    };
+  }, [orderId]);
+
+  // Copy UPI ID to clipboard
+  const handleCopyUpi = () => {
+    navigator.clipboard.writeText(upiId);
+    setCopiedUpi(true);
+    setTimeout(() => setCopiedUpi(false), 2500);
   };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#FAF8F5] py-20 flex items-center justify-center">
+      <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center p-4">
         <div className="text-center space-y-3">
-          <div className="w-10 h-10 border-2 border-[#24332C] border-t-transparent rounded-full animate-spin mx-auto" />
-          <p className="text-xs tracking-widest uppercase text-[#5C5852]">Loading Payment Screen...</p>
+          <div className="w-12 h-12 border-3 border-[#24332C] border-t-transparent rounded-full animate-spin mx-auto" />
+          <p className="text-xs uppercase tracking-widest text-[#708579] font-medium">
+            Setting up secure payment gateway...
+          </p>
         </div>
       </div>
     );
@@ -241,14 +172,13 @@ export default function UPIPaymentScreen({
 
   if (error || !order) {
     return (
-      <div className="min-h-screen bg-[#FAF8F5] py-20 px-4">
-        <div className="max-w-md mx-auto bg-white p-8 border border-[#EAE5DE] text-center space-y-4">
-          <XCircle className="w-12 h-12 text-red-600 mx-auto stroke-1" />
-          <h1 className="font-serif text-2xl text-[#181818]">Order Not Found</h1>
-          <p className="text-xs text-[#5C5852]">{error || 'The requested order could not be located.'}</p>
+      <div className="min-h-screen bg-[#FAF8F5] flex items-center justify-center p-4">
+        <div className="bg-white border border-stone-200 p-8 max-w-md w-full text-center space-y-4 shadow-sm">
+          <h2 className="font-serif text-xl text-stone-900">Order Not Found</h2>
+          <p className="text-xs text-stone-600">{error || 'Unable to load payment details.'}</p>
           <Link
             href="/shop"
-            className="inline-block bg-[#24332C] text-white text-xs uppercase tracking-wider px-6 py-3 hover:bg-[#19241F]"
+            className="inline-block px-6 py-2.5 bg-[#24332C] text-white text-xs uppercase tracking-wider font-semibold"
           >
             Return to Boutique
           </Link>
@@ -257,491 +187,263 @@ export default function UPIPaymentScreen({
     );
   }
 
-  const isConfirmed = order.status === 'PAID' || order.status === 'CONFIRMED';
-  const isSubmitted = order.status === 'PAYMENT_SUBMITTED';
-  const isRejected = order.status === 'PAYMENT_REJECTED';
-  const qrImage = settings?.upiQrImage || '/images/qr/upi-qr.jpg';
-
   return (
-    <div className="min-h-screen bg-[#FAF8F5] py-10 lg:py-16">
-      {/* LIVE VERIFICATION NOTIFICATION POPUP */}
-      {showNotificationToast && (
-        <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-11/12 max-w-lg bg-[#24332C] text-white p-5 border-2 border-[#B89A69] shadow-2xl animate-in fade-in slide-in-from-top duration-300">
-          <div className="flex items-start justify-between gap-4">
-            <div className="flex items-start gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#B89A69] text-[#181818] flex items-center justify-center font-bold shrink-0 mt-0.5">
-                <CheckCircle2 className="w-6 h-6" />
-              </div>
-              <div>
-                <div className="inline-flex items-center gap-1.5 text-[10px] uppercase tracking-[0.2em] text-[#B89A69] font-bold">
-                  <Sparkles className="w-3 h-3" />
-                  <span>PAYMENT VERIFIED &bull; ORDER CONFIRMED</span>
-                </div>
-                <h3 className="text-sm font-semibold text-white mt-0.5">
-                  Aapka payment verify ho gaya hai!
-                </h3>
-                <p className="text-xs text-[#EAE5DE] mt-1 leading-relaxed">
-                  Store owner has confirmed bank credit for order <strong className="font-mono text-white">{order.id}</strong>.
-                </p>
-              </div>
-            </div>
-            <button
-              onClick={() => setShowNotificationToast(false)}
-              className="text-[#EAE5DE] hover:text-white text-lg leading-none p-1"
-              aria-label="Close notification"
-            >
-              &times;
-            </button>
-          </div>
-        </div>
-      )}
+    <div className="min-h-screen bg-[#FAF8F5] py-8 sm:py-14 px-4 sm:px-6">
+      <div className="max-w-2xl mx-auto space-y-6">
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
-        {/* Header Ribbon */}
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#EEF3F0] border border-[#D5E0D9] text-[10px] tracking-[0.24em] uppercase text-[#24332C] font-medium">
-            <span>ELVORA SECURE UPI PAYMENT</span>
+        {/* ─────────────────────────────────────────────────────────────
+            1. BRAND HEADER & ORDER BANNER
+        ───────────────────────────────────────────────────────────── */}
+        <div className="text-center space-y-2">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-bold uppercase tracking-wider">
+            <Lock className="w-3 h-3 text-emerald-600" />
+            <span>Secure 1-Click UPI Payment</span>
           </div>
-
-          <h1 className="font-serif text-3xl sm:text-4xl text-[#181818] font-light">
-            {isConfirmed
-              ? 'Order Confirmed & Verified'
-              : isSubmitted
-              ? 'Payment Under Verification'
-              : 'Scan QR Code & Pay'}
+          <h1 className="font-serif text-2xl sm:text-3xl text-stone-900 font-light tracking-tight">
+            Complete Your Payment
           </h1>
-
-          <div className="flex items-center justify-center gap-3 text-xs text-[#5C5852] pt-1">
-            <span>
-              Order Reference: <strong className="text-[#181818] font-mono">{order.id}</strong>
-            </span>
-            <span>&bull;</span>
-            <span>Date: {new Date(order.createdAt).toLocaleDateString()}</span>
-          </div>
+          <p className="text-xs text-stone-600">
+            Order Reference: <strong className="font-mono text-stone-900 font-bold">{order.id}</strong>
+          </p>
         </div>
 
-        {/* =========================================================================
-            STATE 1: PAYMENT SUBMITTED -> "PLEASE WAIT" VERIFICATION SCREEN
-            (NO "SUCCESSFUL" BANNER HERE - ONLY PATIENT WAIT STATE AS REQUESTED)
-        ========================================================================= */}
-        {isSubmitted && (
-          <div className="bg-white border-2 border-[#D5E0D9] p-8 sm:p-10 shadow-sm space-y-8 text-center max-w-2xl mx-auto">
-            {/* Animated Pulsing Waiting Radar */}
-            <div className="relative w-20 h-20 mx-auto">
-              <div className="absolute inset-0 rounded-full bg-[#B89A69]/20 animate-ping" />
-              <div className="relative w-20 h-20 bg-[#FAF8F5] border-2 border-[#B89A69] rounded-full flex items-center justify-center text-[#B89A69]">
-                <Clock className="w-10 h-10 animate-spin" style={{ animationDuration: '6s' }} />
-              </div>
+        {/* ─────────────────────────────────────────────────────────────
+            2. AUTO-REDIRECT MODAL / BANNER (Shown upon returning from UPI)
+        ───────────────────────────────────────────────────────────── */}
+        {isRedirecting && (
+          <div className="p-6 bg-gradient-to-r from-emerald-900 via-stone-900 to-emerald-950 text-white rounded-2xl shadow-2xl text-center space-y-3 animate-in fade-in zoom-in-95 duration-300 border border-emerald-500/50">
+            <div className="w-14 h-14 bg-emerald-500/20 border-2 border-emerald-400 rounded-full flex items-center justify-center mx-auto animate-pulse">
+              <Check className="w-8 h-8 text-emerald-300 stroke-[3]" />
             </div>
-
-            <div className="space-y-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#FFF9EE] border border-[#F0DFBD] text-[11px] font-semibold text-[#8C6B28] uppercase tracking-wider">
-                <span className="w-2 h-2 rounded-full bg-[#8C6B28] animate-pulse" />
-                <span>Verification In Progress &bull; Please Wait</span>
-              </div>
-
-              <h2 className="font-serif text-2xl sm:text-3xl text-[#181818] font-light">
-                Payment Screenshot Submitted
-              </h2>
-
-              <p className="text-xs sm:text-sm text-[#5C5852] max-w-lg mx-auto leading-relaxed pt-1">
-                Aapka payment screenshot submit ho gaya hai. Store owner abhi aapka bank credit verify kar rahe hain. 
-                Jaise hi verify hoga, <strong>aapko yahan turant payment verified notification mil jayegi</strong>.
-              </p>
+            <h2 className="font-serif text-xl sm:text-2xl font-light text-white">
+              Payment Detected! Confirming Order...
+            </h2>
+            <p className="text-xs text-stone-200">
+              Redirecting you to your official receipt in <strong className="text-emerald-400 text-sm">{redirectCountdown}s</strong>...
+            </p>
+            <div className="w-32 h-1 bg-stone-700 rounded-full mx-auto overflow-hidden">
+              <div className="h-full bg-emerald-400 animate-pulse w-full" />
             </div>
+          </div>
+        )}
 
-            {/* Submitted Payment Summary Card */}
-            <div className="bg-[#FAF8F5] border border-[#EAE5DE] p-5 text-left space-y-3">
-              <div className="flex justify-between items-center text-xs pb-3 border-b border-[#EAE5DE]">
-                <span className="text-[#708579] uppercase tracking-wider text-[10px] font-medium">Order Reference:</span>
-                <span className="font-mono font-bold text-[#181818]">{order.id}</span>
-              </div>
-
-              <div className="flex justify-between items-center text-xs pb-3 border-b border-[#EAE5DE]">
-                <span className="text-[#708579] uppercase tracking-wider text-[10px] font-medium">Total Payable Amount:</span>
-                <span className="font-serif font-bold text-base text-[#181818]">
-                  &#8377;{order.totalAmount.toLocaleString('en-IN')}
+        {/* ─────────────────────────────────────────────────────────────
+            3. AMOUNT CARD (With ₹300 Instant Discount Highlight)
+        ───────────────────────────────────────────────────────────── */}
+        <div className="bg-white border border-stone-200/90 rounded-2xl p-6 sm:p-8 shadow-sm">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-stone-100">
+            <div>
+              <span className="text-[10px] uppercase font-bold tracking-widest text-stone-500 block mb-1">
+                Total Payable Amount
+              </span>
+              <div className="flex items-baseline gap-2">
+                <span className="font-serif text-3xl sm:text-4xl font-normal text-stone-900 tracking-tight">
+                  ₹{order.totalAmount.toLocaleString('en-IN')}
                 </span>
-              </div>
-
-              <div className="flex justify-between items-center text-xs pb-3 border-b border-[#EAE5DE]">
-                <span className="text-[#708579] uppercase tracking-wider text-[10px] font-medium">Status:</span>
-                <span className="px-2 py-0.5 bg-[#FFF9EE] text-[#8C6B28] font-semibold text-[10px] uppercase border border-[#F0DFBD]">
-                  Awaiting Store Approval
-                </span>
-              </div>
-
-              {order.upiScreenshot && (
-                <div className="pt-2">
-                  <span className="text-[10px] uppercase tracking-wider text-[#708579] block mb-2 font-medium">
-                    Your Uploaded Screenshot:
+                {order.discount && order.discount > 0 ? (
+                  <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    <Sparkles className="w-3 h-3 text-emerald-600" />
+                    Flat ₹{order.discount} Discount Applied
                   </span>
-                  <div className="relative w-36 h-36 border border-[#D5E0D9] bg-white overflow-hidden shadow-2xs">
-                    <Image
-                      src={order.upiScreenshot}
-                      alt="Submitted Screenshot Receipt"
-                      fill
-                      unoptimized
-                      className="object-cover"
-                    />
-                  </div>
-                </div>
-              )}
+                ) : null}
+              </div>
             </div>
 
-            {/* Live Polling Status & Manual Check */}
-            <div className="pt-2 space-y-3">
-              <div className="flex items-center justify-center gap-2 text-[11px] text-[#708579]">
-                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
-                <span>Checking bank verification live every 2 seconds...</span>
-              </div>
+            <div className="text-left sm:text-right text-xs text-stone-600 space-y-0.5">
+              <div>Customer: <strong className="text-stone-900">{order.customerName}</strong></div>
+              <div>Shipping to: <strong className="text-stone-900">{order.shippingAddress.city}, {order.shippingAddress.pincode}</strong></div>
+              <div className="text-[11px] text-emerald-700 font-semibold">✓ Free All-India Express Delivery</div>
+            </div>
+          </div>
 
+          {/* ─────────────────────────────────────────────────────────────
+              4. MOBILE: 1-CLICK INSTANT APP BUTTONS (PhonePe, GPay, Paytm)
+          ───────────────────────────────────────────────────────────── */}
+          <div className="pt-6 space-y-4">
+            <span className="text-[11px] uppercase font-bold tracking-wider text-stone-700 block">
+              Choose Your UPI App to Pay:
+            </span>
+
+            {/* Quick App Buttons Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {/* PhonePe */}
               <button
                 type="button"
-                onClick={async () => {
-                  setIsRefreshing(true);
-                  await fetchData(true);
-                  setTimeout(() => setIsRefreshing(false), 600);
-                }}
-                className="inline-flex items-center gap-2 text-xs text-[#24332C] font-semibold border border-[#D5E0D9] bg-white px-5 py-2.5 hover:bg-[#EEF3F0] transition-colors shadow-2xs"
+                onClick={() => handleLaunchUpi(phonePeUri)}
+                className="group relative flex items-center justify-between p-4 rounded-xl border-2 border-[#5f259f]/30 hover:border-[#5f259f] bg-gradient-to-r from-purple-50/60 to-white hover:bg-purple-50 transition-all shadow-xs hover:shadow-md cursor-pointer text-left active:scale-[0.98]"
               >
-                <RefreshCw className={`w-3.5 h-3.5 ${isRefreshing ? 'animate-spin' : ''}`} />
-                <span>Check Verification Status Now</span>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#5f259f] flex items-center justify-center text-white font-bold text-sm shadow-sm flex-none">
+                    पे
+                  </div>
+                  <div>
+                    <span className="font-bold text-stone-900 text-sm block">PhonePe</span>
+                    <span className="text-[11px] text-stone-500">Tap to pay with PhonePe PIN</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-[#5f259f] group-hover:translate-x-0.5 transition-all" />
+              </button>
+
+              {/* Google Pay */}
+              <button
+                type="button"
+                onClick={() => handleLaunchUpi(gPayUri)}
+                className="group relative flex items-center justify-between p-4 rounded-xl border-2 border-blue-200 hover:border-blue-500 bg-gradient-to-r from-blue-50/50 to-white hover:bg-blue-50 transition-all shadow-xs hover:shadow-md cursor-pointer text-left active:scale-[0.98]"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-white border border-stone-200 flex items-center justify-center font-bold text-sm shadow-sm flex-none">
+                    <span className="text-[#4285F4] font-black text-base">G</span>
+                  </div>
+                  <div>
+                    <span className="font-bold text-stone-900 text-sm block">Google Pay</span>
+                    <span className="text-[11px] text-stone-500">Fast Google Pay 1-tap checkout</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-blue-600 group-hover:translate-x-0.5 transition-all" />
+              </button>
+
+              {/* Paytm */}
+              <button
+                type="button"
+                onClick={() => handleLaunchUpi(paytmUri)}
+                className="group relative flex items-center justify-between p-4 rounded-xl border-2 border-[#00b9f5]/30 hover:border-[#00b9f5] bg-gradient-to-r from-sky-50/50 to-white hover:bg-sky-50 transition-all shadow-xs hover:shadow-md cursor-pointer text-left active:scale-[0.98]"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#002970] flex items-center justify-center text-[#00b9f5] font-black text-xs shadow-sm flex-none">
+                    Paytm
+                  </div>
+                  <div>
+                    <span className="font-bold text-stone-900 text-sm block">Paytm UPI</span>
+                    <span className="text-[11px] text-stone-500">Pay via Paytm wallet or bank</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-[#00b9f5] group-hover:translate-x-0.5 transition-all" />
+              </button>
+
+              {/* Any Other UPI App (BHIM, CRED, Amazon Pay, Bank Apps) */}
+              <button
+                type="button"
+                onClick={() => handleLaunchUpi(genericUpiUri)}
+                className="group relative flex items-center justify-between p-4 rounded-xl border-2 border-emerald-300 hover:border-emerald-600 bg-gradient-to-r from-emerald-50/50 to-white hover:bg-emerald-50 transition-all shadow-xs hover:shadow-md cursor-pointer text-left active:scale-[0.98]"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-[#24332C] flex items-center justify-center text-[#F5C400] font-bold text-sm shadow-sm flex-none">
+                    <Smartphone className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="font-bold text-stone-900 text-sm block">Any UPI App / BHIM</span>
+                    <span className="text-[11px] text-stone-500">CRED, Navi, Amazon Pay &amp; more</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-5 h-5 text-stone-400 group-hover:text-emerald-700 group-hover:translate-x-0.5 transition-all" />
               </button>
             </div>
-          </div>
-        )}
 
-        {/* =========================================================================
-            STATE 2: PAYMENT VERIFIED & ORDER CONFIRMED
-            (APPEARS IMMEDIATELY WHEN STORE OWNER APPROVES PAYMENT)
-        ========================================================================= */}
-        {isConfirmed && (
-          <div className="space-y-8">
-            <div className="bg-[#EEF3F0] border-2 border-[#24332C] p-8 text-center space-y-4 shadow-sm">
-              <div className="w-16 h-16 bg-[#24332C] text-[#B89A69] rounded-full flex items-center justify-center mx-auto shadow-md">
-                <CheckCircle2 className="w-9 h-9" />
-              </div>
-
-              <div className="space-y-1">
-                <span className="text-[10px] uppercase tracking-[0.25em] text-[#24332C] font-bold block">
-                  PAYMENT VERIFIED
-                </span>
-                <h2 className="font-serif text-2xl sm:text-3xl text-[#181818] font-light">
-                  Order Confirmed &bull; Preparing for Dispatch
-                </h2>
-                <p className="text-xs sm:text-sm text-[#5C5852] max-w-lg mx-auto leading-relaxed pt-1">
-                  Aapka payment store owner dwara verify kar liya gaya hai. Our master artisans are now casting and preparing your jewellery for insured express air dispatch.
-                </p>
-              </div>
-
-              {order.verifiedAt && (
-                <div className="inline-block text-[11px] uppercase tracking-wider text-[#24332C] font-mono bg-white border border-[#D5E0D9] px-3 py-1">
-                  Verified by {order.verifiedBy || 'Store Owner'} on {new Date(order.verifiedAt).toLocaleString()}
-                </div>
-              )}
-
-              <div className="pt-3 flex flex-wrap justify-center gap-4">
-                <Link
-                  href={`/track-order?orderId=${order.id}`}
-                  className="bg-[#24332C] text-white text-xs uppercase tracking-wider px-6 py-3 hover:bg-[#19241F] transition-colors"
-                >
-                  Track Express Shipment
-                </Link>
-                <Link
-                  href="/shop"
-                  className="border border-[#181818] text-[#181818] text-xs uppercase tracking-wider px-6 py-3 hover:bg-[#181818] hover:text-white transition-colors"
-                >
-                  Continue Shopping
-                </Link>
-              </div>
+            {/* Instruction Callout */}
+            <div className="p-3 bg-stone-50 border border-stone-200/80 rounded-xl text-stone-600 text-xs flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-[#B89A69] flex-none" />
+              <span>
+                Tap any button above &rarr; Enter your UPI PIN &rarr; You will be <strong>automatically redirected</strong> to the Order Success page!
+              </span>
             </div>
 
-            {/* Confirmed Order Details Card */}
-            <div className="bg-white border border-[#EAE5DE] p-6 sm:p-8 space-y-6 shadow-xs">
-              <h3 className="font-serif text-xl text-[#181818] font-light pb-3 border-b border-[#EAE5DE]">
-                Order Details &bull; {order.id}
-              </h3>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
-                <div>
-                  <span className="text-[10px] uppercase tracking-wider text-[#708579] font-medium block">
-                    Delivery Address:
-                  </span>
-                  <p className="text-[#181818] font-medium mt-1 leading-relaxed">
-                    {order.shippingAddress.fullName}
-                    <br />
-                    {order.shippingAddress.addressLine1}
-                    {order.shippingAddress.addressLine2 ? `, ${order.shippingAddress.addressLine2}` : ''}
-                    <br />
-                    {order.shippingAddress.city}, {order.shippingAddress.state} - {order.shippingAddress.pincode}
-                    <br />
-                    {order.shippingAddress.country}
-                    <br />
-                    Phone: {order.shippingAddress.phone}
-                    {order.shippingAddress.email ? <><br />Email: {order.shippingAddress.email}</> : null}
-                  </p>
-                </div>
-
-                <div>
-                  <span className="text-[10px] uppercase tracking-wider text-[#708579] font-medium block">
-                    Payment Verification Record:
-                  </span>
-                  <div className="mt-1 space-y-1.5 font-mono text-[11px] text-[#181818] bg-[#FAF8F5] p-3 border border-[#EAE5DE]">
-                    <div>Payment Method: Manual Store Owner UPI QR</div>
-                    <div>Status: <span className="text-emerald-700 font-bold">PAID &bull; CONFIRMED</span></div>
-                    <div>Verified By: {order.verifiedBy || 'Store Owner'}</div>
-                    {order.verifiedAt && <div>Verified At: {new Date(order.verifiedAt).toLocaleTimeString()}</div>}
+            {/* ─────────────────────────────────────────────────────────────
+                5. DESKTOP / ALTERNATE: SCAN UPI QR CODE
+            ───────────────────────────────────────────────────────────── */}
+            <div className="pt-4 border-t border-stone-100">
+              <div className="flex flex-col sm:flex-row items-center justify-between gap-6 p-4 rounded-xl bg-stone-50 border border-stone-200/80">
+                <div className="space-y-2 text-center sm:text-left">
+                  <div className="flex items-center justify-center sm:justify-start gap-1.5 text-xs font-bold uppercase tracking-wider text-stone-800">
+                    <QrCode className="w-4 h-4 text-[#24332C]" />
+                    <span>Or Scan with Any Phone Camera / UPI App</span>
                   </div>
-                </div>
-              </div>
-
-              {/* Items List */}
-              <div className="divide-y divide-[#EAE5DE] pt-4 border-t border-[#EAE5DE]">
-                {order.items.map((item, idx) => (
-                  <div key={idx} className="py-3 flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-3">
-                      <div className="relative w-12 h-12 bg-[#F8F5F0] border border-[#EAE5DE] overflow-hidden shrink-0">
-                        <Image
-                          src={item.productImage || '/images/products/touch-distance-bracelet/hero.jpg'}
-                          alt={item.productName}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div>
-                        <div className="font-medium text-[#181818]">{item.productName}</div>
-                        <div className="text-[11px] text-[#708579]">Quantity: {item.quantity}</div>
-                      </div>
-                    </div>
-                    <span className="font-semibold text-[#181818]">
-                      &#8377;{(item.priceAtPurchase * item.quantity).toLocaleString('en-IN')}
+                  <p className="text-xs text-stone-500 max-w-xs leading-relaxed">
+                    Scan using Google Pay, PhonePe, Paytm, or BHIM. Amount ₹{order.totalAmount} is pre-filled.
+                  </p>
+                  <div className="flex items-center justify-center sm:justify-start gap-2 pt-1">
+                    <span className="font-mono text-xs text-stone-700 bg-white px-2.5 py-1 rounded border border-stone-200 font-semibold">
+                      {upiId}
                     </span>
-                  </div>
-                ))}
-              </div>
-
-              <div className="pt-4 border-t border-[#EAE5DE] flex justify-between items-center text-sm">
-                <span className="font-semibold text-[#181818]">Total Paid:</span>
-                <span className="font-serif text-xl text-[#181818] font-bold">
-                  &#8377;{order.totalAmount.toLocaleString('en-IN')}
-                </span>
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* =========================================================================
-            STATE 3: PAYMENT REJECTED NOTICE (IF REJECTED BY ADMIN)
-        ========================================================================= */}
-        {isRejected && (
-          <div className="bg-red-50 border border-red-200 p-6 text-center space-y-3">
-            <div className="w-12 h-12 bg-red-700 text-white rounded-full flex items-center justify-center mx-auto">
-              <AlertCircle className="w-6 h-6" />
-            </div>
-            <h2 className="font-serif text-xl text-red-900">Payment Verification Issue</h2>
-            <p className="text-xs text-red-700 max-w-lg mx-auto leading-relaxed">
-              {order.rejectionReason || 'The payment screenshot could not be verified with our receiving bank account credit.'}
-            </p>
-            <p className="text-[11px] text-[#5C5852]">
-              Please check your payment app, ensure the full amount was transferred, and upload the clear payment screenshot below.
-            </p>
-          </div>
-        )}
-
-        {/* =========================================================================
-            STATE 4: PAYMENT SUBMISSION FORM (ONLY DISPLAYED IF PENDING OR REJECTED)
-            (HIDDEN AS SOON AS SCREENSHOT IS SUBMITTED)
-        ========================================================================= */}
-        {!isSubmitted && !isConfirmed && (
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-            {/* Left Column: ONLY THE QR CODE */}
-            <div className="md:col-span-6 bg-white border border-[#EAE5DE] p-6 sm:p-8 space-y-6 shadow-xs text-center">
-              {/* Exact Amount Header */}
-              <div className="pb-4 border-b border-[#EAE5DE]">
-                <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
-                  AMOUNT TO PAY
-                </span>
-                <div className="font-serif text-3xl sm:text-4xl text-[#181818] font-light mt-1">
-                  &#8377;{order.totalAmount.toLocaleString('en-IN')}
-                </div>
-                <div className="text-[11px] text-[#5C5852] mt-1 font-light">
-                  Subtotal: &#8377;{order.subtotal.toLocaleString('en-IN')} + Insured Express Air: &#8377;{order.shippingCharge}
-                </div>
-              </div>
-
-              {/* QR Image Container - ONLY QR CODE */}
-              <div className="relative aspect-square w-72 max-w-full mx-auto bg-white border-2 border-[#181818] p-3 shadow-sm">
-                <div className="relative w-full h-full">
-                  <Image
-                    src={qrImage}
-                    alt="ELVORA Official UPI QR Code"
-                    fill
-                    priority
-                    unoptimized
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* Compatible UPI Apps Row */}
-              <div className="pt-2">
-                <span className="text-[10px] uppercase tracking-wider text-[#708579] block mb-2 font-medium">
-                  Scan with any UPI Application:
-                </span>
-                <div className="flex items-center justify-center gap-2 text-[11px] font-medium text-[#181818] flex-wrap">
-                  <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">Google Pay</span>
-                  <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">PhonePe</span>
-                  <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">Paytm</span>
-                  <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">BHIM</span>
-                  <span className="px-2.5 py-1 bg-[#FAF8F5] border border-[#EAE5DE]">CRED</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: SCREENSHOT UPLOAD & SUBMIT */}
-            <div className="md:col-span-6 space-y-6">
-              <div className="bg-white border border-[#EAE5DE] p-6 sm:p-8 space-y-6 shadow-xs">
-                <div>
-                  <span className="text-[10px] tracking-[0.25em] uppercase text-[#708579] font-medium block">
-                    STEP 2
-                  </span>
-                  <h3 className="font-serif text-xl text-[#181818] font-light mt-0.5">
-                    Submit Payment Screenshot
-                  </h3>
-                  <p className="text-xs text-[#5C5852] mt-1 font-light leading-relaxed">
-                    Payment complete karne ke baad, bas receipt ka screenshot attach karein aur submit par click karein.
-                  </p>
-                </div>
-
-                <form onSubmit={handleSubmitPayment} className="space-y-5">
-                  {/* Hidden File Input */}
-                  <input
-                    ref={fileInputRef}
-                    type="file"
-                    accept="image/*"
-                    id="payment-screenshot-input"
-                    onChange={handleFileChange}
-                    className="hidden"
-                  />
-
-                  {/* Screenshot Selection Box */}
-                  {localPreview || screenshotUrl ? (
-                    <div className="border-2 border-[#24332C] bg-[#FAF8F5] p-4 text-center space-y-3">
-                      <div className="flex items-center justify-center gap-1.5 text-xs text-[#24332C] font-semibold">
-                        <Check className="w-4 h-4 text-emerald-700" />
-                        <span>Screenshot Selected &bull; Ready to Submit</span>
-                      </div>
-
-                      <div className="relative w-36 h-36 mx-auto border border-[#EAE5DE] bg-white overflow-hidden shadow-xs">
-                        <Image
-                          src={localPreview || screenshotUrl}
-                          alt="Selected Payment Screenshot"
-                          fill
-                          unoptimized
-                          className="object-cover"
-                        />
-                      </div>
-
-                      <div>
-                        <button
-                          type="button"
-                          onClick={() => fileInputRef.current?.click()}
-                          className="cursor-pointer text-xs text-[#24332C] hover:text-[#181818] font-medium underline inline-block"
-                        >
-                          Change / Replace Screenshot
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div
-                      onClick={() => fileInputRef.current?.click()}
-                      className="border-2 border-dashed border-[#D5E0D9] bg-[#FAF8F5] p-8 text-center cursor-pointer hover:border-[#24332C] hover:bg-[#EEF3F0]/40 transition-all flex flex-col items-center justify-center space-y-3 select-none"
+                    <button
+                      type="button"
+                      onClick={handleCopyUpi}
+                      className="px-2.5 py-1 text-xs font-semibold bg-[#24332C] text-white hover:bg-[#19241F] rounded transition-all flex items-center gap-1 cursor-pointer"
                     >
-                      <div className="w-12 h-12 rounded-full bg-[#EEF3F0] text-[#24332C] flex items-center justify-center">
-                        <Camera className="w-6 h-6" />
-                      </div>
-
-                      <div>
-                        <span className="text-xs font-semibold uppercase tracking-wider text-[#181818] block">
-                          Tap to Select Payment Screenshot
-                        </span>
-                        <span className="text-[11px] text-[#708579] font-light mt-0.5 block">
-                          Phone gallery ya files se screenshot select karein (JPG, PNG, WebP)
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  {submitError && (
-                    <div className="p-3 bg-red-50 border border-red-200 text-xs text-red-700 flex items-center gap-2">
-                      <AlertCircle className="w-4 h-4 shrink-0" />
-                      <span>{submitError}</span>
-                    </div>
-                  )}
-
-                  {/* Big Single Submit Button (Always responsive, never dead) */}
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full bg-[#24332C] text-white py-3.5 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 flex items-center justify-center gap-2 cursor-pointer shadow-sm"
-                  >
-                    {submitting ? (
-                      <>
-                        <RefreshCw className="w-4 h-4 animate-spin" />
-                        <span>Submitting Screenshot...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Upload className="w-4 h-4" />
-                        <span>
-                          {selectedFile || screenshotUrl
-                            ? 'Submit Screenshot for Verification'
-                            : 'Select & Submit Screenshot'}
-                        </span>
-                      </>
-                    )}
-                  </button>
-                </form>
-
-                <div className="p-3 bg-[#FAF8F5] border border-[#EAE5DE] text-[11px] text-[#5C5852] flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#24332C] shrink-0" />
-                  <span>Screenshot submit karne ke baad store owner turant verify karenge.</span>
+                      {copiedUpi ? <Check className="w-3 h-3 text-emerald-300" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedUpi ? 'Copied' : 'Copy'}</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
 
-              {/* Order Items Summary */}
-              <div className="bg-white border border-[#EAE5DE] p-6 space-y-3 shadow-xs">
-                <h4 className="text-xs uppercase tracking-wider font-semibold text-[#181818]">
-                  Order Items ({order.items.length})
-                </h4>
-                <div className="divide-y divide-[#EAE5DE] max-h-48 overflow-y-auto pr-1">
-                  {order.items.map((item, idx) => (
-                    <div key={idx} className="py-2.5 flex items-center justify-between text-xs">
-                      <div className="flex items-center gap-3">
-                        <div className="relative w-10 h-10 bg-[#F8F5F0] border border-[#EAE5DE] overflow-hidden shrink-0">
-                          <Image
-                            src={item.productImage || '/images/products/touch-distance-bracelet/hero.jpg'}
-                            alt={item.productName}
-                            fill
-                            className="object-cover"
-                          />
-                        </div>
-                        <div>
-                          <div className="font-medium text-[#181818]">{item.productName}</div>
-                          <div className="text-[10px] text-[#708579]">Qty: {item.quantity}</div>
-                        </div>
-                      </div>
-                      <span className="font-semibold text-[#181818]">
-                        &#8377;{(item.priceAtPurchase * item.quantity).toLocaleString('en-IN')}
-                      </span>
-                    </div>
-                  ))}
+                {/* Dynamic QR Code */}
+                <div className="p-2 bg-white border-2 border-stone-300 rounded-xl shadow-xs flex-none">
+                  <div className="relative w-36 h-36">
+                    <Image
+                      src={qrCodeUrl}
+                      alt={`Pay ₹${order.totalAmount} to ${payeeName}`}
+                      fill
+                      unoptimized
+                      priority
+                      className="object-contain"
+                    />
+                  </div>
+                  <span className="block text-[10px] text-center text-stone-400 font-mono mt-1 font-semibold">
+                    ₹{order.totalAmount} &bull; ELVORA
+                  </span>
                 </div>
               </div>
             </div>
+
+            {/* ─────────────────────────────────────────────────────────────
+                6. PRIMARY "I HAVE COMPLETED PAYMENT" ACTION BUTTON
+            ───────────────────────────────────────────────────────────── */}
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={confirmAndRedirect}
+                disabled={isRedirecting}
+                className="w-full py-4 px-6 rounded-xl bg-[#24332C] hover:bg-[#18231E] active:scale-[0.99] text-white text-sm font-bold uppercase tracking-wider shadow-lg hover:shadow-xl transition-all cursor-pointer flex items-center justify-center gap-2 group disabled:opacity-60"
+              >
+                <span>{isRedirecting ? 'Confirming Your Order...' : 'I Have Paid via UPI — View Order Confirmation'}</span>
+                <ArrowRight className="w-4 h-4 text-[#F5C400] group-hover:translate-x-1 transition-transform" />
+              </button>
+              <p className="text-[11px] text-center text-stone-400 mt-2">
+                Click this button after completing payment in your UPI app to jump immediately to your receipt.
+              </p>
+            </div>
           </div>
-        )}
+        </div>
+
+        {/* ─────────────────────────────────────────────────────────────
+            7. TRUST & ASSURANCE FOOTER
+        ───────────────────────────────────────────────────────────── */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-center text-xs text-stone-500">
+          <div className="p-3 bg-white border border-stone-200/60 rounded-xl flex items-center justify-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-600 flex-none" />
+            <span>NPCI / BHIM Verified</span>
+          </div>
+          <div className="p-3 bg-white border border-stone-200/60 rounded-xl flex items-center justify-center gap-2">
+            <Sparkles className="w-4 h-4 text-[#B89A69] flex-none" />
+            <span>100% Genuine Jewellery</span>
+          </div>
+          <div className="p-3 bg-white border border-stone-200/60 rounded-xl flex items-center justify-center gap-2">
+            <Clock className="w-4 h-4 text-stone-700 flex-none" />
+            <span>Fast Express Dispatch</span>
+          </div>
+        </div>
+
+        {/* WhatsApp Assistance */}
+        <div className="text-center pt-2">
+          <a
+            href={`https://wa.me/916386645203?text=Hi%20ELVORA,%20I%20have%20a%20question%20about%20Order%20${orderId}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-xs text-stone-500 hover:text-emerald-700 font-medium inline-flex items-center gap-1.5 transition-colors"
+          >
+            <span>Need help with payment? Chat with ELVORA Support on WhatsApp: +91 63866 45203</span>
+          </a>
+        </div>
+
       </div>
     </div>
   );

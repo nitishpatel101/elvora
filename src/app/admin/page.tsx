@@ -5,9 +5,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useAuth } from '@/context/AuthContext';
-import { useCurrency } from '@/context/CurrencyContext';
 import { Product, Order, StoreSettings, OrderStatus } from '@/types';
-import { compressImage, isVideoFileOrUrl } from '@/lib/imageCompression';
+import { compressImage } from '@/lib/imageCompression';
 import {
   Plus,
   Edit,
@@ -25,9 +24,7 @@ import {
   Upload,
   Eye,
   RefreshCw,
-  Megaphone,
   Image as ImageIcon,
-  Video,
   Truck,
   TrendingUp,
   Sparkles,
@@ -37,10 +34,16 @@ import {
 export default function AdminDashboardPage() {
   const router = useRouter();
   const { admin, isAdminLoggedIn, isAuthInitialized, logoutAdmin } = useAuth();
-  const { format } = useCurrency();
 
-  // Navigation Tabs: Added 'banners' tab
-  const [activeTab, setActiveTab] = useState<'payments' | 'products' | 'banners' | 'orders' | 'settings'>('payments');
+  // Navigation Tabs: Payments, Products, Orders, Store Settings
+  const [activeTab, setActiveTab] = useState<'payments' | 'products' | 'orders' | 'settings'>('payments');
+
+  // Quick Inline Price Editing State
+  const [editingPriceId, setEditingPriceId] = useState<string | null>(null);
+  const [quickPrice, setQuickPrice] = useState<string>('');
+  const [quickOriginalPrice, setQuickOriginalPrice] = useState<string>('');
+  const [savingPriceId, setSavingPriceId] = useState<string | null>(null);
+  const [priceSaveSuccessId, setPriceSaveSuccessId] = useState<string | null>(null);
 
   // Product Catalogue State
   const [products, setProducts] = useState<Product[]>([]);
@@ -108,7 +111,6 @@ export default function AdminDashboardPage() {
   const [settingsSaving, setSettingsSaving] = useState(false);
   const [settingsSaved, setSettingsSaved] = useState(false);
   const [uploadingQr, setUploadingQr] = useState(false);
-  const [uploadingHero, setUploadingHero] = useState(false);
 
   // Fetch Products
   const fetchProducts = async () => {
@@ -147,204 +149,74 @@ export default function AdminDashboardPage() {
     }
   };
 
-  // Story Circles State & Management
-  const [stories, setStories] = useState<any[]>([]);
-  const [savingStories, setSavingStories] = useState(false);
-  const [storiesSaved, setStoriesSaved] = useState(false);
-  const [uploadingStoryId, setUploadingStoryId] = useState<string | null>(null);
-
-  const fetchStories = async () => {
-    try {
-      const res = await fetch('/api/stories', { cache: 'no-store' });
-      const data = await res.json();
-      if (Array.isArray(data)) setStories(data);
-    } catch {}
+  // Quick Inline Price Editing Handlers
+  const handleStartEditPrice = (prod: Product) => {
+    setEditingPriceId(prod.id);
+    setQuickPrice(String(prod.price));
+    setQuickOriginalPrice(prod.originalPrice ? String(prod.originalPrice) : String(Math.round(prod.price * 1.5)));
   };
 
-  // Hero Carousel Slides State & Management (Main Banner Slider)
-  const [heroSlides, setHeroSlides] = useState<any[]>([]);
-  const [savingHeroSlides, setSavingHeroSlides] = useState(false);
-  const [heroSlidesSaved, setHeroSlidesSaved] = useState(false);
-  const [uploadingSlideId, setUploadingSlideId] = useState<string | null>(null);
-
-  const fetchHeroSlides = async () => {
+  const handleQuickSavePrice = async (productId: string) => {
+    const p = Math.round(Number(quickPrice));
+    const op = Math.round(Number(quickOriginalPrice));
+    if (isNaN(p) || p <= 0) {
+      alert('Please enter a valid selling price');
+      return;
+    }
+    setSavingPriceId(productId);
     try {
-      const local = localStorage.getItem('elvora_hero_slides');
-      if (local) {
-        const parsed = JSON.parse(local);
-        if (Array.isArray(parsed) && parsed.length > 0) setHeroSlides(parsed);
-      }
-    } catch {}
-    try {
-      const res = await fetch(`/api/hero-slides?t=${Date.now()}`, { cache: 'no-store' });
-      const data = await res.json();
-      if (Array.isArray(data) && data.length > 0) {
-        setHeroSlides(data);
-        try {
-          localStorage.setItem('elvora_hero_slides', JSON.stringify(data));
-        } catch {}
-      }
-    } catch {}
-  };
-
-  const handleSaveHeroSlides = async (slidesToSave?: any[] | React.MouseEvent | unknown) => {
-    const targetSlides = Array.isArray(slidesToSave) ? slidesToSave : heroSlides;
-    setSavingHeroSlides(true);
-    setHeroSlidesSaved(false);
-    try {
-      localStorage.setItem('elvora_hero_slides', JSON.stringify(targetSlides));
-    } catch {}
-    try {
-      const res = await fetch('/api/hero-slides', {
-        method: 'POST',
+      const res = await fetch(`/api/products/${productId}`, {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(targetSlides),
+        body: JSON.stringify({
+          price: p,
+          originalPrice: !isNaN(op) && op > p ? op : Math.round(p * 1.5),
+        }),
       });
       if (res.ok) {
-        setHeroSlidesSaved(true);
-        setTimeout(() => setHeroSlidesSaved(false), 4000);
-        return true;
-      } else {
-        const err = await res.json().catch(() => ({}));
-        alert(`Failed to save slides: ${err.error || res.statusText}`);
-        return false;
-      }
-    } catch (err: any) {
-      alert(`Network error saving slides: ${err.message || 'Please check connection'}`);
-      return false;
-    } finally {
-      setSavingHeroSlides(false);
-    }
-  };
-
-  const handleSlideImageUpload = async (slideId: string, file: File) => {
-    setUploadingSlideId(slideId);
-    try {
-      const isVid = file.type.startsWith('video/') || /\.(mp4|webm|mov|ogg|m4v)$/i.test(file.name);
-      // Compress large smartphone/laptop images client-side before upload to prevent payload size errors. Videos pass through untouched.
-      const processed = await compressImage(file, 1920, 1080, 0.82);
-      const formData = new FormData();
-      formData.append('file', processed);
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-      if (res.ok && data.url) {
-        const updated = heroSlides.map((s) =>
-          s.id === slideId ? { ...s, image: data.url, mediaType: isVid ? 'video' : 'image' } : s
+        const updated: Product = await res.json();
+        setProducts((prev) =>
+          prev.map((item) =>
+            item.id === productId
+              ? { ...item, price: updated.price, originalPrice: updated.originalPrice }
+              : item
+          )
         );
-        setHeroSlides(updated);
-        try {
-          localStorage.setItem('elvora_hero_slides', JSON.stringify(updated));
-        } catch {}
-        // Immediately persist to server
-        await handleSaveHeroSlides(updated);
+        setPriceSaveSuccessId(productId);
+        setTimeout(() => setPriceSaveSuccessId(null), 3000);
+        setEditingPriceId(null);
       } else {
-        alert(data.error || 'Failed to upload media');
+        alert('Failed to update price');
       }
-    } catch (err: any) {
-      alert(`Upload error: ${err.message || 'Upload failed'}`);
+    } catch {
+      alert('Network error while updating price');
     } finally {
-      setUploadingSlideId(null);
+      setSavingPriceId(null);
     }
   };
 
-  const handleAddSlide = async () => {
-    const newSlide = {
-      id: `slide-${Date.now()}`,
-      title: 'New Featured Offer',
-      subtitle: 'Write an attractive description of this special gift collection.',
-      cta: 'Shop Now',
-      link: '/shop',
-      image: '/images/giftify/hero-banner.jpg',
-      mediaType: 'image',
-      tag: '✨ Special Edition',
-      highlight: 'Limited Time Exclusive',
-    };
-    const updated = [...heroSlides, newSlide];
-    setHeroSlides(updated);
+  const handleToggleStock = async (productId: string, currentInStock: boolean) => {
+    const newStockStatus = !currentInStock;
     try {
-      localStorage.setItem('elvora_hero_slides', JSON.stringify(updated));
-    } catch {}
-    await handleSaveHeroSlides(updated);
-  };
-
-  const handleDeleteSlide = async (slideId: string) => {
-    if (heroSlides.length <= 1) {
-      alert('You must have at least one hero banner slide.');
-      return;
-    }
-    if (!confirm('Are you sure you want to permanently delete this slide from the website?')) {
-      return;
-    }
-    const updated = heroSlides.filter((s) => s.id !== slideId);
-    setHeroSlides(updated);
-    try {
-      localStorage.setItem('elvora_hero_slides', JSON.stringify(updated));
-    } catch {}
-    const ok = await handleSaveHeroSlides(updated);
-    if (ok) {
-      alert('Slide deleted successfully and removed live from website!');
-    }
-  };
-
-  // Occasions State & Management (3D Character Cards)
-  const [occasions, setOccasions] = useState<any[]>([]);
-  const [savingOccasions, setSavingOccasions] = useState(false);
-  const [occasionsSaved, setOccasionsSaved] = useState(false);
-  const [uploadingOccasionId, setUploadingOccasionId] = useState<string | null>(null);
-
-  const fetchOccasions = async () => {
-    try {
-      const res = await fetch('/api/occasions', { cache: 'no-store' });
-      const data = await res.json();
-      if (Array.isArray(data)) setOccasions(data);
-    } catch {}
-  };
-
-  const handleSaveOccasions = async () => {
-    setSavingOccasions(true);
-    setOccasionsSaved(false);
-    try {
-      const res = await fetch('/api/occasions', {
-        method: 'POST',
+      const res = await fetch(`/api/products/${productId}`, {
+        method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(occasions),
+        body: JSON.stringify({
+          inStock: newStockStatus,
+          stock: newStockStatus ? 25 : 0,
+        }),
       });
       if (res.ok) {
-        setOccasionsSaved(true);
-        setTimeout(() => setOccasionsSaved(false), 3000);
+        setProducts((prev) =>
+          prev.map((item) =>
+            item.id === productId
+              ? { ...item, inStock: newStockStatus, stock: newStockStatus ? 25 : 0 }
+              : item
+          )
+        );
       }
-    } finally {
-      setSavingOccasions(false);
-    }
-  };
-
-  const handleOccasionImageUpload = async (occId: string, file: File) => {
-    setUploadingOccasionId(occId);
-    try {
-      const compressed = await compressImage(file, 800, 800, 0.85);
-      const formData = new FormData();
-      formData.append('file', compressed);
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-      if (res.ok && data.url) {
-        const updated = occasions.map((o) => (o.id === occId || o.name === occId ? { ...o, image: data.url } : o));
-        setOccasions(updated);
-        await fetch('/api/occasions', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updated),
-        });
-        setOccasionsSaved(true);
-        setTimeout(() => setOccasionsSaved(false), 3000);
-      }
-    } finally {
-      setUploadingOccasionId(null);
+    } catch {
+      alert('Failed to toggle stock status');
     }
   };
 
@@ -357,88 +229,7 @@ export default function AdminDashboardPage() {
     fetchProducts();
     fetchOrders();
     fetchSettings();
-    fetchStories();
-    fetchHeroSlides();
-    fetchOccasions();
   }, [isAdminLoggedIn, isAuthInitialized, router]);
-
-  const handleSaveStories = async () => {
-    setSavingStories(true);
-    setStoriesSaved(false);
-    try {
-      const res = await fetch('/api/stories', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(stories),
-      });
-      if (res.ok) {
-        setStoriesSaved(true);
-        setTimeout(() => setStoriesSaved(false), 3000);
-      }
-    } finally {
-      setSavingStories(false);
-    }
-  };
-
-  const handleStoryImageUpload = async (storyId: string, file: File) => {
-    setUploadingStoryId(storyId);
-    try {
-      const compressed = await compressImage(file, 600, 600, 0.85);
-      const formData = new FormData();
-      formData.append('file', compressed);
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      const data = await res.json();
-      if (res.ok && data.url) {
-        const updated = stories.map((s) => (s.id === storyId ? { ...s, image: data.url } : s));
-        setStories(updated);
-        await fetch('/api/stories', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updated),
-        });
-        setStoriesSaved(true);
-        setTimeout(() => setStoriesSaved(false), 3000);
-      }
-    } finally {
-      setUploadingStoryId(null);
-    }
-  };
-
-  const handleAddStory = () => {
-    const newStory = {
-      id: `s-${Date.now()}`,
-      label: 'New Story',
-      image: '/images/giftify/stories/anniversary.png',
-      href: '/shop',
-      headline: 'Special Collection ✨',
-      tagline: 'Discover trending gifts handcrafted with love',
-    };
-    setStories([...stories, newStory]);
-  };
-
-  const handleDeleteStory = (storyId: string) => {
-    if (stories.length <= 1) return;
-    setStories(stories.filter((s) => s.id !== storyId));
-  };
-
-  const handleAddOccasion = () => {
-    const newOcc = {
-      id: `occ-${Date.now()}`,
-      name: 'New Occasion',
-      emoji: '🎉',
-      image: '/images/giftify/occasions/birthdays.jpg',
-      href: '/shop',
-    };
-    setOccasions([...occasions, newOcc]);
-  };
-
-  const handleDeleteOccasion = (occId: string) => {
-    if (occasions.length <= 1) return;
-    setOccasions(occasions.filter((o) => (o.id || o.name) !== occId));
-  };
 
   // Save Settings
   const handleSaveSettings = async (e?: React.FormEvent) => {
@@ -780,36 +571,6 @@ export default function AdminDashboardPage() {
     }
   };
 
-  // Hero Banner Upload
-  const handleHeroUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
-
-    setUploadingHero(true);
-    try {
-      const formData = new FormData();
-      formData.append('file', file);
-
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      const data = await res.json();
-      if (res.ok && data.url) {
-        const updated = { ...settings, heroImage: data.url };
-        setSettings(updated);
-        await fetch('/api/settings', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(updated),
-        });
-      }
-    } finally {
-      setUploadingHero(false);
-    }
-  };
-
   if (!isAdminLoggedIn) return null;
 
   // Key Metrics
@@ -998,19 +759,7 @@ export default function AdminDashboardPage() {
             }`}
           >
             <Package className="w-4 h-4" />
-            <span>Product Catalogue ({products.length})</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('banners')}
-            className={`pb-3 px-2 text-xs uppercase tracking-[0.2em] font-semibold transition-all relative flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'banners'
-                ? 'text-[#24332C] border-b-2 border-[#24332C]'
-                : 'text-[#77736D] hover:text-[#181818]'
-            }`}
-          >
-            <Megaphone className="w-4 h-4" />
-            <span>Banners &amp; Announcements</span>
+            <span>Products &amp; Pricing ({products.length})</span>
           </button>
 
           <button
@@ -1034,7 +783,7 @@ export default function AdminDashboardPage() {
             }`}
           >
             <Settings className="w-4 h-4" />
-            <span>UPI &amp; Store Settings</span>
+            <span>Store &amp; UPI Settings</span>
           </button>
         </div>
 
@@ -1195,9 +944,10 @@ export default function AdminDashboardPage() {
                                   <button
                                     onClick={() => handleVerifyPayment(ord.id)}
                                     disabled={verifyingId === ord.id}
-                                    className="bg-[#24332C] text-white px-3 py-1.5 text-[11px] uppercase tracking-wider font-semibold hover:bg-[#19241F] transition-colors disabled:opacity-50 cursor-pointer shadow-2xs"
+                                    className="bg-emerald-700 hover:bg-emerald-800 text-white px-3 py-1.5 text-[11px] uppercase tracking-wider font-bold transition-all disabled:opacity-50 cursor-pointer shadow-xs rounded flex items-center gap-1.5"
                                   >
-                                    {verifyingId === ord.id ? 'Verifying...' : 'Verify Payment'}
+                                    <CheckCircle2 className="w-3.5 h-3.5" />
+                                    <span>{verifyingId === ord.id ? 'Approving...' : 'Approve Payment'}</span>
                                   </button>
 
                                   <button
@@ -1306,12 +1056,94 @@ export default function AdminDashboardPage() {
                             </span>
                           </td>
 
-                          <td className="py-3 px-4 font-semibold text-[#181818]">
-                            {format(prod.price)}
+                          {/* Selling Price with Instant Quick Editor */}
+                          <td className="py-3 px-4">
+                            {editingPriceId === prod.id ? (
+                              <div className="flex flex-col gap-1.5 p-2 bg-[#FAF8F5] border border-[#24332C] shadow-sm rounded min-w-[140px]">
+                                <label className="text-[10px] uppercase font-bold text-stone-600">New Price (&#8377;)</label>
+                                <input
+                                  type="number"
+                                  value={quickPrice}
+                                  onChange={(e) => setQuickPrice(e.target.value)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter') handleQuickSavePrice(prod.id);
+                                  }}
+                                  placeholder="Price"
+                                  className="w-full bg-white border border-[#E7E1D8] px-2 py-1 text-xs font-bold text-[#181818] focus:outline-none focus:border-[#24332C]"
+                                  autoFocus
+                                />
+                                <label className="text-[9px] uppercase text-stone-400">Old Strike (&#8377;)</label>
+                                <input
+                                  type="number"
+                                  value={quickOriginalPrice}
+                                  onChange={(e) => setQuickOriginalPrice(e.target.value)}
+                                  onKeyDown={(e) => {
+                                    if (e.key === 'Enter') handleQuickSavePrice(prod.id);
+                                  }}
+                                  placeholder="Original Price"
+                                  className="w-full bg-white border border-[#E7E1D8] px-2 py-0.5 text-[11px] text-stone-500 focus:outline-none focus:border-[#24332C]"
+                                />
+                                <div className="flex items-center gap-1 pt-1">
+                                  <button
+                                    type="button"
+                                    disabled={savingPriceId === prod.id}
+                                    onClick={() => handleQuickSavePrice(prod.id)}
+                                    className="flex-1 py-1 bg-emerald-700 hover:bg-emerald-800 text-white text-[10px] font-bold uppercase rounded cursor-pointer disabled:opacity-50"
+                                  >
+                                    {savingPriceId === prod.id ? 'Saving...' : 'Save'}
+                                  </button>
+                                  <button
+                                    type="button"
+                                    onClick={() => setEditingPriceId(null)}
+                                    className="px-2 py-1 bg-stone-200 hover:bg-stone-300 text-stone-700 text-[10px] rounded cursor-pointer"
+                                  >
+                                    Cancel
+                                  </button>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="flex items-center gap-2 group">
+                                <div>
+                                  <div className="font-bold text-sm text-[#181818]">
+                                    &#8377;{prod.price.toLocaleString('en-IN')}
+                                  </div>
+                                  {prod.originalPrice ? (
+                                    <div className="text-[10px] text-stone-400 line-through">
+                                      &#8377;{prod.originalPrice.toLocaleString('en-IN')}
+                                    </div>
+                                  ) : null}
+                                  {priceSaveSuccessId === prod.id && (
+                                    <span className="text-[10px] font-bold text-emerald-600 block animate-pulse">
+                                      ✓ Updated!
+                                    </span>
+                                  )}
+                                </div>
+                                <button
+                                  type="button"
+                                  onClick={() => handleStartEditPrice(prod)}
+                                  className="opacity-70 group-hover:opacity-100 p-1.5 hover:bg-stone-200/70 rounded text-[#B89A69] hover:text-[#181818] transition-all cursor-pointer"
+                                  title="Change Product Price"
+                                >
+                                  <Edit className="w-3.5 h-3.5" />
+                                </button>
+                              </div>
+                            )}
                           </td>
 
+                          {/* 1-Click Stock Toggle */}
                           <td className="py-3 px-4">
-                            <span className="font-semibold text-emerald-700">{prod.stock} units</span>
+                            <button
+                              type="button"
+                              onClick={() => handleToggleStock(prod.id, prod.inStock)}
+                              className={`px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider rounded-full transition-all cursor-pointer border ${
+                                prod.inStock
+                                  ? 'bg-emerald-50 text-emerald-700 border-emerald-300 hover:bg-emerald-100'
+                                  : 'bg-rose-50 text-rose-700 border-rose-300 hover:bg-rose-100'
+                              }`}
+                              title="Click to toggle In-Stock / Out-of-Stock"
+                            >
+                              {prod.inStock ? `● In Stock (${prod.stock})` : '✕ Out of Stock'}
+                            </button>
                           </td>
 
                           {/* Quick Photo Manager Button */}
@@ -1368,717 +1200,8 @@ export default function AdminDashboardPage() {
           </div>
         )}
 
-        {/* ======================================================== */}
-        {/* TAB 3: BANNERS & ANNOUNCEMENTS EDITOR (NEW FEATURE) */}
-        {/* ======================================================== */}
-        {activeTab === 'banners' && (
-          <div className="space-y-8">
-            {settingsSaved && (
-              <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 shrink-0" />
-                <span>Store banners and announcement bar updated successfully! Changes are live across the website.</span>
-              </div>
-            )}
-
-            {/* Announcement Bar Customizer */}
-            <div className="bg-white border border-[#E7E1D8] p-6 sm:p-8 space-y-6 shadow-xs">
-              <div className="flex items-center gap-3 pb-4 border-b border-[#E7E1D8]">
-                <Megaphone className="w-5 h-5 text-[#24332C]" />
-                <div>
-                  <h3 className="font-serif text-xl text-[#181818] font-light">
-                    Header Announcement Bar
-                  </h3>
-                  <p className="text-xs text-[#708579]">
-                    The top green promotional bar shown at the very top of every page.
-                  </p>
-                </div>
-              </div>
-
-              {/* Live Preview */}
-              <div>
-                <span className="text-[10px] uppercase tracking-wider text-[#708579] font-medium block mb-2">
-                  Live Preview:
-                </span>
-                <div className="bg-[#24332C] text-[#FAF8F5] text-[11px] tracking-[0.2em] uppercase py-2 px-4 flex items-center justify-between font-medium">
-                  <span className="hidden sm:inline text-[#A3B2A9]">
-                    {settings.announcementSubText || 'FREE EXPRESS SHIPPING ON ORDERS ₹99+'}
-                  </span>
-                  <span className="flex-1 text-center truncate px-2 font-semibold tracking-[0.22em]">
-                    {settings.announcementText || 'BLACK FRIDAY SALE • 30% OFF • USE CODE: ELVORA30'}
-                  </span>
-                  <span className="text-[#A3B2A9] text-xs">&times;</span>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#181818] font-medium mb-1.5">
-                    Main Promotional Text
-                  </label>
-                  <input
-                    type="text"
-                    value={settings.announcementText || ''}
-                    onChange={(e) => setSettings({ ...settings, announcementText: e.target.value })}
-                    placeholder="e.g. BLACK FRIDAY SALE • 30% OFF • USE CODE: ELVORA30"
-                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs uppercase tracking-wider text-[#181818] font-medium mb-1.5">
-                    Left Sub-text (e.g. Shipping Offer)
-                  </label>
-                  <input
-                    type="text"
-                    value={settings.announcementSubText || ''}
-                    onChange={(e) => setSettings({ ...settings, announcementSubText: e.target.value })}
-                    placeholder="e.g. FREE EXPRESS SHIPPING ON ORDERS ₹99+"
-                    className="w-full bg-[#FAF8F5] border border-[#E7E1D8] px-3.5 py-2.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C]"
-                  />
-                </div>
-              </div>
-
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="announcementVisibleCheck"
-                  checked={settings.announcementVisible ?? true}
-                  onChange={(e) => setSettings({ ...settings, announcementVisible: e.target.checked })}
-                  className="w-4 h-4 text-[#24332C] focus:ring-0 rounded-none cursor-pointer"
-                />
-                <label htmlFor="announcementVisibleCheck" className="text-xs text-[#181818] font-medium cursor-pointer">
-                  Display Announcement Bar across all website pages
-                </label>
-              </div>
-            </div>
-
-            {/* Homepage Hero Carousel Slides Manager (Main Banner Slider) */}
-            <div className="bg-white border border-[#E7E1D8] p-6 sm:p-8 space-y-6 shadow-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E7E1D8]">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-[#FAF5E6] border border-[#F5C400]/40 flex items-center justify-center text-[#D9A300]">
-                    <Sparkles className="w-5 h-5 text-[#D9A300]" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-xl text-[#181818] font-light">
-                      Homepage Hero Carousel Slides (Main Banner Slider)
-                    </h3>
-                    <p className="text-xs text-[#708579]">
-                      Edit all sliding hero banners on the homepage (Heat Activated Lockets, Couple Bracelets, Crystal Cubes, etc.). Upload photos, change headlines, badges, buttons, and links.
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={handleAddSlide}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-md transition-colors border border-stone-300"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                    <span>+ Add New Slide</span>
-                  </button>
-                  {heroSlidesSaved && (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> Slides Saved Live!
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              {/* List of Slides */}
-              <div className="space-y-6">
-                {heroSlides.map((slide, idx) => (
-                  <div
-                    key={slide.id || idx}
-                    className="border border-[#E7E1D8] rounded-xl p-5 bg-[#FAF8F5]/60 hover:border-[#24332C]/40 transition-colors space-y-4"
-                  >
-                    {/* Slide Header: Index, Tag & Delete */}
-                    <div className="flex items-center justify-between pb-3 border-b border-[#E7E1D8]">
-                      <div className="flex items-center gap-2">
-                        <span className="w-6 h-6 rounded-full bg-[#24332C] text-white text-xs font-bold flex items-center justify-center">
-                          {idx + 1}
-                        </span>
-                        <span className="text-xs font-bold text-stone-900">
-                          Slide #{idx + 1}: {slide.title || 'Untitled Banner'}
-                        </span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <button
-                          type="button"
-                          onClick={() => handleSaveHeroSlides()}
-                          disabled={savingHeroSlides}
-                          className="inline-flex items-center gap-1 px-3 py-1 bg-[#24332C] hover:bg-[#19241F] text-white text-xs font-bold rounded shadow-xs cursor-pointer transition-colors disabled:opacity-50"
-                          title="Save this slide live to website"
-                        >
-                          <Check className="w-3.5 h-3.5 text-[#F5C400]" />
-                          <span>Save Live</span>
-                        </button>
-                        {heroSlides.length > 1 && (
-                          <button
-                            type="button"
-                            onClick={() => handleDeleteSlide(slide.id)}
-                            className="text-stone-400 hover:text-red-600 transition-colors p-1"
-                            title="Delete this slide"
-                          >
-                            <Trash2 className="w-4 h-4" />
-                          </button>
-                        )}
-                      </div>
-                    </div>
-
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                      {/* Left: Live Visual Preview & Image Upload */}
-                      <div className="lg:col-span-5 space-y-3">
-                        <span className="text-[10px] uppercase tracking-wider text-[#708579] font-medium block">
-                          Slide Preview:
-                        </span>
-                        <div className="relative w-full aspect-[2/1] rounded-xl overflow-hidden bg-stone-950 border border-stone-800 shadow-sm">
-                          {isVideoFileOrUrl(slide.image, slide.mediaType) ? (
-                            <video
-                              src={slide.image}
-                              autoPlay
-                              loop
-                              muted
-                              playsInline
-                              className="w-full h-full object-cover"
-                            />
-                          ) : (
-                            <Image
-                              src={slide.image || '/images/giftify/hero-banner.jpg'}
-                              alt={slide.title || 'Slide'}
-                              fill
-                              className="object-cover"
-                              unoptimized
-                            />
-                          )}
-                          <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent pointer-events-none" />
-                          <div className="absolute top-2 right-2 z-10">
-                            <span className="bg-black/70 backdrop-blur text-white text-[9px] font-bold px-2 py-0.5 rounded-full flex items-center gap-1 border border-white/20">
-                              {isVideoFileOrUrl(slide.image, slide.mediaType) ? (
-                                <>
-                                  <Video className="w-2.5 h-2.5 text-[#F5C400]" /> Video Banner
-                                </>
-                              ) : (
-                                <>
-                                  <ImageIcon className="w-2.5 h-2.5 text-stone-300" /> Photo Banner
-                                </>
-                              )}
-                            </span>
-                          </div>
-                          <div className="absolute inset-0 p-4 flex flex-col justify-center text-white pointer-events-none">
-                            <span className="bg-[#F5C400] text-black text-[9px] font-extrabold px-2 py-0.5 rounded-full w-max mb-1">
-                              {slide.tag || 'Trending'}
-                            </span>
-                            <h4 className="font-sans font-extrabold text-sm line-clamp-1 drop-shadow-sm">
-                              {slide.title || 'Slide Title'}
-                            </h4>
-                            <p className="text-[10px] text-stone-200 line-clamp-2 mt-0.5">
-                              {slide.subtitle || 'Slide subtitle description'}
-                            </p>
-                            <span className="mt-2 bg-[#F5C400] text-black text-[9px] font-bold px-2.5 py-1 rounded w-max">
-                              {slide.cta || 'Shop Now'} &rarr;
-                            </span>
-                          </div>
-                          {uploadingSlideId === slide.id && (
-                            <div className="absolute inset-0 bg-black/70 flex items-center justify-center text-white text-xs font-bold">
-                              Uploading Media...
-                            </div>
-                          )}
-                        </div>
-
-                        {/* Replace Image / Video Button */}
-                        <div className="flex flex-wrap items-center gap-3">
-                          <label className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#24332C] hover:bg-[#19241F] text-white text-xs font-bold uppercase tracking-wider rounded-md transition-colors shadow-xs">
-                            <Upload className="w-3.5 h-3.5" />
-                            <span>{uploadingSlideId === slide.id ? 'Uploading...' : 'Upload Photo / Video (MP4)'}</span>
-                            <input
-                              type="file"
-                              accept="image/*,video/mp4,video/webm,video/quicktime,video/*"
-                              className="hidden"
-                              onChange={(e) => e.target.files?.[0] && handleSlideImageUpload(slide.id, e.target.files[0])}
-                            />
-                          </label>
-                          <span className="text-[11px] text-[#708579]">Photo or MP4/WebM video</span>
-                        </div>
-
-                        {/* Media type toggle and URL input */}
-                        <div className="space-y-1.5">
-                          <div className="flex items-center gap-4 text-xs font-medium text-stone-600">
-                            <span className="text-[10px] uppercase font-bold text-stone-500">Media Type:</span>
-                            <label className="inline-flex items-center gap-1 cursor-pointer">
-                              <input
-                                type="radio"
-                                name={`media-type-${slide.id}`}
-                                checked={slide.mediaType !== 'video' && !isVideoFileOrUrl(slide.image, slide.mediaType)}
-                                onChange={() => {
-                                  const updated = heroSlides.map((s) => (s.id === slide.id ? { ...s, mediaType: 'image' } : s));
-                                  setHeroSlides(updated);
-                                  try { localStorage.setItem('elvora_hero_slides', JSON.stringify(updated)); } catch {}
-                                }}
-                              />
-                              <span>🖼️ Photo</span>
-                            </label>
-                            <label className="inline-flex items-center gap-1 cursor-pointer">
-                              <input
-                                type="radio"
-                                name={`media-type-${slide.id}`}
-                                checked={slide.mediaType === 'video' || isVideoFileOrUrl(slide.image, slide.mediaType)}
-                                onChange={() => {
-                                  const updated = heroSlides.map((s) => (s.id === slide.id ? { ...s, mediaType: 'video' } : s));
-                                  setHeroSlides(updated);
-                                  try { localStorage.setItem('elvora_hero_slides', JSON.stringify(updated)); } catch {}
-                                }}
-                              />
-                              <span>🎥 Video</span>
-                            </label>
-                          </div>
-                          <input
-                            type="text"
-                            value={slide.image || ''}
-                            onChange={(e) => {
-                              const val = e.target.value;
-                              const isVid = isVideoFileOrUrl(val);
-                              const updated = heroSlides.map((s) =>
-                                s.id === slide.id ? { ...s, image: val, mediaType: isVid ? 'video' : s.mediaType || 'image' } : s
-                              );
-                              setHeroSlides(updated);
-                              try { localStorage.setItem('elvora_hero_slides', JSON.stringify(updated)); } catch {}
-                            }}
-                            placeholder="Media URL (Image or MP4 Video, e.g. /images/... or https://...)"
-                            className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm font-mono text-[11px]"
-                          />
-                        </div>
-                      </div>
-
-                      {/* Right: Slide Text Fields */}
-                      <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div className="sm:col-span-2">
-                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
-                            Main Heading / Title
-                          </label>
-                          <input
-                            type="text"
-                            value={slide.title || ''}
-                            onChange={(e) =>
-                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, title: e.target.value } : s)))
-                            }
-                            placeholder="e.g. Heat Activated Magic Photo Lockets"
-                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] font-bold focus:outline-none focus:border-[#24332C] rounded-sm"
-                          />
-                        </div>
-
-                        <div className="sm:col-span-2">
-                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
-                            Subtitle / Description
-                          </label>
-                          <textarea
-                            rows={2}
-                            value={slide.subtitle || ''}
-                            onChange={(e) =>
-                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, subtitle: e.target.value } : s)))
-                            }
-                            placeholder="e.g. A discreet elegant pendant that reveals your secret love photo only when touched by body heat."
-                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm resize-none"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
-                            Badge Tag (Pill on Top)
-                          </label>
-                          <input
-                            type="text"
-                            value={slide.tag || ''}
-                            onChange={(e) =>
-                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, tag: e.target.value } : s)))
-                            }
-                            placeholder="e.g. 🔥 Secret Surprise"
-                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
-                            Highlight Text
-                          </label>
-                          <input
-                            type="text"
-                            value={slide.highlight || ''}
-                            onChange={(e) =>
-                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, highlight: e.target.value } : s)))
-                            }
-                            placeholder="e.g. 100% Water Resistant & Anti-Tarnish"
-                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
-                            Button Label (CTA)
-                          </label>
-                          <input
-                            type="text"
-                            value={slide.cta || ''}
-                            onChange={(e) =>
-                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, cta: e.target.value } : s)))
-                            }
-                            placeholder="e.g. Order Custom Locket"
-                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] font-semibold focus:outline-none focus:border-[#24332C] rounded-sm"
-                          />
-                        </div>
-
-                        <div>
-                          <label className="text-[10px] uppercase font-bold text-stone-600 block mb-1">
-                            Button Link (Destination URL)
-                          </label>
-                          <input
-                            type="text"
-                            value={slide.link || ''}
-                            onChange={(e) =>
-                              setHeroSlides(heroSlides.map((s) => (s.id === slide.id ? { ...s, link: e.target.value } : s)))
-                            }
-                            placeholder="e.g. /product/heat-activated-magic-photo-necklace"
-                            className="w-full bg-white border border-[#E7E1D8] px-3 py-2 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
-                          />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Save Hero Slides Button */}
-              <div className="pt-4 border-t border-[#E7E1D8] flex items-center justify-between">
-                <button
-                  type="button"
-                  onClick={() => handleSaveHeroSlides()}
-                  disabled={savingHeroSlides}
-                  className="bg-[#24332C] text-white px-6 py-3 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 cursor-pointer shadow-xs inline-flex items-center gap-2"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-[#F5C400]" />
-                  <span>{savingHeroSlides ? 'Saving Slides...' : 'Save & Publish Hero Banner Slides'}</span>
-                </button>
-                {heroSlidesSaved && (
-                  <span className="text-xs font-semibold text-emerald-700">
-                    Hero carousel updated successfully and live on homepage!
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Story Circles Manager */}
-            <div className="bg-white border border-[#E7E1D8] p-6 sm:p-8 space-y-6 shadow-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E7E1D8]">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-[#FAF5E6] border border-[#F5C400]/40 flex items-center justify-center text-[#D9A300]">
-                    <Sparkles className="w-5 h-5 text-[#D9A300]" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-xl text-[#181818] font-light">
-                      Homepage Story Circles (Top Bubbles)
-                    </h3>
-                    <p className="text-xs text-[#708579]">
-                      Upload photos, change titles, links &amp; popup text for each of the 8 story circles on the homepage.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={handleAddStory}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-md transition-colors border border-stone-300"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                    <span>+ Add New Story Bubble</span>
-                  </button>
-                  {storiesSaved && (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> Stories Saved Live!
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {stories.map((story, idx) => (
-                  <div
-                    key={story.id || idx}
-                    className="p-4 border border-[#E7E1D8] rounded-xl flex flex-col items-center space-y-3 bg-[#FAF8F5]/80 hover:border-[#24332C]/40 transition-colors relative"
-                  >
-                    {/* Delete story button */}
-                    {stories.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteStory(story.id)}
-                        className="absolute top-2 right-2 text-stone-400 hover:text-red-600 transition-colors p-1"
-                        title="Delete this story"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    )}
-                    {/* Circle Image Preview */}
-                    <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-[#F5C400] shadow-sm bg-white shrink-0 group">
-                      <Image
-                        src={story.image || '/images/giftify/stories/anniversary.png'}
-                        alt={story.label || 'Story'}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                      {uploadingStoryId === story.id && (
-                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white text-[10px] font-bold">
-                          Uploading...
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Change Photo Button */}
-                    <label className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#24332C] hover:bg-[#19241F] text-white text-[10px] font-bold uppercase tracking-wider rounded-md transition-colors shadow-xs">
-                      <Upload className="w-3 h-3" />
-                      <span>{uploadingStoryId === story.id ? 'Uploading...' : 'Upload Image'}</span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={(e) => e.target.files?.[0] && handleStoryImageUpload(story.id, e.target.files[0])}
-                      />
-                    </label>
-
-                    {/* Inputs */}
-                    <div className="w-full space-y-2 pt-1 text-left">
-                      <div>
-                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
-                          Circle Label
-                        </label>
-                        <input
-                          type="text"
-                          value={story.label || ''}
-                          onChange={(e) =>
-                            setStories(stories.map((s) => (s.id === story.id ? { ...s, label: e.target.value } : s)))
-                          }
-                          placeholder="e.g. Anniversary"
-                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] font-medium focus:outline-none focus:border-[#24332C] rounded-sm"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
-                          Redirect Link (URL)
-                        </label>
-                        <input
-                          type="text"
-                          value={story.href || ''}
-                          onChange={(e) =>
-                            setStories(stories.map((s) => (s.id === story.id ? { ...s, href: e.target.value } : s)))
-                          }
-                          placeholder="e.g. /shop?category=anniversary-gifts"
-                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
-                          Popup Headline
-                        </label>
-                        <input
-                          type="text"
-                          value={story.headline || ''}
-                          onChange={(e) =>
-                            setStories(stories.map((s) => (s.id === story.id ? { ...s, headline: e.target.value } : s)))
-                          }
-                          placeholder="e.g. Anniversary Specials 🥂"
-                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Save Stories Button */}
-              <div className="pt-4 border-t border-[#E7E1D8] flex items-center justify-between">
-                <button
-                  type="button"
-                  onClick={handleSaveStories}
-                  disabled={savingStories}
-                  className="bg-[#24332C] text-white px-6 py-3 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 cursor-pointer shadow-xs inline-flex items-center gap-2"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-[#F5C400]" />
-                  <span>{savingStories ? 'Saving Stories...' : 'Save & Update Story Circles'}</span>
-                </button>
-                {storiesSaved && (
-                  <span className="text-xs font-semibold text-emerald-700">
-                    All changes saved and live on homepage!
-                  </span>
-                )}
-              </div>
-            </div>
-
-            {/* Gifts by Occasion Manager (3D Character Cards) */}
-            <div className="bg-white border border-[#E7E1D8] p-6 sm:p-8 space-y-6 shadow-xs">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#E7E1D8]">
-                <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-full bg-[#FAF5E6] border border-[#F5C400]/40 flex items-center justify-center text-[#D9A300]">
-                    <Sparkles className="w-5 h-5 text-[#D9A300]" />
-                  </div>
-                  <div>
-                    <h3 className="font-serif text-xl text-[#181818] font-light">
-                      Homepage Gifts by Occasion (3D Character Cards)
-                    </h3>
-                    <p className="text-xs text-[#708579]">
-                      Edit 3D character occasion cards (Birthdays, Anniversaries, Weddings, Valentine&apos;s, Festive). Upload photos, change names and destination links.
-                    </p>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <button
-                    type="button"
-                    onClick={handleAddOccasion}
-                    className="inline-flex items-center gap-1.5 px-3 py-2 bg-stone-100 hover:bg-stone-200 text-stone-800 text-xs font-semibold rounded-md transition-colors border border-stone-300"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                    <span>+ Add New Occasion Card</span>
-                  </button>
-                  {occasionsSaved && (
-                    <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-50 text-emerald-800 text-xs font-semibold rounded-full border border-emerald-200">
-                      <CheckCircle2 className="w-3.5 h-3.5" /> Occasions Saved Live!
-                    </span>
-                  )}
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-                {occasions.map((occ, idx) => (
-                  <div
-                    key={occ.id || occ.name || idx}
-                    className="p-4 border border-[#E7E1D8] rounded-xl flex flex-col items-center space-y-3 bg-[#FAF8F5]/80 hover:border-[#24332C]/40 transition-colors relative"
-                  >
-                    {/* Delete occasion button */}
-                    {occasions.length > 1 && (
-                      <button
-                        type="button"
-                        onClick={() => handleDeleteOccasion(occ.id || occ.name)}
-                        className="absolute top-2 right-2 text-stone-400 hover:text-red-600 transition-colors p-1"
-                        title="Delete this occasion card"
-                      >
-                        <Trash2 className="w-3.5 h-3.5" />
-                      </button>
-                    )}
-                    {/* 3D Occasion Card Preview */}
-                    <div className="relative w-full aspect-[1.15/1] rounded-xl overflow-hidden border border-stone-200 bg-[#F5C400] shadow-xs">
-                      <Image
-                        src={occ.image || '/images/giftify/occasions/birthdays.jpg'}
-                        alt={occ.name || 'Occasion'}
-                        fill
-                        className="object-cover"
-                        unoptimized
-                      />
-                      {uploadingOccasionId === (occ.id || occ.name) && (
-                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center text-white text-[10px] font-bold">
-                          Uploading...
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Upload Image Button */}
-                    <label className="cursor-pointer inline-flex items-center gap-1.5 px-3 py-1.5 bg-[#24332C] hover:bg-[#19241F] text-white text-[10px] font-bold uppercase tracking-wider rounded-md transition-colors shadow-xs">
-                      <Upload className="w-3 h-3" />
-                      <span>{uploadingOccasionId === (occ.id || occ.name) ? 'Uploading...' : 'Change Photo'}</span>
-                      <input
-                        type="file"
-                        accept="image/*"
-                        className="hidden"
-                        onChange={(e) =>
-                          e.target.files?.[0] &&
-                          handleOccasionImageUpload(occ.id || occ.name, e.target.files[0])
-                        }
-                      />
-                    </label>
-
-                    {/* Inputs */}
-                    <div className="w-full space-y-2 pt-1 text-left">
-                      <div>
-                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
-                          Occasion Name
-                        </label>
-                        <input
-                          type="text"
-                          value={occ.name || ''}
-                          onChange={(e) =>
-                            setOccasions(
-                              occasions.map((o) =>
-                                (o.id === occ.id || o.name === occ.name) ? { ...o, name: e.target.value } : o
-                              )
-                            )
-                          }
-                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] font-bold focus:outline-none focus:border-[#24332C] rounded-sm"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
-                          Emoji Icon
-                        </label>
-                        <input
-                          type="text"
-                          value={occ.emoji || ''}
-                          onChange={(e) =>
-                            setOccasions(
-                              occasions.map((o) =>
-                                (o.id === occ.id || o.name === occ.name) ? { ...o, emoji: e.target.value } : o
-                              )
-                            )
-                          }
-                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-center focus:outline-none focus:border-[#24332C] rounded-sm"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="text-[10px] uppercase font-bold text-stone-600 block mb-0.5">
-                          Destination Link
-                        </label>
-                        <input
-                          type="text"
-                          value={occ.href || ''}
-                          onChange={(e) =>
-                            setOccasions(
-                              occasions.map((o) =>
-                                (o.id === occ.id || o.name === occ.name) ? { ...o, href: e.target.value } : o
-                              )
-                            )
-                          }
-                          className="w-full bg-white border border-[#E7E1D8] px-2.5 py-1.5 text-xs text-[#181818] focus:outline-none focus:border-[#24332C] rounded-sm"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Save Occasions Button */}
-              <div className="pt-4 border-t border-[#E7E1D8] flex items-center justify-between">
-                <button
-                  type="button"
-                  onClick={handleSaveOccasions}
-                  disabled={savingOccasions}
-                  className="bg-[#24332C] text-white px-6 py-3 text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#19241F] transition-colors disabled:opacity-50 cursor-pointer shadow-xs inline-flex items-center gap-2"
-                >
-                  <Sparkles className="w-3.5 h-3.5 text-[#F5C400]" />
-                  <span>{savingOccasions ? 'Saving Occasions...' : 'Save & Update Occasion Cards'}</span>
-                </button>
-                {occasionsSaved && (
-                  <span className="text-xs font-semibold text-emerald-700">
-                    Occasion cards saved and live on homepage!
-                  </span>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* ======================================================== */}
-        {/* TAB 4: ALL ORDERS & FULFILLMENT TRACKING */}
+        {/* TAB 3: ALL ORDERS & FULFILLMENT TRACKING */}
+        
         {/* ======================================================== */}
         {activeTab === 'orders' && (
           <div className="space-y-6">

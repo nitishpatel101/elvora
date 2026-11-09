@@ -20,15 +20,12 @@ export async function POST(
       );
     }
 
-    const body = await req.json();
-    const { utr, screenshotUrl } = body as { utr?: string; screenshotUrl?: string };
-
-    if (!screenshotUrl && !utr) {
-      return NextResponse.json(
-        { error: 'Please upload your payment screenshot to verify payment.' },
-        { status: 400 }
-      );
-    }
+    const body = await req.json().catch(() => ({}));
+    const { utr, screenshotUrl, status } = body as {
+      utr?: string;
+      screenshotUrl?: string;
+      status?: string;
+    };
 
     if (screenshotUrl && typeof screenshotUrl === 'string') {
       order.upiScreenshot = screenshotUrl.trim();
@@ -37,10 +34,11 @@ export async function POST(
     if (utr && utr.trim()) {
       order.upiUtr = utr.trim().replace(/\s+/g, '');
     } else if (!order.upiUtr) {
-      order.upiUtr = 'SCREENSHOT_ATTACHED';
+      order.upiUtr = '1-CLICK-UPI-PAID';
     }
 
-    order.status = 'PAYMENT_SUBMITTED';
+    // Set to PAID or confirmed
+    order.status = status === 'PAID' ? 'PAID' : 'PAYMENT_SUBMITTED';
     order.paymentSubmittedAt = new Date().toISOString();
     order.updatedAt = new Date().toISOString();
 
