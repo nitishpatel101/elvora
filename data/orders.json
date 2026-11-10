@@ -70,14 +70,16 @@
     "discount": 300,
     "totalAmount": 1199,
     "currency": "INR",
-    "status": "PAYMENT_SUBMITTED",
+    "status": "PAID",
     "paymentMethod": "UPI_QR",
     "paymentGateway": "MANUAL_UPI",
     "razorpayOrderId": "order_6e1r0ktoq3",
     "createdAt": "2026-11-09T12:14:02.071Z",
-    "updatedAt": "2026-11-09T12:14:52.970Z",
+    "updatedAt": "2026-11-10T04:03:32.281Z",
     "upiUtr": "1-CLICK-UPI-PAID",
-    "paymentSubmittedAt": "2026-11-09T12:14:52.970Z"
+    "paymentSubmittedAt": "2026-11-09T12:14:52.970Z",
+    "verifiedBy": "admin@elvora.com",
+    "verifiedAt": "2026-11-10T04:03:32.280Z"
   },
   {
     "id": "ELV-539739",
