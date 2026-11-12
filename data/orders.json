@@ -77,9 +77,9 @@
     "paymentGateway": "MANUAL_UPI",
     "razorpayOrderId": "order_i30ula1ygj",
     "createdAt": "2026-11-11T07:08:06.522Z",
-    "updatedAt": "2026-11-12T15:54:26.626Z",
+    "updatedAt": "2026-11-12T15:55:32.390Z",
     "trackingCourier": "BlueDart Express",
-    "rejectionReason": "Bank credit not received or receipt unverified"
+    "rejectionReason": "amount not received"
   },
   {
     "id": "ELV-489130",
