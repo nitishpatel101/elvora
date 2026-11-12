@@ -31,12 +31,13 @@
     "discount": 300,
     "totalAmount": 1199,
     "currency": "INR",
-    "status": "PAYMENT_PENDING",
+    "status": "CANCELLED",
     "paymentMethod": "UPI_QR",
     "paymentGateway": "MANUAL_UPI",
     "razorpayOrderId": "order_1faxd0e5wz",
     "createdAt": "2026-11-11T18:19:04.312Z",
-    "updatedAt": "2026-11-11T18:19:04.312Z"
+    "updatedAt": "2026-11-12T15:52:31.460Z",
+    "trackingCourier": "BlueDart Express"
   },
   {
     "id": "ELV-227410",
