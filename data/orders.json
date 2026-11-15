@@ -31,14 +31,15 @@
     "discount": 300,
     "totalAmount": 1199,
     "currency": "INR",
-    "status": "PAYMENT_SUBMITTED",
+    "status": "PAYMENT_REJECTED",
     "paymentMethod": "UPI_QR",
     "paymentGateway": "MANUAL_UPI",
     "razorpayOrderId": "order_jzbhij57ms",
     "createdAt": "2026-11-13T14:47:30.822Z",
-    "updatedAt": "2026-11-13T14:47:56.153Z",
+    "updatedAt": "2026-11-15T10:24:59.050Z",
     "upiUtr": "1-CLICK-UPI-PAID",
-    "paymentSubmittedAt": "2026-11-13T14:47:56.153Z"
+    "paymentSubmittedAt": "2026-11-13T14:47:56.153Z",
+    "rejectionReason": "Bank credit not received or receipt unverified"
   },
   {
     "id": "ELV-604098",
